@@ -1,7 +1,3 @@
 {
-  "variants": {
-    "": {
-      "model": "testmod:block/shadow_ore"
-    }
-  }
+  "parent": "testmod:block/shadow_ore"
 }

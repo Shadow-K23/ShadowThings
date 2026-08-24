@@ -1,18 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "B": {
       "item": "testmod:shadow_ingot"
+    },
+    "C": {
+      "item": "minecraft:blaze_rod"
     }
   },
   "pattern": [
     "BBB",
-    "BBB",
-    "BBB"
+    " C ",
+    " C "
   ],
   "result": {
     "count": 1,
-    "id": "testmod:shadow_block"
+    "id": "testmod:shadow_pickaxe"
   }
 }
