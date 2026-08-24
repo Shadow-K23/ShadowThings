@@ -32,6 +32,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOWSPEAR);
                         output.accept(ModItems.SHADOWSWORD);
 
+                        output.accept((ModItems.CHISEL));
+
                     }))
 
                     .build());
@@ -43,6 +45,7 @@ public class ModCreativeModeTabs {
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(ModBlocks.SHADOW_BLOCK);
                         output.accept(ModBlocks.SHADOW_ORE);
+                        output.accept(ModBlocks.SHADOW_DEEPSLATE_ORE);
                     }))
                     .build());
 

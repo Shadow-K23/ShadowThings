@@ -26,7 +26,11 @@ public class ModBlocks {
             .sound(SoundType.NETHERITE_BLOCK)));
 
     public static final DeferredBlock<Block> SHADOW_ORE = registerBlock("shadow_ore", () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
-            .strength(2f)
+            .strength(4f)
+            .requiresCorrectToolForDrops()
+            .sound(SoundType.ANCIENT_DEBRIS)));
+    public static final DeferredBlock<Block> SHADOW_DEEPSLATE_ORE = registerBlock("shadow_deepslate_ore", () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
+            .strength(4f)
             .requiresCorrectToolForDrops()
             .sound(SoundType.ANCIENT_DEBRIS)));
 

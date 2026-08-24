@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "testmod:shadow_deepslate_ore"
+  },
+  "result": {
+    "id": "testmod:shadow_ingot"
+  }
+}

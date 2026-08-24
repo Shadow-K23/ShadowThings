@@ -58,6 +58,7 @@ public class TestMod {
         ModBlocks.register(modEventBus);
 
 
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -78,6 +79,7 @@ public class TestMod {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
             event.accept(ModBlocks.SHADOW_BLOCK);
             event.accept(ModBlocks.SHADOW_ORE);
+            event.accept(ModBlocks.SHADOW_DEEPSLATE_ORE);
         }
     }
 
