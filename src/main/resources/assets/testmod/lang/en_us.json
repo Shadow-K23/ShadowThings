@@ -1,4 +1,10 @@
 {
-  "item.testmod.shadowingot": "Niggerium",
-  "item.testmod.iron3d": "3D Iron"
+  "item.testmod.shadowingot": "Shadow Steel",
+  "item.testmod.raw_shadowingot": "Raw Shadow Steel",
+
+  "block.testmod.shadow_block": "Block of Shadow Steel",
+  "block.testmod.shadow_ore": "Shadow Ore",
+
+  "creativetab.testmod.shadow_blocks": "Shadow Blocks",
+  "creativetab.testmod.shadow_items": "Shadow Items"
 }

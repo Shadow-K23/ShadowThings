@@ -11,7 +11,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> SHADOWINGOT = ITEMS.register("shadowingot",
             () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> IRONTHREED = ITEMS.register("iron3d",
+    public static final DeferredItem<Item> RAWSHADOWINGOT = ITEMS.register("raw_shadowingot",
             () -> new Item(new Item.Properties()));
 
 

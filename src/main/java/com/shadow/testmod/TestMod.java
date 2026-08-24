@@ -1,5 +1,7 @@
 package com.shadow.testmod;
 
+import com.shadow.testmod.block.ModBlocks;
+import com.shadow.testmod.item.ModCreativeModeTabs;
 import com.shadow.testmod.item.ModItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -50,8 +52,10 @@ public class TestMod {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        ModItems.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus);
 
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -69,7 +73,11 @@ public class TestMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SHADOWINGOT);
-            event.accept(ModItems.IRONTHREED);
+            event.accept(ModItems.RAWSHADOWINGOT);
+        }
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
+            event.accept(ModBlocks.SHADOW_BLOCK);
+            event.accept(ModBlocks.SHADOW_ORE);
         }
     }
 

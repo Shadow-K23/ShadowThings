@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "testmod:item/iron3d"
+    "layer0": "testmod:item/raw_shadowingot"
   }
 }
