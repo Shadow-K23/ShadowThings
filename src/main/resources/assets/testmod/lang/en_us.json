@@ -1,6 +1,14 @@
 {
-  "item.testmod.shadowingot": "Shadow Steel",
-  "item.testmod.raw_shadowingot": "Raw Shadow Steel",
+  "item.testmod.shadow_ingot": "Shadow Steel",
+  "item.testmod.raw_shadow_ingot": "Raw Shadow Steel",
+  "item.testmod.shadow_spear": "Shadow Spear",
+  "item.testmod.shadow_sword": "Shadow Sword",
+  "item.testmod.shadow_hoe": "Shadow Hoe",
+  "item.testmod.shadow_shovel": "Shadow Shovel",
+  "item.testmod.shadow_pickaxe": "Shadow Pickaxe",
+  "item.testmod.shadow_axe": "Shadow Axe",
+
+
 
   "block.testmod.shadow_block": "Block of Shadow Steel",
   "block.testmod.shadow_ore": "Shadow Ore",

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "testmod:block/shadow_ore"
+  "variants": {
+    "": {
+      "model": "testmod:block/shadow_ore"
+    }
   }
 }

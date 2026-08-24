@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "testmod:item/raw_shadowingot"
+    "layer0": "testmod:item/shadow_pickaxe"
   }
 }

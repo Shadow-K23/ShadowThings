@@ -25,12 +25,19 @@ public class ModCreativeModeTabs {
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(ModItems.SHADOWINGOT);
                         output.accept(ModItems.RAWSHADOWINGOT);
+                        output.accept(ModItems.SHADOWAXE);
+                        output.accept(ModItems.SHADOWHOE);
+                        output.accept(ModItems.SHADOWPICKAXE);
+                        output.accept(ModItems.SHADOWSHOVEL);
+                        output.accept(ModItems.SHADOWSPEAR);
+                        output.accept(ModItems.SHADOWSWORD);
+
                     }))
 
                     .build());
     public static final Supplier<CreativeModeTab> SHADOW_BLOCKS_TAB = CREATIVE_MODE_TAB.register("shadow_block_tab",
             () -> CreativeModeTab.builder()
-                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(TestMod.MODID,"shadow_blocks_items"))
+                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(TestMod.MODID,"shadow_items_tab"))
                     .icon(  () -> new ItemStack(ModBlocks.SHADOW_BLOCK.get()))
                     .title(Component.translatable("creativetab.testmod.shadow_blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
