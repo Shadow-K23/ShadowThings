@@ -11,10 +11,26 @@
   "item.testmod.chisel": "Chisel",
 
 
+  "item.testmod.dragon_fruit": "Dragon Fruit",
+
+
+  "item.testmod.super_fuel": "Super Fuel",
+
+
   "block.testmod.shadow_block": "Block of Shadow Steel",
   "block.testmod.shadow_ore": "Shadow Ore",
   "block.testmod.shadow_deepslate_ore": "Shadow Deepslate Ore",
 
+  "block.testmod.magic_block": "Magic Block",
+
+
   "creativetab.testmod.shadow_blocks": "Shadow Blocks",
-  "creativetab.testmod.shadow_items": "Shadow Items"
+  "creativetab.testmod.shadow_items": "Shadow Items",
+
+
+  "tooltip.testmod.magic_block.tooltip": "This block is Magical",
+
+  "tooltip.testmod.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",
+
+  "tooltip.testmod.chisel": "Chisel can turn normal block variants into bricks."
 }

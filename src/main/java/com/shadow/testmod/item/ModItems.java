@@ -2,6 +2,7 @@ package com.shadow.testmod.item;
 
 import com.shadow.testmod.TestMod;
 import com.shadow.testmod.item.custom.ChiselItem;
+import com.shadow.testmod.item.custom.FuelItem;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -57,7 +58,14 @@ public class ModItems {
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,13f,-2.8f))));
 
+    //FOODS
 
+    public static final DeferredItem<Item> DRAGON_FRUIT = ITEMS.register("dragon_fruit",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.DRAGON_FRUIT)));
+
+    //FUELS
+    public static final DeferredItem<Item> SUPER_FUEL = ITEMS.register("super_fuel",
+            () -> new FuelItem(new Item.Properties(), 800));
     //ADVANCED TOOLS
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             ()-> new ChiselItem(new Item.Properties().durability(100)));

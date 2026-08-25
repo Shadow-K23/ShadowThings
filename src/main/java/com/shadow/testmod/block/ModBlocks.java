@@ -1,6 +1,7 @@
 package com.shadow.testmod.block;
 
 import com.shadow.testmod.TestMod;
+import com.shadow.testmod.block.custom.MagicBlock;
 import com.shadow.testmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -29,10 +30,15 @@ public class ModBlocks {
             .strength(4f)
             .requiresCorrectToolForDrops()
             .sound(SoundType.ANCIENT_DEBRIS)));
+
     public static final DeferredBlock<Block> SHADOW_DEEPSLATE_ORE = registerBlock("shadow_deepslate_ore", () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
             .strength(4f)
             .requiresCorrectToolForDrops()
             .sound(SoundType.ANCIENT_DEBRIS)));
+
+    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock( "magic_block", () -> new MagicBlock(BlockBehaviour.Properties.of()
+            .strength(2f)
+            .requiresCorrectToolForDrops()));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){

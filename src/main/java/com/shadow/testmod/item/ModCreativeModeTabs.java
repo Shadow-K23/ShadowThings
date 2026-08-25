@@ -23,6 +23,8 @@ public class ModCreativeModeTabs {
                     .icon(  () -> new ItemStack(ModItems.SHADOWINGOT.get()))
                     .title(Component.translatable("creativetab.testmod.shadow_items"))
                     .displayItems(((itemDisplayParameters, output) -> {
+
+                        //BASIC ITEMS
                         output.accept(ModItems.SHADOWINGOT);
                         output.accept(ModItems.RAWSHADOWINGOT);
                         output.accept(ModItems.SHADOWAXE);
@@ -31,9 +33,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOWSHOVEL);
                         output.accept(ModItems.SHADOWSPEAR);
                         output.accept(ModItems.SHADOWSWORD);
-
-                        output.accept((ModItems.CHISEL));
-
+                        //ADVANCED ITEMS
+                        output.accept(ModItems.CHISEL);
+                        //FOODS
+                        output.accept(ModItems.DRAGON_FRUIT);
+                        //FUELS
+                        output.accept(ModItems.SUPER_FUEL);
                     }))
 
                     .build());
@@ -43,9 +48,12 @@ public class ModCreativeModeTabs {
                     .icon(  () -> new ItemStack(ModBlocks.SHADOW_BLOCK.get()))
                     .title(Component.translatable("creativetab.testmod.shadow_blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
+                        //BASIC BLOCKS
                         output.accept(ModBlocks.SHADOW_BLOCK);
                         output.accept(ModBlocks.SHADOW_ORE);
                         output.accept(ModBlocks.SHADOW_DEEPSLATE_ORE);
+                        //ADVANCED BLOCKS
+                        output.accept(ModBlocks.MAGIC_BLOCK);
                     }))
                     .build());
 
