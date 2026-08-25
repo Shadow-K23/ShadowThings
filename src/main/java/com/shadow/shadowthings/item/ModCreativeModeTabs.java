@@ -52,6 +52,21 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SHADOW_BLOCK);
                         output.accept(ModBlocks.SHADOW_ORE);
                         output.accept(ModBlocks.SHADOW_DEEPSLATE_ORE);
+
+
+                        output.accept(ModBlocks.SHADOW_STAIRS);
+                        output.accept(ModBlocks.SHADOW_SLAB);
+
+                        output.accept(ModBlocks.SHADOW_PRESSURE_PLATE);
+                        output.accept(ModBlocks.SHADOW_BUTTON);
+
+                        output.accept(ModBlocks.SHADOW_FENCE);
+                        output.accept(ModBlocks.SHADOW_FENCE_GATE);
+                        output.accept(ModBlocks.SHADOW_WALL);
+
+                        output.accept(ModBlocks.SHADOW_DOOR);
+                        output.accept(ModBlocks.SHADOW_TRAPDOOR);
+
                         //ADVANCED BLOCKS
                         output.accept(ModBlocks.MAGIC_BLOCK);
                     }))

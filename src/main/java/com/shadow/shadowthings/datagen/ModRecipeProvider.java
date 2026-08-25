@@ -83,7 +83,30 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.BLAZE_ROD)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
 
+        //NON-BLOCK BLOCKS
 
+        stairBuilder(ModBlocks.SHADOW_STAIRS.get(), Ingredient.of(ModItems.SHADOWINGOT)).group("shadow_steel")
+                .unlockedBy("has_shadow_steel",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHADOW_SLAB.get(), ModItems.SHADOWINGOT.get());
+
+        buttonBuilder(ModBlocks.SHADOW_BUTTON.get(), Ingredient.of(ModItems.SHADOWINGOT.get())).group("bismuth")
+                .unlockedBy("has_bismuth", has(ModItems.SHADOWINGOT.get())).save(recipeOutput);
+
+        pressurePlate(recipeOutput, ModBlocks.SHADOW_PRESSURE_PLATE.get(), ModItems.SHADOWINGOT.get());
+
+        fenceBuilder(ModBlocks.SHADOW_FENCE.get(), Ingredient.of(ModItems.SHADOWINGOT.get())).group("bismuth")
+                .unlockedBy("has_bismuth", has(ModItems.SHADOWINGOT.get())).save(recipeOutput);
+
+        fenceGateBuilder(ModBlocks.SHADOW_FENCE_GATE.get(), Ingredient.of(ModItems.SHADOWINGOT.get())).group("bismuth")
+                .unlockedBy("has_bismuth", has(ModItems.SHADOWINGOT.get())).save(recipeOutput);
+
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHADOW_WALL.get(), ModItems.SHADOWINGOT.get());
+
+        doorBuilder(ModBlocks.SHADOW_DOOR.get(), Ingredient.of(ModItems.SHADOWINGOT.get())).group("bismuth")
+                .unlockedBy("has_bismuth", has(ModItems.SHADOWINGOT.get())).save(recipeOutput);
+
+        trapdoorBuilder(ModBlocks.SHADOW_TRAPDOOR.get(), Ingredient.of(ModItems.SHADOWINGOT.get())).group("bismuth")
+                .unlockedBy("has_bismuth", has(ModItems.SHADOWINGOT.get())).save(recipeOutput);
 
         //SHAPELESS
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHADOWINGOT,9)

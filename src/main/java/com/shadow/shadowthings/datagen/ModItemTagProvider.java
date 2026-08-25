@@ -6,7 +6,9 @@ import com.shadow.shadowthings.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,5 +29,17 @@ public class ModItemTagProvider extends ItemTagsProvider{
         tag(ModTags.Items.TRANSFORMABLE_ITEMS)
                 .add(ModItems.SHADOWINGOT.get())
                 .add(ModItems.RAWSHADOWINGOT.get());
+
+
+        tag(ItemTags.SWORDS)
+                .add(ModItems.SHADOWSWORD.get());
+        tag(ItemTags.PICKAXES)
+                .add(ModItems.SHADOWPICKAXE.get());
+        tag(ItemTags.AXES)
+                .add(ModItems.SHADOWAXE.get());
+        tag(ItemTags.HOES)
+                .add(ModItems.SHADOWHOE.get());
+        tag(ItemTags.SHOVELS)
+                .add(ModItems.SHADOWSHOVEL.get());
     }
 }

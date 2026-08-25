@@ -22,37 +22,37 @@ public class ModItems {
 
 
     //SHADOW TOOL SET
-    public static final DeferredItem<Item> SHADOWSWORD = ITEMS.register("shadow_sword",
+    public static final DeferredItem<SwordItem> SHADOWSWORD = ITEMS.register("shadow_sword",
             ()-> new SwordItem(
                     SHADOW,
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,9f,-2.2f))));
 
-    public static final DeferredItem<Item> SHADOWPICKAXE = ITEMS.register("shadow_pickaxe",
+    public static final DeferredItem<PickaxeItem> SHADOWPICKAXE = ITEMS.register("shadow_pickaxe",
             ()-> new PickaxeItem(
                     SHADOW,
                     new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(SHADOW,0f,-2.8f))));
+                            .attributes(PickaxeItem.createAttributes(SHADOW,-2f,-2.8f))));
 
-    public static final DeferredItem<Item> SHADOWAXE = ITEMS.register("shadow_axe",
+    public static final DeferredItem<AxeItem> SHADOWAXE = ITEMS.register("shadow_axe",
             ()-> new AxeItem(
                     SHADOW,
                     new Item.Properties()
                         .attributes(AxeItem.createAttributes(SHADOW,15f,-3.2f))));
 
-    public static final DeferredItem<Item> SHADOWSHOVEL = ITEMS.register("shadow_shovel",
+    public static final DeferredItem<ShovelItem> SHADOWSHOVEL = ITEMS.register("shadow_shovel",
             ()-> new ShovelItem(
                    SHADOW,
                     new Item.Properties()
-                            .attributes(SwordItem.createAttributes(SHADOW,0f,-2.8f))));
+                            .attributes(SwordItem.createAttributes(SHADOW,-2f,-3.0f))));
 
-    public static final DeferredItem<Item> SHADOWHOE = ITEMS.register("shadow_hoe",
+    public static final DeferredItem<HoeItem> SHADOWHOE = ITEMS.register("shadow_hoe",
             ()-> new HoeItem(
                     SHADOW,
                     new Item.Properties()
-                            .attributes(SwordItem.createAttributes(SHADOW,0f,-2.8f))));
+                            .attributes(SwordItem.createAttributes(SHADOW,-2f,-3.0f))));
 
-    public static final DeferredItem<Item> SHADOWSPEAR = ITEMS.register("shadow_spear",
+    public static final DeferredItem<SwordItem> SHADOWSPEAR = ITEMS.register("shadow_spear",
             ()-> new SwordItem(
                     SHADOW,
                     new Item.Properties()

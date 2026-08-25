@@ -21,6 +21,19 @@
   "block.shadowthings.shadow_ore": "Shadow Ore",
   "block.shadowthings.shadow_deepslate_ore": "Shadow Deepslate Ore",
 
+  "block.shadowthings.shadow_stairs": "Shadow Stairs",
+  "block.shadowthings.shadow_slab": "Shadow Slab",
+
+  "block.shadowthings.shadow_pressure_plate": "Shadow Pressure Plate",
+  "block.shadowthings.shadow_button": "Shadow Button",
+
+  "block.shadowthings.shadow_fence": "Shadow Fence",
+  "block.shadowthings.shadow_fence_gate": "Shadow Fence Gate",
+  "block.shadowthings.shadow_wall": "Shadow Wall",
+
+  "block.shadowthings.shadow_door": "Shadow Door",
+  "block.shadowthings.shadow_trapdoor": "Shadow Trapdoor",
+
   "block.shadowthings.magic_block": "Magic Block",
 
 

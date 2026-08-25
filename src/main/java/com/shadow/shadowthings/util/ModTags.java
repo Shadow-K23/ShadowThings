@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static class Blocks{
 
+        public static final TagKey<Block> NEEDS_SHADOW_TOOL = createTag("needs_shadow_tool");
+        public static final TagKey<Block> INCORRECT_FOR_SHADOW_TOOL = createTag("incorrect_for_shadow_tool");
 
 
         private static TagKey<Block> createTag(String name){

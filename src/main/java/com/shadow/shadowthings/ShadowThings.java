@@ -1,6 +1,7 @@
 package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.item.ModCreativeModeTabs;
 import com.shadow.shadowthings.item.ModItems;
 import org.slf4j.Logger;
@@ -40,6 +41,7 @@ public class ShadowThings {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModDataComponents.register(modEventBus);
 
 
         // Register the item to a creative tab

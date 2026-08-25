@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -29,6 +30,22 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         //SELF DROPPING BLOCKS
         dropSelf(ModBlocks.SHADOW_BLOCK.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
+
+        //NON-BLOCK BLOCKS
+        dropSelf(ModBlocks.SHADOW_STAIRS.get());
+        add(ModBlocks.SHADOW_SLAB.get(),
+                block -> createSlabItemTable(ModBlocks.SHADOW_SLAB.get()));
+
+        dropSelf(ModBlocks.SHADOW_BUTTON.get());
+        dropSelf(ModBlocks.SHADOW_PRESSURE_PLATE.get());
+
+        dropSelf(ModBlocks.SHADOW_WALL.get());
+        dropSelf(ModBlocks.SHADOW_FENCE.get());
+        dropSelf(ModBlocks.SHADOW_FENCE_GATE.get());
+        dropSelf(ModBlocks.SHADOW_TRAPDOOR.get());
+
+        add(ModBlocks.SHADOW_DOOR.get(),
+                block -> createDoorTable(ModBlocks.SHADOW_DOOR.get()));
 
         //ORE LOOT TABLES
         add(ModBlocks.SHADOW_ORE.get(),
