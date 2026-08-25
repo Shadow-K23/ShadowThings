@@ -1,0 +1,36 @@
+{
+  "item.shadowthings.shadow_ingot": "Shadow Steel",
+  "item.shadowthings.raw_shadow_steel": "Raw Shadow Steel",
+  "item.shadowthings.shadow_spear": "Shadow Spear",
+  "item.shadowthings.shadow_sword": "Shadow Sword",
+  "item.shadowthings.shadow_hoe": "Shadow Hoe",
+  "item.shadowthings.shadow_shovel": "Shadow Shovel",
+  "item.shadowthings.shadow_pickaxe": "Shadow Pickaxe",
+  "item.shadowthings.shadow_axe": "Shadow Axe",
+
+  "item.shadowthings.chisel": "Chisel",
+
+
+  "item.shadowthings.dragon_fruit": "Dragon Fruit",
+
+
+  "item.shadowthings.super_fuel": "Super Fuel",
+
+
+  "block.shadowthings.shadow_block": "Block of Shadow Steel",
+  "block.shadowthings.shadow_ore": "Shadow Ore",
+  "block.shadowthings.shadow_deepslate_ore": "Shadow Deepslate Ore",
+
+  "block.shadowthings.magic_block": "Magic Block",
+
+
+  "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
+  "creativetab.shadowthings.shadow_items": "Shadow Items",
+
+
+  "tooltip.shadowthings.magic_block.tooltip": "This block is Magical",
+
+  "tooltip.shadowthings.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",
+
+  "tooltip.shadowthings.chisel": "Chisel can turn normal block variants into bricks."
+}
