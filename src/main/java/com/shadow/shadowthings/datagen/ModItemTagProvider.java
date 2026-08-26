@@ -31,15 +31,34 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.RAWSHADOWINGOT.get());
 
 
+        tag(ItemTags.SWORD_ENCHANTABLE)
+                .add(ModItems.SHADOWHAMMER.get());
+
         tag(ItemTags.SWORDS)
                 .add(ModItems.SHADOWSWORD.get());
         tag(ItemTags.PICKAXES)
-                .add(ModItems.SHADOWPICKAXE.get());
+                .add(ModItems.SHADOWPICKAXE.get())
+                .add(ModItems.SHADOWHAMMER.get());
         tag(ItemTags.AXES)
                 .add(ModItems.SHADOWAXE.get());
         tag(ItemTags.HOES)
                 .add(ModItems.SHADOWHOE.get());
         tag(ItemTags.SHOVELS)
                 .add(ModItems.SHADOWSHOVEL.get());
+
+        this.tag(ItemTags.TRIMMABLE_ARMOR)
+                        .add(ModItems.SHADOW_HELMET.get())
+                        .add(ModItems.SHADOW_CHESTPLATE.get())
+                        .add(ModItems.SHADOW_LEGGINGS.get())
+                        .add(ModItems.SHADOW_BOOTS.get());
+
+        tag(ItemTags.HEAD_ARMOR)
+            .add(ModItems.SHADOW_HELMET.get());
+        tag(ItemTags.CHEST_ARMOR)
+                .add(ModItems.SHADOW_CHESTPLATE.get());
+        tag(ItemTags.LEG_ARMOR)
+                .add(ModItems.SHADOW_LEGGINGS.get());
+        tag(ItemTags.FOOT_ARMOR)
+                .add(ModItems.SHADOW_BOOTS.get());
     }
 }

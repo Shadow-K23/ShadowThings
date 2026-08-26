@@ -27,14 +27,21 @@ public class ModCreativeModeTabs {
                         //BASIC ITEMS
                         output.accept(ModItems.SHADOWINGOT);
                         output.accept(ModItems.RAWSHADOWINGOT);
-                        output.accept(ModItems.SHADOWAXE);
-                        output.accept(ModItems.SHADOWHOE);
-                        output.accept(ModItems.SHADOWPICKAXE);
-                        output.accept(ModItems.SHADOWSHOVEL);
-                        output.accept(ModItems.SHADOWSPEAR);
                         output.accept(ModItems.SHADOWSWORD);
+                        output.accept(ModItems.SHADOWPICKAXE);
+                        output.accept(ModItems.SHADOWAXE);
+                        output.accept(ModItems.SHADOWSHOVEL);
+                        output.accept(ModItems.SHADOWHOE);
+                        output.accept(ModItems.SHADOWSPEAR);
                         //ADVANCED ITEMS
                         output.accept(ModItems.CHISEL);
+                        output.accept(ModItems.SHADOWHAMMER);
+                        //ARMOR
+                        output.accept(ModItems.SHADOW_HELMET);
+                        output.accept(ModItems.SHADOW_CHESTPLATE);
+                        output.accept(ModItems.SHADOW_LEGGINGS);
+                        output.accept(ModItems.SHADOW_BOOTS);
+                        output.accept(ModItems.SHADOW_HORSE_ARMOR);
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);
                         //FUELS

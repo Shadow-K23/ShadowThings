@@ -83,6 +83,46 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.BLAZE_ROD)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
 
+        //ADVANCED TOOL RECIPES
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWHAMMER.get())
+                .pattern("BCB")
+                .pattern(" C ")
+                .pattern(" C ")
+                .define('B', ModBlocks.SHADOW_BLOCK.get())
+                .define('C', Items.BLAZE_ROD)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+
+        //ARMOR
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOW_BOOTS.get())
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', ModItems.SHADOWINGOT.get())
+                .define('C', Items.BLAZE_ROD)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOW_LEGGINGS.get())
+                .pattern("BCB")
+                .pattern("B B")
+                .pattern("B B")
+                .define('B', ModItems.SHADOWINGOT.get())
+                .define('C', Items.BLAZE_ROD)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOW_CHESTPLATE.get())
+                .pattern("B B")
+                .pattern("BCB")
+                .pattern("BBB")
+                .define('B', ModItems.SHADOWINGOT.get())
+                .define('C', Items.BLAZE_ROD)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOW_HELMET.get())
+                .pattern("BCB")
+                .pattern("B B")
+                .define('B', ModItems.SHADOWINGOT.get())
+                .define('C', Items.BLAZE_ROD)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
+
+
         //NON-BLOCK BLOCKS
 
         stairBuilder(ModBlocks.SHADOW_STAIRS.get(), Ingredient.of(ModItems.SHADOWINGOT)).group("shadow_steel")

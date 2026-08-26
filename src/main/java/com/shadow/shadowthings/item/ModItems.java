@@ -3,10 +3,13 @@ package com.shadow.shadowthings.item;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.item.custom.ChiselItem;
 import com.shadow.shadowthings.item.custom.FuelItem;
+import com.shadow.shadowthings.item.custom.HammerItem;
+import com.shadow.shadowthings.item.custom.ModArmorItem;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.lwjgl.opengl.ARBTextureMirrorClampToEdge;
 
 import static com.shadow.shadowthings.util.ModToolTiers.SHADOW;
 
@@ -38,7 +41,7 @@ public class ModItems {
             ()-> new AxeItem(
                     SHADOW,
                     new Item.Properties()
-                        .attributes(AxeItem.createAttributes(SHADOW,15f,-3.2f))));
+                        .attributes(AxeItem.createAttributes(SHADOW,11f,-3.2f))));
 
     public static final DeferredItem<ShovelItem> SHADOWSHOVEL = ITEMS.register("shadow_shovel",
             ()-> new ShovelItem(
@@ -57,6 +60,35 @@ public class ModItems {
                     SHADOW,
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,13f,-2.8f))));
+
+    public static final DeferredItem<HammerItem> SHADOWHAMMER = ITEMS.register("shadow_hammer",
+            ()-> new HammerItem(
+                    SHADOW,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(SHADOW,15f,-3.5f))));
+    //ARMOR ITEMS
+
+    public static final  DeferredItem<ArmorItem> SHADOW_HELMET = ITEMS.register("shadow_helmet",
+            () -> new ModArmorItem(
+                    ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(42))));
+    public static final  DeferredItem<ArmorItem> SHADOW_CHESTPLATE = ITEMS.register("shadow_chestplate",
+                () -> new ArmorItem(
+                        ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                        new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(42))));
+    public static final  DeferredItem<ArmorItem> SHADOW_LEGGINGS = ITEMS.register("shadow_leggings",
+                () -> new ArmorItem(
+                        ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                        new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(42))));
+    public static final  DeferredItem<ArmorItem> SHADOW_BOOTS = ITEMS.register("shadow_boots",
+                () -> new ArmorItem(
+                        ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                        new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(42))));
+
+    public static final  DeferredItem<Item> SHADOW_HORSE_ARMOR = ITEMS.register("shadow_horse_armor",
+                () -> new AnimalArmorItem(
+                        ModArmorMaterials.SHADOW_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN, false , new Item.Properties().stacksTo(1)));
+
 
     //FOODS
 
