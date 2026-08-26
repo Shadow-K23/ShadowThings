@@ -9,7 +9,6 @@ import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.lwjgl.opengl.ARBTextureMirrorClampToEdge;
 
 import static com.shadow.shadowthings.util.ModToolTiers.SHADOW;
 
@@ -69,19 +68,19 @@ public class ModItems {
     //ARMOR ITEMS
 
     public static final  DeferredItem<ArmorItem> SHADOW_HELMET = ITEMS.register("shadow_helmet",
-            () -> new ModArmorItem(
+                () -> new ModArmorItem(
                     ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
                     new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(42))));
     public static final  DeferredItem<ArmorItem> SHADOW_CHESTPLATE = ITEMS.register("shadow_chestplate",
-                () -> new ArmorItem(
+                () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
                         new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(42))));
     public static final  DeferredItem<ArmorItem> SHADOW_LEGGINGS = ITEMS.register("shadow_leggings",
-                () -> new ArmorItem(
+                () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
                         new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(42))));
     public static final  DeferredItem<ArmorItem> SHADOW_BOOTS = ITEMS.register("shadow_boots",
-                () -> new ArmorItem(
+                () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
                         new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(42))));
 
