@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "shadowthings:shadow_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "shadowthings:shadow_ingot"
+  }
+}

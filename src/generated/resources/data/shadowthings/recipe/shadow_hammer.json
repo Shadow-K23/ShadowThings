@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "shadowthings:shadow_block"
+    },
+    "C": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    "BCB",
+    " C ",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "shadowthings:shadow_hammer"
+  }
+}

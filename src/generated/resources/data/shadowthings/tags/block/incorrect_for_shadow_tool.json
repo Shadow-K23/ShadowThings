@@ -1,0 +1,8 @@
+{
+  "remove": [
+    "#shadowthings:needs_shadow_tool"
+  ],
+  "values": [
+    "#minecraft:incorrect_for_diamond_tool"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "bismuth",
+  "ingredients": [
+    {
+      "item": "shadowthings:shadow_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "shadowthings:shadow_button"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shadow_steel",
+  "key": {
+    "#": {
+      "item": "shadowthings:shadow_ingot"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "shadowthings:shadow_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "shadowthings:block/shadow_door_bottom",
+    "top": "shadowthings:block/shadow_door_top"
+  }
+}

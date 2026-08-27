@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "shadow_steel",
+  "ingredient": {
+    "item": "shadowthings:raw_shadow_steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "shadowthings:shadow_ingot"
+  }
+}

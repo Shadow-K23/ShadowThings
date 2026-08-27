@@ -1,0 +1,10 @@
+{
+  "values": {
+    "shadowthings:dragon_fruit": {
+      "chance": 0.45
+    },
+    "shadowthings:radish_seeds": {
+      "chance": 0.25
+    }
+  }
+}
