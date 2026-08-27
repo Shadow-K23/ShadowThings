@@ -46,6 +46,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOW_HORSE_ARMOR);
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);
+                        output.accept(ModItems.SHADOW_BERRIES);
                         //SEEDS
                         output.accept(ModItems.RADISH_SEEDS);
                         //FUELS

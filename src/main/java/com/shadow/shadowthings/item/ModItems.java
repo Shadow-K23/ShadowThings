@@ -103,7 +103,11 @@ public class ModItems {
     public static final DeferredItem<Item> DRAGON_FRUIT = ITEMS.register("dragon_fruit",
             () -> new Item(new Item.Properties().food(ModFoodProperties.DRAGON_FRUIT)));
 
+    public static final DeferredItem<Item> SHADOW_BERRIES = ITEMS.register("shadow_berry",
+            () -> new ItemNameBlockItem(ModBlocks.SHADOW_BERRY_BUSH.get(), new Item.Properties().food(ModFoodProperties.SHADOW_BERRY)));
+
     //SEEDS
+
 
     public static final DeferredItem<Item> RADISH_SEEDS = ITEMS.register("radish_seeds",
             ()-> new ItemNameBlockItem(ModBlocks.RADISH_CROP.get(), new Item.Properties()));

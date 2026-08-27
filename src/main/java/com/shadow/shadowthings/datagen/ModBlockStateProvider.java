@@ -3,9 +3,12 @@ package com.shadow.shadowthings.datagen;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.custom.RadishCropBlock;
+import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -55,6 +58,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         makeCrop (((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage","radish_crop_stage");
 
+        makeBush(((SweetBerryBushBlock) ModBlocks.SHADOW_BERRY_BUSH.get()),"shadow_berry_bush_stage","shadow_berry_bush_stage");
 
         //ORES
 
@@ -64,6 +68,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //ADVANCED BLOCKS
 
         blockWithItem(ModBlocks.MAGIC_BLOCK);
+    }
+
+
+
+    public void makeBush(SweetBerryBushBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, modelName, textureName);
+
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        models[0] = new ConfiguredModel(models().cross(modelName + state.getValue(ShadowBerryBushBlock.AGE),
+                ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "block/" + textureName + state.getValue(ShadowBerryBushBlock.AGE))).renderType("cutout"));
+
+        return models;
     }
 
     public void makeCrop(CropBlock block, String modelName, String textureName) {

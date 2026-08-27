@@ -33,6 +33,7 @@
 
   "item.shadowthings.dragon_fruit": "Dragon Fruit",
   "item.shadowthings.radish_seeds": "Radish Seeds",
+  "item.shadowthings.shadow_berry": "Shadow Berries",
 
 
   "item.shadowthings.super_fuel": "Super Fuel",
@@ -58,6 +59,7 @@
   "block.shadowthings.magic_block": "Magic Block",
 
   "block.shadowthings.radish_crop": "Radish Crop",
+  "block.shadowthings.shadow_berries_bush": "Shadow Berries Bush",
 
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",

@@ -78,6 +78,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         //FOOD
         basicItem(ModItems.DRAGON_FRUIT.get());
+        basicItem(ModItems.SHADOW_BERRIES.get());
         //SEEDS
         basicItem(ModItems.RADISH_SEEDS.get());
         //FUEL

@@ -12,4 +12,11 @@ public class ModFoodProperties {
             .effect(()-> new MobEffectInstance(MobEffects.REGENERATION, 300), 1f)
             .build();
 
+    public static final FoodProperties SHADOW_BERRY = new FoodProperties.Builder()
+            .nutrition(1)
+            .saturationModifier(0.15f)
+            //.effect(()-> new MobEffectInstance(MobEffects.REGENERATION, 100), 1f)
+            .fast()
+            .build();
+
 }

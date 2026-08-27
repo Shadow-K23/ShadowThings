@@ -3,6 +3,7 @@ package com.shadow.shadowthings.block;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.custom.MagicBlock;
 import com.shadow.shadowthings.block.custom.RadishCropBlock;
+import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.sound.ModSounds;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -48,10 +49,13 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
 
-    //CROPS
+    //PLANTS
 
-    public static final DeferredBlock<Block> RADISH_CROP = BLOCKS.register("",
+    public static final DeferredBlock<Block> RADISH_CROP = BLOCKS.register("radish_crop",
             () -> new RadishCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS)));
+
+    public static final DeferredBlock<Block> SHADOW_BERRY_BUSH = BLOCKS.register("shadow_berry_bush",
+            () -> new ShadowBerryBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
 
 
     //NON-BLOCK BLOCKS
