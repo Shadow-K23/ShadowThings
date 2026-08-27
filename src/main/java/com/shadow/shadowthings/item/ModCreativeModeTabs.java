@@ -33,6 +33,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOWSHOVEL);
                         output.accept(ModItems.SHADOWHOE);
                         output.accept(ModItems.SHADOWSPEAR);
+                        //WEAPONS
+                        output.accept(ModItems.SHADOW_BOW);
                         //ADVANCED ITEMS
                         output.accept(ModItems.CHISEL);
                         output.accept(ModItems.SHADOWHAMMER);
@@ -44,8 +46,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOW_HORSE_ARMOR);
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);
+                        //SEEDS
+                        output.accept(ModItems.RADISH_SEEDS);
                         //FUELS
                         output.accept(ModItems.SUPER_FUEL);
+                        //MISC
+                        output.accept(ModItems.BAR_BRAWL_MUSIC_DISC);
                     }))
 
                     .build());

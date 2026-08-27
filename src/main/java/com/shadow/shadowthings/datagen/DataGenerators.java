@@ -44,5 +44,7 @@ public class DataGenerators {
         //MODELS AND STATES
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput,existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput,existingFileHelper));
+        //DATAPACKS
+        generator.addProvider(event.includeServer(), new ModDatapackProvider(packOutput, lookupProvider));
     }
 }

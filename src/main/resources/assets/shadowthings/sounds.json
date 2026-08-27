@@ -1,0 +1,46 @@
+{
+  "chisel_use": {
+    "subtitle": "sounds.shadowthings.chisel_use",
+    "sounds": [
+      "shadowthings:chisel_use"
+    ]
+  },
+  "magic_block_break": {
+    "subtitle": "sounds.shadowthings.magic_block_break",
+    "sounds": [
+  "shadowthings:magic_block_break"
+  ]
+  },
+  "magic_block_step": {
+    "subtitle": "sounds.shadowthings.magic_block_step",
+    "sounds": [
+      "shadowthings:magic_block_step"
+    ]
+  },
+  "magic_block_fall": {
+    "subtitle": "sounds.shadowthings.magic_block_fall",
+    "sounds": [
+      "shadowthings:magic_block_fall"
+    ]
+  },
+  "magic_block_hit": {
+    "subtitle": "sounds.shadowthings.magic_block_hit",
+    "sounds": [
+      "shadowthings:magic_block_hit"
+    ]
+  },
+  "magic_block_place": {
+    "subtitle": "sounds.shadowthings.magic_block_place",
+    "sounds": [
+      "shadowthings:magic_block_place"
+    ]
+  },
+  "bar_brawl": {
+    "sounds": [
+      {
+        "name": "shadowthings:bar_brawl",
+        "stream": true
+      }
+    ]
+  }
+}

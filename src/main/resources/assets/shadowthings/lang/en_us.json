@@ -8,8 +8,21 @@
   "item.shadowthings.shadow_pickaxe": "Shadow Pickaxe",
   "item.shadowthings.shadow_axe": "Shadow Axe",
 
+  "item.shadowthings.shadow_bow": "Shadow Bow",
+
   "item.shadowthings.chisel": "Chisel",
   "item.shadowthings.shadow_hammer": "Shadow Hammer",
+
+  "item.shadowthings.bar_brawl_music_disc": "Bar Brawl Music Disc",
+  "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "effect.shadowthings.slimey": "Slimey",
+
+  "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
+
+  "enchantment.shadowthings.lightning_strike": "Lightning Strike",
 
   "item.shadowthings.shadow_helmet": "Shadow Helmet",
   "item.shadowthings.shadow_chestplate": "Shadow Chestplate",
@@ -19,6 +32,7 @@
   "item.shadowthings.shadow_horse_armor": "Shadow Horse Armor",
 
   "item.shadowthings.dragon_fruit": "Dragon Fruit",
+  "item.shadowthings.radish_seeds": "Radish Seeds",
 
 
   "item.shadowthings.super_fuel": "Super Fuel",
@@ -43,6 +57,7 @@
 
   "block.shadowthings.magic_block": "Magic Block",
 
+  "block.shadowthings.radish_crop": "Radish Crop",
 
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",

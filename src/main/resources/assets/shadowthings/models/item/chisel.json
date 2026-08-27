@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "shadowthings:item/chisel_used"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "shadowthings:used": 1
+      },
+      "model": "shadowthings:item/chisel_used"
+    }
+  ]
+}

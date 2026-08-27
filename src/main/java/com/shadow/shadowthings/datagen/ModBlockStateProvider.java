@@ -2,11 +2,19 @@ package com.shadow.shadowthings.datagen;
 
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.block.custom.RadishCropBlock;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.w3c.dom.UserDataHandler;
+
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -43,6 +51,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.SHADOW_WALL);
         blockItem(ModBlocks.SHADOW_TRAPDOOR, "_bottom");
 
+        //CROPS
+
+        makeCrop (((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage","radish_crop_stage");
+
+
         //ORES
 
         blockWithItem(ModBlocks.SHADOW_ORE);
@@ -51,6 +64,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //ADVANCED BLOCKS
 
         blockWithItem(ModBlocks.MAGIC_BLOCK);
+    }
+
+    public void makeCrop(CropBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, block, modelName, textureName);
+
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        models[0] = new ConfiguredModel(models().crop(modelName + state.getValue(((RadishCropBlock) block).getAgeProperty()),
+                ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "block/" + textureName + state.getValue(((RadishCropBlock) block).getAgeProperty()))).renderType("cutout"));
+
+        return models;
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock){

@@ -1,0 +1,6 @@
+{
+    "parent": "shadowthings:item/shadow_bow",
+    "textures": {
+        "layer0": "shadowthings:item/shadow_bow_pulling_0"
+    }
+}

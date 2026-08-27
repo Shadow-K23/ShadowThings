@@ -65,7 +65,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.SHADOWSPEAR);
 
         //ADVANCED ITEMS
-        basicItem(ModItems.CHISEL.get());
+        //basicItem(ModItems.CHISEL.get());
         handheldItem(ModItems.SHADOWHAMMER);
 
         //ARMOR
@@ -78,8 +78,12 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         //FOOD
         basicItem(ModItems.DRAGON_FRUIT.get());
+        //SEEDS
+        basicItem(ModItems.RADISH_SEEDS.get());
         //FUEL
         basicItem(ModItems.SUPER_FUEL.get());
+        //MISC
+        basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
     }
 
     // Shoutout to El_Redstoniano for making this

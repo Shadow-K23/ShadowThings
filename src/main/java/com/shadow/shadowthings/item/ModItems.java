@@ -1,10 +1,12 @@
 package com.shadow.shadowthings.item;
 
 import com.shadow.shadowthings.ShadowThings;
+import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.custom.ChiselItem;
 import com.shadow.shadowthings.item.custom.FuelItem;
 import com.shadow.shadowthings.item.custom.HammerItem;
 import com.shadow.shadowthings.item.custom.ModArmorItem;
+import com.shadow.shadowthings.sound.ModSounds;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -22,6 +24,10 @@ public class ModItems {
     public static final DeferredItem<Item> RAWSHADOWINGOT = ITEMS.register("raw_shadow_steel",
             () -> new Item(new Item.Properties()));
 
+    //CUSTOM WEAPONS
+
+    public static  final  DeferredItem<Item> SHADOW_BOW = ITEMS.register("shadow_bow",
+            ()-> new BowItem(new Item.Properties().durability(800)));
 
     //SHADOW TOOL SET
     public static final DeferredItem<SwordItem> SHADOWSWORD = ITEMS.register("shadow_sword",
@@ -87,12 +93,20 @@ public class ModItems {
     public static final  DeferredItem<Item> SHADOW_HORSE_ARMOR = ITEMS.register("shadow_horse_armor",
                 () -> new AnimalArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN, false , new Item.Properties().stacksTo(1)));
+    //MISC
 
+    public static final  DeferredItem<Item> BAR_BRAWL_MUSIC_DISC = ITEMS.register("bar_brawl_music_disc",
+            () -> new Item(new Item.Properties().jukeboxPlayable(ModSounds.BAR_BRAWL_KEY).stacksTo(1)));
 
     //FOODS
 
     public static final DeferredItem<Item> DRAGON_FRUIT = ITEMS.register("dragon_fruit",
             () -> new Item(new Item.Properties().food(ModFoodProperties.DRAGON_FRUIT)));
+
+    //SEEDS
+
+    public static final DeferredItem<Item> RADISH_SEEDS = ITEMS.register("radish_seeds",
+            ()-> new ItemNameBlockItem(ModBlocks.RADISH_CROP.get(), new Item.Properties()));
 
     //FUELS
     public static final DeferredItem<Item> SUPER_FUEL = ITEMS.register("super_fuel",

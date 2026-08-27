@@ -2,7 +2,9 @@ package com.shadow.shadowthings.block;
 
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.custom.MagicBlock;
+import com.shadow.shadowthings.block.custom.RadishCropBlock;
 import com.shadow.shadowthings.item.ModItems;
+import com.shadow.shadowthings.sound.ModSounds;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -43,7 +45,14 @@ public class ModBlocks {
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock( "magic_block",
             () -> new MagicBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
-                    .requiresCorrectToolForDrops()));
+                    .requiresCorrectToolForDrops()
+                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+
+    //CROPS
+
+    public static final DeferredBlock<Block> RADISH_CROP = BLOCKS.register("",
+            () -> new RadishCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS)));
+
 
     //NON-BLOCK BLOCKS
 

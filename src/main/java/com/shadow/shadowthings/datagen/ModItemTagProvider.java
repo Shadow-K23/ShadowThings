@@ -31,7 +31,7 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.RAWSHADOWINGOT.get());
 
 
-        tag(ItemTags.SWORD_ENCHANTABLE)
+        tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(ModItems.SHADOWHAMMER.get());
 
         tag(ItemTags.SWORDS)

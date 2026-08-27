@@ -2,8 +2,16 @@ package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.component.ModDataComponents;
+import com.shadow.shadowthings.effect.ModEffects;
+import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
 import com.shadow.shadowthings.item.ModCreativeModeTabs;
 import com.shadow.shadowthings.item.ModItems;
+import com.shadow.shadowthings.potion.ModPotions;
+import com.shadow.shadowthings.sound.ModSounds;
+import com.shadow.shadowthings.util.ModItemProperties;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -41,6 +49,13 @@ public class ShadowThings {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModSounds.register(modEventBus);
+
+        ModEffects.register(modEventBus);
+        ModPotions.register(modEventBus);
+
+        ModEnchantmentEffects.register(modEventBus);
+
         ModDataComponents.register(modEventBus);
 
 
@@ -72,5 +87,13 @@ public class ShadowThings {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents{
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event){
+            ModItemProperties.addCustomProperties();
+        }
     }
 }
