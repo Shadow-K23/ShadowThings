@@ -66,6 +66,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SHADOW_BLOCK);
                         output.accept(ModBlocks.SHADOW_ORE);
                         output.accept(ModBlocks.SHADOW_DEEPSLATE_ORE);
+                        output.accept(ModBlocks.SHADOW_NETHER_ORE);
+                        output.accept(ModBlocks.SHADOW_END_ORE);
 
 
                         output.accept(ModBlocks.SHADOW_STAIRS);

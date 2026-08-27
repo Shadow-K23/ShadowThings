@@ -23,11 +23,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SHADOW_BLOCK.get())
                 .add(ModBlocks.SHADOW_ORE.get())
                 .add(ModBlocks.SHADOW_DEEPSLATE_ORE.get())
+                .add(ModBlocks.SHADOW_NETHER_ORE.get())
+                .add(ModBlocks.SHADOW_END_ORE.get())
                 .add(ModBlocks.MAGIC_BLOCK.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.SHADOW_ORE.get())
-                .add(ModBlocks.SHADOW_DEEPSLATE_ORE.get());
+                .add(ModBlocks.SHADOW_DEEPSLATE_ORE.get())
+                .add(ModBlocks.SHADOW_NETHER_ORE.get())
+                .add(ModBlocks.SHADOW_END_ORE.get());
 
         tag(BlockTags.FENCES)
                 .add(ModBlocks.SHADOW_FENCE.get());

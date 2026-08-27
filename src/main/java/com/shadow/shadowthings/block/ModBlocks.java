@@ -31,6 +31,8 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.NETHERITE_BLOCK)));
 
+    //ORES
+
     public static final DeferredBlock<Block> SHADOW_ORE = registerBlock("shadow_ore",
             () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
                     .strength(4f)
@@ -42,12 +44,17 @@ public class ModBlocks {
                     .strength(4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.ANCIENT_DEBRIS)));
-
-    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock( "magic_block",
-            () -> new MagicBlock(BlockBehaviour.Properties.of()
-                    .strength(2f)
+    public static final DeferredBlock<Block> SHADOW_NETHER_ORE = registerBlock("shadow_nether_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
+                    .strength(4f)
                     .requiresCorrectToolForDrops()
-                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+                    .sound(SoundType.ANCIENT_DEBRIS)));
+    public static final DeferredBlock<Block> SHADOW_END_ORE = registerBlock("shadow_end_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2,6),BlockBehaviour.Properties.of()
+                    .strength(4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.ANCIENT_DEBRIS)));
+
 
     //PLANTS
 
@@ -58,7 +65,16 @@ public class ModBlocks {
             () -> new ShadowBerryBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
 
 
+    //ADVANCED BLOCKS
+
+    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock( "magic_block",
+            () -> new MagicBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+
     //NON-BLOCK BLOCKS
+
 
     public static final DeferredBlock<StairBlock> SHADOW_STAIRS = registerBlock("shadow_stairs",
             () -> new StairBlock(ModBlocks.SHADOW_BLOCK.get().defaultBlockState(),

@@ -58,6 +58,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 block -> createOreDrop(ModBlocks.SHADOW_ORE.get(), ModItems.RAWSHADOWINGOT.get()));
         add(ModBlocks.SHADOW_DEEPSLATE_ORE.get(),
                 block -> createMultipleOreDrops(ModBlocks.SHADOW_DEEPSLATE_ORE.get(),ModItems.RAWSHADOWINGOT.get(),2f,5f));
+        add(ModBlocks.SHADOW_NETHER_ORE.get(),
+                block -> createMultipleOreDrops(ModBlocks.SHADOW_NETHER_ORE.get(),ModItems.RAWSHADOWINGOT.get(),3f,7f));
+        add(ModBlocks.SHADOW_END_ORE.get(),
+                block -> createMultipleOreDrops(ModBlocks.SHADOW_END_ORE.get(),ModItems.RAWSHADOWINGOT.get(),4f,9f));
 
         //CROP LOOT TABLES
 

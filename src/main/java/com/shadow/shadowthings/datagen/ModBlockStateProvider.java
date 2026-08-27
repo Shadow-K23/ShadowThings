@@ -6,7 +6,6 @@ import com.shadow.shadowthings.block.custom.RadishCropBlock;
 import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +14,6 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import org.w3c.dom.UserDataHandler;
 
 import java.util.function.Function;
 
@@ -64,6 +62,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.SHADOW_ORE);
         blockWithItem(ModBlocks.SHADOW_DEEPSLATE_ORE);
+        blockWithItem(ModBlocks.SHADOW_NETHER_ORE);
+        blockWithItem(ModBlocks.SHADOW_END_ORE);
 
         //ADVANCED BLOCKS
 
