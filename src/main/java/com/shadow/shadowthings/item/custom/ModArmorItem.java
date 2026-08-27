@@ -1,9 +1,12 @@
 package com.shadow.shadowthings.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.item.ModArmorMaterials;
+import com.shadow.shadowthings.item.client.ModArmorRenderer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +21,7 @@ import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -34,9 +38,11 @@ public class ModArmorItem extends ArmorItem implements GeoItem{
                             List.of(new MobEffectInstance(MobEffects.JUMP, 200, 1, false, false),
                                     new MobEffectInstance(MobEffects.GLOWING, 200, 1, false, false)))
                     .build();
+private final String armorName;
 
-    public ModArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
+    public ModArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties, String armorName) {
         super(material, type, properties);
+        this.armorName = armorName;
     }
 
     @Override
@@ -92,14 +98,11 @@ public class ModArmorItem extends ArmorItem implements GeoItem{
 
         return !boots.isEmpty() && !leggings.isEmpty() && !chestplate.isEmpty() && !helmet.isEmpty();
     }
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        // Leave this empty for now unless you want custom looping animations
-    }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
+
+    //GECKO LIB STUFF
+    public String getArmorName() {
+        return this.armorName;
     }
 
     @Override
@@ -109,10 +112,7 @@ public class ModArmorItem extends ArmorItem implements GeoItem{
 
             @Override
             public @Nullable <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(
-                    @Nullable T livingEntity,
-                    ItemStack itemStack,
-                    @Nullable EquipmentSlot equipmentSlot,
-                    @Nullable HumanoidModel<T> original) {
+                    @Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
 
                 if (this.renderer == null) {
                     this.renderer = new ModArmorRenderer();
@@ -120,5 +120,15 @@ public class ModArmorItem extends ArmorItem implements GeoItem{
                 return this.renderer;
             }
         });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        // Leave this empty for now unless you want custom looping animations
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 }

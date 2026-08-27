@@ -70,19 +70,19 @@ public class ModItems {
     public static final  DeferredItem<ArmorItem> SHADOW_HELMET = ITEMS.register("shadow_helmet",
                 () -> new ModArmorItem(
                     ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
-                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(42))));
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(42)), "shadow_armor"));
     public static final  DeferredItem<ArmorItem> SHADOW_CHESTPLATE = ITEMS.register("shadow_chestplate",
                 () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
-                        new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(42))));
+                        new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(42)), "shadow_armor"));
     public static final  DeferredItem<ArmorItem> SHADOW_LEGGINGS = ITEMS.register("shadow_leggings",
                 () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
-                        new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(42))));
+                        new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(42)), "shadow_armor"));
     public static final  DeferredItem<ArmorItem> SHADOW_BOOTS = ITEMS.register("shadow_boots",
                 () -> new ModArmorItem(
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
-                        new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(42))));
+                        new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(42)), "shadow_armor"));
 
     public static final  DeferredItem<Item> SHADOW_HORSE_ARMOR = ITEMS.register("shadow_horse_armor",
                 () -> new AnimalArmorItem(
