@@ -23,6 +23,10 @@
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
 
   "enchantment.shadowthings.lightning_strike": "Lightning Strike",
+  "enchantment.shadowthings.poison_strike": "Poison Strike",
+
+  "item.shadowthings.ruby_gem": "Ruby Gem",
+  "item.shadowthings.topaz_gem": "Topaz Gem",
 
   "item.shadowthings.shadow_helmet": "Shadow Helmet",
   "item.shadowthings.shadow_chestplate": "Shadow Chestplate",

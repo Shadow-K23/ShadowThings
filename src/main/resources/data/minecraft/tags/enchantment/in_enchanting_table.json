@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "shadowthings:lightning_strike"
+    "shadowthings:lightning_strike",
+    "shadowthings:poison_strike"
   ]
 }

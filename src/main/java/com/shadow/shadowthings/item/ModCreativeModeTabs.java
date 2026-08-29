@@ -33,35 +33,47 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOWSHOVEL);
                         output.accept(ModItems.SHADOWHOE);
                         output.accept(ModItems.SHADOWSPEAR);
+
                         //WEAPONS
                         output.accept(ModItems.SHADOW_BOW);
+
                         //ADVANCED ITEMS
                         output.accept(ModItems.CHISEL);
                         output.accept(ModItems.SHADOWHAMMER);
+
                         //ARMOR
                         output.accept(ModItems.SHADOW_HELMET);
                         output.accept(ModItems.SHADOW_CHESTPLATE);
                         output.accept(ModItems.SHADOW_LEGGINGS);
                         output.accept(ModItems.SHADOW_BOOTS);
                         output.accept(ModItems.SHADOW_HORSE_ARMOR);
+
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);
                         output.accept(ModItems.SHADOW_BERRIES);
+
                         //SEEDS
                         output.accept(ModItems.RADISH_SEEDS);
+
                         //FUELS
                         output.accept(ModItems.SUPER_FUEL);
+
                         //MISC
                         output.accept(ModItems.BAR_BRAWL_MUSIC_DISC);
-                    }))
 
+                        //GEMS
+                        output.accept(ModItems.RUBY_GEM);
+                        output.accept(ModItems.TOPAZ_GEM);
+                    }))
                     .build());
+
     public static final Supplier<CreativeModeTab> SHADOW_BLOCKS_TAB = CREATIVE_MODE_TAB.register("shadow_block_tab",
             () -> CreativeModeTab.builder()
                     .withTabsBefore(ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"shadow_items_tab"))
                     .icon(  () -> new ItemStack(ModBlocks.SHADOW_BLOCK.get()))
                     .title(Component.translatable("creativetab.shadowthings.shadow_blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
+
                         //BASIC BLOCKS
                         output.accept(ModBlocks.SHADOW_BLOCK);
                         output.accept(ModBlocks.SHADOW_ORE);
@@ -85,6 +97,8 @@ public class ModCreativeModeTabs {
 
                         //ADVANCED BLOCKS
                         output.accept(ModBlocks.MAGIC_BLOCK);
+
+
                     }))
                     .build());
 

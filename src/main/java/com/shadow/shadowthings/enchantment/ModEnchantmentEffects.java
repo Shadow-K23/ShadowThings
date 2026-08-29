@@ -3,6 +3,7 @@ package com.shadow.shadowthings.enchantment;
 import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.enchantment.custom.LightningStrikeEnchantmentEffect;
+import com.shadow.shadowthings.enchantment.custom.PoisonStrikeEnchantmentEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,9 @@ public class ModEnchantmentEffects {
 
     public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> LIGHTNING_STRIKE =
             ENTITY_ENCHANTMENT_EFFECTS.register("lightning_strike", () -> LightningStrikeEnchantmentEffect.CODEC);
+
+    public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> POISON_STRIKE =
+            ENTITY_ENCHANTMENT_EFFECTS.register("poison_strike", () -> PoisonStrikeEnchantmentEffect.CODEC);
 
 
     public static void register(IEventBus eventBus){

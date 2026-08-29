@@ -21,7 +21,14 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> COORDINATES =
             DATA_COMPONENT_TYPES.registerComponentType("coordinates", builder -> builder.persistent(BlockPos.CODEC));
 
-    // 3. Register it to the mod event bus
+
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ModSocketedGems>> SOCKETED_GEMS =
+            DATA_COMPONENT_TYPES.registerComponentType("socketed_gems", builder -> builder
+                    .persistent(ModSocketedGems.CODEC)
+                    .networkSynchronized(ModSocketedGems.STREAM_CODEC)
+            );
+
     public static void register(IEventBus eventBus) {
         DATA_COMPONENT_TYPES.register(eventBus);
     }

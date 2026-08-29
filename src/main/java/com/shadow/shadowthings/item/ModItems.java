@@ -2,10 +2,7 @@ package com.shadow.shadowthings.item;
 
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
-import com.shadow.shadowthings.item.custom.ChiselItem;
-import com.shadow.shadowthings.item.custom.FuelItem;
-import com.shadow.shadowthings.item.custom.HammerItem;
-import com.shadow.shadowthings.item.custom.ModArmorItem;
+import com.shadow.shadowthings.item.custom.*;
 import com.shadow.shadowthings.sound.ModSounds;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
@@ -119,7 +116,12 @@ public class ModItems {
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             ()-> new ChiselItem(new Item.Properties().durability(100)));
 
+    //GEMS
+    public static final DeferredItem<Item> RUBY_GEM = ITEMS.register("ruby_gem",
+            () -> new ModGemItem(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<Item> TOPAZ_GEM = ITEMS.register("topaz_gem",
+            () -> new ModGemItem(new Item.Properties().stacksTo(1)));
 
 
 

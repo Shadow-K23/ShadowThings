@@ -30,12 +30,12 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SHADOWINGOT.get())
                 .add(ModItems.RAWSHADOWINGOT.get());
 
+        tag(ItemTags.WEAPON_ENCHANTABLE);
 
-        tag(ItemTags.WEAPON_ENCHANTABLE)
-                .add(ModItems.SHADOWHAMMER.get());
 
         tag(ItemTags.SWORDS)
-                .add(ModItems.SHADOWSWORD.get());
+                .add(ModItems.SHADOWSWORD.get())
+                .add(ModItems.SHADOWHAMMER.get());
         tag(ItemTags.PICKAXES)
                 .add(ModItems.SHADOWPICKAXE.get())
                 .add(ModItems.SHADOWHAMMER.get());
