@@ -3,6 +3,7 @@ package com.shadow.shadowthings.enchantment;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.enchantment.custom.LightningStrikeEnchantmentEffect;
 import com.shadow.shadowthings.enchantment.custom.PoisonStrikeEnchantmentEffect;
+import com.shadow.shadowthings.enchantment.custom.ShadowStrikeEnchantmentEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import org.spongepowered.asm.mixin.Shadow;
 
 public class ModEnchantments {
     public static final ResourceKey<Enchantment> LIGHTNING_STRIKE = ResourceKey.create(Registries.ENCHANTMENT,
@@ -20,6 +22,9 @@ public class ModEnchantments {
 
     public static final ResourceKey<Enchantment> POISON_STRIKE = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "poison_strike"));
+
+    public static final ResourceKey<Enchantment> SHADOW_STRIKE = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "shadow_strike"));
 
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
@@ -54,6 +59,21 @@ public class ModEnchantments {
                 .withEffect(EnchantmentEffectComponents.POST_ATTACK, EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM, new PoisonStrikeEnchantmentEffect())
         );
+
+        register(context, SHADOW_STRIKE,Enchantment.enchantment(Enchantment.definition(
+                items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                items.getOrThrow(ItemTags.SWORD_ENCHANTABLE),
+                1,
+                5,
+                Enchantment.dynamicCost(6,8),
+                Enchantment.dynamicCost(30,10),
+                5,
+                EquipmentSlotGroup.MAINHAND))
+                .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
+                .withEffect(EnchantmentEffectComponents.POST_ATTACK, EnchantmentTarget.ATTACKER,
+                        EnchantmentTarget.VICTIM, new ShadowStrikeEnchantmentEffect())
+        );
+
     }
 
 

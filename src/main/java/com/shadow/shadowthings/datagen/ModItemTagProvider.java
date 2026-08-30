@@ -1,11 +1,13 @@
 package com.shadow.shadowthings.datagen;
 
 import com.shadow.shadowthings.ShadowThings;
+import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.common.Mod;
@@ -60,5 +62,12 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SHADOW_LEGGINGS.get());
         tag(ItemTags.FOOT_ARMOR)
                 .add(ModItems.SHADOW_BOOTS.get());
+        this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBlocks.SHADOWWOOD_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_SHADOWWOOD_LOG.get().asItem())
+                .add(ModBlocks.SHADOWWOOD_WOOD.get().asItem())
+                .add(ModBlocks.STRIPPED_SHADOWWOOD_WOOD.get().asItem());
+        this.tag(ItemTags.PLANKS)
+                .add(ModBlocks.SHADOWWOOD_PLANKS.get().asItem());
     }
 }

@@ -37,6 +37,17 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.SHADOW_BLOCK.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
 
+        //TREE
+        this.dropSelf(ModBlocks.SHADOWWOOD_LOG.get());
+        this.dropSelf(ModBlocks.SHADOWWOOD_WOOD.get());
+        this.dropSelf(ModBlocks.STRIPPED_SHADOWWOOD_LOG.get());
+        this.dropSelf(ModBlocks.STRIPPED_SHADOWWOOD_WOOD.get());
+        this.dropSelf(ModBlocks.SHADOWWOOD_PLANKS.get());
+        this.dropSelf(ModBlocks.SHADOWWOOD_SAPLING.get());
+
+        this.add(ModBlocks.SHADOWWOOD_LEAVES.get(), block ->
+                createLeavesDrops(block, ModBlocks.SHADOWWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
         //NON-BLOCK BLOCKS
         dropSelf(ModBlocks.SHADOW_STAIRS.get());
         add(ModBlocks.SHADOW_SLAB.get(),

@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
@@ -17,6 +18,13 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_SHADOW_ORE = registerKey("add_shadow_ore");
     public static final ResourceKey<BiomeModifier> ADD_NETHER_SHADOW_ORE = registerKey("add_nether_shadow_ore");
     public static final ResourceKey<BiomeModifier> ADD_END_SHADOW_ORE = registerKey("add_end_shadow_ore");
+
+    //TREE
+    public static final ResourceKey<BiomeModifier> ADD_SHADOWWOOD = registerKey("add_shadowwood");
+
+
+    public static final ResourceKey<BiomeModifier> ADD_SHADOW_BERRY = registerKey("add_shadow_berry");
+
 
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
@@ -33,16 +41,27 @@ public class ModBiomeModifiers {
 
         context.register(ADD_SHADOW_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeaures.SHADOW_ORE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SHADOW_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
         context.register(ADD_NETHER_SHADOW_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_NETHER),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeaures.NETHER_SHADOW_ORE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NETHER_SHADOW_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
         context.register(ADD_END_SHADOW_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_END),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeaures.END_SHADOW_ORE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.END_SHADOW_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
+        //TREE
+
+        context.register(ADD_SHADOWWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SHADOWWOOD_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(ADD_SHADOW_BERRY, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.FOREST)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SHADOW_BERRY_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
 
     }
 

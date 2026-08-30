@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "shadowthings:lightning_strike",
-    "shadowthings:poison_strike"
+    "shadowthings:poison_strike",
+    "shadowthings:shadow_strike"
   ]
 }

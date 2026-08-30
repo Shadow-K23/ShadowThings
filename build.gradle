@@ -33,6 +33,11 @@ repositories {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+
 }
 
 base {
@@ -146,6 +151,11 @@ dependencies {
 
         // GeckoLib for NeoForge 1.21.1
         implementation 'software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7'
+
+        // Adds Jade 15.10.5 for NeoForge 1.21.1 to your test client only
+        localRuntime "maven.modrinth:jade:15.10.5+neoforge"
+
+        implementation "maven.modrinth:kkmrDlKT:6e8GCrLb"
     }
 }
 

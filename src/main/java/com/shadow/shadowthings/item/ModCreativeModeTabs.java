@@ -98,6 +98,16 @@ public class ModCreativeModeTabs {
                         //ADVANCED BLOCKS
                         output.accept(ModBlocks.MAGIC_BLOCK);
 
+                        //TREES
+                        output.accept((ModBlocks.SHADOWWOOD_LOG));
+                        output.accept((ModBlocks.SHADOWWOOD_WOOD));
+                        output.accept((ModBlocks.STRIPPED_SHADOWWOOD_LOG));
+                        output.accept((ModBlocks.STRIPPED_SHADOWWOOD_WOOD));
+
+                        output.accept((ModBlocks.SHADOWWOOD_PLANKS));
+                        output.accept((ModBlocks.SHADOWWOOD_SAPLING));
+                        
+                        output.accept((ModBlocks.SHADOWWOOD_LEAVES));
 
                     }))
                     .build());

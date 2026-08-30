@@ -4,14 +4,23 @@ import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.effect.ModEffects;
 import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
+import com.shadow.shadowthings.event.ModEvents;
 import com.shadow.shadowthings.item.ModCreativeModeTabs;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.potion.ModPotions;
+import com.shadow.shadowthings.server.ModDataAttachments;
+import com.shadow.shadowthings.soul.ModManaHudOverlay;
+import com.shadow.shadowthings.soul.ModManaSyncPayload;
 import com.shadow.shadowthings.sound.ModSounds;
 import com.shadow.shadowthings.util.ModItemProperties;
+import com.shadow.shadowthings.worldgen.ModOverworldRegion;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -26,6 +35,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import terrablender.api.Regions;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ShadowThings.MODID)
@@ -57,6 +67,7 @@ public class ShadowThings {
         ModEnchantmentEffects.register(modEventBus);
 
         ModDataComponents.register(modEventBus);
+        ModDataAttachments.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -67,7 +78,12 @@ public class ShadowThings {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            Regions.register(new ModOverworldRegion(
+                    ResourceLocation.fromNamespaceAndPath("shadowthings", "overworld_region"),
+                    3
+            ));
+        });
     }
 
     // Add the example block item to the building blocks tab
@@ -83,6 +99,7 @@ public class ShadowThings {
         }
     }
 
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
@@ -94,6 +111,15 @@ public class ShadowThings {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event){
             ModItemProperties.addCustomProperties();
+        }
+
+        @SubscribeEvent
+        public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+            event.registerAbove(
+                    VanillaGuiLayers.CHAT, // Place it relative to vanilla UI elements
+                    ResourceLocation.fromNamespaceAndPath("shadowthings", "mana_overlay"),
+                    ModManaHudOverlay::render
+            );
         }
     }
 }

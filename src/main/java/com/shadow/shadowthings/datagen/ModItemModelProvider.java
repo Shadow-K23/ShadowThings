@@ -90,8 +90,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         //GEMS
         basicItem(ModItems.RUBY_GEM.get());
         basicItem(ModItems.TOPAZ_GEM.get());
+        saplingItem(ModBlocks.SHADOWWOOD_SAPLING);
     }
 
+
+    private ItemModelBuilder saplingItem(DeferredBlock<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                ResourceLocation.parse("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"block/" + item.getId().getPath()));
+    }
     // Shoutout to El_Redstoniano for making this
     private void trimmedArmorItem(DeferredItem<ArmorItem> itemDeferredItem) {
         final String MOD_ID = ShadowThings.MODID; // Change this to your mod id

@@ -5,8 +5,9 @@ import com.shadow.shadowthings.enchantment.ModEnchantments;
 //import com.shadow.shadowthings.trim.ModTrimMaterials;
 //import com.shadow.shadowthings.trim.ModTrimPatterns;
 import com.shadow.shadowthings.worldgen.ModBiomeModifiers;
+import com.shadow.shadowthings.worldgen.ModBiomes;
 import com.shadow.shadowthings.worldgen.ModConfiguredFeatures;
-import com.shadow.shadowthings.worldgen.ModPlacedFeaures;
+import com.shadow.shadowthings.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -23,9 +24,9 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
   //          .add(Registries.TRIM_PATTERN, ModTrimPatterns::bootstrap)
             .add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
-            .add(Registries.PLACED_FEATURE, ModPlacedFeaures::bootstrap)
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
-
+            .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+            .add(Registries.BIOME, ModBiomes::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(ShadowThings.MODID));

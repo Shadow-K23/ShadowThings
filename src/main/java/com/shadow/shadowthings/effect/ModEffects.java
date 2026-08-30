@@ -22,6 +22,9 @@ public class ModEffects {
                             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"slimey"), -0.15f,
                             AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
+    public static final Holder<MobEffect> SHADOW_CURSE_EFFECT = MOB_EFFECTS.register("shadow_curse",
+            () -> new ShadowCurseEffect(MobEffectCategory.HARMFUL, 0x31013d));
+
 
     public static void register(IEventBus eventBus){
         MOB_EFFECTS.register(eventBus);

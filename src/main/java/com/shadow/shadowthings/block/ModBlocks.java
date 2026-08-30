@@ -2,15 +2,21 @@ package com.shadow.shadowthings.block;
 
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.custom.MagicBlock;
+import com.shadow.shadowthings.block.custom.ModFlammableRotatedPillarBlock;
 import com.shadow.shadowthings.block.custom.RadishCropBlock;
 import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.sound.ModSounds;
+import com.shadow.shadowthings.worldgen.Tree.ModTreeGrowers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
@@ -72,6 +78,55 @@ public class ModBlocks {
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+
+    //SHADOW TREE
+
+    public static final DeferredBlock<Block> SHADOWWOOD_LOG = registerBlock("shadowwood_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<Block> SHADOWWOOD_WOOD = registerBlock("shadowwood_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));
+    public static final DeferredBlock<Block> STRIPPED_SHADOWWOOD_LOG = registerBlock("stripped_shadowwood_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)));
+    public static final DeferredBlock<Block> STRIPPED_SHADOWWOOD_WOOD = registerBlock("stripped_shadowwood_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final DeferredBlock<Block> SHADOWWOOD_PLANKS = registerBlock("shadowwood_planks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+    public static final DeferredBlock<Block> SHADOWWOOD_LEAVES = registerBlock("shadowwood_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+    public static final DeferredBlock<Block> SHADOWWOOD_SAPLING = registerBlock("shadowwood_sapling",
+            () -> new SaplingBlock(ModTreeGrowers.SHADOWWOOD,BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+
 
     //NON-BLOCK BLOCKS
 

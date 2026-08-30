@@ -17,13 +17,19 @@
   "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
 
   "effect.shadowthings.slimey": "Slimey",
+  "effect.shadowthings.shadow_curse": "Shadow Curse",
 
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
 
+  "item.minecraft.potion.effect.shadow_curse_potion": "Shadow Curse Potion",
+  "item.minecraft.splash_potion.effect.shadow_curse_potion": "Shadow Curse Splash Potion",
+  "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Shadow Curse Lingering Potion",
+
   "enchantment.shadowthings.lightning_strike": "Lightning Strike",
   "enchantment.shadowthings.poison_strike": "Poison Strike",
+  "enchantment.shadowthings.shadow_strike": "Shadow Strike",
 
   "item.shadowthings.ruby_gem": "Ruby Gem",
   "item.shadowthings.topaz_gem": "Topaz Gem",
@@ -66,6 +72,16 @@
 
   "block.shadowthings.radish_crop": "Radish Crop",
   "block.shadowthings.shadow_berries_bush": "Shadow Berries Bush",
+
+  "block.shadowthings.shadowwood_log": "Shadowwood Log" ,
+  "block.shadowthings.shadowwood_wood": "Shadowwood Wood",
+
+  "block.shadowthings.stripped_shadowwood_log": "Stripped Shadowwood Log",
+  "block.shadowthings.stripped_shadowwood_wood": "Stripped Shadowwood Wood",
+
+  "block.shadowthings.shadowwood_planks": "Shadowwood Planks",
+  "block.shadowthings.shadowwood_sapling": "Shadowwood Sapling",
+  "block.shadowthings.shadowwood_leaves": "Shadowwood Leaves",
 
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",

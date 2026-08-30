@@ -49,5 +49,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.INCORRECT_FOR_SHADOW_TOOL)
                 .addTag(BlockTags.INCORRECT_FOR_DIAMOND_TOOL)
                 .remove(ModTags.Blocks.NEEDS_SHADOW_TOOL);
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBlocks.SHADOWWOOD_LOG.get())
+                .add(ModBlocks.STRIPPED_SHADOWWOOD_LOG.get())
+                .add(ModBlocks.SHADOWWOOD_WOOD.get())
+                .add(ModBlocks.STRIPPED_SHADOWWOOD_WOOD.get());
+
+
     }
 }
