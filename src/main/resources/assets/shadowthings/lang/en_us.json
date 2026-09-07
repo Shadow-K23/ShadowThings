@@ -27,9 +27,12 @@
   "item.minecraft.splash_potion.effect.shadow_curse_potion": "Shadow Curse Splash Potion",
   "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Shadow Curse Lingering Potion",
 
+  "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Arrow of Shadow Curse",
+
   "enchantment.shadowthings.lightning_strike": "Lightning Strike",
   "enchantment.shadowthings.poison_strike": "Poison Strike",
   "enchantment.shadowthings.shadow_strike": "Shadow Strike",
+  "enchantment.shadowthings.soul_stealer": "Soul Stealer",
 
   "item.shadowthings.ruby_gem": "Ruby Gem",
   "item.shadowthings.topaz_gem": "Topaz Gem",
@@ -69,6 +72,8 @@
   "block.shadowthings.shadow_trapdoor": "Shadow Trapdoor",
 
   "block.shadowthings.magic_block": "Magic Block",
+  "block.shadowthings.soul_orb": "Soul Orb",
+
 
   "block.shadowthings.radish_crop": "Radish Crop",
   "block.shadowthings.shadow_berries_bush": "Shadow Berries Bush",

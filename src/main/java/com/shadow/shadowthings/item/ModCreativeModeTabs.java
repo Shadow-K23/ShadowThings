@@ -98,6 +98,10 @@ public class ModCreativeModeTabs {
                         //ADVANCED BLOCKS
                         output.accept(ModBlocks.MAGIC_BLOCK);
 
+                        //SOUL RELATED
+
+                        output.accept(ModBlocks.SOUL_ORB);
+
                         //TREES
                         output.accept((ModBlocks.SHADOWWOOD_LOG));
                         output.accept((ModBlocks.SHADOWWOOD_WOOD));

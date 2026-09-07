@@ -26,6 +26,9 @@ public class ModEnchantments {
     public static final ResourceKey<Enchantment> SHADOW_STRIKE = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "shadow_strike"));
 
+    public static final ResourceKey<Enchantment> SOUL_STEALER = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "soul_stealer"));
+
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
         var enchantments = context.lookup(Registries.ENCHANTMENT);
@@ -41,7 +44,6 @@ public class ModEnchantments {
                 Enchantment.dynamicCost(25,8),
                 2,
                 EquipmentSlotGroup.MAINHAND))
-                .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
                 .withEffect(EnchantmentEffectComponents.POST_ATTACK, EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM, new LightningStrikeEnchantmentEffect())
         );
@@ -55,7 +57,6 @@ public class ModEnchantments {
                 Enchantment.dynamicCost(25,8),
                 3,
                 EquipmentSlotGroup.MAINHAND))
-                .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
                 .withEffect(EnchantmentEffectComponents.POST_ATTACK, EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM, new PoisonStrikeEnchantmentEffect())
         );
@@ -72,6 +73,17 @@ public class ModEnchantments {
                 .exclusiveWith(enchantments.getOrThrow(EnchantmentTags.DAMAGE_EXCLUSIVE))
                 .withEffect(EnchantmentEffectComponents.POST_ATTACK, EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM, new ShadowStrikeEnchantmentEffect())
+        );
+
+        register(context, SOUL_STEALER,Enchantment.enchantment(Enchantment.definition(
+                        items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                        items.getOrThrow(ItemTags.SWORD_ENCHANTABLE),
+                        3,
+                        3,
+                        Enchantment.dynamicCost(6,6),
+                        Enchantment.dynamicCost(20,8),
+                        3,
+                        EquipmentSlotGroup.MAINHAND))
         );
 
     }

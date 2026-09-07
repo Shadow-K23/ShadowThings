@@ -1,16 +1,19 @@
 package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.block.entity.ModBlockEntities;
+import com.shadow.shadowthings.client.model.SoulOrbModel;
+import com.shadow.shadowthings.block.entity.renderer.SoulOrbEntityRenderer;
 import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.effect.ModEffects;
 import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
-import com.shadow.shadowthings.event.ModEvents;
 import com.shadow.shadowthings.item.ModCreativeModeTabs;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.potion.ModPotions;
+import com.shadow.shadowthings.screen.ModMenuTypes;
+import com.shadow.shadowthings.screen.custom.SoulOrbScreen;
 import com.shadow.shadowthings.server.ModDataAttachments;
 import com.shadow.shadowthings.soul.ModManaHudOverlay;
-import com.shadow.shadowthings.soul.ModManaSyncPayload;
 import com.shadow.shadowthings.sound.ModSounds;
 import com.shadow.shadowthings.util.ModItemProperties;
 import com.shadow.shadowthings.worldgen.ModOverworldRegion;
@@ -18,9 +21,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -66,9 +70,12 @@ public class ShadowThings {
 
         ModEnchantmentEffects.register(modEventBus);
 
+        ModBlockEntities.register(modEventBus);
+
         ModDataComponents.register(modEventBus);
         ModDataAttachments.register(modEventBus);
 
+        ModMenuTypes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -120,6 +127,19 @@ public class ShadowThings {
                     ResourceLocation.fromNamespaceAndPath("shadowthings", "mana_overlay"),
                     ModManaHudOverlay::render
             );
+        }
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_ORB_BE.get(), SoulOrbEntityRenderer::new);
+        }
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            // This tells the game how to build your 3D model using the math from Blockbench
+            event.registerLayerDefinition(SoulOrbModel.LAYER_LOCATION, SoulOrbModel::createBodyLayer);
+        }
+
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.SOUL_ORB_MENU.get(), SoulOrbScreen::new);
         }
     }
 }

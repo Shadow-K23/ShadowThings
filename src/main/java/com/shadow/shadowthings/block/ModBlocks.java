@@ -1,10 +1,7 @@
 package com.shadow.shadowthings.block;
 
 import com.shadow.shadowthings.ShadowThings;
-import com.shadow.shadowthings.block.custom.MagicBlock;
-import com.shadow.shadowthings.block.custom.ModFlammableRotatedPillarBlock;
-import com.shadow.shadowthings.block.custom.RadishCropBlock;
-import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
+import com.shadow.shadowthings.block.custom.*;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.sound.ModSounds;
 import com.shadow.shadowthings.worldgen.Tree.ModTreeGrowers;
@@ -78,6 +75,10 @@ public class ModBlocks {
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+    //SHADOW SOULS RELATED BLOCKS
+
+    public static final DeferredBlock<Block> SOUL_ORB = registerBlock("soul_orb",
+            () -> new SoulOrbBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
     //SHADOW TREE
 
