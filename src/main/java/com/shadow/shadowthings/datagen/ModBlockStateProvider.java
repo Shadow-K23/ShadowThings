@@ -4,6 +4,8 @@ import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.custom.RadishCropBlock;
 import com.shadow.shadowthings.block.custom.ShadowBerryBushBlock;
+import com.shadow.shadowthings.block.custom.SoulCoreBlock;
+import com.shadow.shadowthings.block.custom.SoulStructureBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +14,9 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.neoforged.neoforge.client.model.EmptyModel;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -31,6 +36,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //BLOCKS
 
         blockWithItem(ModBlocks.SHADOW_BLOCK);
+
+        //ADVANCED BLOCKS
+
+        blockWithItem(ModBlocks.MAGIC_BLOCK);
+
+        //SOUL BLOCKS
+
+        formableMultiblockPart(ModBlocks.SOUL_CORE.get(), SoulStructureBlock.FORMED, "soul_core");
+
+        formableMultiblockPart(ModBlocks.SOUL_STRUCTURE_BLOCK.get(), SoulStructureBlock.FORMED, "soul_structure_block");
+
 
         //NON-BLOCK BLOCKS
 
@@ -68,9 +84,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SHADOW_NETHER_ORE);
         blockWithItem(ModBlocks.SHADOW_END_ORE);
 
-        //ADVANCED BLOCKS
 
-        blockWithItem(ModBlocks.MAGIC_BLOCK);
 
         //TREES
         logBlock((RotatedPillarBlock) ModBlocks.SHADOWWOOD_LOG.get());
@@ -141,5 +155,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockItem(DeferredBlock<?> deferredBlock, String appendix) {
         simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("shadowthings:block/" + deferredBlock.getId().getPath() + appendix));
+    }
+
+    public void formableMultiblockPart(Block block, BooleanProperty formedProperty, String textureName) {
+        BlockModelBuilder emptyModel = models().withExistingParent(textureName + "_empty", mcLoc("block/block"));
+
+        getVariantBuilder(block)
+                // State 1: FORMED = false (Normal building phase)
+                .partialState().with(formedProperty, false)
+                .modelForState()
+                .modelFile(models().cubeAll(textureName, modLoc("block/" + textureName)))
+                .addModel()
+
+                // State 2: FORMED = true (Multiblock is active, turn invisible!)
+                .partialState().with(formedProperty, true)
+                .modelForState()
+                .modelFile(emptyModel)
+                .addModel();
     }
 }

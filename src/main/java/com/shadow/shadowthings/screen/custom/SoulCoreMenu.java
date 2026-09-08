@@ -1,39 +1,50 @@
 package com.shadow.shadowthings.screen.custom;
 
 import com.shadow.shadowthings.block.ModBlocks;
-import com.shadow.shadowthings.block.entity.SoulOrbEntity;
+import com.shadow.shadowthings.block.entity.SoulCoreEntity;
 import com.shadow.shadowthings.screen.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
-public class SoulOrbMenu extends AbstractContainerMenu {
-    public final SoulOrbEntity blockEntity;
+public class SoulCoreMenu extends AbstractContainerMenu {
+    public final SoulCoreEntity blockEntity;
     private final Level level;
 
+    private final ContainerData data;
 
-    public SoulOrbMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId,inv,inv.player.level().getBlockEntity(extraData.readBlockPos()));
+    // Update your client-side constructor (extraData one)
+    public SoulCoreMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public SoulOrbMenu(int containerId, Inventory inv, BlockEntity blockEntity) {
-        super(ModMenuTypes.SOUL_ORB_MENU.get(),containerId);
-        this.blockEntity = ((SoulOrbEntity) blockEntity);
+    // Update your main constructor
+    public SoulCoreMenu(int containerId, Inventory inv, BlockEntity blockEntity, ContainerData data) {
+        super(ModMenuTypes.SOUL_CORE_MENU.get(), containerId);
+        this.blockEntity = ((SoulCoreEntity) blockEntity);
         this.level = inv.player.level();
+        this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
+
+        // CRUCIAL: Tells the menu to actively sync these numbers!
+        addDataSlots(data);
+    }
+
+    // This method does the math for the screen!
+    public int getScaledSoulProgress() {
+        int currentSouls = this.data.get(0);
+        int maxSouls = this.data.get(1);
+        int barPixelHeight = 69; // Change this to the exact pixel height of your bar in your texture!
+
+        return maxSouls != 0 && currentSouls != 0 ? (currentSouls * barPixelHeight) / maxSouls : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -89,7 +100,7 @@ public class SoulOrbMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.SOUL_ORB.get());
+                player, ModBlocks.SOUL_CORE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

@@ -100,7 +100,8 @@ public class ModCreativeModeTabs {
 
                         //SOUL RELATED
 
-                        output.accept(ModBlocks.SOUL_ORB);
+                        output.accept(ModBlocks.SOUL_CORE);
+                        output.accept(ModBlocks.SOUL_STRUCTURE_BLOCK);
 
                         //TREES
                         output.accept((ModBlocks.SHADOWWOOD_LOG));

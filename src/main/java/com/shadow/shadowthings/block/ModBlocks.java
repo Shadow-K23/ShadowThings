@@ -77,8 +77,17 @@ public class ModBlocks {
                     .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
     //SHADOW SOULS RELATED BLOCKS
 
-    public static final DeferredBlock<Block> SOUL_ORB = registerBlock("soul_orb",
-            () -> new SoulOrbBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final DeferredBlock<Block> SOUL_CORE = registerBlock("soul_core",
+            () -> new SoulCoreBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .strength(2f)
+                    .sound(SoundType.SCULK_CATALYST)));
+    public static final DeferredBlock<Block> SOUL_STRUCTURE_BLOCK = registerBlock("soul_structure_block",
+            () -> new SoulStructureBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.METAL)));
 
     //SHADOW TREE
 

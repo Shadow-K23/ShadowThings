@@ -36,6 +36,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         //SELF DROPPING BLOCKS
         dropSelf(ModBlocks.SHADOW_BLOCK.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
+        dropSelf(ModBlocks.SOUL_STRUCTURE_BLOCK.get());
+        dropSelf(ModBlocks.SOUL_CORE.get());
 
         //TREE
         this.dropSelf(ModBlocks.SHADOWWOOD_LOG.get());
