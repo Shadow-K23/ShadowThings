@@ -3,6 +3,7 @@ package com.shadow.shadowthings.screen.custom;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.shadow.shadowthings.ShadowThings;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -15,6 +16,23 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
 
     public SoulCoreScreen(SoulCoreMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        // Add a standard button.
+        // You can adjust the X (x + 10), Y (y + 10), Width (60), and Height (20) to fit your GUI texture!
+        this.addRenderableWidget(Button.builder(Component.literal("Soul Siphon"), button -> {
+
+            // This is the magic line! It sends the click directly to our Menu's 'clickMenuButton' method
+            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
+
+        }).bounds(x + 10, y + 10, 60, 20).build());
     }
 
     @Override

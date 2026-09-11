@@ -2,17 +2,23 @@ package com.shadow.shadowthings.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.SoulCoreEntity;
+import com.shadow.shadowthings.world.SoulCoreData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
@@ -21,13 +27,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SoulCoreBlock extends BaseEntityBlock {
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
+    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
     public static final MapCodec<SoulCoreBlock> CODEC = simpleCodec(SoulCoreBlock::new);
 
     public SoulCoreBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(SoulStructureBlock.FORMED, false));
     }
+
+
 
     public boolean checkMultiblock(Level level, BlockPos corePos) {
         // 1. Check the 3x3 Base (Y = 0)
@@ -84,6 +92,15 @@ public class SoulCoreBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
+
+            // Unregister the core from the global tracker so the player can build a new one
+            if (!level.isClientSide() && level.getBlockEntity(pos) instanceof SoulCoreEntity coreEntity) {
+                if (coreEntity.ownerUUID != null) {
+                    SoulCoreData data = SoulCoreData.get((ServerLevel) level);
+                    data.removeCore(coreEntity.ownerUUID);
+                }
+            }
+
             unformMultiblock(level, pos);
         }
         super.onRemove(state, level, pos, newState, isMoving);
@@ -92,22 +109,23 @@ public class SoulCoreBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-
             // 1. If sneaking (Shift + Right-Click) -> Try to form the multiblock
-            if (player.isShiftKeyDown()) {
-                if (checkMultiblock(level, pos)) {
-                    formMultiblock(level, pos);
-                    player.displayClientMessage(Component.literal("§bSoul Core Activated!"), true);
-                } else {
-                    player.displayClientMessage(Component.literal("§cIncomplete Structure!"), true);
-                }
-                return InteractionResult.SUCCESS;
-            }
+                if (player.isShiftKeyDown()) {
+                    if (checkMultiblock(level, pos)) {
+                        formMultiblock(level, pos);
+                        player.displayClientMessage(Component.literal("§bSoul Core Activated!"), true);
+                    } else {
+                        player.displayClientMessage(Component.literal("§cIncomplete Structure!"), true);
+                    }
+                    return InteractionResult.SUCCESS;
+                    }
 
             // 2. If NOT sneaking (Normal Right-Click) -> Open the UI
             BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof SoulCoreEntity coreEntity) {
+            if (entity instanceof SoulCoreEntity coreEntity && coreEntity.isFormed) {
                 player.openMenu(coreEntity, pos);
+            }else{
+                player.displayClientMessage(Component.literal("§cIncomplete Structure!"), true);
             }
             return InteractionResult.SUCCESS;
         }
@@ -178,5 +196,49 @@ public class SoulCoreBlock extends BaseEntityBlock {
         if (state.hasProperty(SoulStructureBlock.FORMED)) {
             level.setBlock(pos, state.setValue(SoulStructureBlock.FORMED, formed), 3);
         }
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable net.minecraft.world.entity.LivingEntity placer, net.minecraft.world.item.ItemStack stack) {
+        if (placer instanceof Player player && !level.isClientSide()) {
+            SoulCoreData data = SoulCoreData.get((ServerLevel) level);
+
+            // 1. REJECTION: If they already have a core, bounce it back to them!
+            if (data.hasCore(player.getUUID())) {
+                player.displayClientMessage(Component.literal("§cYou can only have one Soul Core in the world!"), true);
+
+                // Instantly remove the block that was just placed
+                level.setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+
+                // Refund the item (if not in Creative mode)
+                if (!player.isCreative()) {
+                    net.minecraft.world.item.ItemStack refundedItem = new net.minecraft.world.item.ItemStack(this);
+                    // Try to put it in their inventory, otherwise drop it at their feet
+                    player.drop(refundedItem, false);
+
+                }
+                return; // Stop the rest of the registration code from running
+            }
+
+            // 2. SUCCESS: Register the new Core normally
+            data.setCore(player.getUUID(), pos);
+            if (level.getBlockEntity(pos) instanceof SoulCoreEntity coreEntity) {
+                coreEntity.ownerUUID = player.getUUID();
+                coreEntity.setChanged();
+            }
+        }
+        super.setPlacedBy(level, pos, state, placer, stack);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        // We only want the server to do the math and siphoning!
+        if (level.isClientSide()) {
+            return null;
+        }
+
+        return createTickerHelper(type, ModBlockEntities.SOUL_CORE_BE.get(),
+                (lvl, pos, blockState, blockEntity) -> blockEntity.tick(lvl, pos, blockState));
     }
 }

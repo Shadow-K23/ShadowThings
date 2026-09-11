@@ -47,6 +47,30 @@ public class SoulCoreMenu extends AbstractContainerMenu {
         return maxSouls != 0 && currentSouls != 0 ? (currentSouls * barPixelHeight) / maxSouls : 0;
     }
 
+    @Override
+    public boolean clickMenuButton(Player player, int buttonId) {
+        switch (buttonId) {
+            case 0:
+                // Button 0 toggles Mechanic A
+                this.blockEntity.toggleSoulSiphon();
+                return true;
+
+            case 1:
+                // Button 1 toggles Mechanic B
+                //this.blockEntity.toggleMechanicB();
+                return true;
+
+            case 2:
+                // Button 2 triggers some other event (like spending souls)
+                //this.blockEntity.triggerSpecialEvent();
+                return true;
+        }
+
+        return super.clickMenuButton(player, buttonId);
+    }
+
+
+
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
