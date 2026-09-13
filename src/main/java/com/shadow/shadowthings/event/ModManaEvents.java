@@ -3,11 +3,10 @@ package com.shadow.shadowthings.event;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.enchantment.ModEnchantments;
 import com.shadow.shadowthings.server.ModDataAttachments;
-import com.shadow.shadowthings.soul.ModManaSyncPayload;
+import com.shadow.shadowthings.network.ModManaSyncPayload;
 import com.shadow.shadowthings.soul.ModPlayerSoulMana;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -31,7 +30,7 @@ public class ModManaEvents {
             var manaData = player.getData(ModDataAttachments.PLAYER_SOUL_MANA);
 
             // Immediately sync it to the client so the HUD updates!
-            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana()));
+            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
         }
     }
     @SubscribeEvent
@@ -42,7 +41,7 @@ public class ModManaEvents {
             var manaData = player.getData(ModDataAttachments.PLAYER_SOUL_MANA);
 
             // Immediately sync it to the client so the HUD updates!
-            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana()));
+            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
         }
     }
     @SubscribeEvent
@@ -53,7 +52,7 @@ public class ModManaEvents {
             var manaData = player.getData(ModDataAttachments.PLAYER_SOUL_MANA);
 
             // Immediately sync it to the client so the HUD updates!
-            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana()));
+            PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
         }
     }
 
@@ -70,7 +69,7 @@ public class ModManaEvents {
                 manaData.addMana(manaData.getManaRegen());
 
                 // Sync to client so the HUD updates
-                PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana()));
+                PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
 
             }
         }
@@ -95,7 +94,7 @@ public class ModManaEvents {
 
                 manaData.addMana(souls);
 
-                PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana()));
+                PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
             }
         }
     }

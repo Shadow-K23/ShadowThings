@@ -3,10 +3,13 @@ package com.shadow.shadowthings.datagen;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.ModItems;
+import com.shadow.shadowthings.recipe.SoulInfusionRecipe;
 import it.unimi.dsi.fastutil.bytes.Byte2IntSortedMap;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -122,6 +125,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.BLAZE_ROD)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
 
+        //SOUL CRAFTER RECIPES
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_sword_infusion"), // 1. The unique JSON file name
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_SWORD),                                // 2. The Catalyst (Center item)
+                        List.of(                                                        // 3. The Pedestal Ingredients
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN)
+                        ),
+                        2500,                                                           // 4. The Soul Cost
+                        new ItemStack(ModItems.SHADOWSWORD.get())                            // 5. The Result (Change to your mod item!)
+                ),
+                null // 6. The Advancement (Leave null, custom machines don't use the vanilla recipe book!)
+        );
 
         //NON-BLOCK BLOCKS
 

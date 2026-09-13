@@ -18,6 +18,14 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("soul_core_be", () -> BlockEntityType.Builder.of(
                     SoulCoreEntity::new, ModBlocks.SOUL_CORE.get()).build(null));
 
+    public static final Supplier<BlockEntityType<SoulPedestalEntity>> SOUL_PEDESTAL_BE =
+            BLOCK_ENTITIES.register("soul_pedestal_be", () -> BlockEntityType.Builder.of(
+                    SoulPedestalEntity::new, ModBlocks.SOUL_PEDESTAL.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SoulCrafterEntity>> SOUL_CRAFTER_BE =
+                BLOCK_ENTITIES.register("soul_crafter_be", () -> BlockEntityType.Builder.of(
+                        SoulCrafterEntity::new, ModBlocks.SOUL_CRAFTER.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

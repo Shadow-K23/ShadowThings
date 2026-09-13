@@ -38,7 +38,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOW_BOW);
 
                         //ADVANCED ITEMS
-                        output.accept(ModItems.CHISEL);
+                        output.accept(ModItems.SOUL_LINKER);
                         output.accept(ModItems.SHADOWHAMMER);
 
                         //ARMOR
@@ -102,6 +102,8 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.SOUL_CORE);
                         output.accept(ModBlocks.SOUL_STRUCTURE_BLOCK);
+                        output.accept(ModBlocks.SOUL_PEDESTAL);
+                        output.accept(ModBlocks.SOUL_CRAFTER);
 
                         //TREES
                         output.accept((ModBlocks.SHADOWWOOD_LOG));

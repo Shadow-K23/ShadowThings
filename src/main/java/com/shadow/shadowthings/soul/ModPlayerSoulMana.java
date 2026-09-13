@@ -7,6 +7,8 @@ public class ModPlayerSoulMana {
     private int maxMana = 200;
     private int manaRegen = 0;
 
+    public boolean hasSynced = false;
+
     public int getMana(){return mana;}
     public int getMaxMana(){return maxMana;}
     public int getManaRegen(){return manaRegen;}
@@ -23,12 +25,15 @@ public class ModPlayerSoulMana {
 
     public void setMaxMana(int mana){
         this.maxMana = mana;
+        if (this.getMana() > mana){
+            setMana(mana);
+        }
     }
     public void addMaxMana(int mana){
         setMaxMana(this.mana + mana);
     }
     public void removeMaxMana(int mana){
-        setMaxMana(this.mana - mana);
+        Math.clamp(this.maxMana - mana, 0, mana);
     }
 
     public void setManaRegen(int mana){

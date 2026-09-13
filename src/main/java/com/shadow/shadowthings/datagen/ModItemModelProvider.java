@@ -66,7 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.SHADOWSPEAR);
 
         //ADVANCED ITEMS
-        //basicItem(ModItems.CHISEL.get());
+        handheldItem(ModItems.SOUL_LINKER);
         handheldItem(ModItems.SHADOWHAMMER);
 
         //ARMOR

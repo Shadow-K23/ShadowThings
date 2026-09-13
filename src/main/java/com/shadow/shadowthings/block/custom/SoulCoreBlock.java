@@ -21,6 +21,10 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -29,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public class SoulCoreBlock extends BaseEntityBlock {
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
     public static final MapCodec<SoulCoreBlock> CODEC = simpleCodec(SoulCoreBlock::new);
+    private static BlockPattern soulCorePattern;
 
     public SoulCoreBlock(Properties properties) {
         super(properties);
@@ -37,31 +42,61 @@ public class SoulCoreBlock extends BaseEntityBlock {
 
 
 
-    public boolean checkMultiblock(Level level, BlockPos corePos) {
-        // 1. Check the 3x3 Base (Y = 0)
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                if (x == 0 && z == 0) continue;
+    public static BlockPattern getOrCreateSoulCorePattern() {
+        if (soulCorePattern == null) {
+            soulCorePattern = BlockPatternBuilder.start()
+                    // Y=2 (Top layer of the pillars)
+                    .aisle(
+                            "S~S",
+                            "~~~",
+                            "S~S"
+                    )
+                    // Y=1 (Middle layer of the pillars)
+                    .aisle(
+                            "S~S",
+                            "~~~",
+                            "S~S"
+                    )
+                    // Y=0 (The 3x3 base)
+                    .aisle(
+                            "SSS",
+                            "SCS",
+                            "SSS"
+                    )
+                    .where('C', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.SOUL_CORE.get())))
+                    .where('S', BlockInWorld.hasState(state -> state.is(ModBlocks.SOUL_STRUCTURE_BLOCK.get()) && !state.getValue(SoulStructureBlock.FORMED)))
+                    .where('~', BlockInWorld.hasState(BlockStatePredicate.ANY)) // ~ means we don't care what block is in the air space!
+                    .build();
+        }
+        return soulCorePattern;
+    }
 
-                BlockPos checkPos = corePos.offset(x, 0, z);
-                if (!level.getBlockState(checkPos).is(ModBlocks.SOUL_STRUCTURE_BLOCK.get())) {
-                    return false;
+    public static void trySpawnMultiblock(Level level, BlockPos pos) {
+        if (level.isClientSide) return;
+        BlockPattern.BlockPatternMatch match = getOrCreateSoulCorePattern().find(level, pos);
+        if (match != null) {
+            for (int width = 0; width < getOrCreateSoulCorePattern().getWidth(); width++) {
+                for (int height = 0; height < getOrCreateSoulCorePattern().getHeight(); height++) {
+                    for (int depth = 0; depth < getOrCreateSoulCorePattern().getDepth(); depth++) {
+                        BlockInWorld blockInWorld = match.getBlock(width, height, depth);
+                        BlockPos currentPos = blockInWorld.getPos();
+                        BlockState currentState = level.getBlockState(currentPos);
+
+                        if (currentState.is(ModBlocks.SOUL_STRUCTURE_BLOCK.get())) {
+                            level.setBlock(currentPos, currentState.setValue(SoulStructureBlock.FORMED, true), 3);
+                        } else if (currentState.is(ModBlocks.SOUL_CORE.get())) {
+                            BlockState newCoreState = currentState.setValue(SoulStructureBlock.FORMED, true);
+                            level.setBlock(currentPos, newCoreState, 3);
+                            if (level.getBlockEntity(currentPos) instanceof SoulCoreEntity core) {
+                                core.isFormed = true;
+                                core.setChanged();
+                                level.sendBlockUpdated(currentPos, newCoreState, newCoreState, 3);
+                            }
+                        }
+                    }
                 }
             }
         }
-
-        // 2. Check the Corner Pillars (Y = 1 and Y = 2)
-        int[][] corners = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-        for (int[] corner : corners) {
-            for (int y = 1; y <= 2; y++) {
-                BlockPos checkPos = corePos.offset(corner[0], y, corner[1]);
-                if (!level.getBlockState(checkPos).is(ModBlocks.SOUL_STRUCTURE_BLOCK.get())) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     @Override
@@ -81,6 +116,9 @@ public class SoulCoreBlock extends BaseEntityBlock {
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {
+        if (state.getValue(SoulStructureBlock.FORMED)) {
+            return RenderShape.ENTITYBLOCK_ANIMATED;
+        }
         return RenderShape.MODEL;
     }
 
@@ -111,13 +149,8 @@ public class SoulCoreBlock extends BaseEntityBlock {
         if (!level.isClientSide()) {
             // 1. If sneaking (Shift + Right-Click) -> Try to form the multiblock
                 if (player.isShiftKeyDown()) {
-                    if (checkMultiblock(level, pos)) {
-                        formMultiblock(level, pos);
-                        player.displayClientMessage(Component.literal("§bSoul Core Activated!"), true);
-                    } else {
-                        player.displayClientMessage(Component.literal("§cIncomplete Structure!"), true);
-                    }
-                    return InteractionResult.SUCCESS;
+                        trySpawnMultiblock(level,pos);
+                        return InteractionResult.SUCCESS;
                     }
 
             // 2. If NOT sneaking (Normal Right-Click) -> Open the UI
@@ -132,35 +165,7 @@ public class SoulCoreBlock extends BaseEntityBlock {
         return InteractionResult.SUCCESS;
     }
 
-    private void formMultiblock(Level level, BlockPos corePos) {
-        // 1. Transform the Core itself and sync its entity tracker
-        BlockState coreState = level.getBlockState(corePos);
-        if (coreState.hasProperty(SoulStructureBlock.FORMED)) {
-            level.setBlock(corePos, coreState.setValue(SoulStructureBlock.FORMED, true), 3);
-        }
 
-        if (level.getBlockEntity(corePos) instanceof SoulCoreEntity coreEntity) {
-            coreEntity.isFormed = true;
-            coreEntity.setChanged();
-            level.sendBlockUpdated(corePos, coreState, coreState, 3);
-        }
-
-        // 2. Transform the 3x3 Base
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                if (x == 0 && z == 0) continue;
-                setFormedState(level, corePos.offset(x, 0, z), true);
-            }
-        }
-
-        // 3. Transform the Pillars
-        int[][] corners = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-        for (int[] corner : corners) {
-            for (int y = 1; y <= 2; y++) {
-                setFormedState(level, corePos.offset(corner[0], y, corner[1]), true);
-            }
-        }
-    }
 
     public void unformMultiblock(Level level, BlockPos corePos) {
         // 1. Unform the Core itself and sync its entity tracker

@@ -1,7 +1,6 @@
 package com.shadow.shadowthings.network;
 
 import com.shadow.shadowthings.server.ModDataAttachments;
-import com.shadow.shadowthings.soul.ModManaSyncPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -25,7 +24,28 @@ public class ModNetworking {
                         // Get the local player and update their mana data
                         if (context.player() != null) {
                             var manaData = context.player().getData(ModDataAttachments.PLAYER_SOUL_MANA);
+
+                            // Update BOTH values on the client HUD!
+                            manaData.setMaxMana(payload.maxMana());
                             manaData.setMana(payload.mana());
+                            manaData.hasSynced = true;
+                        }
+                    });
+                }
+        );
+        // Register the payload blueprint
+        registrar.playToServer(
+                ModStartCraftingPayload.TYPE,
+                ModStartCraftingPayload.STREAM_CODEC,
+                (payload, context) -> {
+                    context.enqueueWork(() -> {
+                        // This code runs on the Server!
+                        if (context.player() != null && context.player().level() != null) {
+                            var level = context.player().level();
+                            // Find the block entity at the coordinates the client sent
+                            if (level.getBlockEntity(payload.pos()) instanceof com.shadow.shadowthings.block.entity.SoulCrafterEntity crafter) {
+                                crafter.startCrafting(); // Trigger the logic we wrote earlier!
+                            }
                         }
                     });
                 }

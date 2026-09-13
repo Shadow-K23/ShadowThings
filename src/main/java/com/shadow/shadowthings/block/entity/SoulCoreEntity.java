@@ -1,9 +1,9 @@
 package com.shadow.shadowthings.block.entity;
 
-import com.shadow.shadowthings.block.custom.SoulCoreBlock;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import com.shadow.shadowthings.screen.custom.SoulCoreMenu;
 import com.shadow.shadowthings.server.ModDataAttachments;
-import com.shadow.shadowthings.soul.ModManaSyncPayload;
+import com.shadow.shadowthings.network.ModManaSyncPayload;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,37 +21,49 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class SoulCoreEntity extends BlockEntity implements MenuProvider {
+public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     public SoulCoreEntity(BlockPos pos, BlockState blockState) {
-        super(ModBlockEntities.SOUL_CORE_BE.get(), pos, blockState);
+        super(ModBlockEntities.SOUL_CORE_BE.get(), pos, blockState,1000, 5000, 5, 200);
     }
 
     public boolean isFormed = false;
 
-    private int souls = 0;
-    private int maxSouls = 5000;
-
     public UUID ownerUUID;
 
-    public boolean soulTransferEnabled = false;
-    public int transferRate = 0;
-    public int transferAmount = 0;
 
     public boolean soulSiphonEnabled = false;
-    public int siphonRate = 10; // How many ticks between siphons (20 ticks = 1 second)
+    public int siphonRate = 10; // How many ticks between siphons
     public int siphonAmount = 10; // How many souls to pull per siphon
     private int tickCounter = 0; // Internal timer
+
+    private int coreRadius = 8;
+
+    public UUID getOwnerUUID() {
+        return ownerUUID;
+    }
+
+    public void setOwnerUUID(UUID ownerUUID) {
+        this.ownerUUID = ownerUUID;
+        setChanged();
+    }
+
+    public int getCoreRadius() {
+        return coreRadius;
+    }
+
+    public void setCoreRadius(int coreRadius) {
+        this.coreRadius = coreRadius;
+        setChanged();
+    }
 
     public int getSouls() {
         return souls;
@@ -106,7 +118,11 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
         }
     }
     public void setMaxSouls(int amount) {
+
         this.maxSouls = amount;
+        if (this.getSouls() > amount){
+            this.setSouls(amount);
+        }
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
@@ -120,13 +136,25 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
         }
     }
     public void removeMaxSouls(int amount) {
-        this.maxSouls = this.maxSouls - amount;
+        this.maxSouls = Math.clamp(this.maxSouls - amount, 0 ,amount);
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
         }
     }
 
+    public boolean sendSoulsTo(AbstractSoulEntity target, int requestedAmount) {
+        // Ensure the core has enough souls to fulfill the request
+        int amountToSend = Math.min(requestedAmount, this.getSouls());
+
+        if (amountToSend > 0) {
+            this.removeSouls(amountToSend);
+            target.addSouls(amountToSend);
+            return true; // Transfer was successful!
+        }
+
+        return false; // Core didn't have enough souls
+    }
     //SOUL CORE TOGGLEABLES
 
     public void toggleSoulSiphon() {
@@ -170,16 +198,11 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
             if (manaData.getMana() > siphonAmount && player instanceof ServerPlayer serverPlayer){
                 this.addSouls(this.siphonAmount);
                 manaData.removeMana(siphonAmount);
-                PacketDistributor.sendToPlayer(serverPlayer, new ModManaSyncPayload(manaData.getMana()));
+                PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
                 this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
             }
-
-
-            // TEMPORARY PLACEHOLDER: Just adds souls directly for testing
-
         }
     }
-
 
     public final ItemStackHandler inventory = new ItemStackHandler(1){
         @Override
@@ -196,7 +219,6 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
         }
     };
 
-    private float rotation;
 
     public void clearContents(){
         inventory.setStackInSlot(0, ItemStack.EMPTY);
@@ -226,6 +248,7 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
         if (this.ownerUUID != null) {
             tag.putUUID("OwnerUUID", this.ownerUUID);
         }
+        tag.putInt("CoreRadius", this.coreRadius);
     }
 
     @Override
@@ -244,6 +267,9 @@ public class SoulCoreEntity extends BlockEntity implements MenuProvider {
             this.ownerUUID = tag.getUUID("OwnerUUID");
         } else {
             this.ownerUUID = null;
+        }
+        if (tag.contains("CoreRadius")) {
+            this.coreRadius = tag.getInt("CoreRadius");
         }
     }
 

@@ -11,8 +11,10 @@ import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
 import com.shadow.shadowthings.item.ModCreativeModeTabs;
 import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.potion.ModPotions;
+import com.shadow.shadowthings.recipe.ModRecipes;
 import com.shadow.shadowthings.screen.ModMenuTypes;
 import com.shadow.shadowthings.screen.custom.SoulCoreScreen;
+import com.shadow.shadowthings.screen.custom.SoulCrafterScreen;
 import com.shadow.shadowthings.server.ModDataAttachments;
 import com.shadow.shadowthings.soul.ModManaHudOverlay;
 import com.shadow.shadowthings.sound.ModSounds;
@@ -77,7 +79,7 @@ public class ShadowThings {
         ModDataAttachments.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
-
+        ModRecipes.register(modEventBus);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -143,6 +145,7 @@ public class ShadowThings {
         public static void registerScreens(RegisterMenuScreensEvent event) {
             // This links the server menu to the client GUI rendering
             event.register(ModMenuTypes.SOUL_CORE_MENU.get(), SoulCoreScreen::new);
+            event.register(ModMenuTypes.SOUL_CRAFTER_MENU.get(), SoulCrafterScreen::new);
         }
     }
 }

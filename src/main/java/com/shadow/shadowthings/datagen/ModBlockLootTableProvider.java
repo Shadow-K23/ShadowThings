@@ -38,6 +38,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.SOUL_STRUCTURE_BLOCK.get());
         dropSelf(ModBlocks.SOUL_CORE.get());
+        dropSelf(ModBlocks.SOUL_CRAFTER.get());
+        dropSelf(ModBlocks.SOUL_PEDESTAL.get());
 
         //TREE
         this.dropSelf(ModBlocks.SHADOWWOOD_LOG.get());

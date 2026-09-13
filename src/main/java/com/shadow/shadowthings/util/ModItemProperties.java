@@ -11,8 +11,6 @@ import net.minecraft.world.item.Items;
 
 public class ModItemProperties {
     public static void addCustomProperties() {
-        ItemProperties.register(ModItems.CHISEL.get(), ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"used"),
-                (itemStack, clientLevel, livingEntity, i) -> itemStack.get(ModDataComponents.COORDINATES) != null ? 1f: 0f);
 
         makeCustomBow(ModItems.SHADOW_BOW.get());
 

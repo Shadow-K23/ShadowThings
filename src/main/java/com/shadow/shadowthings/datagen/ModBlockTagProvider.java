@@ -28,7 +28,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGIC_BLOCK.get())
 
                 .add(ModBlocks.SOUL_CORE.get())
-                .add(ModBlocks.SOUL_STRUCTURE_BLOCK.get());
+                .add(ModBlocks.SOUL_STRUCTURE_BLOCK.get())
+                .add(ModBlocks.SOUL_CRAFTER.get())
+                .add(ModBlocks.SOUL_PEDESTAL.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.SHADOW_ORE.get())

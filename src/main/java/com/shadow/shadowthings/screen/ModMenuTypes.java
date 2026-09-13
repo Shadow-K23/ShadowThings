@@ -2,6 +2,7 @@ package com.shadow.shadowthings.screen;
 
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.screen.custom.SoulCoreMenu;
+import com.shadow.shadowthings.screen.custom.SoulCrafterMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +19,10 @@ public class ModMenuTypes {
 
     public static final DeferredHolder<MenuType<?>, MenuType<SoulCoreMenu>> SOUL_CORE_MENU =
             registerMenuType("soul_core_menu", SoulCoreMenu::new);
+
+    public static final DeferredHolder<MenuType<?>, MenuType<SoulCrafterMenu>> SOUL_CRAFTER_MENU =
+            registerMenuType("soul_crafter_menu", SoulCrafterMenu::new);
+
 
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>,MenuType<T>> registerMenuType(String name,

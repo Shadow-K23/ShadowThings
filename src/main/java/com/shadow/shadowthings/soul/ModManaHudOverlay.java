@@ -15,9 +15,12 @@ public class ModManaHudOverlay {
 
     public static void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || minecraft.level == null) return;
+        if (minecraft.player == null || minecraft.level == null ) return;
 
         var manaData = minecraft.player.getData(ModDataAttachments.PLAYER_SOUL_MANA);
+
+        if (!manaData.hasSynced) return;
+
         int targetMana = manaData.getMana();
         int maxMana = manaData.getMaxMana();
 
