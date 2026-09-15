@@ -34,7 +34,6 @@ public class ModItemTagProvider extends ItemTagsProvider{
 
         tag(ItemTags.WEAPON_ENCHANTABLE);
 
-
         tag(ItemTags.SWORDS)
                 .add(ModItems.SHADOWSWORD.get())
                 .add(ModItems.SHADOWHAMMER.get());
@@ -54,6 +53,16 @@ public class ModItemTagProvider extends ItemTagsProvider{
                         .add(ModItems.SHADOW_LEGGINGS.get())
                         .add(ModItems.SHADOW_BOOTS.get());
 
+        //UPGRADE TAGS
+
+        tag(ModTags.Items.CORE_UPGRADES)
+                .add(ModItems.SOUL_UPGRADE_CAPACITY_1.get())
+                .add(ModItems.SOUL_UPGRADE_CAPACITY_2.get())
+                .add(ModItems.SOUL_UPGRADE_CAPACITY_3.get())
+                .add(ModItems.SOUL_UPGRADE_CAPACITY_4.get())
+                .add(ModItems.SOUL_UPGRADE_CAPACITY_5.get());
+
+
         tag(ItemTags.HEAD_ARMOR)
             .add(ModItems.SHADOW_HELMET.get());
         tag(ItemTags.CHEST_ARMOR)
@@ -69,5 +78,6 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModBlocks.STRIPPED_SHADOWWOOD_WOOD.get().asItem());
         this.tag(ItemTags.PLANKS)
                 .add(ModBlocks.SHADOWWOOD_PLANKS.get().asItem());
+
     }
 }

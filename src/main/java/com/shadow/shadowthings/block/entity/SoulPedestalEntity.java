@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -24,10 +25,28 @@ public class SoulPedestalEntity extends BlockEntity {
         }
     };
 
+    public boolean isLocked() {
+        if (this.level == null) return false;
+
+        int radius = 2;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                BlockPos checkPos = this.worldPosition.offset(x, 0, z);
+                if (this.level.getBlockEntity(checkPos) instanceof SoulCrafterEntity crafter) {
+                    if (crafter.isCrafting) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public SoulPedestalEntity(BlockPos pos, BlockState state) {
         // Make sure to register this in your ModBlockEntities!
         super(ModBlockEntities.SOUL_PEDESTAL_BE.get(), pos, state);
     }
+
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {

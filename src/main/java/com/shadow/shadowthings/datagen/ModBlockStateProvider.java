@@ -33,6 +33,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        ModelFile crafterModel = new ModelFile.UncheckedModelFile(modLoc("block/soul_crafter"));
+        ModelFile pedestalModel = new ModelFile.UncheckedModelFile(modLoc("block/soul_pedestal"));
+
+
         //BLOCKS
 
         blockWithItem(ModBlocks.SHADOW_BLOCK);
@@ -46,9 +50,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         formableMultiblockPart(ModBlocks.SOUL_STRUCTURE_BLOCK.get(), SoulStructureBlock.FORMED, "soul_structure_block");
 
+        simpleBlock(ModBlocks.SOUL_CRAFTER.get(), crafterModel);
+        simpleBlock(ModBlocks.SOUL_PEDESTAL.get(), pedestalModel);
 
-        blockWithItem(ModBlocks.SOUL_CRAFTER);
-        blockWithItem(ModBlocks.SOUL_PEDESTAL);
 
         //NON-BLOCK BLOCKS
 

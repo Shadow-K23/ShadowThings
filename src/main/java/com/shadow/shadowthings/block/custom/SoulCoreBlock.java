@@ -15,6 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -47,15 +48,15 @@ public class SoulCoreBlock extends BaseEntityBlock {
             soulCorePattern = BlockPatternBuilder.start()
                     // Y=2 (Top layer of the pillars)
                     .aisle(
-                            "S~S",
+                            "O~O",
                             "~~~",
-                            "S~S"
+                            "O~O"
                     )
                     // Y=1 (Middle layer of the pillars)
                     .aisle(
-                            "S~S",
+                            "O~O",
                             "~~~",
-                            "S~S"
+                            "O~O"
                     )
                     // Y=0 (The 3x3 base)
                     .aisle(
@@ -65,6 +66,7 @@ public class SoulCoreBlock extends BaseEntityBlock {
                     )
                     .where('C', BlockInWorld.hasState(BlockStatePredicate.forBlock(ModBlocks.SOUL_CORE.get())))
                     .where('S', BlockInWorld.hasState(state -> state.is(ModBlocks.SOUL_STRUCTURE_BLOCK.get()) && !state.getValue(SoulStructureBlock.FORMED)))
+                    .where('O', BlockInWorld.hasState(state -> state.is(ModBlocks.SOUL_STRUCTURE_BLOCK.get()) && !state.getValue(SoulStructureBlock.FORMED)))
                     .where('~', BlockInWorld.hasState(BlockStatePredicate.ANY)) // ~ means we don't care what block is in the air space!
                     .build();
         }

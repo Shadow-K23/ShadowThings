@@ -4,6 +4,7 @@ package com.shadow.shadowthings.screen.custom;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
 import com.shadow.shadowthings.screen.ModMenuTypes;
+import com.shadow.shadowthings.screen.custom.base.AbstractSoulMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class SoulCrafterMenu extends AbstractContainerMenu {
+public class SoulCrafterMenu extends AbstractSoulMenu {
     public final SoulCrafterEntity blockEntity;
     private final ContainerLevelAccess levelAccess;
 
@@ -27,9 +28,10 @@ public class SoulCrafterMenu extends AbstractContainerMenu {
     public SoulCrafterMenu(int id, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.SOUL_CRAFTER_MENU.get(), id); // You'll need to register this type next!
         checkContainerSize(inv, 1);
+
         this.blockEntity = (SoulCrafterEntity) entity;
         this.levelAccess = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
-
+        this.addUpgradeSlots(blockEntity, 180, 10);
         // Add the 1 slot for the Crafter's Catalyst (x: 80, y: 35)
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
 

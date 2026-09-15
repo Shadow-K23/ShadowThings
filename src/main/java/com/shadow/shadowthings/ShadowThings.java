@@ -2,6 +2,8 @@ package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
+import com.shadow.shadowthings.block.entity.renderer.SoulCrafterEntityRenderer;
+import com.shadow.shadowthings.block.entity.renderer.SoulPedestalEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulCoreModel;
 import com.shadow.shadowthings.client.model.SoulOrbModel;
 import com.shadow.shadowthings.block.entity.renderer.SoulCoreEntityRenderer;
@@ -20,6 +22,7 @@ import com.shadow.shadowthings.soul.ModManaHudOverlay;
 import com.shadow.shadowthings.sound.ModSounds;
 import com.shadow.shadowthings.util.ModItemProperties;
 import com.shadow.shadowthings.worldgen.ModOverworldRegion;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -134,6 +137,8 @@ public class ShadowThings {
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CORE_BE.get(), SoulCoreEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CRAFTER_BE.get(), SoulCrafterEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_PEDESTAL_BE.get(), SoulPedestalEntityRenderer::new);
         }
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

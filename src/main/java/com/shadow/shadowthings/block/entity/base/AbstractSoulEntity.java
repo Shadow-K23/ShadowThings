@@ -1,17 +1,31 @@
 package com.shadow.shadowthings.block.entity.base;
 
 import com.mojang.logging.LogUtils;
+import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.SoulCoreEntity;
+import com.shadow.shadowthings.item.custom.SoulUpgradeItem;
+import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.logging.log4j.core.jmx.Server;
 import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
 
 public abstract class AbstractSoulEntity extends BlockEntity {
     protected int souls;
@@ -23,12 +37,55 @@ public abstract class AbstractSoulEntity extends BlockEntity {
     protected int transferTickCounter = 0;
     protected BlockPos linkedCorePos = null;
 
+    protected int visualTransferTimer = 0; // Tracks how long to spawn particles
+
+    public abstract TagKey<Item> getAllowedUpgradeTag();
+
+    // The Universal Upgrade Inventory (Available to all machines)
+    public final ItemStackHandler upgradeInventory = new ItemStackHandler(4) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+            // 2. Call our new trigger method!
+            onUpgradesChanged();
+
+            if (level != null && !level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            // 1. TAG CHECK: Must be allowed in this specific machine type
+            if (!stack.is(getAllowedUpgradeTag())) {
+                return false;
+            }
+
+            // 2. DUPLICATE TYPE CHECK: Prevent stacking the same upgrade type
+            if (stack.getItem() instanceof SoulUpgradeItem newUpgrade) {
+
+                for (int i = 0; i < getSlots(); i++) {
+                    if (i == slot) continue; // Skip the slot we are actively clicking on
+
+                    ItemStack existingStack = getStackInSlot(i);
+                    if (existingStack.getItem() instanceof SoulUpgradeItem existingUpgrade) {
+                        // If the types match (e.g., both are SPEED), reject the new one!
+                        if (existingUpgrade.getUpgradeType() == newUpgrade.getUpgradeType()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true; // Passed all checks, let it in!
+        }
+    };
+
     public AbstractSoulEntity(BlockEntityType<?> type, BlockPos pos, BlockState state,int souls, int maxSouls, int transferRate, int transferAmount) {
         super(type, pos, state);
         this.souls = souls;
         this.maxSouls = maxSouls;
         this.transferRate = transferRate;
         this.transferAmount = transferAmount;
+
     }
 
     public int getSouls() { return souls; }
@@ -69,39 +126,115 @@ public abstract class AbstractSoulEntity extends BlockEntity {
     }
 
 
+    //UPGRADES LOGIC
+
+    public boolean hasUpgrade(Item upgradeItem) {
+        for (int i = 0; i < upgradeInventory.getSlots(); i++) {
+            if (upgradeInventory.getStackInSlot(i).is(upgradeItem)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getUpgradeLevel(UpgradeType typeToFind) {
+        int highestTier = 0; // If we want they to overwrite each other (max)
+        // OR: int totalTier = 0; // If you want players to stack multiple Tier 1s together!
+
+        for (int i = 0; i < upgradeInventory.getSlots(); i++) {
+            ItemStack stack = upgradeInventory.getStackInSlot(i);
+
+            // Check if the item in the slot is our custom Upgrade item
+            if (stack.getItem() instanceof SoulUpgradeItem upgradeItem) {
+
+                // Does it match the type we are looking for?
+                if (upgradeItem.getUpgradeType() == typeToFind) {
+
+                    // Option A: Only the highest tier counts
+                    highestTier = Math.max(highestTier, upgradeItem.getTier());
+
+                    // Option B: Stack them! (totalTier += upgradeItem.getTier();)
+                }
+            }
+        }
+        return highestTier;
+    }
+
     public boolean requestSoulsFromCore(int requestedAmount) {
         if (this.level == null || this.level.isClientSide()) return false;
 
-        // If the machine hasn't been linked to a core yet, fail early
         if (this.linkedCorePos == null) return false;
 
-        // Check if the linked block is actually a Soul Core
         if (this.level.getBlockEntity(this.linkedCorePos) instanceof SoulCoreEntity core) {
 
-            // Verify it's still within range
             if (this.worldPosition.distSqr(this.linkedCorePos) > (core.getCoreRadius() * core.getCoreRadius())) {
                 return false;
             }
 
-            // STRICTLY use the Core's transfer amount for this packet
+            // 1. Get the standard chunk request
             int amountToRequest = Math.min(requestedAmount, core.getTransferAmount());
 
-            if (core.getSouls() >= amountToRequest) {
+            // 2. FIX: Clamp it down to whatever the core actually has left!
+            amountToRequest = Math.min(amountToRequest, core.getSouls());
+
+            // 3. If the core has anything left to give, drain it!
+            if (amountToRequest > 0) {
                 core.removeSouls(amountToRequest);
                 this.addSouls(amountToRequest);
 
-                // Set our cooldown using the Core's transfer rate!
                 this.transferTickCounter = core.getTransferRate();
+                this.visualTransferTimer = core.getTransferRate();
+                this.sync();
+
                 return true;
             }
         } else {
-            // Core was broken/removed, clear the dead link
             this.linkedCorePos = null;
         }
 
         return false;
     }
 
+    public void tickClientVisuals() {
+        if (this.level == null || !this.level.isClientSide()) return;
+
+        // If the server told us we are transferring, count down and spawn particles!
+        if (this.visualTransferTimer > 0) {
+            this.visualTransferTimer--;
+
+            // We can spawn multiple particles per tick if we want a thicker stream!
+            if (this.linkedCorePos != null && this.level.getGameTime() % 2 == 0) {
+
+                // --- START POSITION (The Crystal) ---
+                // Adjust the '1.5' up or down until it perfectly matches your crystal's height!
+                // We add a tiny random offset so they spawn scattered around the crystal.
+                double startX = this.linkedCorePos.getX() + 0.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
+                double startY = this.linkedCorePos.getY() + 1.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
+                double startZ = this.linkedCorePos.getZ() + 0.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
+
+                // --- END POSITION (The Crafter) ---
+                double targetX = this.getBlockPos().getX() + 0.5;
+                double targetY = this.getBlockPos().getY() + 0.8;
+                double targetZ = this.getBlockPos().getZ() + 0.5;
+
+                // --- VECTOR MATH ---
+                double dX = targetX - startX;
+                double dY = targetY - startY;
+                double dZ = targetZ - startZ;
+
+                double distance = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+                double speed = 0.50;
+
+                double vX = (dX / distance) * speed;
+                double vY = (dY / distance) * speed;
+                double vZ = (dZ / distance) * speed;
+
+                this.level.addParticle(net.minecraft.core.particles.ParticleTypes.SOUL,
+                        startX, startY, startZ,
+                        vX, vY, vZ);
+            }
+        }
+    }
 
     // A handy helper method so you don't repeat the sync logic 6 times!
     protected void sync() {
@@ -117,6 +250,10 @@ public abstract class AbstractSoulEntity extends BlockEntity {
         sync();
     }
 
+    protected void onUpgradesChanged() {
+        // Does nothing by default, but machines can override it!
+    }
+
     // Update your saveAdditional and loadAdditional methods in AbstractSoulEntity:
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
@@ -124,6 +261,8 @@ public abstract class AbstractSoulEntity extends BlockEntity {
         if (linkedCorePos != null) {
             tag.putLong("LinkedCorePos", linkedCorePos.asLong());
         }
+        tag.putInt("VisualTimer", this.visualTransferTimer); // ADD THIS
+        tag.put("UpgradeInventory", upgradeInventory.serializeNBT(registries));
     }
 
     @Override
@@ -132,5 +271,20 @@ public abstract class AbstractSoulEntity extends BlockEntity {
         if (tag.contains("LinkedCorePos")) {
             linkedCorePos = BlockPos.of(tag.getLong("LinkedCorePos"));
         }
+        this.visualTransferTimer = tag.getInt("VisualTimer"); // ADD THIS
+        upgradeInventory.deserializeNBT(registries, tag.getCompound("UpgradeInventory"));
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        saveAdditional(tag, registries);
+        return tag;
     }
 }

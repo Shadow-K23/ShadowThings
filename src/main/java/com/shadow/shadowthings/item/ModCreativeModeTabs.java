@@ -48,6 +48,14 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHADOW_BOOTS);
                         output.accept(ModItems.SHADOW_HORSE_ARMOR);
 
+                        //SOUL UPGRADES
+
+                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_1);
+                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_2);
+                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_3);
+                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_4);
+                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_5);
+
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);
                         output.accept(ModItems.SHADOW_BERRIES);

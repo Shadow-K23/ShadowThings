@@ -134,12 +134,48 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         List.of(                                                        // 3. The Pedestal Ingredients
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(ModItems.SHADOWINGOT),
-                                Ingredient.of(Items.OBSIDIAN)
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
                         ),
-                        2500,                                                           // 4. The Soul Cost
+                        1500,                                                           // 4. The Soul Cost
                         new ItemStack(ModItems.SHADOWSWORD.get())                            // 5. The Result (Change to your mod item!)
                 ),
-                null // 6. The Advancement (Leave null, custom machines don't use the vanilla recipe book!)
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_pickaxe_infusion"), // 1. The unique JSON file name
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_PICKAXE),                                // 2. The Catalyst (Center item)
+                        List.of(                                                        // 3. The Pedestal Ingredients
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1500,                                                           // 4. The Soul Cost
+                        new ItemStack(ModItems.SHADOWPICKAXE.get())                            // 5. The Result (Change to your mod item!)
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_axe_infusion"), // 1. The unique JSON file name
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_AXE),                                // 2. The Catalyst (Center item)
+                        List.of(                                                        // 3. The Pedestal Ingredients
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1500,                                                           // 4. The Soul Cost
+                        new ItemStack(ModItems.SHADOWAXE.get())                            // 5. The Result (Change to your mod item!)
+                ),
+                null
         );
 
         //NON-BLOCK BLOCKS

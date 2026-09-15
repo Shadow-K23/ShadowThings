@@ -13,6 +13,8 @@ import net.minecraft.world.entity.player.Inventory;
 public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"textures/gui/soul_core/soul_core_gui.png");
+    private static final ResourceLocation UPGRADE_PANEL =
+            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"textures/gui/upgrade_gui.png");
 
     public SoulCoreScreen(SoulCoreMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -63,5 +65,25 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
                     scaledProgress // Height of the bar we are actively drawing
             );
         }
+
+        guiGraphics.drawString(
+                minecraft.font,
+                (menu.getSouls()/1000f) + "k / " + menu.getMaxSouls()/1000f + "k",
+                x + 150, y + 75,
+                0x41beff
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                ("CORE HEALTH: " + menu.getCoreHealth()) + " / 1000" ,
+                x + 125, y + 50,
+                0xff3333
+        );
+
+        int panelX = leftPos + this.imageWidth;
+        int panelY = topPos + 5; // Push it down 5 pixels from the top
+
+        // 3. Draw the upgrade panel
+        // Parameters: texture, x, y, uOffset, vOffset, width, height
+        guiGraphics.blit(UPGRADE_PANEL, panelX, panelY, 0, 0, 27, 83);
     }
 }

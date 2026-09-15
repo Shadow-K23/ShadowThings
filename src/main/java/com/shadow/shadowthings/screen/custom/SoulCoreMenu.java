@@ -3,6 +3,7 @@ package com.shadow.shadowthings.screen.custom;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.SoulCoreEntity;
 import com.shadow.shadowthings.screen.ModMenuTypes;
+import com.shadow.shadowthings.screen.custom.base.AbstractSoulMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class SoulCoreMenu extends AbstractContainerMenu {
+public class SoulCoreMenu extends AbstractSoulMenu {
     public final SoulCoreEntity blockEntity;
     private final Level level;
 
@@ -20,7 +21,7 @@ public class SoulCoreMenu extends AbstractContainerMenu {
 
     // Update your client-side constructor (extraData one)
     public SoulCoreMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     // Update your main constructor
@@ -29,15 +30,22 @@ public class SoulCoreMenu extends AbstractContainerMenu {
         this.blockEntity = ((SoulCoreEntity) blockEntity);
         this.level = inv.player.level();
         this.data = data;
-
+        this.addUpgradeSlots(this.blockEntity, 180, 10);
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
 
         // CRUCIAL: Tells the menu to actively sync these numbers!
         addDataSlots(data);
     }
-
+    public int getSouls(){
+        return this.data.get(0);
+    }
+    public int getMaxSouls(){
+        return this.data.get(1);
+    }
+    public int getCoreHealth(){
+        return this.data.get(2);
+    }
     // This method does the math for the screen!
     public int getScaledSoulProgress() {
         int currentSouls = this.data.get(0);

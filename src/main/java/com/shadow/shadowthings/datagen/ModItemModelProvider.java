@@ -48,6 +48,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         //BASIC ITEMS
         basicItem(ModItems.RAWSHADOWINGOT.get());
         basicItem(ModItems.SHADOWINGOT.get());
+        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_4.get());
+        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_5.get());
 
         //NON-BLOCK BLOCKS
 
@@ -68,6 +73,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         //ADVANCED ITEMS
         handheldItem(ModItems.SOUL_LINKER);
         handheldItem(ModItems.SHADOWHAMMER);
+
+        withExistingParent(ModBlocks.SOUL_CRAFTER.getId().getPath(), modLoc("block/soul_crafter"));
+        withExistingParent(ModBlocks.SOUL_PEDESTAL.getId().getPath(), modLoc("block/soul_pedestal"));
 
         //ARMOR
         trimmedArmorItem(ModItems.SHADOW_BOOTS);

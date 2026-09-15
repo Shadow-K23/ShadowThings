@@ -91,12 +91,14 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> SOUL_PEDESTAL = registerBlock("soul_pedestal",
             () -> new SoulPedestalBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)));
 
-public static final DeferredBlock<Block> SOUL_CRAFTER = registerBlock("soul_crafter",
+    public static final DeferredBlock<Block> SOUL_CRAFTER = registerBlock("soul_crafter",
             () -> new SoulCrafterBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.SCULK_CATALYST)));

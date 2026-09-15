@@ -4,6 +4,7 @@ import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.custom.*;
 import com.shadow.shadowthings.sound.ModSounds;
+import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -116,7 +117,25 @@ public class ModItems {
     public static final DeferredItem<Item> SOUL_LINKER = ITEMS.register("soul_linker",
             ()-> new SoulLinkerItem(new Item.Properties().durability(100)));
 
+    //SOUL UPGRADES
 
+    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_1 = ITEMS.register("soul_upgrade_capacity_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_2 = ITEMS.register("soul_upgrade_capacity_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_3 = ITEMS.register("soul_upgrade_capacity_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_4 = ITEMS.register("soul_upgrade_capacity_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,4));
+
+
+
+    //OVERLOADED UPGRADES
+    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_5 = ITEMS.register("soul_upgrade_capacity_5",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,5));
+
+
+    //TODO: REMOVE THE USELESS GEMS
     //GEMS
     public static final DeferredItem<Item> RUBY_GEM = ITEMS.register("ruby_gem",
             () -> new ModGemItem(new Item.Properties().stacksTo(1)));
