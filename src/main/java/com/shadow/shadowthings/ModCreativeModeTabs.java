@@ -1,7 +1,7 @@
-package com.shadow.shadowthings.item;
+package com.shadow.shadowthings;
 
-import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -54,7 +54,29 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SOUL_UPGRADE_CAPACITY_2);
                         output.accept(ModItems.SOUL_UPGRADE_CAPACITY_3);
                         output.accept(ModItems.SOUL_UPGRADE_CAPACITY_4);
-                        output.accept(ModItems.SOUL_UPGRADE_CAPACITY_5);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_1);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_2);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_3);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_4);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_RATE_1);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3);
+                        output.accept(ModItems.SOUL_UPGRADE_TRANSFER_RATE_4);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_1);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_4);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_SPEED_1);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_SPEED_2);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_SPEED_3);
+                        output.accept(ModItems.SOUL_UPGRADE_SMELT_SPEED_4);
+                        output.accept(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1);
+                        output.accept(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2);
+                        output.accept(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3);
+                        output.accept(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4);
+
+                        output.accept(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL);
+                        output.accept(ModItems.SOUL_UPGRADE_OVERLOAD);
 
                         //FOODS
                         output.accept(ModItems.DRAGON_FRUIT);

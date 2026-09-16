@@ -25,6 +25,10 @@ public class ModSounds {
     public static final Supplier<SoundEvent> MAGIC_BLOCK_HIT =  registerSoundEvent("magic_block_hit");
     public static final Supplier<SoundEvent> MAGIC_BLOCK_FALL =  registerSoundEvent("magic_block_fall");
 
+    public static final Supplier<SoundEvent> CORE_EXPLOSION_BUILDUP =  registerSoundEvent("core_explosion_buildup");
+    public static final Supplier<SoundEvent> CORE_EXPLOSION =  registerSoundEvent("core_explosion");
+    public static final Supplier<SoundEvent> CORE_EXPLOSION_SHOCKWAVE =  registerSoundEvent("core_explosion_shockwave");
+
     public static final DeferredSoundType MAGIC_BLOCK_SOUNDS = new DeferredSoundType(1f,1f,
             ModSounds.MAGIC_BLOCK_BREAK, ModSounds.MAGIC_BLOCK_STEP,ModSounds.MAGIC_BLOCK_PLACE,
             ModSounds.MAGIC_BLOCK_HIT,ModSounds.MAGIC_BLOCK_FALL);

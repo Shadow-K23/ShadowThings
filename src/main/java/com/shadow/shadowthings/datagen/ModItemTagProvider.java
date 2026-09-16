@@ -60,8 +60,43 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SOUL_UPGRADE_CAPACITY_2.get())
                 .add(ModItems.SOUL_UPGRADE_CAPACITY_3.get())
                 .add(ModItems.SOUL_UPGRADE_CAPACITY_4.get())
-                .add(ModItems.SOUL_UPGRADE_CAPACITY_5.get());
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_1.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_4.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_1.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_2.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_3.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_4.get())
 
+                .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
+                .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
+
+        tag(ModTags.Items.CRAFTER_UPGRADES)
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get())
+
+                .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
+                .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
+
+        tag(ModTags.Items.FURNACE_UPGRADES)
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_1.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_4.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_1.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_2.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_3.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_4.get())
+
+                .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
+                .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
 
         tag(ItemTags.HEAD_ARMOR)
             .add(ModItems.SHADOW_HELMET.get());

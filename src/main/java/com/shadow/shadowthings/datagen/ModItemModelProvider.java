@@ -48,14 +48,49 @@ public class ModItemModelProvider extends ItemModelProvider {
         //BASIC ITEMS
         basicItem(ModItems.RAWSHADOWINGOT.get());
         basicItem(ModItems.SHADOWINGOT.get());
+
+        //SOUL UPGRADES
+        basicItem(ModItems.SOUL_UPGRADE_BASE_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_BASE_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_BASE_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_BASE_4.get());
+        basicItem(ModItems.SOUL_UPGRADE_BASE_5.get());
+
         basicItem(ModItems.SOUL_UPGRADE_CAPACITY_1.get());
         basicItem(ModItems.SOUL_UPGRADE_CAPACITY_2.get());
         basicItem(ModItems.SOUL_UPGRADE_CAPACITY_3.get());
         basicItem(ModItems.SOUL_UPGRADE_CAPACITY_4.get());
-        basicItem(ModItems.SOUL_UPGRADE_CAPACITY_5.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_4.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_RATE_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_TRANSFER_RATE_4.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_4.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_SPEED_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_SPEED_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_SPEED_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_SMELT_SPEED_4.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1.get());
+        basicItem(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2.get());
+        basicItem(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get());
+        basicItem(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get());
+
+        basicItem(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get());
+        basicItem(ModItems.SOUL_UPGRADE_OVERLOAD.get());
+
 
         //NON-BLOCK BLOCKS
-
         buttonItem(ModBlocks.SHADOW_BUTTON, ModBlocks.SHADOW_BLOCK);
         fenceItem(ModBlocks.SHADOW_FENCE, ModBlocks.SHADOW_BLOCK);
         wallItem(ModBlocks.SHADOW_WALL, ModBlocks.SHADOW_BLOCK);

@@ -37,6 +37,7 @@ public class SoulCoreMenu extends AbstractSoulMenu {
         // CRUCIAL: Tells the menu to actively sync these numbers!
         addDataSlots(data);
     }
+
     public int getSouls(){
         return this.data.get(0);
     }

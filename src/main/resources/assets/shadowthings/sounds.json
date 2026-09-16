@@ -1,4 +1,22 @@
 {
+  "core_explosion_buildup": {
+    "subtitle": "sounds.shadowthings.core_explosion_buildup",
+    "sounds": [
+      "shadowthings:core_explosion_buildup"
+    ]
+  },
+  "core_explosion": {
+    "subtitle": "sounds.shadowthings.core_explosion",
+    "sounds": [
+      "shadowthings:core_explosion"
+    ]
+  },
+  "core_explosion_shockwave": {
+    "subtitle": "sounds.shadowthings.core_explosion_shockwave",
+    "sounds": [
+      "shadowthings:core_explosion_shockwave"
+    ]
+  },
   "chisel_use": {
     "subtitle": "sounds.shadowthings.chisel_use",
     "sounds": [

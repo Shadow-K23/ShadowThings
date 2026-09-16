@@ -52,7 +52,13 @@ public abstract class AbstractSoulEntity extends BlockEntity {
             if (level != null && !level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+
         }
+        @Override
+        public int getSlotLimit(int slot) {
+            return 1; // Forces a maximum of 1 item per slot for ALL inherited blocks
+        }
+
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             // 1. TAG CHECK: Must be allowed in this specific machine type

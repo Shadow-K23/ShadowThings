@@ -1,6 +1,7 @@
 package com.shadow.shadowthings.block.custom;
 
 import com.shadow.shadowthings.block.ModBlocks;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -38,6 +39,7 @@ public class SoulStructureBlock extends Block {
                 }
             }
         }
+
         super.onRemove(state, level, pos, newState, isMoving);
     }
     @Override

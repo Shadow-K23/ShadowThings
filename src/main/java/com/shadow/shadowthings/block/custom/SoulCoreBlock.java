@@ -241,10 +241,6 @@ public class SoulCoreBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         // We only want the server to do the math and siphoning!
-        if (level.isClientSide()) {
-            return null;
-        }
-
         return createTickerHelper(type, ModBlockEntities.SOUL_CORE_BE.get(),
                 (lvl, pos, blockState, blockEntity) -> blockEntity.tick(lvl, pos, blockState));
     }

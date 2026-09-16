@@ -117,22 +117,83 @@ public class ModItems {
     public static final DeferredItem<Item> SOUL_LINKER = ITEMS.register("soul_linker",
             ()-> new SoulLinkerItem(new Item.Properties().durability(100)));
 
+
     //SOUL UPGRADES
 
+        //UPGRADE BASES
+            public static final DeferredItem<Item> SOUL_UPGRADE_BASE_1 = ITEMS.register("soul_upgrade_base_1",
+                ()-> new Item(new Item.Properties().stacksTo(16)));
+            public static final DeferredItem<Item> SOUL_UPGRADE_BASE_2 = ITEMS.register("soul_upgrade_base_2",
+                ()-> new Item(new Item.Properties().stacksTo(16)));
+            public static final DeferredItem<Item> SOUL_UPGRADE_BASE_3 = ITEMS.register("soul_upgrade_base_3",
+                ()-> new Item(new Item.Properties().stacksTo(16)));
+            public static final DeferredItem<Item> SOUL_UPGRADE_BASE_4 = ITEMS.register("soul_upgrade_base_4",
+                ()-> new Item(new Item.Properties().stacksTo(16)));
+            public static final DeferredItem<Item> SOUL_UPGRADE_BASE_5 = ITEMS.register("soul_upgrade_base_5",
+                ()-> new Item(new Item.Properties().stacksTo(16)));
+
+
     public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_1 = ITEMS.register("soul_upgrade_capacity_1",
-            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,1));
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_CAPACITY,1));
     public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_2 = ITEMS.register("soul_upgrade_capacity_2",
-            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,2));
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_CAPACITY,2));
     public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_3 = ITEMS.register("soul_upgrade_capacity_3",
-            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,3));
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_CAPACITY,3));
     public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_4 = ITEMS.register("soul_upgrade_capacity_4",
-            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,4));
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_CAPACITY,4));
+
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_RATE_1 = ITEMS.register("soul_upgrade_transfer_rate_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_RATE,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_RATE_2 = ITEMS.register("soul_upgrade_transfer_rate_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_RATE,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_RATE_3 = ITEMS.register("soul_upgrade_transfer_rate_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_RATE,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_RATE_4 = ITEMS.register("soul_upgrade_transfer_rate_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_RATE,4));
+
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_AMOUNT_1 = ITEMS.register("soul_upgrade_transfer_amount_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_AMOUNT,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_AMOUNT_2 = ITEMS.register("soul_upgrade_transfer_amount_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_AMOUNT,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_AMOUNT_3 = ITEMS.register("soul_upgrade_transfer_amount_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_AMOUNT,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_TRANSFER_AMOUNT_4 = ITEMS.register("soul_upgrade_transfer_amount_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_TRANSFER_AMOUNT,4));
+
+    public static final DeferredItem<Item> SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1 = ITEMS.register("soul_upgrade_soul_usage_efficiency_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_USAGE_EFFICIENCY,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2 = ITEMS.register("soul_upgrade_soul_usage_efficiency_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_USAGE_EFFICIENCY,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3 = ITEMS.register("soul_upgrade_soul_usage_efficiency_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_USAGE_EFFICIENCY,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4 = ITEMS.register("soul_upgrade_soul_usage_efficiency_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_USAGE_EFFICIENCY,4));
+
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_SPEED_1 = ITEMS.register("soul_upgrade_smelt_speed_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_SPEED,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_SPEED_2 = ITEMS.register("soul_upgrade_smelt_speed_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_SPEED,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_SPEED_3 = ITEMS.register("soul_upgrade_smelt_speed_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_SPEED,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_SPEED_4 = ITEMS.register("soul_upgrade_smelt_speed_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_SPEED,4));
+
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_AMOUNT_1 = ITEMS.register("soul_upgrade_smelt_amount_1",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_AMOUNT,1));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_AMOUNT_2 = ITEMS.register("soul_upgrade_smelt_amount_2",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_AMOUNT,2));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_AMOUNT_3 = ITEMS.register("soul_upgrade_smelt_amount_3",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_AMOUNT,3));
+    public static final DeferredItem<Item> SOUL_UPGRADE_SMELT_AMOUNT_4 = ITEMS.register("soul_upgrade_smelt_amount_4",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(4), UpgradeType.SOUL_SMELT_AMOUNT,4));
 
 
+    //SPECIAL UPGRADES
+    public static final DeferredItem<Item> SOUL_UPGRADE_OVERLOAD = ITEMS.register("soul_upgrade_overload",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.OVERLOAD,5));
 
-    //OVERLOADED UPGRADES
-    public static final DeferredItem<Item> SOUL_UPGRADE_CAPACITY_5 = ITEMS.register("soul_upgrade_capacity_5",
-            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.SOUL_CAPACITY,5));
+    public static final DeferredItem<Item> SOUL_UPGRADE_REDSTONE_CONTROL = ITEMS.register("soul_upgrade_redstone_control",
+            ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.REDSTONE,5));
 
 
     //TODO: REMOVE THE USELESS GEMS

@@ -1,6 +1,7 @@
 package com.shadow.shadowthings.block.entity;
 
 import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
+import com.shadow.shadowthings.item.ModItems;
 import com.shadow.shadowthings.screen.custom.SoulCoreMenu;
 import com.shadow.shadowthings.server.CoreMeltdownManager;
 import com.shadow.shadowthings.server.ModDataAttachments;
@@ -37,15 +38,15 @@ import java.util.UUID;
 
 public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     public SoulCoreEntity(BlockPos pos, BlockState blockState) {
-        super(ModBlockEntities.SOUL_CORE_BE.get(), pos, blockState,1000, 5000, 40, 100);
+        super(ModBlockEntities.SOUL_CORE_BE.get(), pos, blockState,0, 5000, 80, 100);
     }
 
     public boolean isFormed = false;
 
     public UUID ownerUUID;
 
-    public final int BASE_MAX_HEALTH = 5000;
-    public final int BASE_TRANSFER_RATE = 40;
+    public final int BASE_MAX_CAPACITY = 5000;
+    public final int BASE_TRANSFER_RATE = 80;
     public final int BASE_TRANSFER_AMOUNT = 100;
 
     public boolean soulSiphonEnabled = false;
@@ -250,15 +251,28 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         if (this.level != null && !this.level.isClientSide()) {
 
             int capacityTier = this.getUpgradeLevel(UpgradeType.SOUL_CAPACITY);
+            int transferRateTier = this.getUpgradeLevel(UpgradeType.SOUL_TRANSFER_RATE);
+            int transferAmountTier = this.getUpgradeLevel(UpgradeType.SOUL_TRANSFER_AMOUNT);
 
-            if (capacityTier == 5) {
+            if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
                 // OVERLOADED TIER!
                 this.setMaxSouls(125000); // 125k absolute max
                 this.safeCapacity = 100000; // Starts taking damage above 100k!
             } else {
-                int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 1.5))) * BASE_MAX_HEALTH;
-                int newMaxCapacity = BASE_MAX_HEALTH + bonusCapacity;
+                int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 1.5))) * BASE_MAX_CAPACITY;
+                int bonusTransferAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))) * BASE_TRANSFER_AMOUNT;
+
+                int newMaxCapacity = BASE_MAX_CAPACITY + bonusCapacity;
+                int newTransferAmount = BASE_TRANSFER_AMOUNT + bonusTransferAmount;
+                int newTransferRate = BASE_TRANSFER_RATE;
+
+                if (transferRateTier > 0) {
+                    newTransferRate = BASE_TRANSFER_RATE / (transferRateTier * 2);
+                }
+
                 this.setMaxSouls(newMaxCapacity);
+                this.transferRate = newTransferRate;
+                this.transferAmount = newTransferAmount;
             }
         }
     }
