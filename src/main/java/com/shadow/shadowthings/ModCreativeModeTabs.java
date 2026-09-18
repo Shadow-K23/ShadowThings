@@ -134,6 +134,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SOUL_STRUCTURE_BLOCK);
                         output.accept(ModBlocks.SOUL_PEDESTAL);
                         output.accept(ModBlocks.SOUL_CRAFTER);
+                        output.accept(ModBlocks.SOUL_FURNACE_CONTROLLER);
 
                         //TREES
                         output.accept((ModBlocks.SHADOWWOOD_LOG));

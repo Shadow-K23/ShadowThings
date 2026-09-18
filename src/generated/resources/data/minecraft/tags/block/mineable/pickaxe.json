@@ -9,6 +9,7 @@
     "shadowthings:soul_core",
     "shadowthings:soul_structure_block",
     "shadowthings:soul_crafter",
-    "shadowthings:soul_pedestal"
+    "shadowthings:soul_pedestal",
+    "shadowthings:soul_furnace_controller"
   ]
 }

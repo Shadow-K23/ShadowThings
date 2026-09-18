@@ -75,6 +75,7 @@ public class ModBlocks {
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
+
     //SHADOW SOULS RELATED BLOCKS
 
     public static final DeferredBlock<Block> SOUL_CORE = registerBlock("soul_core",
@@ -103,6 +104,12 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.SCULK_CATALYST)));
 
+    public static final DeferredBlock<Block> SOUL_FURNACE_CONTROLLER = registerBlock("soul_furnace_controller",
+            () -> new SoulFurnaceBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.SCULK_CATALYST)));
 
     //SHADOW TREE
 

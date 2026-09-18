@@ -55,7 +55,7 @@ public class SoulStructureBlock extends Block {
                         BlockPos checkPos = pos.offset(x, y, z);
                         BlockState checkState = level.getBlockState(checkPos);
 
-                        if (checkState.is(ModBlocks.SOUL_CORE.get())) {
+                        if (checkState.is(ModBlocks.SOUL_CORE.get()) || checkState.is(ModBlocks.SOUL_FURNACE_CONTROLLER.get())) {
                             // 1. Create a fake click target pointing at the Core's position
                             BlockHitResult coreHitResult = new BlockHitResult(
                                     hitResult.getLocation(), hitResult.getDirection(), checkPos, hitResult.isInside()

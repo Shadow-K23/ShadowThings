@@ -17,6 +17,12 @@
       "shadowthings:core_explosion_shockwave"
     ]
   },
+  "soul_furnace_craft": {
+    "subtitle": "sounds.shadowthings.soul_furnace_bwomp",
+    "sounds": [
+      "shadowthings:soul_furnace_bwomp"
+    ]
+  },
   "chisel_use": {
     "subtitle": "sounds.shadowthings.chisel_use",
     "sounds": [

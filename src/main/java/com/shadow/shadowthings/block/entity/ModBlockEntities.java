@@ -26,6 +26,10 @@ public class ModBlockEntities {
                 BLOCK_ENTITIES.register("soul_crafter_be", () -> BlockEntityType.Builder.of(
                         SoulCrafterEntity::new, ModBlocks.SOUL_CRAFTER.get()).build(null));
 
+    public static final Supplier<BlockEntityType<SoulFurnaceEntity>> SOUL_FURNACE_BE =
+                BLOCK_ENTITIES.register("soul_furnace_be", () -> BlockEntityType.Builder.of(
+                        SoulFurnaceEntity::new, ModBlocks.SOUL_FURNACE_CONTROLLER.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

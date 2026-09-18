@@ -3,9 +3,11 @@ package com.shadow.shadowthings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.renderer.SoulCrafterEntityRenderer;
+import com.shadow.shadowthings.block.entity.renderer.SoulFurnaceEntityRenderer;
 import com.shadow.shadowthings.block.entity.renderer.SoulPedestalEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulCoreModel;
 import com.shadow.shadowthings.block.entity.renderer.SoulCoreEntityRenderer;
+import com.shadow.shadowthings.client.model.SoulFurnaceModel;
 import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.effect.ModEffects;
 import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
@@ -15,6 +17,7 @@ import com.shadow.shadowthings.recipe.ModRecipes;
 import com.shadow.shadowthings.screen.ModMenuTypes;
 import com.shadow.shadowthings.screen.custom.SoulCoreScreen;
 import com.shadow.shadowthings.screen.custom.SoulCrafterScreen;
+import com.shadow.shadowthings.screen.custom.SoulFurnaceScreen;
 import com.shadow.shadowthings.server.ModDataAttachments;
 import com.shadow.shadowthings.soul.ModManaHudOverlay;
 import com.shadow.shadowthings.sound.ModSounds;
@@ -136,11 +139,13 @@ public class ShadowThings {
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CORE_BE.get(), SoulCoreEntityRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CRAFTER_BE.get(), SoulCrafterEntityRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_PEDESTAL_BE.get(), SoulPedestalEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_FURNACE_BE.get(), SoulFurnaceEntityRenderer::new);
         }
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
             // This tells the game how to build your 3D model using the math from Blockbench
             event.registerLayerDefinition(SoulCoreModel.LAYER_LOCATION, SoulCoreModel::createBodyLayer);
+            event.registerLayerDefinition(SoulFurnaceModel.LAYER_LOCATION, SoulFurnaceModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -148,6 +153,7 @@ public class ShadowThings {
             // This links the server menu to the client GUI rendering
             event.register(ModMenuTypes.SOUL_CORE_MENU.get(), SoulCoreScreen::new);
             event.register(ModMenuTypes.SOUL_CRAFTER_MENU.get(), SoulCrafterScreen::new);
+            event.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
         }
     }
 }

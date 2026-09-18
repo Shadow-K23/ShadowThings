@@ -47,8 +47,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //SOUL BLOCKS
 
         formableMultiblockPart(ModBlocks.SOUL_CORE.get(), SoulStructureBlock.FORMED, "soul_core");
-
         formableMultiblockPart(ModBlocks.SOUL_STRUCTURE_BLOCK.get(), SoulStructureBlock.FORMED, "soul_structure_block");
+        formableMultiblockPart(ModBlocks.SOUL_FURNACE_CONTROLLER.get(),SoulStructureBlock.FORMED, "soul_furnace");
+
+        blockItem(ModBlocks.SOUL_CORE);
+        blockItem(ModBlocks.SOUL_STRUCTURE_BLOCK);
 
         simpleBlock(ModBlocks.SOUL_CRAFTER.get(), crafterModel);
         simpleBlock(ModBlocks.SOUL_PEDESTAL.get(), pedestalModel);
