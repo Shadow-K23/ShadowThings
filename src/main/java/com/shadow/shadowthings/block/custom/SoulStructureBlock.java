@@ -35,6 +35,10 @@ public class SoulStructureBlock extends Block {
                             ((SoulCoreBlock) level.getBlockState(checkPos).getBlock()).unformMultiblock(level, checkPos);
                             break;
                         }
+                        if (level.getBlockState(checkPos).is(ModBlocks.SOUL_FURNACE_CONTROLLER.get())) {
+                            ((SoulFurnaceBlock) level.getBlockState(checkPos).getBlock()).unformMultiblock(level, checkPos);
+                            break;
+                        }
                     }
                 }
             }

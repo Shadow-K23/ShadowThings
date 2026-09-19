@@ -103,7 +103,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
     public boolean isSmelting = false;
 
     public SoulFurnaceEntity(BlockPos pos, BlockState state) {
-        // Starts with 0 souls, 10,000 max capacity, and a standard transfer rate
+
         super(ModBlockEntities.SOUL_FURNACE_BE.get(), pos, state, 0, 5000, 0, 0);
     }
 
@@ -115,60 +115,62 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         float normalizedMomentum = this.momentum / 100.0f;
         float currentSpeedMultiplier = Math.min(15.0f, 1.0f + (normalizedMomentum * normalizedMomentum * 1.5f));
 
+        // Speed percentage from 0.0 to 1.0 based on whatever the current max is (handles Overload naturally)
+        float currentSpeedPercent = this.momentum / Math.max(1.0f, this.maxMomentum);
 
-        // --- EXPONENTIAL SUB-LAP TRIGGER MATH ---
-        float normalizedMom = this.momentum / 500.0f;
-        float exponentialFactor = normalizedMom * normalizedMom;
+        // Scale triggers per lap: purely scales from 1 to 3 triggers maximum based on speed
+        double triggersPerLap = 1 + (int)(currentSpeedPercent * 2.0f);
 
-        // Scale triggers per lap: 1 trigger at low speed, up to 6 triggers per lap at max overload!
-        int triggersPerLap = 1 + (int)(exponentialFactor * 5.0f);
+        // The Hum Protector: At near-max speed, throttle back to 1.5 triggers per lap so it doesn't clip over itself!
+        if (currentSpeedPercent >= 0.95f) {
+            triggersPerLap = 1.5;
+        }
 
         float twoPi = (float) (Math.PI * 2);
-        float segmentSize = twoPi / triggersPerLap /2;
-        float oldSegment = this.orbitAngle / segmentSize;
+        double segmentSize = twoPi / triggersPerLap;
+        float oldSegment = this.orbitAngle / (float)segmentSize;
 
-        // Advance the angle (using your existing exponential speed multiplier)
+        // Advance the angle
         this.orbitAngle += 0.05f * currentSpeedMultiplier;
 
-        float newSegment = this.orbitAngle / segmentSize;
+        float newSegment = this.orbitAngle / (float)segmentSize;
 
-        // If we crossed a segment threshold, play the sound!
-        // --- 3-TIER ORBIT SOUND LOGIC ---
         if ((int) oldSegment < (int) newSegment) {
-            SoundEvent soundToPlay;
-            float soundPitch;
-            float soundVolume;
-            float dynamicPitch = 0.25f + (exponentialFactor * 1.8f);
-            float randomPitch = dynamicPitch * (float)(level.random.nextFloat() * 0.15);
-            float currentSpeedPercent = momentum/maxMomentum;
-            if (currentSpeedPercent < 0.25) {
-                // Tier 1: Low / Standard (Heavy, deep mechanical hum)
-                soundToPlay = ModSounds.SOUL_FURNACE_CRAFT.get(); // Or a base sound
-                soundPitch = randomPitch - 0.25f;
-                soundVolume = 0.10f;
-            } else if (currentSpeedPercent < 0.5) {
-                // Tier 2: Medium / Accelerated (Higher whir)
-                soundToPlay = ModSounds.SOUL_FURNACE_CRAFT.get();
-                soundPitch = randomPitch;
-                soundVolume = 0.10f;
-            } else if (currentSpeedPercent < 0.75){
-                // Tier 3: Overload / Critical Mass (Screaming turbine)
-                soundToPlay = ModSounds.SOUL_FURNACE_CRAFT.get(); // Or a separate intense sound event
-                soundPitch = randomPitch + 0.25f;
-                soundVolume = 0.10f;
+
+            float exponentialFactor = currentSpeedPercent * currentSpeedPercent;
+
+            // Base pitch of 0.6f, scaling up by 1.4f (Max pitch = 2.0f)
+            float dynamicPitch = 0.6f + (exponentialFactor * 1.4f) + (float)(level.random.nextFloat() * 0.1f - 0.05f);
+
+            float dynamicVolume;
+
+            // 1. SMOOTH VOLUME CURVE (Peak at 80% speed, fade out at 100%)
+            if (currentSpeedPercent < 0.95f) {
+                // Scales volume UP from 0.10 to 0.25 as speed reaches 80%
+                float climbProgress = currentSpeedPercent / 0.95f;
+                dynamicVolume = 0.15f + (climbProgress * 0.25f);
             } else {
-                soundToPlay = ModSounds.SOUL_FURNACE_CRAFT.get(); // Or a separate intense sound event
-                soundPitch = randomPitch + 0.35f;
-                soundVolume = 0.10f;
+                // Scales volume DOWN from 0.25 to 0.02 as speed reaches 100%
+                float fadeProgress = (currentSpeedPercent - 0.95f) / 0.05f;
+                dynamicVolume = 0.40f - (fadeProgress * 0.37f);
+            }
+            // Lock the pitch completely steady right at the very end to prevent the hum from warbling
+            if (currentSpeedPercent >= 0.95f) {
+                dynamicPitch = 2.0f;
+            }
+            // 2. COASTING REDUCTION
+            // If the furnace has momentum but isn't actively smelting, reduce volume to 15% of its current level
+            if (!this.isSmelting && currentSpeedPercent < 0.15f) {
+                dynamicVolume *= 0.1f;
             }
 
             level.playSound(
                     null,
                     pos,
-                    soundToPlay,
+                    ModSounds.SOUL_FURNACE_CRAFT.get(),
                     net.minecraft.sounds.SoundSource.BLOCKS,
-                    soundVolume,
-                    soundPitch
+                    dynamicVolume,
+                    dynamicPitch
             );
         }
 
@@ -193,6 +195,9 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         if (level.getGameTime() % 10 == 0) {
             tickAutoIO(level, pos);
         }
+
+        this.isSmelting = false;
+
         ItemStack inputStack = mainInventory.getStackInSlot(0);
 
         // 1. Check if we have an item and enough souls to run
@@ -372,7 +377,10 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         tag.putBoolean("IsFormed", this.isFormed);
         tag.putFloat("Momentum", this.momentum);
         tag.putFloat("MaxMomentum", this.maxMomentum);
+        tag.putFloat("MomentumGain", this.momentumGainRate);
+        tag.putFloat("MomentumDecay", this.momentumDecayRate);
         tag.putInt("Progress", this.progress);
+        tag.putBoolean("IsSmelting", this.isSmelting);
         tag.put("MainInventory", mainInventory.serializeNBT(registries));
     }
 
@@ -382,7 +390,10 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         this.isFormed = tag.getBoolean("IsFormed");
         this.momentum = tag.getFloat("Momentum");
         this.maxMomentum = tag.getFloat("MaxMomentum");
+        this.momentumGainRate = tag.getFloat("MomentumGain");
+        this.momentumDecayRate = tag.getFloat("MomentumDecay");
         this.progress = tag.getInt("Progress");
+        this.isSmelting = tag.getBoolean("IsSmelting");
         mainInventory.deserializeNBT(registries, tag.getCompound("MainInventory"));
     }
     @Override

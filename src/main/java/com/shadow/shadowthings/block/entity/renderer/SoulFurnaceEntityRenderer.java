@@ -17,6 +17,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnaceEntity> {
 
@@ -24,6 +26,7 @@ public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnac
 
     private final SoulFurnaceModel furnaceModel;
     private final ItemRenderer itemRenderer;
+    private float clientSmoothedMomentum = 0.0f;
 
     public SoulFurnaceEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.itemRenderer = context.getItemRenderer();
@@ -35,25 +38,25 @@ public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnac
         if (!entity.isFormed) return;
 
         float centerX = 0.5f;
-        float centerY = 1.5f; // Adjust this if your base/item is too high or low
+        float centerY = 1.175f; // Adjust this if your base/item is too high or low
         float centerZ = 0.5f;
-
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucentCull(TEXTURE));
 
 
         // --- 2. RENDER THE STATIC BASE BONE ---
         poseStack.pushPose();
-        // If your base is meant to sit on the controller block itself rather than the center of the cradle,
-        // change these coordinates back to (0.5f, 1.5f, 0.5f).
         poseStack.translate(0.5f, 1.5f, 0.5f);
-
-        // Standard Blockbench Java export correction (flips the model right-side up)
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
 
-        // RENDER ONLY THE BASE BONE!
-        this.furnaceModel.base.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        // Request buffer strictly right before drawing the base
+        VertexConsumer baseConsumer = buffer.getBuffer(RenderType.entityTranslucentCull(TEXTURE));
+        this.furnaceModel.base.render(poseStack, baseConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
 
+        float momentumLerpRate = 0.1f; // Adjust between 0.1f (slower/smoother) and 0.3f (snappier)
+        this.clientSmoothedMomentum += (entity.momentum - this.clientSmoothedMomentum) * momentumLerpRate;
+
+        // Use the smoothed client momentum for all visual effects instead of the raw entity.momentum!
+        float speedPercent = this.clientSmoothedMomentum / Math.max(1.0f, entity.maxMomentum);
 
         // --- 3. RENDER THE HOVERING ITEM ---
         ItemStack inputStack = entity.mainInventory.getStackInSlot(0);
@@ -77,54 +80,169 @@ public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnac
         // Start at the center of your Controller block
         poseStack.translate(0.5f, 1.825f, 0.5f);
 
-        // --- ORBITAL PRECESSION (The Wobble) ---
-        float precessionTime = (entity.getLevel().getGameTime() + partialTick) * 0.15f;
-        // Max tilt lowered to 15 degrees so the circle doesn't stretch too heavily at high speeds
-        float currentTilt = 15.0f + ((entity.momentum / Math.max(1, entity.maxMomentum)));
-
-        poseStack.mulPose(Axis.ZP.rotationDegrees((float) Math.sin(precessionTime) * currentTilt));
-        poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.cos(precessionTime) * currentTilt));
-
 
         // --- SPEED MIRAGES (The Perfect Ring) ---
         // A full circle is 2*PI radians. We slice the circle into 16 perfect increments.
-        float trailGap = (float) (Math.PI * 2) / 16.0f;
+        float trailGap = (float) (Math.PI * 2) / 20.0f;
 
         int ballCount = 1; // Default to just the main crystal
 
         // Only start spawning trailing mirages once momentum hits 150
-        if (entity.momentum >= 150.0f) {
-            // Normalize momentum between 150 and 500 into a 0.0 to 1.0 scale
-            float progress = (entity.momentum - 150.0f) / (500.0f - 150.0f);
+        if (entity.momentum >= 125.0f) {
+            // 1. Normalize momentum between 125 and 650
+            float progress = (entity.momentum - 125.0f) / (650.0f - 125.0f);
+            // Safety clamp
+            progress = Math.clamp(progress, 0.0f, 1.0f);
+            // 2. The "Soft Exponential" Curve
+            // We blend 40% Linear (starts immediately) with 60% Exponential (swoops at the end).
+            float linearPart = progress * 0.35f;
+            float exponentialPart = (progress * progress) * 0.65f;
 
-            // Square the progress (progress * progress) for an exponential curve.
-            // It starts growing slowly right after 150, then accelerates aggressively toward 500!
-            float exponentialFactor = progress * progress;
+            float curveFactor = linearPart + exponentialPart;
 
-            // Map the exponential curve to our 16 extra trail slots
-            int extraBalls = (int) (exponentialFactor * 16.0f);
+            // 3. Map the curve to your 20 extra trail slots
+            int extraBalls = (int) (curveFactor * 20.0f);
 
             ballCount = 1 + extraBalls;
         }
 
-        for (int i = 0; i < ballCount; i++) {
+        // --- DYNAMIC COLOR CALCULATION ---
+
+        float red = 0.3f + (speedPercent * 0.70f);
+        float green = 0.1f + (speedPercent * 0.25f);
+        float blue = 0.25f + (speedPercent * 0.75f);
+
+        int rInt = (int) (red * 255.0f);
+        int gInt = (int) (green * 255.0f);
+        int bInt = (int) (blue * 255.0f);
+        int packedColor = (255 << 24) | (rInt << 16) | (gInt << 8) | bInt;
+
+
+        // --- 5. RENDER CRYSTAL BALLS (Pass 1) ---
+        VertexConsumer ballConsumer = buffer.getBuffer(RenderType.entityTranslucentCull(TEXTURE));
+
+        for (int ring = 0; ring < 2; ring++) {
             poseStack.pushPose();
 
-            // Space each ghost ball strictly by the perfect mathematical gap
-            float timeOffset = orbitTime - (i * trailGap);
+            float radius = (ring == 0) ? 0.7f : 1f;
+            float currentOrbitTime = (ring == 0) ? orbitTime : -orbitTime * 0.70f;
 
-            // The flat plane orbit
-            double orbitX = Math.sin(timeOffset) * 0.85;
-            double orbitZ = Math.cos(timeOffset) * 0.85;
+            float smoothSpeed = speedPercent * speedPercent * (3.0f - 2.0f * speedPercent);
 
-            poseStack.translate(orbitX, 0.0, orbitZ);
-            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+            if (ring == 0) {
+                // Inner Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed so it glides to a stop
+                float spinY = (float) (Math.sin(orbitTime * 0.015f) * 300.0f + Math.sin(orbitTime * 0.005f) * 600.0f);
+                poseStack.mulPose(Axis.YP.rotationDegrees(spinY * smoothSpeed));
 
-            //poseStack.mulPose(Axis.YP.rotationDegrees(timeOffset * 1.5f));
-            //poseStack.mulPose(Axis.XP.rotationDegrees(timeOffset * 1.0f));
+                // Inner Ring: Secondary Spin (X-Axis)
+                float spinX = (float) (Math.cos(orbitTime * 0.018f) * 400.0f + Math.sin(orbitTime * 0.006f) * 500.0f);
+                poseStack.mulPose(Axis.XP.rotationDegrees(spinX * smoothSpeed));
+            } else {
+                // Outer Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed
+                float spinY = (float) (Math.sin(orbitTime * 0.02f) * 450.0f + Math.sin(orbitTime * 0.007f) * 750.0f);
+                poseStack.mulPose(Axis.YP.rotationDegrees(spinY * smoothSpeed));
 
-            this.furnaceModel.ball.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+                // Outer Ring: Secondary Spin (Z-Axis)
+                float spinZ = (float) (Math.cos(orbitTime * 0.022f) * 550.0f + Math.sin(orbitTime * 0.008f) * 700.0f);
+                poseStack.mulPose(Axis.ZP.rotationDegrees(spinZ * smoothSpeed));
+            }
+
+            for (int i = 0; i < ballCount; i++) {
+                poseStack.pushPose();
+
+                float timeOffset = currentOrbitTime - (i * trailGap);
+                double orbitX = Math.sin(timeOffset) * radius;
+                double orbitZ = Math.cos(timeOffset) * radius;
+
+                poseStack.translate(orbitX, -0.3, orbitZ);
+                poseStack.mulPose(Axis.XP.rotationDegrees(180));
+
+                this.furnaceModel.ball.render(poseStack, ballConsumer, packedLight, OverlayTexture.NO_OVERLAY, packedColor);
+
+                poseStack.popPose();
+            }
             poseStack.popPose();
+        }
+
+        // --- 6. RENDER ENERGY BEAMS (Pass 2) ---
+        // Only run the entire second pass if we are actively smelting!
+        if (entity.isSmelting) {
+            // Request the lightning buffer ONCE, outside the loop!
+            VertexConsumer beamConsumer = buffer.getBuffer(RenderType.lightning());
+
+            for (int ring = 0; ring < 2; ring++) {
+                poseStack.pushPose();
+
+                float radius = (ring == 0) ? 0.7f : 1f;
+                float currentOrbitTime = (ring == 0) ? orbitTime : -orbitTime * 0.70f;
+
+                float smoothSpeed = speedPercent * speedPercent * (3.0f - 2.0f * speedPercent);
+
+                if (ring == 0) {
+                    // Inner Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed so it glides to a stop
+                    float spinY = (float) (Math.sin(orbitTime * 0.015f) * 300.0f + Math.sin(orbitTime * 0.005f) * 600.0f);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(spinY * smoothSpeed));
+
+                    // Inner Ring: Secondary Spin (X-Axis)
+                    float spinX = (float) (Math.cos(orbitTime * 0.018f) * 400.0f + Math.sin(orbitTime * 0.006f) * 500.0f);
+                    poseStack.mulPose(Axis.XP.rotationDegrees(spinX * smoothSpeed));
+                } else {
+                    // Outer Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed
+                    float spinY = (float) (Math.sin(orbitTime * 0.02f) * 450.0f + Math.sin(orbitTime * 0.007f) * 750.0f);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(spinY * smoothSpeed));
+
+                    // Outer Ring: Secondary Spin (Z-Axis)
+                    float spinZ = (float) (Math.cos(orbitTime * 0.022f) * 550.0f + Math.sin(orbitTime * 0.008f) * 700.0f);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(spinZ * smoothSpeed));
+                }
+
+                for (int i = 0; i < ballCount; i++) {
+                    float timeOffset = currentOrbitTime - (i * trailGap);
+                    double orbitX = Math.sin(timeOffset) * radius;
+                    double orbitZ = Math.cos(timeOffset) * radius;
+
+                    float timeTicks = entity.getLevel().getGameTime() + partialTick;
+                    float arcNoise = (float) Math.sin(timeTicks * 0.8f + (i * 4.3f) + (ring * 10)) + (float) Math.sin(timeTicks * 1.7f + i - ring);
+                    float arcThreshold = 1.5f - (speedPercent * 2.5f);
+
+                    if (arcNoise > arcThreshold) {
+                        float yaw = (float) Math.toDegrees(Math.atan2(orbitX, orbitZ));
+                        float length = (float) Math.sqrt((radius * radius) + (-0.3 * -0.3));
+
+                        poseStack.pushPose();
+                        poseStack.mulPose(Axis.YP.rotationDegrees(yaw));
+
+
+                        Matrix4f poseMatrix = poseStack.last().pose();
+                        float thickness = 0.05f + (float) (Math.sin(orbitTime * 15.0f + i) * 0.02f);
+
+                        // Vertical Beam (Front & Back)
+                        beamConsumer.addVertex(poseMatrix, 0, -thickness, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, thickness, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, thickness, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, -thickness, length).setColor(rInt, gInt, bInt, 180);
+
+                        beamConsumer.addVertex(poseMatrix, 0, -thickness, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, thickness, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, thickness, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, 0, -thickness, 0).setColor(rInt, gInt, bInt, 180);
+
+                        // Horizontal Beam (Top & Bottom)
+                        beamConsumer.addVertex(poseMatrix, -thickness, 0, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, thickness, 0, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, thickness, 0, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, -thickness, 0, length).setColor(rInt, gInt, bInt, 180);
+
+                        beamConsumer.addVertex(poseMatrix, -thickness, 0, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, thickness, 0, length).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, thickness, 0, 0).setColor(rInt, gInt, bInt, 180);
+                        beamConsumer.addVertex(poseMatrix, -thickness, 0, 0).setColor(rInt, gInt, bInt, 180);
+
+                        poseStack.popPose();
+                    }
+                }
+                poseStack.popPose();
+            }
         }
 
         poseStack.popPose();
