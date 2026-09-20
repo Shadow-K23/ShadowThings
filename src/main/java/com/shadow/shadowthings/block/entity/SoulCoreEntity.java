@@ -50,15 +50,15 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     public final int BASE_TRANSFER_AMOUNT = 100;
 
     public boolean soulSiphonEnabled = false;
-    public int siphonRate = 20; // How many ticks between siphons
-    public int siphonAmount = 50; // How many souls to pull per siphon
+    public int siphonRate = 10; // How many ticks between siphons
+    public int siphonAmount = 200; // How many souls to pull per siphon
     private int tickCounter = 0; // Internal timer
 
     private int coreRadius = 8;
 
     public int coreHealth = 1000;
     public final int MAX_CORE_HEALTH = 1000;
-    public int safeCapacity = 100000;
+    public int safeCapacity = 200000;
 
     public boolean isMeltingDown = false;
     public int meltdownTimer = 0; // Tracks the terrifying collapse animation
@@ -256,10 +256,10 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
 
             if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
                 // OVERLOADED TIER!
-                this.setMaxSouls(125000); // 125k absolute max
-                this.safeCapacity = 100000; // Starts taking damage above 100k!
+                this.setMaxSouls(205000); // 125k absolute max
+                this.safeCapacity = 200000; // Starts taking damage above 100k!
             } else {
-                int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 1.5))) * BASE_MAX_CAPACITY;
+                int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 2.5))) * BASE_MAX_CAPACITY;
                 int bonusTransferAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))) * BASE_TRANSFER_AMOUNT;
 
                 int newMaxCapacity = BASE_MAX_CAPACITY + bonusCapacity;
@@ -287,19 +287,20 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         super.saveAdditional(tag, registries);
         tag.putBoolean("IsFormed", this.isFormed);
 
-        // ADD THESE TWO LINES: Save the soul data so it syncs to the client!
         tag.putInt("Souls", this.souls);
         tag.putInt("MaxSouls", this.maxSouls);
         tag.putBoolean("SoulSiphon", this.soulSiphonEnabled);
+        tag.putInt("SoulTransferRate", this.transferRate);
+        tag.putInt("SoulTransferAmount", this.transferAmount);
+
+        tag.putInt("CoreHealth", this.coreHealth);
+        tag.putInt("MeltdownTimer", this.meltdownTimer);
+        tag.putBoolean("IsMeltingDown", this.isMeltingDown);
 
         if (this.ownerUUID != null) {
             tag.putUUID("OwnerUUID", this.ownerUUID);
         }
         tag.putInt("CoreRadius", this.coreRadius);
-
-        tag.putInt("CoreHealth", this.coreHealth);
-        tag.putInt("MeltdownTimer", this.meltdownTimer);
-        tag.putBoolean("IsMeltingDown", this.isMeltingDown);
     }
 
     @Override
@@ -311,6 +312,8 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         this.souls = tag.getInt("Souls");
         this.maxSouls = tag.getInt("MaxSouls");
         this.soulSiphonEnabled = tag.getBoolean("SoulSiphon");
+        this.transferRate = tag.getInt("SoulTransferRate");
+        this.transferAmount = tag.getInt("SoulTransferAmount");
 
         this.coreHealth = tag.getInt("CoreHealth");
         this.meltdownTimer = tag.getInt("MeltdownTimer");
@@ -357,6 +360,8 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         tag.putInt("Souls", this.souls);
         tag.putInt("MaxSouls", this.maxSouls);
         tag.putBoolean("SoulSiphon", this.soulSiphonEnabled);
+        tag.putInt("SoulTransferRate", this.transferRate);
+        tag.putInt("SoulTransferAmount", this.transferAmount);
 
         return tag;
     }

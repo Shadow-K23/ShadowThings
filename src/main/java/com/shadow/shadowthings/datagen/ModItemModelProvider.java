@@ -130,9 +130,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         //MISC
         basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
 
-        //GEMS
-        basicItem(ModItems.RUBY_GEM.get());
-        basicItem(ModItems.TOPAZ_GEM.get());
         saplingItem(ModBlocks.SHADOWWOOD_SAPLING);
     }
 

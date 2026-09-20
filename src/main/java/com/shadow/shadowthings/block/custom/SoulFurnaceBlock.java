@@ -3,9 +3,11 @@ package com.shadow.shadowthings.block.custom;
 import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
+import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
 import com.shadow.shadowthings.block.entity.SoulFurnaceEntity; // We will create this next!
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -160,6 +162,11 @@ public class SoulFurnaceBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             unformMultiblock(level, pos);
+        }
+        if (level.getBlockEntity(pos) instanceof SoulFurnaceEntity furnace) {
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), furnace.mainInventory.getStackInSlot(0));
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), furnace.mainInventory.getStackInSlot(1));
+            furnace.dropAllUpgrades();
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }

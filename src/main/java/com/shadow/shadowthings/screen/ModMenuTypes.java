@@ -3,6 +3,7 @@ package com.shadow.shadowthings.screen;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.screen.custom.SoulCoreMenu;
 import com.shadow.shadowthings.screen.custom.SoulCrafterMenu;
+import com.shadow.shadowthings.screen.custom.SoulCrucibleMenu;
 import com.shadow.shadowthings.screen.custom.SoulFurnaceMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -26,6 +27,9 @@ public class ModMenuTypes {
 
     public static final DeferredHolder<MenuType<?>, MenuType<SoulFurnaceMenu>> SOUL_FURNACE_MENU =
             registerMenuType("soul_furnace_menu", SoulFurnaceMenu::new);
+
+    public static final DeferredHolder<MenuType<?>, MenuType<SoulCrucibleMenu>> SOUL_CRUCIBLE_MENU =
+            registerMenuType("soul_crucible_menu", SoulCrucibleMenu::new);
 
 
 

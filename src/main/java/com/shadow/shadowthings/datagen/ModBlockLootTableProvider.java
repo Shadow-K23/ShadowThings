@@ -35,12 +35,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         //SELF DROPPING BLOCKS
         dropSelf(ModBlocks.SHADOW_BLOCK.get());
-        dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.SOUL_STRUCTURE_BLOCK.get());
         dropSelf(ModBlocks.SOUL_CORE.get());
         dropSelf(ModBlocks.SOUL_CRAFTER.get());
         dropSelf(ModBlocks.SOUL_PEDESTAL.get());
         dropSelf(ModBlocks.SOUL_FURNACE_CONTROLLER.get());
+        dropSelf(ModBlocks.SOUL_CONDENSER.get());
+        dropSelf(ModBlocks.SOUL_CRUCIBLE.get());
+        dropSelf(ModBlocks.SOUL_COLLECTOR.get());
 
         //TREE
         this.dropSelf(ModBlocks.SHADOWWOOD_LOG.get());

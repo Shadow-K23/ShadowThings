@@ -2,11 +2,10 @@ package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
-import com.shadow.shadowthings.block.entity.renderer.SoulCrafterEntityRenderer;
-import com.shadow.shadowthings.block.entity.renderer.SoulFurnaceEntityRenderer;
-import com.shadow.shadowthings.block.entity.renderer.SoulPedestalEntityRenderer;
+import com.shadow.shadowthings.block.entity.SoulCondenserEntity;
+import com.shadow.shadowthings.block.entity.SoulCrucibleEntity;
+import com.shadow.shadowthings.block.entity.renderer.*;
 import com.shadow.shadowthings.client.model.SoulCoreModel;
-import com.shadow.shadowthings.block.entity.renderer.SoulCoreEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulFurnaceModel;
 import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.effect.ModEffects;
@@ -17,6 +16,7 @@ import com.shadow.shadowthings.recipe.ModRecipes;
 import com.shadow.shadowthings.screen.ModMenuTypes;
 import com.shadow.shadowthings.screen.custom.SoulCoreScreen;
 import com.shadow.shadowthings.screen.custom.SoulCrafterScreen;
+import com.shadow.shadowthings.screen.custom.SoulCrucibleScreen;
 import com.shadow.shadowthings.screen.custom.SoulFurnaceScreen;
 import com.shadow.shadowthings.server.ModDataAttachments;
 import com.shadow.shadowthings.soul.ModManaHudOverlay;
@@ -140,6 +140,9 @@ public class ShadowThings {
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CRAFTER_BE.get(), SoulCrafterEntityRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_PEDESTAL_BE.get(), SoulPedestalEntityRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SOUL_FURNACE_BE.get(), SoulFurnaceEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CONDENSER_BE.get(), SoulCondenserEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_CRUCIBLE_BE.get(), SoulCrucibleEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.SOUL_COLLECTOR_BE.get(), SoulCollectorEntityRenderer::new);
         }
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -154,6 +157,7 @@ public class ShadowThings {
             event.register(ModMenuTypes.SOUL_CORE_MENU.get(), SoulCoreScreen::new);
             event.register(ModMenuTypes.SOUL_CRAFTER_MENU.get(), SoulCrafterScreen::new);
             event.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
+            event.register(ModMenuTypes.SOUL_CRUCIBLE_MENU.get(), SoulCrucibleScreen::new);
         }
     }
 }

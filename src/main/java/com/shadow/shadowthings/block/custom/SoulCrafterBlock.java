@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -62,7 +63,7 @@ public class SoulCrafterBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             if (level.getBlockEntity(pos) instanceof SoulCrafterEntity crafter) {
-                net.minecraft.world.Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crafter.inventory.getStackInSlot(0));
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crafter.inventory.getStackInSlot(0));
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

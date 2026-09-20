@@ -70,12 +70,6 @@ public class ModBlocks {
 
     //ADVANCED BLOCKS
 
-    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock( "magic_block",
-            () -> new MagicBlock(BlockBehaviour.Properties.of()
-                    .strength(2f)
-                    .requiresCorrectToolForDrops()
-                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
-
     //SHADOW SOULS RELATED BLOCKS
 
     public static final DeferredBlock<Block> SOUL_CORE = registerBlock("soul_core",
@@ -109,6 +103,24 @@ public class ModBlocks {
                     .noOcclusion()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
+                    .sound(SoundType.SCULK_CATALYST)));
+
+    public static final DeferredBlock<Block> SOUL_CONDENSER = registerBlock("soul_condenser",
+            () -> new SoulCondenserBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .strength(2f)
+                    .sound(SoundType.SCULK)));
+
+    public static final DeferredBlock<Block> SOUL_CRUCIBLE = registerBlock("soul_crucible",
+            () -> new SoulCrucibleBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .strength(2f)
+                    .sound(SoundType.SCULK_SENSOR)));
+
+    public static final DeferredBlock<Block> SOUL_COLLECTOR = registerBlock("soul_collector",
+            () -> new SoulCollectorBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .strength(2f)
                     .sound(SoundType.SCULK_CATALYST)));
 
     //SHADOW TREE

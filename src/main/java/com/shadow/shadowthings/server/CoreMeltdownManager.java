@@ -20,6 +20,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class CoreMeltdownManager {
@@ -54,7 +55,7 @@ public class CoreMeltdownManager {
                 .withStyle(ChatFormatting.RED, ChatFormatting.BOLD);
         if(!warningSent) {
             warningSent = true;
-            level.getServer().getPlayerList().broadcastSystemMessage(warningMessage, false);
+            Objects.requireNonNull(level.getServer()).getPlayerList().broadcastSystemMessage(warningMessage, false);
         };
 
         if (this.core.meltdownTimer == 1 && level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
@@ -134,8 +135,8 @@ public class CoreMeltdownManager {
             // 3A. Crackling Sounds
             if (this.core.meltdownTimer < 1600) {
                 if (this.core.meltdownTimer % 10 == 0) level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 5f, 0.5f);
-                else if (this.core.meltdownTimer % 20 == 0) level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 7f, 0.35f);
-                else if (this.core.meltdownTimer % 30 == 0) level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 9f, 0.15f);
+                if (this.core.meltdownTimer % 20 == 0) level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 7f, 0.35f);
+                if (this.core.meltdownTimer % 30 == 0) level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 9f, 0.15f);
             }
 
             // 3B. The 5-Second Buildup Sound

@@ -139,6 +139,7 @@ public class SoulCoreBlock extends BaseEntityBlock {
                     SoulCoreData data = SoulCoreData.get((ServerLevel) level);
                     data.removeCore(coreEntity.ownerUUID);
                 }
+                coreEntity.dropAllUpgrades();
             }
 
             unformMultiblock(level, pos);

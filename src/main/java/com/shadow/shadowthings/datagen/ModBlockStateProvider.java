@@ -43,19 +43,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         //ADVANCED BLOCKS
 
-        blockWithItem(ModBlocks.MAGIC_BLOCK);
         //SOUL BLOCKS
 
         formableMultiblockPart(ModBlocks.SOUL_CORE.get(), SoulStructureBlock.FORMED, "soul_core");
         formableMultiblockPart(ModBlocks.SOUL_STRUCTURE_BLOCK.get(), SoulStructureBlock.FORMED, "soul_structure_block");
-        formableMultiblockPart(ModBlocks.SOUL_FURNACE_CONTROLLER.get(),SoulStructureBlock.FORMED, "soul_furnace");
+        formableMultiblockPart(ModBlocks.SOUL_FURNACE_CONTROLLER.get(),SoulStructureBlock.FORMED, "soul_furnace_controller");
 
         blockItem(ModBlocks.SOUL_CORE);
         blockItem(ModBlocks.SOUL_STRUCTURE_BLOCK);
+        blockItem(ModBlocks.SOUL_FURNACE_CONTROLLER);
 
         simpleBlock(ModBlocks.SOUL_CRAFTER.get(), crafterModel);
         simpleBlock(ModBlocks.SOUL_PEDESTAL.get(), pedestalModel);
 
+        blockWithItem(ModBlocks.SOUL_CONDENSER);
+        blockWithItem(ModBlocks.SOUL_CRUCIBLE);
+        blockWithItem(ModBlocks.SOUL_COLLECTOR); //temporary change later
 
         //NON-BLOCK BLOCKS
 

@@ -3,43 +3,49 @@ package com.shadow.shadowthings.screen.custom;
 
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
+import com.shadow.shadowthings.block.entity.SoulCrucibleEntity;
 import com.shadow.shadowthings.screen.ModMenuTypes;
 import com.shadow.shadowthings.screen.custom.base.AbstractSoulMenu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class SoulCrafterMenu extends AbstractSoulMenu {
-    public final SoulCrafterEntity blockEntity;
+public class SoulCrucibleMenu extends AbstractSoulMenu {
+    public final SoulCrucibleEntity blockEntity;
     private final ContainerLevelAccess levelAccess;
+    private final ContainerData data; // Add this
 
-    // Client-side constructor
-    public SoulCrafterMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+    // Client-side constructor (Adds dummy data for the client to read)
+    public SoulCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new net.minecraft.world.inventory.SimpleContainerData(4));
     }
 
-    // Server-side constructor
-    public SoulCrafterMenu(int id, Inventory inv, BlockEntity entity) {
-        super(ModMenuTypes.SOUL_CRAFTER_MENU.get(), id); // You'll need to register this type next!
+    // Server-side constructor (Accepts the real data from the entity)
+    public SoulCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.SOUL_CRUCIBLE_MENU.get(), id);
         checkContainerSize(inv, 1);
 
-        this.blockEntity = (SoulCrafterEntity) entity;
+        this.blockEntity = (SoulCrucibleEntity) entity;
         this.levelAccess = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
-        this.addUpgradeSlots(blockEntity, 180, 10);
-        // Add the 1 slot for the Crafter's Catalyst (x: 80, y: 35)
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
+        this.data = data; // Assign the data
 
-        // Add the Player's Inventory (Standard math for alignment)
+        this.addUpgradeSlots(blockEntity, 180, 10);
+        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 0, 80, 35));
+
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
+
+        // Tell the menu to actively sync the variables to the client!
+        addDataSlots(data);
     }
 
-    public SoulCrafterEntity getBlockEntity() {
+    public SoulCrucibleEntity getBlockEntity() {
         return this.blockEntity;
     }
 
@@ -52,7 +58,7 @@ public class SoulCrafterMenu extends AbstractSoulMenu {
         ItemStack stackInSlot = slot.getItem();
         ItemStack originalStack = stackInSlot.copy();
 
-        if (index == 0) { // If clicking the Crafter slot
+        if (index == 0) {
             if (!this.moveItemStackTo(stackInSlot, 1, 37, true)) return ItemStack.EMPTY;
         } else if (!this.moveItemStackTo(stackInSlot, 0, 1, false)) { // If clicking Player inventory
             return ItemStack.EMPTY;
@@ -66,7 +72,7 @@ public class SoulCrafterMenu extends AbstractSoulMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.levelAccess, player, ModBlocks.SOUL_CRAFTER.get());
+        return stillValid(this.levelAccess, player, ModBlocks.SOUL_CRUCIBLE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

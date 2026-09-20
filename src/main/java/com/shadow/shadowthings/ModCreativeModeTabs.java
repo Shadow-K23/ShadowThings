@@ -91,9 +91,6 @@ public class ModCreativeModeTabs {
                         //MISC
                         output.accept(ModItems.BAR_BRAWL_MUSIC_DISC);
 
-                        //GEMS
-                        output.accept(ModItems.RUBY_GEM);
-                        output.accept(ModItems.TOPAZ_GEM);
                     }))
                     .build());
 
@@ -126,7 +123,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SHADOW_TRAPDOOR);
 
                         //ADVANCED BLOCKS
-                        output.accept(ModBlocks.MAGIC_BLOCK);
 
                         //SOUL RELATED
 
@@ -135,6 +131,9 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SOUL_PEDESTAL);
                         output.accept(ModBlocks.SOUL_CRAFTER);
                         output.accept(ModBlocks.SOUL_FURNACE_CONTROLLER);
+                        output.accept(ModBlocks.SOUL_CONDENSER);
+                        output.accept(ModBlocks.SOUL_CRUCIBLE);
+                        output.accept(ModBlocks.SOUL_COLLECTOR);
 
                         //TREES
                         output.accept((ModBlocks.SHADOWWOOD_LOG));

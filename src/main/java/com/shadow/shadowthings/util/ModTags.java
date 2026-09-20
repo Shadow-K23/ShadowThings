@@ -25,6 +25,8 @@ public class ModTags {
         public static final TagKey<Item>  CRAFTER_UPGRADES = createTag("upgrades/crafter");
         public static final TagKey<Item>  CORE_UPGRADES = createTag("upgrades/core");
         public static final TagKey<Item>  FURNACE_UPGRADES = createTag("upgrades/furnace");
+        public static final TagKey<Item>  CRUCIBLE_UPGRADES = createTag("upgrades/crucible");
+        public static final TagKey<Item>  COLLECTOR_UPGRADES = createTag("upgrades/collector");
 
         private static TagKey<Item> createTag(String name){
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, name));

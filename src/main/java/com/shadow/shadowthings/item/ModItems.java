@@ -196,16 +196,6 @@ public class ModItems {
             ()-> new SoulUpgradeItem(new Item.Properties().stacksTo(1), UpgradeType.REDSTONE,5));
 
 
-    //TODO: REMOVE THE USELESS GEMS
-    //GEMS
-    public static final DeferredItem<Item> RUBY_GEM = ITEMS.register("ruby_gem",
-            () -> new ModGemItem(new Item.Properties().stacksTo(1)));
-
-    public static final DeferredItem<Item> TOPAZ_GEM = ITEMS.register("topaz_gem",
-            () -> new ModGemItem(new Item.Properties().stacksTo(1)));
-
-
-
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

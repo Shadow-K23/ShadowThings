@@ -30,6 +30,18 @@ public class ModBlockEntities {
                 BLOCK_ENTITIES.register("soul_furnace_be", () -> BlockEntityType.Builder.of(
                         SoulFurnaceEntity::new, ModBlocks.SOUL_FURNACE_CONTROLLER.get()).build(null));
 
+    public static final Supplier<BlockEntityType<SoulCondenserEntity>> SOUL_CONDENSER_BE =
+                BLOCK_ENTITIES.register("soul_condenser_be", () -> BlockEntityType.Builder.of(
+                        SoulCondenserEntity::new, ModBlocks.SOUL_CONDENSER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SoulCrucibleEntity>> SOUL_CRUCIBLE_BE =
+                BLOCK_ENTITIES.register("soul_crucible_be", () -> BlockEntityType.Builder.of(
+                        SoulCrucibleEntity::new, ModBlocks.SOUL_CRUCIBLE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SoulCollectorEntity>> SOUL_COLLECTOR_BE =
+                BLOCK_ENTITIES.register("soul_collector_be", () -> BlockEntityType.Builder.of(
+                        SoulCollectorEntity::new, ModBlocks.SOUL_COLLECTOR.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

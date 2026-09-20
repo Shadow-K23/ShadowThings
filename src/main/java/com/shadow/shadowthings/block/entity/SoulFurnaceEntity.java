@@ -6,6 +6,7 @@ import com.shadow.shadowthings.screen.custom.SoulFurnaceMenu;
 import com.shadow.shadowthings.sound.ModSounds;
 import com.shadow.shadowthings.util.ModTags;
 import com.shadow.shadowthings.util.UpgradeType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -14,10 +15,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -35,6 +34,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvider {
@@ -100,6 +100,9 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
     public float orbitAngle = 0.0f;
     public float prevOrbitAngle = 0.0f;
 
+    public int smeltAmountTier = 0;
+    public int soulEfficiencyTier = 0;
+
     public boolean isSmelting = false;
 
     public SoulFurnaceEntity(BlockPos pos, BlockState state) {
@@ -140,7 +143,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
             float exponentialFactor = currentSpeedPercent * currentSpeedPercent;
 
             // Base pitch of 0.6f, scaling up by 1.4f (Max pitch = 2.0f)
-            float dynamicPitch = 0.6f + (exponentialFactor * 1.4f) + (float)(level.random.nextFloat() * 0.1f - 0.05f);
+            float dynamicPitch = 0.6f + (exponentialFactor * 1.4f) + (level.random.nextFloat() * 0.1f - 0.05f);
 
             float dynamicVolume;
 
@@ -148,11 +151,11 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
             if (currentSpeedPercent < 0.95f) {
                 // Scales volume UP from 0.10 to 0.25 as speed reaches 80%
                 float climbProgress = currentSpeedPercent / 0.95f;
-                dynamicVolume = 0.15f + (climbProgress * 0.25f);
+                dynamicVolume = 0.15f + (climbProgress * 0.27f);
             } else {
                 // Scales volume DOWN from 0.25 to 0.02 as speed reaches 100%
                 float fadeProgress = (currentSpeedPercent - 0.95f) / 0.05f;
-                dynamicVolume = 0.40f - (fadeProgress * 0.37f);
+                dynamicVolume = 0.42f - (fadeProgress * 0.37f);
             }
             // Lock the pitch completely steady right at the very end to prevent the hum from warbling
             if (currentSpeedPercent >= 0.95f) {
@@ -176,7 +179,6 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
 
 
         if (level.isClientSide()) {
-            this.tickClientVisuals();
             return;
         }
 
@@ -185,16 +187,11 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
                 this.transferTickCounter--;
             } else {
                 int needed = this.maxSouls - this.getSouls();
-                if (requestSoulsFromCore(needed)) {
-                } else {
-                    this.transferTickCounter = 100;
-                }
+                if (!requestSoulsFromCore(needed)) {this.transferTickCounter = 100;}
             }
         }
+        tickAutoIO(level, pos);
 
-        if (level.getGameTime() % 10 == 0) {
-            tickAutoIO(level, pos);
-        }
 
         this.isSmelting = false;
 
@@ -220,23 +217,47 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
                     // Increase momentum
                     this.momentum = Math.min(this.momentum + this.momentumGainRate, this.maxMomentum);
 
-                    // Calculate speed: At 0 momentum = 1x speed. At 100 momentum = 6x speed!
-                    int speedMultiplier = 1 + (int)(this.momentum / 20.0f);
+                    // Calculate speed
+                    int speedMultiplier = 1 + (int)(this.momentum / 5.0f);
                     this.progress += speedMultiplier;
 
-                    // Calculate soul cost: Base 5 per tick, reduces to 1 per tick at max momentum!
-                    int soulCost = Math.max(1, 5 - (int)(this.momentum / 25.0f));
-                    this.removeSouls(soulCost);
-
+                    //Calculate item smelt soul cost dynamically, based on momentum and upgrades
+                    int baseSoulCost = 150;
+                    float upgradeSoulCost = baseSoulCost * ((float) 1 / Math.max(1,soulEfficiencyTier * 1.25f)) * Math.max(1,smeltAmountTier * 1.15f);
+                    int dynamicSoulCost = Math.max(15,(int)(upgradeSoulCost - momentum/15f));
                     // --- CRAFTING ---
                     if (this.progress >= this.maxProgress) {
                         this.progress = 0;
-                        mainInventory.extractItem(0, 1, false); // Consume 1 input
 
-                        if (outputSlot.isEmpty()) {
-                            mainInventory.setStackInSlot(1, result.copy());
-                        } else {
-                            outputSlot.grow(result.getCount());
+                        // 1. Calculate the absolute limit of what we can smelt
+                        int maxBatch = Math.max(1, this.smeltAmountTier * 2);
+                        int availableInput = mainInventory.getStackInSlot(0).getCount();
+
+                        // Check how much physical room is left in the output slot
+                        int spaceLeft = outputSlot.isEmpty() ? result.getMaxStackSize() : outputSlot.getMaxStackSize() - outputSlot.getCount();
+                        int maxFits = spaceLeft / result.getCount(); // Accounts for recipes that output 2+ items per craft
+
+                        // The true amount to smelt is the lowest of the three variables
+                        int actualAmountToSmelt = Math.min(maxBatch, Math.min(availableInput, maxFits));
+
+                        if (actualAmountToSmelt > 0) {
+                            // 2. Consume the exact amount of input items
+                            mainInventory.extractItem(0, actualAmountToSmelt, false);
+
+                            // Scale the soul cost so you aren't paying the 8-item price for 1 item!
+                            int finalSoulCost = (int) ((dynamicSoulCost / (float) maxBatch) * actualAmountToSmelt);
+                            this.removeSouls(finalSoulCost);
+
+                            // 3. Output the exact scaled result
+                            int totalOutput = actualAmountToSmelt * result.getCount();
+
+                            if (outputSlot.isEmpty()) {
+                                ItemStack newOutput = result.copy();
+                                newOutput.setCount(totalOutput);
+                                mainInventory.setStackInSlot(1, newOutput);
+                            } else {
+                                outputSlot.grow(totalOutput);
+                            }
                         }
                     }
                 }
@@ -264,33 +285,44 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
     }
 
     private void tickAutoIO(Level level, BlockPos pos) {
-        // 1. SCALE SPEED WITH UPGRADES:
-        // Base interval is 10 ticks. Each Speed upgrade reduces it by 2 ticks (down to a minimum of 2 ticks).
+
         int stackTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_SPEED);
         int checkInterval = 10;
+        if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())){stackTier = 4;checkInterval = 5;}
+
 
         if (level.getGameTime() % checkInterval != 0) return;
 
         // Check all 6 directions around the controller block
-        for (Direction direction : Direction.values()) {
-            BlockPos targetPos = pos.relative(direction);
+        int radius = 2;
 
-            IItemHandler adjacentHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, targetPos, direction.getOpposite());
-            if (adjacentHandler == null) continue;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                // Skip the center block (the machine itself)
+                if (x == 0 && z == 0) continue;
 
-            // --- 2. PUSH OUTPUT (Slot 1 -> Adjacent Inventory) ---
-            ItemStack outputStack = mainInventory.getStackInSlot(1);
-            if (!outputStack.isEmpty()) {
-                for (int i = 0; i < adjacentHandler.getSlots(); i++) {
-                    ItemStack remainder = adjacentHandler.insertItem(i, outputStack, false);
-                    if (remainder.getCount() < outputStack.getCount()) {
-                        mainInventory.setStackInSlot(1, remainder);
-                        setChanged();
-                        level.sendBlockUpdated(pos, getBlockState(), getBlockState(), 3);
-                        break;
+                BlockPos targetPos = pos.offset(x, 0, z);
+
+                IItemHandler adjacentHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, targetPos, null);
+
+                if (adjacentHandler == null) continue;
+
+
+                // --- 2. PUSH OUTPUT (Slot 1 -> Adjacent Inventory) ---
+                ItemStack outputStack = mainInventory.getStackInSlot(1);
+                if (!outputStack.isEmpty()) {
+                    for (int i = 0; i < adjacentHandler.getSlots(); i++) {
+                        ItemStack remainder = adjacentHandler.insertItem(i, outputStack, false);
+                        if (remainder.getCount() < outputStack.getCount()) {
+                            mainInventory.setStackInSlot(1, remainder);
+                            setChanged();
+                            level.sendBlockUpdated(pos, getBlockState(), getBlockState(), 3);
+                            break;
+                        }
                     }
                 }
-            }
+
+
 
             // --- 3. PULL INPUT (Adjacent Inventory -> Slot 0) ---
             ItemStack inputSlot = mainInventory.getStackInSlot(0);
@@ -336,14 +368,15 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
             }
         }
     }
+    }
 
     @Override
     protected void onUpgradesChanged() {
         super.onUpgradesChanged();
         if (this.level != null && !this.level.isClientSide()) {
             int speedTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_SPEED);
-            int efficiencyTier = this.getUpgradeLevel(UpgradeType.SOUL_USAGE_EFFICIENCY);
-
+            this.soulEfficiencyTier = this.getUpgradeLevel(UpgradeType.SOUL_USAGE_EFFICIENCY);
+            this.smeltAmountTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_AMOUNT);
             if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
                 this.maxMomentum = 750.0f; // Insane max speed
                 this.momentumGainRate = 3.0f; // Revs up instantly
@@ -353,7 +386,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
                 this.momentumGainRate = 0.5f + (speedTier * 0.25f);
 
                 // Math.max guarantees the decay rate never drops below 0.02, even with max upgrades!
-                this.momentumDecayRate = Math.max(0.02f, 0.2f - (efficiencyTier * 0.04f));
+                this.momentumDecayRate = Math.max(0.02f, 0.2f - (this.soulEfficiencyTier * 0.04f));
             }
 
             // Force momentum down if we remove an upgrade and max capacity shrinks
@@ -379,6 +412,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         tag.putFloat("MaxMomentum", this.maxMomentum);
         tag.putFloat("MomentumGain", this.momentumGainRate);
         tag.putFloat("MomentumDecay", this.momentumDecayRate);
+        tag.putInt("SmeltAmount", this.smeltAmountTier);
         tag.putInt("Progress", this.progress);
         tag.putBoolean("IsSmelting", this.isSmelting);
         tag.put("MainInventory", mainInventory.serializeNBT(registries));
@@ -392,6 +426,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         this.maxMomentum = tag.getFloat("MaxMomentum");
         this.momentumGainRate = tag.getFloat("MomentumGain");
         this.momentumDecayRate = tag.getFloat("MomentumDecay");
+        this.smeltAmountTier = tag.getInt("SmeltAmount");
         this.progress = tag.getInt("Progress");
         this.isSmelting = tag.getBoolean("IsSmelting");
         mainInventory.deserializeNBT(registries, tag.getCompound("MainInventory"));
@@ -418,6 +453,8 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         tag.putBoolean("IsFormed", this.isFormed);
         tag.putFloat("Momentum", this.momentum);
         tag.put("MainInventory", mainInventory.serializeNBT(registries)); // Syncs items for the floating renderer!
+        tag.putBoolean("IsSmelting", this.isSmelting);
+        tag.putInt("Progress", this.progress);
         return tag;
     }
 }

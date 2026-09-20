@@ -166,6 +166,18 @@ public abstract class AbstractSoulEntity extends BlockEntity {
         return highestTier;
     }
 
+    public void dropAllUpgrades() {
+        if (this.level != null && !this.level.isClientSide()) {
+            // Drop upgrades
+            for (int i = 0; i < this.upgradeInventory.getSlots(); i++) {
+                ItemStack stack = this.upgradeInventory.getStackInSlot(i);
+                if (!stack.isEmpty()) {
+                    net.minecraft.world.Containers.dropItemStack(this.level, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), stack);
+                }
+            }
+        }
+    }
+
     public boolean requestSoulsFromCore(int requestedAmount) {
         if (this.level == null || this.level.isClientSide()) return false;
 

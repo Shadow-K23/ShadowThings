@@ -27,7 +27,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         //LISTS OF ITEMS FOR SMELTING
-        List<ItemLike> SHADOW_SMELTABLES = List.of(ModItems.RAWSHADOWINGOT,ModBlocks.SHADOW_ORE,ModBlocks.SHADOW_DEEPSLATE_ORE);
+        List<ItemLike> SHADOW_SMELTABLES =
+                List.of(
+                        ModItems.RAWSHADOWINGOT,
+                        ModBlocks.SHADOW_ORE,
+                        ModBlocks.SHADOW_DEEPSLATE_ORE,
+                        ModBlocks.SHADOW_END_ORE,
+                        ModBlocks.SHADOW_NETHER_ORE);
 
         //BLOCK CRAFTING
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SHADOW_BLOCK.get())
@@ -37,64 +43,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModItems.SHADOWINGOT.get())
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput, "shadowthings:shadow_block_craft");
 
-        //TOOL RECIPES
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOWSWORD.get())
-                .pattern("B")
-                .pattern("B")
-                .pattern("C")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOWSPEAR.get())
-                .pattern("  B")
-                .pattern(" C ")
-                .pattern("C  ")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWSHOVEL.get())
-                .pattern("B")
-                .pattern("C")
-                .pattern("C")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWAXE.get())
-                .pattern("BB")
-                .pattern("BC")
-                .pattern(" C")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWHOE.get())
-                .pattern("BB")
-                .pattern("C ")
-                .pattern("C ")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWPICKAXE.get())
-                .pattern("BBB")
-                .pattern(" C ")
-                .pattern(" C ")
-                .define('B', ModItems.SHADOWINGOT.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
-
-        //ADVANCED TOOL RECIPES
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SHADOWHAMMER.get())
-                .pattern("BCB")
-                .pattern(" C ")
-                .pattern(" C ")
-                .define('B', ModBlocks.SHADOW_BLOCK.get())
-                .define('C', Items.BLAZE_ROD)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOWINGOT)).save(recipeOutput);
 
         //ARMOR
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.SHADOW_BOOTS.get())
@@ -127,8 +75,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         //SOUL CRAFTER RECIPES
 
+        //TOOL RECIPES
         recipeOutput.accept(
-                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_sword_infusion"), // 1. The unique JSON file name
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "shadow_sword_infusion"), // 1. The unique JSON file name
                 new SoulInfusionRecipe(
                         Ingredient.of(Items.NETHERITE_SWORD),                                // 2. The Catalyst (Center item)
                         List.of(                                                        // 3. The Pedestal Ingredients
@@ -139,44 +88,141 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                 Ingredient.of(Items.DIAMOND)
                         ),
                         1500,                                                           // 4. The Soul Cost
-                        new ItemStack(ModItems.SHADOWSWORD.get())                            // 5. The Result (Change to your mod item!)
+                        new ItemStack(ModItems.SHADOWSWORD.get())                            // 5. The Result
                 ),
                 null
         );
 
         recipeOutput.accept(
-                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_pickaxe_infusion"), // 1. The unique JSON file name
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "shadow_pickaxe_infusion"),
                 new SoulInfusionRecipe(
-                        Ingredient.of(Items.NETHERITE_PICKAXE),                                // 2. The Catalyst (Center item)
-                        List.of(                                                        // 3. The Pedestal Ingredients
+                        Ingredient.of(Items.NETHERITE_PICKAXE),
+                        List.of(
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(Items.OBSIDIAN),
                                 Ingredient.of(Items.DIAMOND)
                         ),
-                        1500,                                                           // 4. The Soul Cost
-                        new ItemStack(ModItems.SHADOWPICKAXE.get())                            // 5. The Result (Change to your mod item!)
+                        1500,
+                        new ItemStack(ModItems.SHADOWPICKAXE.get())
                 ),
                 null
         );
 
         recipeOutput.accept(
-                ResourceLocation.fromNamespaceAndPath("shadowthings", "soul_axe_infusion"), // 1. The unique JSON file name
+                ResourceLocation.fromNamespaceAndPath("shadowthings", "shadow_axe_infusion"),
                 new SoulInfusionRecipe(
-                        Ingredient.of(Items.NETHERITE_AXE),                                // 2. The Catalyst (Center item)
-                        List.of(                                                        // 3. The Pedestal Ingredients
+                        Ingredient.of(Items.NETHERITE_AXE),
+                        List.of(
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(ModItems.SHADOWINGOT),
                                 Ingredient.of(Items.OBSIDIAN),
                                 Ingredient.of(Items.DIAMOND)
                         ),
-                        1500,                                                           // 4. The Soul Cost
-                        new ItemStack(ModItems.SHADOWAXE.get())                            // 5. The Result (Change to your mod item!)
+                        1500,
+                        new ItemStack(ModItems.SHADOWAXE.get())
                 ),
                 null
         );
+
+        //ADVANCED TOOLS
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_hammer_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SHADOWPICKAXE), //TODO: ADD A HAMMER CORE ITEM
+                        List.of(
+                                Ingredient.of(ModBlocks.SHADOW_BLOCK),
+                                Ingredient.of(ModBlocks.SHADOW_BLOCK),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1750,
+                        new ItemStack(ModItems.SHADOWHAMMER.get())
+                ),
+                null
+        );
+
+        //ARMOR
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_helmet_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_HELMET),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        2250,
+                        new ItemStack(ModItems.SHADOW_HELMET.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_chestplate_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_CHESTPLATE),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        2250,
+                        new ItemStack(ModItems.SHADOW_CHESTPLATE.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_leggings_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_LEGGINGS),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        2250,
+                        new ItemStack(ModItems.SHADOW_LEGGINGS.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_boots_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_BOOTS),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(ModItems.SHADOWINGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        2250,
+                        new ItemStack(ModItems.SHADOW_BOOTS.get())
+                ),
+                null
+        );
+
+
+
+
 
         //NON-BLOCK BLOCKS
 
