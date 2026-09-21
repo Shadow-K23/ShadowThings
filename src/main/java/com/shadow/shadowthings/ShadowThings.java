@@ -7,6 +7,7 @@ import com.shadow.shadowthings.block.entity.SoulCrucibleEntity;
 import com.shadow.shadowthings.block.entity.renderer.*;
 import com.shadow.shadowthings.client.model.SoulCoreModel;
 import com.shadow.shadowthings.client.model.SoulFurnaceModel;
+import com.shadow.shadowthings.client.model.SoulOrbModel;
 import com.shadow.shadowthings.component.ModDataComponents;
 import com.shadow.shadowthings.effect.ModEffects;
 import com.shadow.shadowthings.enchantment.ModEnchantmentEffects;
@@ -149,6 +150,7 @@ public class ShadowThings {
             // This tells the game how to build your 3D model using the math from Blockbench
             event.registerLayerDefinition(SoulCoreModel.LAYER_LOCATION, SoulCoreModel::createBodyLayer);
             event.registerLayerDefinition(SoulFurnaceModel.LAYER_LOCATION, SoulFurnaceModel::createBodyLayer);
+            event.registerLayerDefinition(SoulOrbModel.LAYER_LOCATION, SoulOrbModel::createBodyLayer);
         }
 
         @SubscribeEvent

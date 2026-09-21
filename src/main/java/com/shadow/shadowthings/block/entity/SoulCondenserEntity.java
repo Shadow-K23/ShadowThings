@@ -83,7 +83,6 @@ public class SoulCondenserEntity extends AbstractSoulEntity {
         if (this.ownerUUID != null) {
             tag.putUUID("OwnerUUID", this.ownerUUID);
         }
-        tag.putInt("StoredSouls",this.souls);
     }
 
     @Override
@@ -92,6 +91,5 @@ public class SoulCondenserEntity extends AbstractSoulEntity {
         if (tag.hasUUID("OwnerUUID")) {
             this.ownerUUID = tag.getUUID("OwnerUUID");
         }
-        this.souls = tag.getInt("StoredSouls");
     }
 }

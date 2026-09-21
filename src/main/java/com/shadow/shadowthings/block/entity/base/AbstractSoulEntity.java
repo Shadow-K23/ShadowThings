@@ -276,6 +276,8 @@ public abstract class AbstractSoulEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+        tag.putInt("Souls", this.souls);
+        tag.putInt("MaxSouls", this.maxSouls);
         if (linkedCorePos != null) {
             tag.putLong("LinkedCorePos", linkedCorePos.asLong());
         }
@@ -286,6 +288,8 @@ public abstract class AbstractSoulEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        this.souls = tag.getInt("Souls");
+        this.maxSouls = tag.getInt("MaxSouls");
         if (tag.contains("LinkedCorePos")) {
             linkedCorePos = BlockPos.of(tag.getLong("LinkedCorePos"));
         }

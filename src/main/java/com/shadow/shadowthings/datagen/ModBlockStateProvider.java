@@ -43,11 +43,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         //ADVANCED BLOCKS
 
+        blockWithItem(ModBlocks.SHADOW_MACHINE_BLOCK);
+
         //SOUL BLOCKS
 
         formableMultiblockPart(ModBlocks.SOUL_CORE.get(), SoulStructureBlock.FORMED, "soul_core");
         formableMultiblockPart(ModBlocks.SOUL_STRUCTURE_BLOCK.get(), SoulStructureBlock.FORMED, "soul_structure_block");
-        formableMultiblockPart(ModBlocks.SOUL_FURNACE_CONTROLLER.get(),SoulStructureBlock.FORMED, "soul_furnace_controller");
+        formableMultiblockPart(ModBlocks.SOUL_FURNACE_CONTROLLER.get(), SoulStructureBlock.FORMED, "soul_furnace_controller");
 
         blockItem(ModBlocks.SOUL_CORE);
         blockItem(ModBlocks.SOUL_STRUCTURE_BLOCK);
@@ -58,44 +60,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.SOUL_CONDENSER);
         blockWithItem(ModBlocks.SOUL_CRUCIBLE);
-        blockWithItem(ModBlocks.SOUL_COLLECTOR); //temporary change later
-
-        //NON-BLOCK BLOCKS
-
-        stairsBlock(ModBlocks.SHADOW_STAIRS.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-        slabBlock(ModBlocks.SHADOW_SLAB.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-
-        buttonBlock(ModBlocks.SHADOW_BUTTON.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-        pressurePlateBlock(ModBlocks.SHADOW_PRESSURE_PLATE.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-
-        fenceBlock(ModBlocks.SHADOW_FENCE.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-        fenceGateBlock(ModBlocks.SHADOW_FENCE_GATE.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-        wallBlock(ModBlocks.SHADOW_WALL.get(),blockTexture(ModBlocks.SHADOW_BLOCK.get()));
-
-        doorBlockWithRenderType(ModBlocks.SHADOW_DOOR.get(), modLoc("block/shadow_door_bottom"), modLoc("block/shadow_door_top"), "cutout");
-        trapdoorBlockWithRenderType(ModBlocks.SHADOW_TRAPDOOR.get(), modLoc("block/shadow_trapdoor"),true, "cutout");
-
-        blockItem(ModBlocks.SHADOW_STAIRS);
-        blockItem(ModBlocks.SHADOW_SLAB);
-        blockItem(ModBlocks.SHADOW_PRESSURE_PLATE);
-        blockItem(ModBlocks.SHADOW_BUTTON);
-        blockItem(ModBlocks.SHADOW_FENCE_GATE);
-        blockItem(ModBlocks.SHADOW_WALL);
-        blockItem(ModBlocks.SHADOW_TRAPDOOR, "_bottom");
-
-        //CROPS
-
-        makeCrop (((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage","radish_crop_stage");
-
-        makeBush(((SweetBerryBushBlock) ModBlocks.SHADOW_BERRY_BUSH.get()),"shadow_berry_bush_stage","shadow_berry_bush_stage");
-
-        //ORES
-
-        blockWithItem(ModBlocks.SHADOW_ORE);
-        blockWithItem(ModBlocks.SHADOW_DEEPSLATE_ORE);
-        blockWithItem(ModBlocks.SHADOW_NETHER_ORE);
-        blockWithItem(ModBlocks.SHADOW_END_ORE);
-
+        blockWithItem(ModBlocks.SOUL_COLLECTOR);
 
 
         //TREES
@@ -116,6 +81,40 @@ public class ModBlockStateProvider extends BlockStateProvider {
         leavesBlock(ModBlocks.SHADOWWOOD_LEAVES);
         saplingBlock(ModBlocks.SHADOWWOOD_SAPLING);
 
+
+        //NON-BLOCK BLOCKS
+
+        stairsBlock(ModBlocks.SHADOW_STAIRS.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+        slabBlock(ModBlocks.SHADOW_SLAB.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+
+        buttonBlock(ModBlocks.SHADOW_BUTTON.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+        pressurePlateBlock(ModBlocks.SHADOW_PRESSURE_PLATE.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+
+        fenceBlock(ModBlocks.SHADOW_FENCE.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+        fenceGateBlock(ModBlocks.SHADOW_FENCE_GATE.get(), blockTexture(ModBlocks.SHADOWWOOD_PLANKS.get()));
+
+        doorBlockWithRenderType(ModBlocks.SHADOW_DOOR.get(), modLoc("block/shadow_door_bottom"), modLoc("block/shadow_door_top"), "cutout");
+        trapdoorBlockWithRenderType(ModBlocks.SHADOW_TRAPDOOR.get(), modLoc("block/shadow_trapdoor"), true, "cutout");
+
+        blockItem(ModBlocks.SHADOW_STAIRS);
+        blockItem(ModBlocks.SHADOW_SLAB);
+        blockItem(ModBlocks.SHADOW_PRESSURE_PLATE);
+        blockItem(ModBlocks.SHADOW_BUTTON);
+        blockItem(ModBlocks.SHADOW_FENCE_GATE);
+        blockItem(ModBlocks.SHADOW_TRAPDOOR, "_bottom");
+
+        //CROPS
+
+        makeCrop(((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage", "radish_crop_stage");
+
+        makeBush(((SweetBerryBushBlock) ModBlocks.SHADOW_BERRY_BUSH.get()), "shadow_berry_bush_stage", "shadow_berry_bush_stage");
+
+        //ORES
+
+        blockWithItem(ModBlocks.SHADOW_ORE);
+        blockWithItem(ModBlocks.SHADOW_DEEPSLATE_ORE);
+        blockWithItem(ModBlocks.SHADOW_NETHER_ORE);
+        blockWithItem(ModBlocks.SHADOW_END_ORE);
     }
 
     private void saplingBlock(DeferredBlock<Block> blockRegistryObject) {

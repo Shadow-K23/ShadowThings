@@ -287,8 +287,6 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         super.saveAdditional(tag, registries);
         tag.putBoolean("IsFormed", this.isFormed);
 
-        tag.putInt("Souls", this.souls);
-        tag.putInt("MaxSouls", this.maxSouls);
         tag.putBoolean("SoulSiphon", this.soulSiphonEnabled);
         tag.putInt("SoulTransferRate", this.transferRate);
         tag.putInt("SoulTransferAmount", this.transferAmount);
@@ -309,8 +307,6 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         this.isFormed = tag.getBoolean("IsFormed");
 
         // ADD THESE TWO LINES: Load the soul data when the client receives the packet!
-        this.souls = tag.getInt("Souls");
-        this.maxSouls = tag.getInt("MaxSouls");
         this.soulSiphonEnabled = tag.getBoolean("SoulSiphon");
         this.transferRate = tag.getInt("SoulTransferRate");
         this.transferAmount = tag.getInt("SoulTransferAmount");

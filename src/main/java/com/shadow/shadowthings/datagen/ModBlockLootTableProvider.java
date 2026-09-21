@@ -43,6 +43,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.SOUL_CONDENSER.get());
         dropSelf(ModBlocks.SOUL_CRUCIBLE.get());
         dropSelf(ModBlocks.SOUL_COLLECTOR.get());
+        dropSelf(ModBlocks.SHADOW_MACHINE_BLOCK.get());
 
         //TREE
         this.dropSelf(ModBlocks.SHADOWWOOD_LOG.get());
@@ -63,7 +64,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.SHADOW_BUTTON.get());
         dropSelf(ModBlocks.SHADOW_PRESSURE_PLATE.get());
 
-        dropSelf(ModBlocks.SHADOW_WALL.get());
         dropSelf(ModBlocks.SHADOW_FENCE.get());
         dropSelf(ModBlocks.SHADOW_FENCE_GATE.get());
         dropSelf(ModBlocks.SHADOW_TRAPDOOR.get());

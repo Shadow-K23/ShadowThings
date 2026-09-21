@@ -4,8 +4,15 @@ import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.custom.*;
 import com.shadow.shadowthings.sound.ModSounds;
+import com.shadow.shadowthings.util.ModItemProperties;
+import com.shadow.shadowthings.util.ModToolTiers;
 import com.shadow.shadowthings.util.UpgradeType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,9 +31,33 @@ public class ModItems {
 
     //CUSTOM WEAPONS
 
-    public static  final  DeferredItem<Item> SHADOW_BOW = ITEMS.register("shadow_bow",
+    public static  final DeferredItem<Item> SHADOW_BOW = ITEMS.register("shadow_bow",
             ()-> new BowItem(new Item.Properties().durability(800)));
 
+    public static final DeferredItem<Item> SHADOW_SCYTHE = ITEMS.register("shadow_scythe", () -> {
+
+        // Build the custom modifiers
+        ItemAttributeModifiers.Builder modifiers = ItemAttributeModifiers.builder();
+
+        // Standard Damage (e.g., Diamond Tier + 4 extra damage)
+        modifiers.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(
+                        Item.BASE_ATTACK_DAMAGE_ID, 20.0, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND);
+
+        // Slow Attack Speed (It's a heavy weapon, so we subtract from the player's base speed of 4.0)
+        modifiers.add(Attributes.ATTACK_SPEED, new AttributeModifier(
+                        Item.BASE_ATTACK_SPEED_ID, -3.0, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND);
+
+        // CUSTOM REACH! Adds 1.5 extra blocks of attack range natively.
+        modifiers.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(
+                        ResourceLocation.fromNamespaceAndPath("shadowthings", "scythe_reach"), 1.5, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND);
+
+        // Register the scythe with these attributes applied
+        return new SoulScytheItem(ModToolTiers.SHADOW, new Item.Properties()
+                .attributes(modifiers.build()));
+    });
     //SHADOW TOOL SET
     public static final DeferredItem<SwordItem> SHADOWSWORD = ITEMS.register("shadow_sword",
             ()-> new SwordItem(
@@ -117,6 +148,10 @@ public class ModItems {
     public static final DeferredItem<Item> SOUL_LINKER = ITEMS.register("soul_linker",
             ()-> new SoulLinkerItem(new Item.Properties().durability(100)));
 
+    //COMPONENTS
+
+    public static final DeferredItem<Item> SOUL_MATRIX = ITEMS.register("soul_matrix",
+            () -> new Item(new Item.Properties().stacksTo(1)));
 
     //SOUL UPGRADES
 

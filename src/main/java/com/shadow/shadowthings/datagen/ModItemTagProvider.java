@@ -28,15 +28,15 @@ public class ModItemTagProvider extends ItemTagsProvider{
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(ModTags.Items.TRANSFORMABLE_ITEMS)
-                .add(ModItems.SHADOWINGOT.get())
-                .add(ModItems.RAWSHADOWINGOT.get());
 
-        tag(ItemTags.WEAPON_ENCHANTABLE);
+        this.tag(ItemTags.WEAPON_ENCHANTABLE)
+                .add(ModItems.SHADOW_SCYTHE.get());
 
-        tag(ItemTags.SWORDS)
+        this.tag(ItemTags.SWORDS)
                 .add(ModItems.SHADOWSWORD.get())
-                .add(ModItems.SHADOWHAMMER.get());
+                .add(ModItems.SHADOWHAMMER.get())
+                .add(ModItems.SHADOW_SCYTHE.get());
+
         tag(ItemTags.PICKAXES)
                 .add(ModItems.SHADOWPICKAXE.get())
                 .add(ModItems.SHADOWHAMMER.get());
@@ -46,6 +46,7 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SHADOWHOE.get());
         tag(ItemTags.SHOVELS)
                 .add(ModItems.SHADOWSHOVEL.get());
+
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                         .add(ModItems.SHADOW_HELMET.get())
@@ -78,6 +79,11 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get())
                 .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get())
 
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_1.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3.get())
+                .add(ModItems.SOUL_UPGRADE_TRANSFER_RATE_4.get())
+
                 .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
                 .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
 
@@ -98,6 +104,7 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
                 .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
 
+
         tag(ItemTags.HEAD_ARMOR)
             .add(ModItems.SHADOW_HELMET.get());
         tag(ItemTags.CHEST_ARMOR)
@@ -106,6 +113,7 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SHADOW_LEGGINGS.get());
         tag(ItemTags.FOOT_ARMOR)
                 .add(ModItems.SHADOW_BOOTS.get());
+
         this.tag(ItemTags.LOGS_THAT_BURN)
                 .add(ModBlocks.SHADOWWOOD_LOG.get().asItem())
                 .add(ModBlocks.STRIPPED_SHADOWWOOD_LOG.get().asItem())

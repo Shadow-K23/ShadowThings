@@ -4,6 +4,7 @@ import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import com.shadow.shadowthings.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -13,6 +14,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.joml.Vector3f;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class SoulCollectorEntity extends AbstractSoulEntity {
 
@@ -21,16 +27,55 @@ public class SoulCollectorEntity extends AbstractSoulEntity {
 
     // Timer to show the particle radius when the player toggles it
     public int showRadiusTimer = 0;
+    public float clientSpinAngle = 0f;
+
 
     public SoulCollectorEntity(BlockPos pos, BlockState state) {
         // Base stats: 0 souls, 10,000 capacity, standard transfer rules
-        super(ModBlockEntities.SOUL_COLLECTOR_BE.get(), pos, state, 0, 10000, 0, 0);
+        super(ModBlockEntities.SOUL_COLLECTOR_BE.get(), pos, state, 0, 2500, 0, 0);
     }
 
+    // Tracks the physical location of souls flying towards the block
+    public final List<Vector3f> flyingSouls = new ArrayList<>();
+
+    // Call this from your Event when a mob dies!
+    public void addIncomingVisualSoul(BlockPos deathPos) {
+        this.flyingSouls.add(new Vector3f(deathPos.getX() + 0.5f, deathPos.getY() + 1.0f, deathPos.getZ() + 0.5f));
+    }
+
+    // Inside your existing tick() method, add this to the SERVER-SIDE block:
     public void tick(Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide()) {
             tickClientVisuals();
             return;
+        }
+
+        // --- FLYING SOUL PARTICLES (Server Side) ---
+        if (!this.flyingSouls.isEmpty() && level instanceof ServerLevel serverLevel) {
+            Vector3f targetPos = new Vector3f(pos.getX() + 0.5f, pos.getY() + 1.5f, pos.getZ() + 0.5f);
+            Iterator<Vector3f> iterator = this.flyingSouls.iterator();
+
+            while (iterator.hasNext()) {
+                Vector3f soulPos = iterator.next();
+                Vector3f direction = new Vector3f(targetPos).sub(soulPos);
+
+                float distance = direction.length();
+
+                // If it reached the orb, remove it and play a tiny sound!
+                if (distance < 0.5f) {
+                    iterator.remove();
+                    serverLevel.playSound(null, pos, net.minecraft.sounds.SoundEvents.SOUL_ESCAPE.value(), net.minecraft.sounds.SoundSource.BLOCKS, 0.1f, 1.5f);
+                } else {
+                    // Move the soul 0.6 blocks towards the collector per tick
+                    direction.normalize().mul(0.6f);
+                    soulPos.add(direction);
+
+                    // Spawn a server particle at this exact flying location.
+                    // (Server particles are automatically sent to all nearby clients and ignore block collisions!)
+                    serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
+                            soulPos.x(), soulPos.y(), soulPos.z(), 1, 0, 0, 0, 0);
+                }
+            }
         }
 
         // --- WIRELESS TRANSMISSION TO CORE ---
@@ -75,9 +120,18 @@ public class SoulCollectorEntity extends AbstractSoulEntity {
         return new AABB(this.getBlockPos()).inflate(this.collectionRadius);
     }
 
+
     @Override
     public void tickClientVisuals() {
-        super.tickClientVisuals(); // Keeps the transfer particles running!
+        super.tickClientVisuals();
+
+        // Increment the spin angle based on current souls
+        float fillRatio = this.getMaxSouls() > 0 ? (float) this.getSouls() / (float) this.getMaxSouls() : 0f;
+        this.clientSpinAngle += 2.0F + (fillRatio * 6.0F);
+
+        if (this.clientSpinAngle >= 360f) {
+            this.clientSpinAngle -= 360f;
+        }
 
         if (this.showRadiusTimer > 0) {
             this.showRadiusTimer--;

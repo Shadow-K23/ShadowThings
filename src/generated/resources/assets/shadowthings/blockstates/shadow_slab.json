@@ -4,7 +4,7 @@
       "model": "shadowthings:block/shadow_slab"
     },
     "type=double": {
-      "model": "shadowthings:block/shadow_block"
+      "model": "shadowthings:block/shadowwood_planks"
     },
     "type=top": {
       "model": "shadowthings:block/shadow_slab_top"

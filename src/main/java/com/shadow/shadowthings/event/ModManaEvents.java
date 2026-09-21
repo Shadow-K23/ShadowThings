@@ -3,6 +3,7 @@ package com.shadow.shadowthings.event;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.entity.SoulCollectorEntity;
 import com.shadow.shadowthings.enchantment.ModEnchantments;
+import com.shadow.shadowthings.item.custom.SoulScytheItem;
 import com.shadow.shadowthings.server.ModDataAttachments;
 import com.shadow.shadowthings.network.ModManaSyncPayload;
 import com.shadow.shadowthings.soul.ModPlayerSoulMana;
@@ -21,9 +22,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @EventBusSubscriber(modid = ShadowThings.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ModManaEvents {
@@ -96,19 +95,19 @@ public class ModManaEvents {
 
         // --- 1. SOUL COLLECTOR LOGIC (Automated Mob Farms) ---
         int collectorSouls = 2;
-        if (dyingEntity instanceof net.minecraft.world.entity.monster.Monster) collectorSouls = 15;
+        if (dyingEntity instanceof Monster) collectorSouls = 15;
         if (dyingEntity.getMaxHealth() >= 100) collectorSouls = 500;
 
         // Define the 15-block radius corners
         BlockPos minPos = BlockPos.containing(deathPos.getX() - 15, deathPos.getY() - 15, deathPos.getZ() - 15);
         BlockPos maxPos = BlockPos.containing(deathPos.getX() + 15, deathPos.getY() + 15, deathPos.getZ() + 15);
 
-        java.util.List<com.shadow.shadowthings.block.entity.SoulCollectorEntity> nearbyCollectors = new java.util.ArrayList<>();
+        List<SoulCollectorEntity> nearbyCollectors = new ArrayList<>();
 
         // Scan all block positions in that radius
         for (BlockPos p : BlockPos.betweenClosed(minPos, maxPos)) {
             // Check if the chunk is actually loaded before polling the entity to prevent lag
-            if (level.isLoaded(p) && level.getBlockEntity(p) instanceof com.shadow.shadowthings.block.entity.SoulCollectorEntity collector) {
+            if (level.isLoaded(p) && level.getBlockEntity(p) instanceof SoulCollectorEntity collector) {
                 // Verify the mob is inside this specific collector's radius
                 if (collector.getCollectionArea().contains(dyingEntity.position())) {
                     nearbyCollectors.add(collector);
@@ -116,13 +115,14 @@ public class ModManaEvents {
             }
         }
         // Sort the list so the closest collector gets priority
-        nearbyCollectors.sort(java.util.Comparator.comparingDouble(c -> c.getBlockPos().distSqr(deathPos)));
+        nearbyCollectors.sort(Comparator.comparingDouble(c -> c.getBlockPos().distSqr(deathPos)));
 
         // Give souls to the closest valid collector
         if (!nearbyCollectors.isEmpty()) {
             com.shadow.shadowthings.block.entity.SoulCollectorEntity closest = nearbyCollectors.get(0);
             if (closest.getSouls() < closest.getMaxSouls()) {
                 closest.addSouls(collectorSouls);
+                closest.addIncomingVisualSoul(deathPos);
             }
         }
 
@@ -130,17 +130,19 @@ public class ModManaEvents {
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
             if (dyingEntity instanceof Monster) {
                 var manaData = player.getData(ModDataAttachments.PLAYER_SOUL_MANA);
-
                 ItemStack weapon = player.getMainHandItem();
                 var registry = player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
                 var soulStealerHolder = registry.getHolder(ModEnchantments.SOUL_STEALER).orElse(null);
-
+                int scytheBonus = 0;
                 int enchantLevel = 0;
                 if (soulStealerHolder != null) {
                     enchantLevel = weapon.getEnchantmentLevel(soulStealerHolder) + 1;
                 }
+                if (weapon.getItem() instanceof SoulScytheItem scytheItem){
+                    scytheBonus = player.getRandom().nextIntBetweenInclusive(150,300);
+                }
 
-                int souls = player.getRandom().nextIntBetweenInclusive(5, 15) * enchantLevel;
+                int souls = (player.getRandom().nextIntBetweenInclusive(5, 15) + scytheBonus) * enchantLevel;
 
                 manaData.addMana(souls);
                 PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));

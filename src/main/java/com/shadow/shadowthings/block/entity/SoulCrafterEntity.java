@@ -6,6 +6,7 @@ import com.shadow.shadowthings.recipe.ModRecipes;
 import com.shadow.shadowthings.recipe.SoulInfusionRecipe;
 import com.shadow.shadowthings.screen.custom.SoulCrafterMenu;
 import com.shadow.shadowthings.util.ModTags;
+import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -72,6 +73,11 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
     public SoulInfusionRecipe cachedRecipe = null;
     public ItemStack cachedResult = ItemStack.EMPTY;
+
+    public float soulEfficiencyTier = 0;
+    public int transferRateTier = 0;
+    public boolean isOverloaded = false;
+
 
     public int requiredPedestals = 0;
     public int pedestalsConsumed = 0;
@@ -197,84 +203,89 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
         // Do the actual math and crafting
         if (this.isCrafting) {
+            // 1. Pedestal Integrity Check
             if (this.level.getGameTime() % 10 == 0) {
-                // Start with the items the laser already vaporized
                 int intactItems = this.pedestalsConsumed;
-
-                // Add the items still waiting safely on their pedestals
                 for (SoulPedestalEntity ped : getNearbyPedestals()) {
-                    if (!ped.inventory.getStackInSlot(0).isEmpty()) {
-                        intactItems++;
-                    }
+                    if (!ped.inventory.getStackInSlot(0).isEmpty()) intactItems++;
                 }
 
-                // If the total is less than what the recipe requires, something was destroyed!
                 if (intactItems < this.requiredPedestals) {
                     LOGGER.warn("Ritual interrupted! A pedestal or item was destroyed.");
                     this.cancelCrafting();
-                    return; // Stop running the rest of the tick!
+                    return;
                 }
             }
-            // If we don't have enough souls, request them from the Core
-            if (this.getSouls() < this.requiredSouls ) {
 
-                if (this.transferTickCounter > 0) {
-                    this.transferTickCounter--;
-                } else {
-                    int needed = this.requiredSouls - this.getSouls();
+            // 2. Calculate Speed based on Upgrades
+            // (Ensure you have an UpgradeType.CRAFTER_SPEED or similar defined in your enum!)
+            int craftSpeed = 1 + transferRateTier; // Base speed of 1, plus 1 per upgrade tier
 
-                    if (requestSoulsFromCore(needed)) {
+            // 3. Advance Progress
+            this.craftingProgress = Math.min(this.craftingProgress + craftSpeed, this.maxCraftingTime);
+            float progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime;
 
-                        if (this.requiredPedestals > 0) {
-                            float soulPercentage = (float) this.getSouls() / (float) this.requiredSouls;
-                            int expectedConsumed = (int) (soulPercentage * this.requiredPedestals);
+            // 4. Force-Pull Souls from Core (Bypassing slow Core transfer rates)
+            int expectedSouls = (int) (this.requiredSouls * progressRatio);
+            int neededSouls = expectedSouls - this.getSouls();
 
-                            // If we crossed a threshold, zap an item! (Using a while-loop in case we cross multiple thresholds at once)
-                            while (expectedConsumed > this.pedestalsConsumed) {
-                                boolean consumedThisLoop = false;
+            if (neededSouls > 0) {
+                if (this.linkedCorePos != null && this.level.getBlockEntity(this.linkedCorePos) instanceof SoulCoreEntity core) {
 
-                                // Find the first available pedestal with an item
-                                for (SoulPedestalEntity ped : getNearbyPedestals()) {
-                                    if (!ped.inventory.getStackInSlot(0).isEmpty()) {
-                                        ped.inventory.extractItem(0, 1, false); // Zap!
-                                        this.pedestalsConsumed++;
-                                        consumedThisLoop = true;
+                    int actualPulled = Math.min(neededSouls, core.getSouls());
 
+                    if (actualPulled > 0) {
+                        core.removeSouls(actualPulled);
+                        this.addSouls(actualPulled);
 
-                                        if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-
-                                            double pX = ped.getBlockPos().getX() + 0.5;
-                                            double pY = ped.getBlockPos().getY() + 1.0;
-                                            double pZ = ped.getBlockPos().getZ() + 0.5;
-
-                                            serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
-                                                    pX, pY, pZ, 100, 0.3, 0.75, 0.3, 0.02);
-                                            level.playSound(null,ped.getBlockPos(), SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS,0.65f,0.35f);
-                                            level.playSound(null,ped.getBlockPos(), SoundEvents.ENDER_EYE_DEATH, SoundSource.BLOCKS,0.25f,1.5f);
-                                            level.playSound(null,ped.getBlockPos(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS,0.25f,1f);
-
-                                        }
-                                        break; // Break the for-loop so we only zap one pedestal at a time
-                                    }
-                                }
-
-                                // Safety check: if pedestals were empty, break the while-loop to prevent infinite freezing
-                                if (!consumedThisLoop) break;
-                            }
-                        }
-                    } else {
-                        this.transferTickCounter = 20;
+                        this.visualTransferTimer = 2; // Trigger particle stream constantly during craft!
+                        this.sync();
                     }
 
+                    // If the core suddenly emptied mid-craft (someone else drained it), pause the progress!
+                    if (actualPulled < neededSouls) {
+                        this.craftingProgress -= craftSpeed;
+                        progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime; // Recalculate ratio
+                    }
+                } else {
+                    this.cancelCrafting(); // Core was broken or moved!
+                    return;
                 }
-            } else {
-                // We have enough souls! Progress the crafting animation
-                this.craftingProgress++;
-                setChanged();
+            }
 
-                if (this.craftingProgress >= this.maxCraftingTime) {
-                    finishCrafting();
+            // 5. Zap Pedestals based on Progress Ratio
+            if (this.requiredPedestals > 0) {
+                int expectedConsumed = (int) (progressRatio * this.requiredPedestals);
+
+                while (expectedConsumed > this.pedestalsConsumed) {
+                    boolean consumedThisLoop = false;
+
+                    for (SoulPedestalEntity ped : getNearbyPedestals()) {
+                        if (!ped.inventory.getStackInSlot(0).isEmpty()) {
+                            ped.inventory.extractItem(0, 1, false); // Zap!
+                            this.pedestalsConsumed++;
+                            consumedThisLoop = true;
+
+                            if (level instanceof ServerLevel serverLevel) {
+                                double pX = ped.getBlockPos().getX() + 0.5;
+                                double pY = ped.getBlockPos().getY() + 1.0;
+                                double pZ = ped.getBlockPos().getZ() + 0.5;
+
+                                serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pX, pY, pZ, 100, 0.3, 0.75, 0.3, 0.02);
+                                level.playSound(null, ped.getBlockPos(), SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS, 0.65f, 0.35f);
+                                level.playSound(null, ped.getBlockPos(), SoundEvents.ENDER_EYE_DEATH, SoundSource.BLOCKS, 0.25f, 1.5f);
+                                level.playSound(null, ped.getBlockPos(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 0.25f, 1f);
+                            }
+                            break;
+                        }
+                    }
+                    if (!consumedThisLoop) break;
                 }
+            }
+
+            // 6. Finish Crafting
+            if (this.craftingProgress >= this.maxCraftingTime) {
+                finishCrafting();
             }
         }
     }
@@ -347,32 +358,35 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
     public void startCrafting() {
         var recipe = getMatchingRecipe();
         if (recipe != null) {
-            int totalNeeded = recipe.soulCost() - this.getSouls();
+            int discountedCost = (int)(recipe.soulCost() * this.soulEfficiencyTier);
+            int totalNeeded = discountedCost - this.getSouls();
 
-            // 1. Check if we have a valid linked core
             if (this.linkedCorePos == null || !(this.level.getBlockEntity(this.linkedCorePos) instanceof SoulCoreEntity core)) {
                 LOGGER.warn("Cannot start craft: No valid Soul Core linked!");
                 return;
             }
 
-            // 2. Check if the core has enough total souls to finish the ENTIRE craft
             if (core.getSouls() < totalNeeded) {
                 LOGGER.warn("Cannot start craft: Core only has {} souls, but recipe needs {} more!", core.getSouls(), totalNeeded);
-                return; // STOP! Do not start the craft.
+                return;
             }
 
-            // 3. If we passed the check, start the craft safely!
+            // --- 3. START THE CRAFT SAFELY ---
             this.isCrafting = true;
             this.craftingProgress = 0;
-            this.requiredSouls = recipe.soulCost();
+            this.requiredSouls = discountedCost;
             this.requiredPedestals = recipe.pedestalItems().size();
             this.pedestalsConsumed = 0;
 
+            // --- NEW: DYNAMIC TIME SCALING ---
+            // Example: 20 ticks (1 second) per 100 souls.
+            // We use Math.max to ensure it always takes at least 2 seconds (40 ticks) so the animation doesn't glitch on super cheap recipes!
+            this.maxCraftingTime = Math.max(40, (this.requiredSouls / 100) * 20);
 
             this.cachedRecipe = recipe;
             this.cachedResult = cachedRecipe.result().copy();
 
-            LOGGER.info("Started crafting recipe. Required souls: {}", this.requiredSouls);
+            LOGGER.info("Started crafting. Souls: {}, Base Time: {} ticks", this.requiredSouls, this.maxCraftingTime);
             sync();
         } else {
             LOGGER.warn("Tried to start crafting, but no valid recipe matched!");
@@ -459,6 +473,15 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
     }
 
     @Override
+    protected void onUpgradesChanged() {
+        super.onUpgradesChanged();
+        if (this.level != null && !this.level.isClientSide()) {
+            this.soulEfficiencyTier = 1 - (0.08f * this.getUpgradeLevel(UpgradeType.SOUL_USAGE_EFFICIENCY));
+            this.transferRateTier = this.getUpgradeLevel(UpgradeType.SOUL_TRANSFER_RATE);
+        }
+    }
+
+    @Override
     public TagKey<Item> getAllowedUpgradeTag() {
         return ModTags.Items.CRAFTER_UPGRADES;
     }
@@ -482,9 +505,13 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
         tag.put("inventory", inventory.serializeNBT(registries));
         tag.putBoolean("IsCrafting", this.isCrafting);
         tag.putInt("CraftingProgress", this.craftingProgress);
+        tag.putInt("MaxCraftingTime", this.maxCraftingTime);
         tag.putInt("RequiredSouls", this.requiredSouls);
         tag.putInt("TransferTickCounter", this.transferTickCounter);
-        tag.putInt("CurrentSouls",this.souls);
+
+        tag.putFloat("SoulEfficiencyTier", this.soulEfficiencyTier);
+        tag.putInt("TransferRateTier", this.transferRateTier);
+        tag.putBoolean("IsOverloaded", this.isOverloaded);
     }
 
     @Override
@@ -493,9 +520,13 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
         this.isCrafting = tag.getBoolean("IsCrafting");
         this.craftingProgress = tag.getInt("CraftingProgress");
+        this.maxCraftingTime = tag.contains("MaxCraftingTime") ? tag.getInt("MaxCraftingTime") : 100;
         this.requiredSouls = tag.getInt("RequiredSouls");
         this.transferTickCounter = tag.getInt("TransferTickCounter");
-        this.souls = tag.getInt("CurrentSouls");
+
+        this.soulEfficiencyTier = tag.getFloat("SoulEfficiencyTier");
+        this.transferRateTier = tag.getInt("TransferRateTier");
+        this.isOverloaded = tag.getBoolean("IsOverloaded");
     }
 
     public void sync() {

@@ -213,7 +213,8 @@ public class SoulCoreBlock extends BaseEntityBlock {
 
             // 1. REJECTION: If they already have a core, bounce it back to them!
             if (data.hasCore(player.getUUID())) {
-                player.displayClientMessage(Component.literal("§cYou can only have one Soul Core in the world!"), true);
+                player.displayClientMessage(Component.literal("§cYou can only have one Soul Core in the world! "
+                        + "§cCurrent core position: " + data.getCorePosition(player.getUUID())), true);
 
                 // Instantly remove the block that was just placed
                 level.setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);

@@ -6,6 +6,7 @@ import com.shadow.shadowthings.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -26,11 +27,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SHADOW_NETHER_ORE.get())
                 .add(ModBlocks.SHADOW_END_ORE.get())
 
+                .add(ModBlocks.SHADOW_MACHINE_BLOCK.get())
+                .add(ModBlocks.SOUL_CONDENSER.get())
+                .add(ModBlocks.SOUL_COLLECTOR.get())
+                .add(ModBlocks.SOUL_CRUCIBLE.get())
                 .add(ModBlocks.SOUL_CORE.get())
                 .add(ModBlocks.SOUL_STRUCTURE_BLOCK.get())
                 .add(ModBlocks.SOUL_CRAFTER.get())
                 .add(ModBlocks.SOUL_PEDESTAL.get())
                 .add(ModBlocks.SOUL_FURNACE_CONTROLLER.get());
+
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.SHADOW_ORE.get())
@@ -43,9 +49,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.SHADOW_FENCE_GATE.get());
-
-        tag(BlockTags.WALLS)
-                .add(ModBlocks.SHADOW_WALL.get());
 
 
         tag(ModTags.Blocks.NEEDS_SHADOW_TOOL)
@@ -61,6 +64,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SHADOWWOOD_WOOD.get())
                 .add(ModBlocks.STRIPPED_SHADOWWOOD_WOOD.get());
 
+        tag(BlockTags.SAPLINGS)
+                .add(ModBlocks.SHADOWWOOD_SAPLING.get());
 
     }
 }

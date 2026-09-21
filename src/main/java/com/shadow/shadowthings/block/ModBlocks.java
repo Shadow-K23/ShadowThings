@@ -70,6 +70,11 @@ public class ModBlocks {
 
     //ADVANCED BLOCKS
 
+    public static final DeferredBlock<Block> SHADOW_MACHINE_BLOCK = registerBlock("shadow_machine_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .sound(SoundType.METAL)));
+
     //SHADOW SOULS RELATED BLOCKS
 
     public static final DeferredBlock<Block> SOUL_CORE = registerBlock("soul_core",
@@ -176,27 +181,25 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<StairBlock> SHADOW_STAIRS = registerBlock("shadow_stairs",
-            () -> new StairBlock(ModBlocks.SHADOW_BLOCK.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+            () -> new StairBlock(ModBlocks.SHADOWWOOD_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD).requiresCorrectToolForDrops()));
     public static final DeferredBlock<SlabBlock> SHADOW_SLAB = registerBlock("shadow_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<PressurePlateBlock> SHADOW_PRESSURE_PLATE = registerBlock("shadow_pressure_plate",
-            () -> new PressurePlateBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+            () -> new PressurePlateBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
     public static final DeferredBlock<ButtonBlock> SHADOW_BUTTON = registerBlock("shadow_button",
-            () -> new ButtonBlock(BlockSetType.IRON,20, BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noCollission()));
+            () -> new ButtonBlock(BlockSetType.OAK,20, BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noCollission()));
 
     public static final DeferredBlock<FenceBlock> SHADOW_FENCE = registerBlock("shadow_fence",
-            () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+            () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD).requiresCorrectToolForDrops()));
     public static final DeferredBlock<FenceGateBlock> SHADOW_FENCE_GATE = registerBlock("shadow_fence_gate",
-            () -> new FenceGateBlock(WoodType.ACACIA,BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
-    public static final DeferredBlock<WallBlock> SHADOW_WALL = registerBlock("shadow_wall",
-            () -> new WallBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+            () -> new FenceGateBlock(WoodType.ACACIA,BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<DoorBlock> SHADOW_DOOR = registerBlock("shadow_door",
-            () -> new DoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
+            () -> new DoorBlock(BlockSetType.OAK,BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
     public static final DeferredBlock<TrapDoorBlock> SHADOW_TRAPDOOR = registerBlock("shadow_trapdoor",
-            () -> new TrapDoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
+            () -> new TrapDoorBlock(BlockSetType.OAK,BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD).requiresCorrectToolForDrops().noOcclusion()));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block){

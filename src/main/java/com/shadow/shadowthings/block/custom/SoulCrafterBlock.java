@@ -64,6 +64,7 @@ public class SoulCrafterBlock extends BaseEntityBlock {
         if (!state.is(newState.getBlock())) {
             if (level.getBlockEntity(pos) instanceof SoulCrafterEntity crafter) {
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), crafter.inventory.getStackInSlot(0));
+                crafter.dropAllUpgrades();
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);
@@ -73,7 +74,6 @@ public class SoulCrafterBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        // We will write the tick logic in the entity class later
         return createTickerHelper(type, ModBlockEntities.SOUL_CRAFTER_BE.get(),
                 (lvl, p, st, blockEntity) -> {
                      blockEntity.tick(lvl, p, st);

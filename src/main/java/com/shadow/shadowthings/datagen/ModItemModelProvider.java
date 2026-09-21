@@ -90,10 +90,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.SOUL_UPGRADE_OVERLOAD.get());
 
 
+        //COMPONENTS
+
+        basicItem(ModItems.SOUL_MATRIX.get());
+
         //NON-BLOCK BLOCKS
-        buttonItem(ModBlocks.SHADOW_BUTTON, ModBlocks.SHADOW_BLOCK);
-        fenceItem(ModBlocks.SHADOW_FENCE, ModBlocks.SHADOW_BLOCK);
-        wallItem(ModBlocks.SHADOW_WALL, ModBlocks.SHADOW_BLOCK);
+        buttonItem(ModBlocks.SHADOW_BUTTON, ModBlocks.SHADOWWOOD_PLANKS);
+        fenceItem(ModBlocks.SHADOW_FENCE, ModBlocks.SHADOWWOOD_PLANKS);
 
         basicItem(ModBlocks.SHADOW_DOOR.asItem());
 
@@ -104,6 +107,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.SHADOWHOE);
         handheldItem(ModItems.SHADOWSHOVEL);
         handheldItem(ModItems.SHADOWSPEAR);
+
+        handheldItem(ModItems.SHADOW_SCYTHE);
 
         //ADVANCED ITEMS
         handheldItem(ModItems.SOUL_LINKER);
@@ -197,11 +202,6 @@ public class ModItemModelProvider extends ItemModelProvider {
                         "block/" + baseBlock.getId().getPath()));
     }
 
-    public void wallItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {
-        this.withExistingParent(block.getId().getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,
-                        "block/" + baseBlock.getId().getPath()));
-    }
     private ItemModelBuilder handheldItem(DeferredItem<?> item) {
         return withExistingParent(item.getId().getPath(),
                 ResourceLocation.parse("item/handheld")).texture("layer0",

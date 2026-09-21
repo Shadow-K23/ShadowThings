@@ -51,7 +51,7 @@ public class SoulCrucibleBlock extends BaseEntityBlock {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if(level.getBlockEntity(pos) instanceof SoulCrucibleEntity soulCrucibleEntity){
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), soulCrucibleEntity.mainInventory.getStackInSlot(0));
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), soulCrucibleEntity.mainInventory.getStackInSlot(1));
+            soulCrucibleEntity.dropAllUpgrades();
         }
 
         super.onRemove(state, level, pos, newState, movedByPiston);

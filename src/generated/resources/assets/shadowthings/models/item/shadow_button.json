@@ -1,3 +1,6 @@
 {
-  "parent": "shadowthings:block/shadow_button"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "shadowthings:block/shadowwood_planks"
+  }
 }
