@@ -48,15 +48,17 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     public final int BASE_MAX_CAPACITY = 5000;
     public final int BASE_TRANSFER_RATE = 80;
     public final int BASE_TRANSFER_AMOUNT = 100;
+    public final int BASE_SIPHON_AMOUNT = 150;
+    public final int BASE_SIPHON_RATE = 40;
 
     public boolean soulSiphonEnabled = false;
-    public int siphonRate = 10; // How many ticks between siphons
-    public int siphonAmount = 200; // How many souls to pull per siphon
+    public int siphonRate = 40; // How many ticks between siphons
+    public int siphonAmount = 250; // How many souls to pull per siphon
     private int tickCounter = 0; // Internal timer
 
-    private int coreRadius = 8;
+    private int coreRadius = 32;
 
-    public int coreHealth = 1000;
+    public int coreHealth = 10000;
     public final int MAX_CORE_HEALTH = 1000;
     public int safeCapacity = 200000;
 
@@ -138,11 +140,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void setMaxSouls(int amount) {
-
         this.maxSouls = amount;
-        if (this.getSouls() > amount){
-            this.setSouls(amount);
-        }
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
@@ -256,23 +254,29 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
 
             if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
                 // OVERLOADED TIER!
-                this.setMaxSouls(205000); // 125k absolute max
-                this.safeCapacity = 200000; // Starts taking damage above 100k!
+                this.setMaxSouls(205000);
+                this.safeCapacity = 200000;
             } else {
                 int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 2.5))) * BASE_MAX_CAPACITY;
                 int bonusTransferAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))) * BASE_TRANSFER_AMOUNT;
+                int bonusSiphonAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))/4) * BASE_SIPHON_AMOUNT;
 
                 int newMaxCapacity = BASE_MAX_CAPACITY + bonusCapacity;
                 int newTransferAmount = BASE_TRANSFER_AMOUNT + bonusTransferAmount;
                 int newTransferRate = BASE_TRANSFER_RATE;
+                int newSiphonRate = BASE_SIPHON_RATE;
+                int newSiphonAmount = BASE_SIPHON_AMOUNT + bonusSiphonAmount ;
 
                 if (transferRateTier > 0) {
                     newTransferRate = BASE_TRANSFER_RATE / (transferRateTier * 2);
+                    newSiphonRate = BASE_SIPHON_RATE / (transferRateTier * 2);
                 }
 
                 this.setMaxSouls(newMaxCapacity);
                 this.transferRate = newTransferRate;
                 this.transferAmount = newTransferAmount;
+                this.siphonRate = newSiphonRate;
+                this.siphonAmount = newSiphonAmount;
             }
         }
     }
@@ -288,6 +292,8 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         tag.putBoolean("IsFormed", this.isFormed);
 
         tag.putBoolean("SoulSiphon", this.soulSiphonEnabled);
+        tag.putInt("SiphonAmount", this.siphonAmount);
+        tag.putInt("SiphonRate", this.siphonRate);
         tag.putInt("SoulTransferRate", this.transferRate);
         tag.putInt("SoulTransferAmount", this.transferAmount);
 
@@ -308,6 +314,8 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
 
         // ADD THESE TWO LINES: Load the soul data when the client receives the packet!
         this.soulSiphonEnabled = tag.getBoolean("SoulSiphon");
+        this.siphonAmount = tag.getInt("SiphonAmount");
+        this.siphonRate = tag.getInt("SiphonRate");
         this.transferRate = tag.getInt("SoulTransferRate");
         this.transferAmount = tag.getInt("SoulTransferAmount");
 

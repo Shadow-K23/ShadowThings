@@ -24,16 +24,8 @@ public class ModDataComponents {
             DATA_COMPONENT_TYPES.registerComponentType("coordinates", builder -> builder.persistent(BlockPos.CODEC));
 
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ModSocketedGems>> SOCKETED_GEMS =
-            DATA_COMPONENT_TYPES.registerComponentType("socketed_gems", builder -> builder
-                    .persistent(ModSocketedGems.CODEC)
-                    .networkSynchronized(ModSocketedGems.STREAM_CODEC)
-            );
 
-    public static final Supplier<DataComponentType<Integer>> ORB_COLOR = DATA_COMPONENT_TYPES.registerComponentType(
-            "orb_color",
-            builder -> builder.networkSynchronized(ByteBufCodecs.INT)
-    );
+
 
     public static void register(IEventBus eventBus) {
         DATA_COMPONENT_TYPES.register(eventBus);

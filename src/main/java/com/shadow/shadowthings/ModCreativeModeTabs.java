@@ -20,19 +20,18 @@ public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> SHADOW_ITEMS_TAB = CREATIVE_MODE_TAB.register("shadow_items_tab",
             () -> CreativeModeTab.builder()
-                    .icon(  () -> new ItemStack(ModItems.SHADOWINGOT.get()))
+                    .icon(  () -> new ItemStack(ModItems.SHADOW_INGOT.get()))
                     .title(Component.translatable("creativetab.shadowthings.shadow_items"))
                     .displayItems(((itemDisplayParameters, output) -> {
 
                         //BASIC ITEMS
-                        output.accept(ModItems.SHADOWINGOT);
-                        output.accept(ModItems.RAWSHADOWINGOT);
-                        output.accept(ModItems.SHADOWSWORD);
-                        output.accept(ModItems.SHADOWPICKAXE);
-                        output.accept(ModItems.SHADOWAXE);
-                        output.accept(ModItems.SHADOWSHOVEL);
-                        output.accept(ModItems.SHADOWHOE);
-                        output.accept(ModItems.SHADOWSPEAR);
+                        output.accept(ModItems.SHADOW_INGOT);
+                        output.accept(ModItems.RAW_SHADOW_INGOT);
+                        output.accept(ModItems.SHADOW_SWORD);
+                        output.accept(ModItems.SHADOW_PICKAXE);
+                        output.accept(ModItems.SHADOW_AXE);
+                        output.accept(ModItems.SHADOW_SHOVEL);
+                        output.accept(ModItems.SHADOW_HOE);
 
                         //WEAPONS
                         output.accept(ModItems.SHADOW_BOW);
@@ -40,14 +39,14 @@ public class ModCreativeModeTabs {
 
                         //ADVANCED ITEMS
                         output.accept(ModItems.SOUL_LINKER);
-                        output.accept(ModItems.SHADOWHAMMER);
+                        output.accept(ModItems.SHADOW_HAMMER);
 
                         //ARMOR
                         output.accept(ModItems.SHADOW_HELMET);
                         output.accept(ModItems.SHADOW_CHESTPLATE);
                         output.accept(ModItems.SHADOW_LEGGINGS);
                         output.accept(ModItems.SHADOW_BOOTS);
-                        output.accept(ModItems.SHADOW_HORSE_ARMOR);
+                        //output.accept(ModItems.SHADOW_HORSE_ARMOR);
 
                         //COMPONENTS
 
@@ -91,7 +90,9 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SOUL_UPGRADE_OVERLOAD);
 
                         //FOODS
-                        output.accept(ModItems.DRAGON_FRUIT);
+                        output.accept(ModItems.SOUL_FRUIT_1);
+                        output.accept(ModItems.SOUL_FRUIT_2);
+                        output.accept(ModItems.SOUL_FRUIT_3);
                         output.accept(ModItems.SHADOW_BERRIES);
 
                         //SEEDS

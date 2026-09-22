@@ -14,13 +14,16 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_SHADOW_TOOL = createTag("needs_shadow_tool");
         public static final TagKey<Block> INCORRECT_FOR_SHADOW_TOOL = createTag("incorrect_for_shadow_tool");
 
+        public static final TagKey<Block> ADVANCED_BLOCK_TOOLTIP = createTag("advanced_tooltip_blocks");
+
+
         private static TagKey<Block> createTag(String name){
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, name));
         }
     }
 
     public static class Items{
-        public static final TagKey<Item> TRANSFORMABLE_ITEMS = createTag("transformable_items");
+        public static final TagKey<Item> ADVANCED_ITEM_TOOLTIP = createTag("advanced_tooltip_items");
 
         public static final TagKey<Item>  CRAFTER_UPGRADES = createTag("upgrades/crafter");
         public static final TagKey<Item>  CORE_UPGRADES = createTag("upgrades/core");

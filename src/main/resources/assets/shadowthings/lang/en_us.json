@@ -1,17 +1,62 @@
 {
   "item.shadowthings.shadow_ingot": "Shadow Steel",
   "item.shadowthings.raw_shadow_steel": "Raw Shadow Steel",
-  "item.shadowthings.shadow_spear": "Shadow Spear",
+
   "item.shadowthings.shadow_sword": "Shadow Sword",
   "item.shadowthings.shadow_hoe": "Shadow Hoe",
   "item.shadowthings.shadow_shovel": "Shadow Shovel",
   "item.shadowthings.shadow_pickaxe": "Shadow Pickaxe",
   "item.shadowthings.shadow_axe": "Shadow Axe",
 
+  "item.shadowthings.shadow_scythe": "Shadow Scythe",
   "item.shadowthings.shadow_bow": "Shadow Bow",
 
-  "item.shadowthings.chisel": "Chisel",
+  "item.shadowthings.soul_linker": "Soul Linker",
   "item.shadowthings.shadow_hammer": "Shadow Hammer",
+
+  "item.shadowthings.soul_matrix": "Soul Matrix",
+  "item.shadowthings.soul_fruit_1": "Soul Fruit",
+  "item.shadowthings.soul_fruit_2": "Lapis Soul Fruit",
+  "item.shadowthings.soul_fruit_3": "Amethyst Soul Fruit",
+
+  "item.shadowthings.soul_upgrade_base_1": "Upgrade Base T1",
+  "item.shadowthings.soul_upgrade_base_2": "Upgrade Base T2",
+  "item.shadowthings.soul_upgrade_base_3": "Upgrade Base T3",
+  "item.shadowthings.soul_upgrade_base_4": "Upgrade Base T4",
+  "item.shadowthings.soul_upgrade_base_5": "Upgrade Base T5",
+
+  "item.shadowthings.soul_upgrade_capacity_1": "Soul Capacity Upgrade T1",
+  "item.shadowthings.soul_upgrade_capacity_2": "Soul Capacity Upgrade T2",
+  "item.shadowthings.soul_upgrade_capacity_3": "Soul Capacity Upgrade T3",
+  "item.shadowthings.soul_upgrade_capacity_4": "Soul Capacity Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_transfer_amount_1": "Transfer Amount Upgrade T1",
+  "item.shadowthings.soul_upgrade_transfer_amount_2": "Transfer Amount Upgrade T2",
+  "item.shadowthings.soul_upgrade_transfer_amount_3": "Transfer Amount Upgrade T3",
+  "item.shadowthings.soul_upgrade_transfer_amount_4": "Transfer Amount Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_transfer_rate_1": "Transfer Rate Upgrade T1",
+  "item.shadowthings.soul_upgrade_transfer_rate_2": "Transfer Rate Upgrade T2",
+  "item.shadowthings.soul_upgrade_transfer_rate_3": "Transfer Rate Upgrade T3",
+  "item.shadowthings.soul_upgrade_transfer_rate_4": "Transfer Rate Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Soul Efficiency Upgrade T1",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Soul Efficiency Upgrade T2",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Soul Efficiency Upgrade T3",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Soul Efficiency Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_smelt_amount_1": "Smelt Amount Upgrade T1",
+  "item.shadowthings.soul_upgrade_smelt_amount_2": "Smelt Amount Upgrade T2",
+  "item.shadowthings.soul_upgrade_smelt_amount_3": "Smelt Amount Upgrade T3",
+  "item.shadowthings.soul_upgrade_smelt_amount_4": "Smelt Amount Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_smelt_speed_1": "Smelt Speed Upgrade T1",
+  "item.shadowthings.soul_upgrade_smelt_speed_2": "Smelt Speed Upgrade T2",
+  "item.shadowthings.soul_upgrade_smelt_speed_3": "Smelt Speed Upgrade T3",
+  "item.shadowthings.soul_upgrade_smelt_speed_4": "Smelt Speed Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_redstone_control": "Redstone Control Upgrade",
+  "item.shadowthings.soul_upgrade_overload": "Overload Upgrade",
 
   "item.shadowthings.bar_brawl_music_disc": "Bar Brawl Music Disc",
   "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
@@ -34,8 +79,6 @@
   "enchantment.shadowthings.shadow_strike": "Shadow Strike",
   "enchantment.shadowthings.soul_stealer": "Soul Stealer",
 
-  "item.shadowthings.ruby_gem": "Ruby Gem",
-  "item.shadowthings.topaz_gem": "Topaz Gem",
 
   "item.shadowthings.shadow_helmet": "Shadow Helmet",
   "item.shadowthings.shadow_chestplate": "Shadow Chestplate",
@@ -44,7 +87,6 @@
 
   "item.shadowthings.shadow_horse_armor": "Shadow Horse Armor",
 
-  "item.shadowthings.dragon_fruit": "Dragon Fruit",
   "item.shadowthings.radish_seeds": "Radish Seeds",
   "item.shadowthings.shadow_berry": "Shadow Berries",
 
@@ -71,9 +113,16 @@
   "block.shadowthings.shadow_door": "Shadow Door",
   "block.shadowthings.shadow_trapdoor": "Shadow Trapdoor",
 
-  "block.shadowthings.magic_block": "Magic Block",
   "block.shadowthings.soul_core": "Soul Core",
+  "block.shadowthings.soul_furnace_controller": "Soul Furnace Controller",
+  "block.shadowthings.soul_crafter": "Soul Crafter",
+  "block.shadowthings.soul_pedestal": "Soul Pedestal",
   "block.shadowthings.soul_structure_block": "Soul Structure Block",
+
+  "block.shadowthings.shadow_machine_block": "Shadow Machine Block",
+  "block.shadowthings.soul_condenser": "Soul Condenser",
+  "block.shadowthings.soul_crucible": "Soul Crucible",
+  "block.shadowthings.soul_collector": "Soul Collector",
 
 
   "block.shadowthings.radish_crop": "Radish Crop",
@@ -93,9 +142,22 @@
   "creativetab.shadowthings.shadow_items": "Shadow Items",
 
 
-  "tooltip.shadowthings.magic_block.tooltip": "This block is Magical",
-
   "tooltip.shadowthings.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",
 
-  "tooltip.shadowthings.chisel": "Chisel can turn normal block variants into bricks."
+  "tooltip.shadowthings.soul_core": "The heart of the Soul Core multiblock.",
+  "tooltip.shadowthings.soul_furnace_controller": "The heart of the Soul Furnace multiblock.",
+  "tooltip.shadowthings.soul_crafter": "Used for crafting advanced items from the mod.",
+  "tooltip.shadowthings.soul_pedestal": "Used for Soul Crafting.",
+  "tooltip.shadowthings.soul_structure_block": "Used for building multiblocks.",
+  "tooltip.shadowthings.soul_condenser": "Passively collects souls from the atmosphere.",
+  "tooltip.shadowthings.soul_crucible": "Generates souls from undead mob drops or soul sand.",
+  "tooltip.shadowthings.soul_collector": "Collects souls from dying mobs in its vicinity.",
+
+  "tooltip.shadowthings.shadow_scythe": "Powerful weapon that reaps souls from its opponents.",
+  "tooltip.shadowthings.soul_linker": "Tool for connecting the Soul Core to other machines.",
+  "tooltip.shadowthings.soul_upgrade_overload": "The most §dpowerful§r upgrade in the mod. §c§lUse with caution§r",
+  "tooltip.shadowthings.soul_matrix": "Complicated machinery used in crafting powerful items and blocks.",
+  "tooltip.shadowthings.soul_fruit_1": "Increases players max souls when eaten up to 1750!",
+  "tooltip.shadowthings.soul_fruit_2": "Increases players max souls when eaten up to 4250!",
+  "tooltip.shadowthings.soul_fruit_3": "Increases players max souls when eaten up to 7500!"
 }

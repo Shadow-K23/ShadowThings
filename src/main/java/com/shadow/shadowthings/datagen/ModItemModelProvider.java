@@ -11,7 +11,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -46,8 +45,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         //BASIC ITEMS
-        basicItem(ModItems.RAWSHADOWINGOT.get());
-        basicItem(ModItems.SHADOWINGOT.get());
+        basicItem(ModItems.RAW_SHADOW_INGOT.get());
+        basicItem(ModItems.SHADOW_INGOT.get());
 
         //SOUL UPGRADES
         basicItem(ModItems.SOUL_UPGRADE_BASE_1.get());
@@ -101,18 +100,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModBlocks.SHADOW_DOOR.asItem());
 
         //TOOLS
-        handheldItem(ModItems.SHADOWSWORD);
-        handheldItem(ModItems.SHADOWPICKAXE);
-        handheldItem(ModItems.SHADOWAXE);
-        handheldItem(ModItems.SHADOWHOE);
-        handheldItem(ModItems.SHADOWSHOVEL);
-        handheldItem(ModItems.SHADOWSPEAR);
+        handheldItem(ModItems.SHADOW_SWORD);
+        handheldItem(ModItems.SHADOW_PICKAXE);
+        handheldItem(ModItems.SHADOW_AXE);
+        handheldItem(ModItems.SHADOW_HOE);
+        handheldItem(ModItems.SHADOW_SHOVEL);
 
         handheldItem(ModItems.SHADOW_SCYTHE);
 
         //ADVANCED ITEMS
         handheldItem(ModItems.SOUL_LINKER);
-        handheldItem(ModItems.SHADOWHAMMER);
+        handheldItem(ModItems.SHADOW_HAMMER);
 
         withExistingParent(ModBlocks.SOUL_CRAFTER.getId().getPath(), modLoc("block/soul_crafter"));
         withExistingParent(ModBlocks.SOUL_PEDESTAL.getId().getPath(), modLoc("block/soul_pedestal"));
@@ -123,10 +121,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.SHADOW_CHESTPLATE);
         trimmedArmorItem(ModItems.SHADOW_HELMET);
 
-        basicItem(ModItems.SHADOW_HORSE_ARMOR.get());
+        //basicItem(ModItems.SHADOW_HORSE_ARMOR.get());
 
         //FOOD
-        basicItem(ModItems.DRAGON_FRUIT.get());
+        basicItem(ModItems.SOUL_FRUIT_1.get());
+        basicItem(ModItems.SOUL_FRUIT_2.get());
+        basicItem(ModItems.SOUL_FRUIT_3.get());
         basicItem(ModItems.SHADOW_BERRIES.get());
         //SEEDS
         basicItem(ModItems.RADISH_SEEDS.get());

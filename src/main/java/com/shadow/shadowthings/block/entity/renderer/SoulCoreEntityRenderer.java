@@ -53,7 +53,7 @@ public class SoulCoreEntityRenderer implements BlockEntityRenderer<SoulCoreEntit
 
         // 2. Set a maximum jitter distance (0.1 blocks is a very violent shake)
         float maxJitter = 0.1f * damageFactor;
-        float fullness = (float)blockEntity.getSouls() / blockEntity.getMaxSouls(); // Testing value
+        float fullness = Math.min(1.0f,(float)blockEntity.getSouls() / blockEntity.getMaxSouls()); // Testing value
 
         // --- ANIMATION MATH ---
         long time = blockEntity.getLevel().getGameTime();

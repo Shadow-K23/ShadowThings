@@ -37,13 +37,12 @@ public class SoulCrafterEntityRenderer implements BlockEntityRenderer<SoulCrafte
             poseStack.translate(0, bob, 0);
         }
         // 2. SMOOTH ROTATION MATH
-        float currentSpeed = 2f;
-        if (crafter.isCrafting && crafter.requiredSouls > 0) {
-            // Again, cast FIRST!
-            float progress = (float) crafter.getSouls() / (float) crafter.requiredSouls;
-            currentSpeed = 4f + (progress * 128f);
-        }
+        float currentSpeed = 4f;
 
+        if (crafter.isCrafting && crafter.maxCraftingTime > 0) {
+            float progressRatio = (float) crafter.craftingProgress / (float) crafter.maxCraftingTime;
+            currentSpeed = 4f + (progressRatio * 45f);
+        }
         // 2. Add the partialTick for high-FPS smoothness
         float smoothAngle = crafter.spinAngle + (currentSpeed * partialTick);
 

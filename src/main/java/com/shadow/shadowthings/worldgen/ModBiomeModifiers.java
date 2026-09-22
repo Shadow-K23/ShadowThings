@@ -53,11 +53,6 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_ORES));
         //TREE
 
-        context.register(ADD_SHADOWWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST)),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SHADOWWOOD_PLACED_KEY)),
-                GenerationStep.Decoration.VEGETAL_DECORATION));
-
         context.register(ADD_SHADOW_BERRY, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.FOREST)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SHADOW_BERRY_PLACED_KEY)),

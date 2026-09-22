@@ -21,8 +21,9 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -54,7 +55,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SHADOWWOOD_SAPLING.get());
 
         this.add(ModBlocks.SHADOWWOOD_LEAVES.get(), block ->
-                createLeavesDrops(block, ModBlocks.SHADOWWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+                createLeavesDrops(block, ModBlocks.SHADOWWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES)
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .when(this.doesNotHaveSilkTouch())
+                                .add(this.applyExplosionCondition(block, LootItem.lootTableItem(ModItems.SOUL_FRUIT_1.get()))
+                                        .when(LootItemRandomChanceCondition.randomChance(0.08F)))
+                        )
+        );
 
         //NON-BLOCK BLOCKS
         dropSelf(ModBlocks.SHADOW_STAIRS.get());
@@ -73,13 +81,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         //ORE LOOT TABLES
         add(ModBlocks.SHADOW_ORE.get(),
-                block -> createOreDrop(ModBlocks.SHADOW_ORE.get(), ModItems.RAWSHADOWINGOT.get()));
+                block -> createOreDrop(ModBlocks.SHADOW_ORE.get(), ModItems.RAW_SHADOW_INGOT.get()));
         add(ModBlocks.SHADOW_DEEPSLATE_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.SHADOW_DEEPSLATE_ORE.get(),ModItems.RAWSHADOWINGOT.get(),2f,5f));
+                block -> createMultipleOreDrops(ModBlocks.SHADOW_DEEPSLATE_ORE.get(),ModItems.RAW_SHADOW_INGOT.get(),2f,5f));
         add(ModBlocks.SHADOW_NETHER_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.SHADOW_NETHER_ORE.get(),ModItems.RAWSHADOWINGOT.get(),3f,7f));
+                block -> createMultipleOreDrops(ModBlocks.SHADOW_NETHER_ORE.get(),ModItems.RAW_SHADOW_INGOT.get(),3f,7f));
         add(ModBlocks.SHADOW_END_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.SHADOW_END_ORE.get(),ModItems.RAWSHADOWINGOT.get(),4f,9f));
+                block -> createMultipleOreDrops(ModBlocks.SHADOW_END_ORE.get(),ModItems.RAW_SHADOW_INGOT.get(),4f,9f));
 
         //CROP LOOT TABLES
 
@@ -88,7 +96,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RadishCropBlock.AGE, 3));
 
         this.add(ModBlocks.RADISH_CROP.get(), this.createCropDrops(ModBlocks.RADISH_CROP.get(),
-                ModItems.DRAGON_FRUIT.get(), ModItems.RADISH_SEEDS.get(), lootItemConditionBuilder));
+                ModItems.RADISH_SEEDS.get(), ModItems.RADISH_SEEDS.get(), lootItemConditionBuilder));
 
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 

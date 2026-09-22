@@ -35,7 +35,7 @@ public class ModArmorItem extends ArmorItem implements GeoItem{
     private static final Map<Holder<ArmorMaterial>, List<MobEffectInstance>> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<Holder<ArmorMaterial>, List<MobEffectInstance>>())
                     .put(ModArmorMaterials.SHADOW_ARMOR_MATERIAL,
-                            List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false)))
+                            List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 1, false, false)))
                     .build();
 private final String armorName;
 

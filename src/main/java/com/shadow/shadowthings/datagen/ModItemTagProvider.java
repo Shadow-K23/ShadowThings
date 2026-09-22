@@ -7,7 +7,6 @@ import com.shadow.shadowthings.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.common.Mod;
@@ -33,19 +32,19 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SHADOW_SCYTHE.get());
 
         this.tag(ItemTags.SWORDS)
-                .add(ModItems.SHADOWSWORD.get())
-                .add(ModItems.SHADOWHAMMER.get())
+                .add(ModItems.SHADOW_SWORD.get())
+                .add(ModItems.SHADOW_HAMMER.get())
                 .add(ModItems.SHADOW_SCYTHE.get());
 
         tag(ItemTags.PICKAXES)
-                .add(ModItems.SHADOWPICKAXE.get())
-                .add(ModItems.SHADOWHAMMER.get());
+                .add(ModItems.SHADOW_PICKAXE.get())
+                .add(ModItems.SHADOW_HAMMER.get());
         tag(ItemTags.AXES)
-                .add(ModItems.SHADOWAXE.get());
+                .add(ModItems.SHADOW_AXE.get());
         tag(ItemTags.HOES)
-                .add(ModItems.SHADOWHOE.get());
+                .add(ModItems.SHADOW_HOE.get());
         tag(ItemTags.SHOVELS)
-                .add(ModItems.SHADOWSHOVEL.get());
+                .add(ModItems.SHADOW_SHOVEL.get());
 
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
@@ -53,6 +52,18 @@ public class ModItemTagProvider extends ItemTagsProvider{
                         .add(ModItems.SHADOW_CHESTPLATE.get())
                         .add(ModItems.SHADOW_LEGGINGS.get())
                         .add(ModItems.SHADOW_BOOTS.get());
+
+
+        //TOOLTIPS
+        tag(ModTags.Items.ADVANCED_ITEM_TOOLTIP)
+                .add(ModItems.SHADOW_SCYTHE.get())
+                .add(ModItems.SOUL_MATRIX.get())
+                .add(ModItems.SHADOW_HAMMER.get())
+                .add(ModItems.SOUL_UPGRADE_OVERLOAD.get())
+                .add(ModItems.SOUL_LINKER.get())
+                .add(ModItems.SOUL_FRUIT_1.get())
+                .add(ModItems.SOUL_FRUIT_2.get())
+                .add(ModItems.SOUL_FRUIT_3.get());
 
         //UPGRADE TAGS
 

@@ -3,6 +3,7 @@ package com.shadow.shadowthings.block.custom;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -74,7 +75,7 @@ public class SoulStructureBlock extends Block {
         }
 
         // If it isn't formed, just do nothing (act like a normal block)
-        return net.minecraft.world.InteractionResult.PASS;
+        return InteractionResult.PASS;
     }
 }
 

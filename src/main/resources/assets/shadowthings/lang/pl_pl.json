@@ -1,6 +1,160 @@
 {
-  "item.shadowthings.shadowingot": "Cieniowa Stal",
-  "item.shadowthings.raw_shadowingot": "Raw Shadow Steel",
-  "block.shadowthings.shadow_block": "Block of Shadow Steel",
-  "block.shadowthings.shadow_ore": "Shadow Ore"
+  "item.shadowthings.shadow_ingot": "Sztabka Stali Cienia",
+  "item.shadowthings.raw_shadow_steel": "Surowa Stal Cienia",
+
+  "item.shadowthings.shadow_sword": "Cienisty Miecz",
+  "item.shadowthings.shadow_hoe": "Cienista Motyka",
+  "item.shadowthings.shadow_shovel": "Cienista Łopata",
+  "item.shadowthings.shadow_pickaxe": "Cienisty Kilof",
+  "item.shadowthings.shadow_axe": "Cienista Siekiera",
+
+  "item.shadowthings.shadow_scythe": "Cienista Kosa",
+  "item.shadowthings.shadow_bow": "Cienisty Łuk",
+
+  "item.shadowthings.soul_linker": "Łącznik Dusz",
+  "item.shadowthings.shadow_hammer": "Cienisty Młot",
+
+  "item.shadowthings.soul_matrix": "Matryca Dusz",
+  "item.shadowthings.soul_fruit_1": "Owoc Dusz",
+  "item.shadowthings.soul_fruit_2": "Lapisowy Owoc Dusz",
+  "item.shadowthings.soul_fruit_3": "Ametystowy Owoc Dusz",
+
+  "item.shadowthings.soul_upgrade_base_1": "Baza Ulepszenia T1",
+  "item.shadowthings.soul_upgrade_base_2": "Baza Ulepszenia T2",
+  "item.shadowthings.soul_upgrade_base_3": "Baza Ulepszenia T3",
+  "item.shadowthings.soul_upgrade_base_4": "Baza Ulepszenia T4",
+  "item.shadowthings.soul_upgrade_base_5": "Baza Ulepszenia T5",
+
+  "item.shadowthings.soul_upgrade_capacity_1": "Ulepszenie Pojemności Dusz T1",
+  "item.shadowthings.soul_upgrade_capacity_2": "Ulepszenie Pojemności Dusz T2",
+  "item.shadowthings.soul_upgrade_capacity_3": "Ulepszenie Pojemności Dusz T3",
+  "item.shadowthings.soul_upgrade_capacity_4": "Ulepszenie Pojemności Dusz T4",
+
+  "item.shadowthings.soul_upgrade_transfer_amount_1": "Ulepszenie Ilości Przesyłu T1",
+  "item.shadowthings.soul_upgrade_transfer_amount_2": "Ulepszenie Ilości Przesyłu T2",
+  "item.shadowthings.soul_upgrade_transfer_amount_3": "Ulepszenie Ilości Przesyłu T3",
+  "item.shadowthings.soul_upgrade_transfer_amount_4": "Ulepszenie Ilości Przesyłu T4",
+
+  "item.shadowthings.soul_upgrade_transfer_rate_1": "Ulepszenie Szybkości Przesyłu T1",
+  "item.shadowthings.soul_upgrade_transfer_rate_2": "Ulepszenie Szybkości Przesyłu T2",
+  "item.shadowthings.soul_upgrade_transfer_rate_3": "Ulepszenie Szybkości Przesyłu T3",
+  "item.shadowthings.soul_upgrade_transfer_rate_4": "Ulepszenie Szybkości Przesyłu T4",
+
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Ulepszenie Wydajności Dusz T1",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Ulepszenie Wydajności Dusz T2",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Ulepszenie Wydajności Dusz T3",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Ulepszenie Wydajności Dusz T4",
+
+  "item.shadowthings.soul_upgrade_smelt_amount_1": "Ulepszenie Ilości Przepalania T1",
+  "item.shadowthings.soul_upgrade_smelt_amount_2": "Ulepszenie Ilości Przepalania T2",
+  "item.shadowthings.soul_upgrade_smelt_amount_3": "Ulepszenie Ilości Przepalania T3",
+  "item.shadowthings.soul_upgrade_smelt_amount_4": "Ulepszenie Ilości Przepalania T4",
+
+  "item.shadowthings.soul_upgrade_smelt_speed_1": "Ulepszenie Szybkości Przepalania T1",
+  "item.shadowthings.soul_upgrade_smelt_speed_2": "Ulepszenie Szybkości Przepalania T2",
+  "item.shadowthings.soul_upgrade_smelt_speed_3": "Ulepszenie Szybkości Przepalania T3",
+  "item.shadowthings.soul_upgrade_smelt_speed_4": "Ulepszenie Szybkości Przepalania T4",
+
+  "item.shadowthings.soul_upgrade_redstone_control": "Ulepszenie Kontroli Redstone",
+  "item.shadowthings.soul_upgrade_overload": "Ulepszenie Przeciążenia",
+
+  "item.shadowthings.bar_brawl_music_disc": "Płyta Muzyczna Bar Brawl",
+  "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "effect.shadowthings.slimey": "Śluzowatość",
+  "effect.shadowthings.shadow_curse": "Klątwa Cienia",
+
+  "item.minecraft.potion.effect.slimey_potion": "Mikstura Śluzowatości",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Miotana Mikstura Śluzowatości",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Trwała Mikstura Śluzowatości",
+
+  "item.minecraft.potion.effect.shadow_curse_potion": "Mikstura Klątwy Cienia",
+  "item.minecraft.splash_potion.effect.shadow_curse_potion": "Miotana Mikstura Klątwy Cienia",
+  "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Trwała Mikstura Klątwy Cienia",
+
+  "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Strzała Klątwy Cienia",
+
+  "enchantment.shadowthings.lightning_strike": "Uderzenie Pioruna",
+  "enchantment.shadowthings.poison_strike": "Trujące Uderzenie",
+  "enchantment.shadowthings.shadow_strike": "Uderzenie Cienia",
+  "enchantment.shadowthings.soul_stealer": "Kradzież Dusz",
+
+
+  "item.shadowthings.shadow_helmet": "Cienisty Hełm",
+  "item.shadowthings.shadow_chestplate": "Cienisty Napierśnik",
+  "item.shadowthings.shadow_leggings": "Cieniste Nogawice",
+  "item.shadowthings.shadow_boots": "Cieniste Buty",
+
+  "item.shadowthings.shadow_horse_armor": "Cienista Zbroja Końska",
+
+  "item.shadowthings.radish_seeds": "Nasiona Rzodkiewki",
+  "item.shadowthings.shadow_berry": "Cieniste Jagody",
+
+  "item.shadowthings.super_fuel": "Super Paliwo",
+
+  "block.shadowthings.shadow_block": "Blok Stali Cienia",
+  "block.shadowthings.shadow_ore": "Ruda Cienia",
+  "block.shadowthings.shadow_deepslate_ore": "Łupkowa Ruda Cienia",
+  "block.shadowthings.shadow_nether_ore": "Netherowa Ruda Cienia",
+  "block.shadowthings.shadow_end_ore": "Ruda Cienia Endu",
+
+  "block.shadowthings.shadow_stairs": "Cieniste Schody",
+  "block.shadowthings.shadow_slab": "Cienista Płyta",
+
+  "block.shadowthings.shadow_pressure_plate": "Cienista Płyta Naciskowa",
+  "block.shadowthings.shadow_button": "Cienisty Przycisk",
+
+  "block.shadowthings.shadow_fence": "Cienisty Płotek",
+  "block.shadowthings.shadow_fence_gate": "Cienista Furtka",
+  "block.shadowthings.shadow_wall": "Cienisty Murek",
+
+  "block.shadowthings.shadow_door": "Cieniste Drzwi",
+  "block.shadowthings.shadow_trapdoor": "Cienisty Właz",
+
+  "block.shadowthings.soul_core": "Rdzeń Dusz",
+  "block.shadowthings.soul_furnace_controller": "Kontroler Pieca Dusz",
+  "block.shadowthings.soul_crafter": "Kreator Dusz",
+  "block.shadowthings.soul_pedestal": "Piedestał Dusz",
+  "block.shadowthings.soul_structure_block": "Blok Struktury Dusz",
+
+  "block.shadowthings.shadow_machine_block": "Cienisty Blok Maszyny",
+  "block.shadowthings.soul_condenser": "Kondensator Dusz",
+  "block.shadowthings.soul_crucible": "Tygiel Dusz",
+  "block.shadowthings.soul_collector": "Kolektor Dusz",
+
+  "block.shadowthings.radish_crop": "Uprawa Rzodkiewki",
+  "block.shadowthings.shadow_berries_bush": "Krzew Cienistych Jagód",
+
+  "block.shadowthings.shadowwood_log": "Cienisty Pień",
+  "block.shadowthings.shadowwood_wood": "Cieniste Drewno",
+
+  "block.shadowthings.stripped_shadowwood_log": "Ociosany Cienisty Pień",
+  "block.shadowthings.stripped_shadowwood_wood": "Ociosane Cieniste Drewno",
+
+  "block.shadowthings.shadowwood_planks": "Cieniste Deski",
+  "block.shadowthings.shadowwood_sapling": "Sadzonka Cienistego Drzewa",
+  "block.shadowthings.shadowwood_leaves": "Cieniste Liście",
+
+  "creativetab.shadowthings.shadow_blocks": "Cieniste Bloki",
+  "creativetab.shadowthings.shadow_items": "Cieniste Przedmioty",
+
+  "tooltip.shadowthings.shift": "§7Naciśnij§r §6§lShift§r§r §7aby uzyskać więcej informacji.§r",
+
+  "tooltip.shadowthings.soul_core": "Serce multibloku Rdzenia Dusz.",
+  "tooltip.shadowthings.soul_furnace_controller": "Serce multibloku Pieca Dusz.",
+  "tooltip.shadowthings.soul_crafter": "Używany do tworzenia zaawansowanych przedmiotów z modyfikacji.",
+  "tooltip.shadowthings.soul_pedestal": "Używany w procesie Rzemiosła Dusz (Soul Crafting).",
+  "tooltip.shadowthings.soul_structure_block": "Używany do budowy wieloblokowych maszyn.",
+  "tooltip.shadowthings.soul_condenser": "Pasywnie zbiera dusze z atmosfery.",
+  "tooltip.shadowthings.soul_crucible": "Generuje dusze z przedmiotów upuszczanych przez nieumarłych lub z piasku dusz.",
+  "tooltip.shadowthings.soul_collector": "Zbiera dusze z umierających w pobliżu mobów.",
+
+  "tooltip.shadowthings.shadow_scythe": "Potężna broń, która żnie dusze ze swoich przeciwników.",
+  "tooltip.shadowthings.soul_linker": "Narzędzie do łączenia Rdzenia Dusz z innymi maszynami.",
+  "tooltip.shadowthings.soul_upgrade_overload": "§dNajpotężniejsze§r ulepszenie w modyfikacji. §c§lUżywaj z rozwagą!§r",
+  "tooltip.shadowthings.soul_matrix": "Skomplikowana maszyneria używana w tworzeniu potężnych przedmiotów i bloków.",
+  "tooltip.shadowthings.soul_fruit_1": "Zwiększa maksymalną ilość dusz gracza po zjedzeniu aż do 1750!",
+  "tooltip.shadowthings.soul_fruit_2": "Zwiększa maksymalną ilość dusz gracza po zjedzeniu aż do 4250!",
+  "tooltip.shadowthings.soul_fruit_3": "Zwiększa maksymalną ilość dusz gracza po zjedzeniu aż do 7500!"
+
 }

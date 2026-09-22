@@ -87,6 +87,7 @@ public class ModBlocks {
             () -> new SoulStructureBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
+                    .noOcclusion()
                     .sound(SoundType.METAL)));
 
     public static final DeferredBlock<Block> SOUL_PEDESTAL = registerBlock("soul_pedestal",
@@ -112,19 +113,16 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> SOUL_CONDENSER = registerBlock("soul_condenser",
             () -> new SoulCondenserBlock(BlockBehaviour.Properties.of()
-                    .noOcclusion()
                     .strength(2f)
                     .sound(SoundType.SCULK)));
 
     public static final DeferredBlock<Block> SOUL_CRUCIBLE = registerBlock("soul_crucible",
             () -> new SoulCrucibleBlock(BlockBehaviour.Properties.of()
-                    .noOcclusion()
                     .strength(2f)
                     .sound(SoundType.SCULK_SENSOR)));
 
     public static final DeferredBlock<Block> SOUL_COLLECTOR = registerBlock("soul_collector",
             () -> new SoulCollectorBlock(BlockBehaviour.Properties.of()
-                    .noOcclusion()
                     .strength(2f)
                     .sound(SoundType.SCULK_CATALYST)));
 

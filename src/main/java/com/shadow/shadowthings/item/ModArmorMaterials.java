@@ -26,7 +26,7 @@ public class ModArmorMaterials {
                 attribute.put(ArmorItem.Type.CHESTPLATE,11);
                 attribute.put(ArmorItem.Type.HELMET,8);
                 attribute.put(ArmorItem.Type.BODY,13);
-    }),28,4f,0.2f, () -> ModItems.SHADOWINGOT.get());
+    }),28,4f,0.2f, () -> ModItems.SHADOW_INGOT.get());
 
 
 

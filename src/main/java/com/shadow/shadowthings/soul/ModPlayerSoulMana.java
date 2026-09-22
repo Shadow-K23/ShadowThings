@@ -30,7 +30,7 @@ public class ModPlayerSoulMana {
         }
     }
     public void addMaxMana(int mana){
-        setMaxMana(this.mana + mana);
+        setMaxMana(this.maxMana + mana);
     }
     public void removeMaxMana(int mana){
         Math.clamp(this.maxMana - mana, 0, mana);

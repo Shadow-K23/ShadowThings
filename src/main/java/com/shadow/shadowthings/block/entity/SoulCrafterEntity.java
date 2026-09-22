@@ -100,8 +100,8 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
             if (this.isCrafting && this.requiredSouls > 0) {
                 // Cast to float FIRST, then divide!
-                float progress = (float) this.getSouls() / (float) this.requiredSouls;
-                currentSpeed = 4f + (progress * 128f);
+                float progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime;
+                currentSpeed = 4f + (progressRatio * 45f);
             }
 
             this.spinAngle += currentSpeed;
@@ -125,7 +125,7 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
             // -- SPHERE AROUND ITEM ---
 
             if (this.isCrafting && this.requiredSouls > 0) {
-                float progress = (float) this.getSouls() / (float) this.requiredSouls;
+                float progress = (float) this.craftingProgress / (float) this.maxCraftingTime;
 
                 // Maximum 6 particles per tick at 100% completion.
                 // Using Math.random() ensures smooth fractional buildup (e.g., 0.5 particles per tick).
@@ -222,67 +222,67 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
             int craftSpeed = 1 + transferRateTier; // Base speed of 1, plus 1 per upgrade tier
 
             // 3. Advance Progress
-            this.craftingProgress = Math.min(this.craftingProgress + craftSpeed, this.maxCraftingTime);
-            float progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime;
+            int baseCostPerTick = (int) Math.ceil((double) this.requiredSouls / (double) this.maxCraftingTime);
+            int neededSoulsThisTick = baseCostPerTick * craftSpeed;
 
-            // 4. Force-Pull Souls from Core (Bypassing slow Core transfer rates)
-            int expectedSouls = (int) (this.requiredSouls * progressRatio);
-            int neededSouls = expectedSouls - this.getSouls();
+            int remainingToCollect = this.requiredSouls - this.getSouls();
+            neededSoulsThisTick = Math.min(neededSoulsThisTick, remainingToCollect);
 
-            if (neededSouls > 0) {
+            if (neededSoulsThisTick > 0) {
                 if (this.linkedCorePos != null && this.level.getBlockEntity(this.linkedCorePos) instanceof SoulCoreEntity core) {
 
-                    int actualPulled = Math.min(neededSouls, core.getSouls());
+                    int actualPulled = Math.min(neededSoulsThisTick, core.getSouls());
 
                     if (actualPulled > 0) {
                         core.removeSouls(actualPulled);
                         this.addSouls(actualPulled);
 
-                        this.visualTransferTimer = 2; // Trigger particle stream constantly during craft!
+                        this.visualTransferTimer = 2;
                         this.sync();
                     }
+                    float progressGained = ((float)actualPulled / (float)this.requiredSouls) * (float)this.maxCraftingTime;
+                    this.craftingProgress = Math.min((int)(this.craftingProgress + progressGained), this.maxCraftingTime);
 
-                    // If the core suddenly emptied mid-craft (someone else drained it), pause the progress!
-                    if (actualPulled < neededSouls) {
-                        this.craftingProgress -= craftSpeed;
-                        progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime; // Recalculate ratio
-                    }
+
                 } else {
                     this.cancelCrafting(); // Core was broken or moved!
                     return;
                 }
+            } else {
+                this.craftingProgress = Math.min(this.craftingProgress + craftSpeed, this.maxCraftingTime);
             }
 
-            // 5. Zap Pedestals based on Progress Ratio
-            if (this.requiredPedestals > 0) {
-                int expectedConsumed = (int) (progressRatio * this.requiredPedestals);
+            float progressRatio = (float) this.craftingProgress / (float) this.maxCraftingTime;
 
-                while (expectedConsumed > this.pedestalsConsumed) {
-                    boolean consumedThisLoop = false;
+                // 5. Zap Pedestals based on Progress Ratio
+                if (this.requiredPedestals > 0) {
+                    int expectedConsumed = (int) (progressRatio * this.requiredPedestals);
 
-                    for (SoulPedestalEntity ped : getNearbyPedestals()) {
-                        if (!ped.inventory.getStackInSlot(0).isEmpty()) {
-                            ped.inventory.extractItem(0, 1, false); // Zap!
-                            this.pedestalsConsumed++;
-                            consumedThisLoop = true;
+                    while (expectedConsumed > this.pedestalsConsumed) {
+                        boolean consumedThisLoop = false;
 
-                            if (level instanceof ServerLevel serverLevel) {
-                                double pX = ped.getBlockPos().getX() + 0.5;
-                                double pY = ped.getBlockPos().getY() + 1.0;
-                                double pZ = ped.getBlockPos().getZ() + 0.5;
+                        for (SoulPedestalEntity ped : getNearbyPedestals()) {
+                            if (!ped.inventory.getStackInSlot(0).isEmpty()) {
+                                ped.inventory.extractItem(0, 1, false); // Zap!
+                                this.pedestalsConsumed++;
+                                consumedThisLoop = true;
 
-                                serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pX, pY, pZ, 100, 0.3, 0.75, 0.3, 0.02);
-                                level.playSound(null, ped.getBlockPos(), SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS, 0.65f, 0.35f);
-                                level.playSound(null, ped.getBlockPos(), SoundEvents.ENDER_EYE_DEATH, SoundSource.BLOCKS, 0.25f, 1.5f);
-                                level.playSound(null, ped.getBlockPos(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 0.25f, 1f);
+                                if (level instanceof ServerLevel serverLevel) {
+                                    double pX = ped.getBlockPos().getX() + 0.5;
+                                    double pY = ped.getBlockPos().getY() + 1.0;
+                                    double pZ = ped.getBlockPos().getZ() + 0.5;
+
+                                    serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pX, pY, pZ, 100, 0.3, 0.75, 0.3, 0.02);
+                                    level.playSound(null, ped.getBlockPos(), SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS, 0.65f, 0.35f);
+                                    level.playSound(null, ped.getBlockPos(), SoundEvents.ENDER_EYE_DEATH, SoundSource.BLOCKS, 0.25f, 1.5f);
+                                    level.playSound(null, ped.getBlockPos(), SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 0.25f, 1f);
+                                }
+                                break;
                             }
-                            break;
                         }
+                        if (!consumedThisLoop) break;
                     }
-                    if (!consumedThisLoop) break;
                 }
-            }
-
             // 6. Finish Crafting
             if (this.craftingProgress >= this.maxCraftingTime) {
                 finishCrafting();

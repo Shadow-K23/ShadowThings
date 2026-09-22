@@ -2,8 +2,6 @@ package com.shadow.shadowthings;
 
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
-import com.shadow.shadowthings.block.entity.SoulCondenserEntity;
-import com.shadow.shadowthings.block.entity.SoulCrucibleEntity;
 import com.shadow.shadowthings.block.entity.renderer.*;
 import com.shadow.shadowthings.client.model.SoulCoreModel;
 import com.shadow.shadowthings.client.model.SoulFurnaceModel;
@@ -103,8 +101,8 @@ public class ShadowThings {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.SHADOWINGOT);
-            event.accept(ModItems.RAWSHADOWINGOT);
+            event.accept(ModItems.SHADOW_INGOT);
+            event.accept(ModItems.RAW_SHADOW_INGOT);
         }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
             event.accept(ModBlocks.SHADOW_BLOCK);

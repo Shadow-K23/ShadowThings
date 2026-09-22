@@ -4,13 +4,15 @@ import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.item.custom.*;
 import com.shadow.shadowthings.sound.ModSounds;
-import com.shadow.shadowthings.util.ModItemProperties;
 import com.shadow.shadowthings.util.ModToolTiers;
 import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
@@ -24,9 +26,9 @@ public class ModItems {
 
 
     //BASIC MOD ITEMS
-    public static final DeferredItem<Item> SHADOWINGOT = ITEMS.register("shadow_ingot",
+    public static final DeferredItem<Item> SHADOW_INGOT = ITEMS.register("shadow_ingot",
             () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RAWSHADOWINGOT = ITEMS.register("raw_shadow_steel",
+    public static final DeferredItem<Item> RAW_SHADOW_INGOT = ITEMS.register("raw_shadow_steel",
             () -> new Item(new Item.Properties()));
 
     //CUSTOM WEAPONS
@@ -58,44 +60,39 @@ public class ModItems {
         return new SoulScytheItem(ModToolTiers.SHADOW, new Item.Properties()
                 .attributes(modifiers.build()));
     });
+
     //SHADOW TOOL SET
-    public static final DeferredItem<SwordItem> SHADOWSWORD = ITEMS.register("shadow_sword",
+    public static final DeferredItem<SwordItem> SHADOW_SWORD = ITEMS.register("shadow_sword",
             ()-> new SwordItem(
                     SHADOW,
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,9f,-2.2f))));
 
-    public static final DeferredItem<PickaxeItem> SHADOWPICKAXE = ITEMS.register("shadow_pickaxe",
+    public static final DeferredItem<PickaxeItem> SHADOW_PICKAXE = ITEMS.register("shadow_pickaxe",
             ()-> new PickaxeItem(
                     SHADOW,
                     new Item.Properties()
                             .attributes(PickaxeItem.createAttributes(SHADOW,-2f,-2.8f))));
 
-    public static final DeferredItem<AxeItem> SHADOWAXE = ITEMS.register("shadow_axe",
+    public static final DeferredItem<AxeItem> SHADOW_AXE = ITEMS.register("shadow_axe",
             ()-> new AxeItem(
                     SHADOW,
                     new Item.Properties()
                         .attributes(AxeItem.createAttributes(SHADOW,11f,-3.2f))));
 
-    public static final DeferredItem<ShovelItem> SHADOWSHOVEL = ITEMS.register("shadow_shovel",
+    public static final DeferredItem<ShovelItem> SHADOW_SHOVEL = ITEMS.register("shadow_shovel",
             ()-> new ShovelItem(
                    SHADOW,
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,-2f,-3.0f))));
 
-    public static final DeferredItem<HoeItem> SHADOWHOE = ITEMS.register("shadow_hoe",
+    public static final DeferredItem<HoeItem> SHADOW_HOE = ITEMS.register("shadow_hoe",
             ()-> new HoeItem(
                     SHADOW,
                     new Item.Properties()
                             .attributes(SwordItem.createAttributes(SHADOW,-2f,-3.0f))));
 
-    public static final DeferredItem<SwordItem> SHADOWSPEAR = ITEMS.register("shadow_spear",
-            ()-> new SwordItem(
-                    SHADOW,
-                    new Item.Properties()
-                            .attributes(SwordItem.createAttributes(SHADOW,13f,-2.8f))));
-
-    public static final DeferredItem<HammerItem> SHADOWHAMMER = ITEMS.register("shadow_hammer",
+    public static final DeferredItem<HammerItem> SHADOW_HAMMER = ITEMS.register("shadow_hammer",
             ()-> new HammerItem(
                     SHADOW,
                     new Item.Properties()
@@ -119,9 +116,9 @@ public class ModItems {
                         ModArmorMaterials.SHADOW_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
                         new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(42)), "shadow_armor"));
 
-    public static final  DeferredItem<Item> SHADOW_HORSE_ARMOR = ITEMS.register("shadow_horse_armor",
-                () -> new AnimalArmorItem(
-                        ModArmorMaterials.SHADOW_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN, false , new Item.Properties().stacksTo(1)));
+    //public static final  DeferredItem<Item> SHADOW_HORSE_ARMOR = ITEMS.register("shadow_horse_armor",
+    //            () -> new AnimalArmorItem(
+    //                    ModArmorMaterials.SHADOW_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN, false , new Item.Properties().stacksTo(1)));
     //MISC
 
     public static final  DeferredItem<Item> BAR_BRAWL_MUSIC_DISC = ITEMS.register("bar_brawl_music_disc",
@@ -129,8 +126,34 @@ public class ModItems {
 
     //FOODS
 
-    public static final DeferredItem<Item> DRAGON_FRUIT = ITEMS.register("dragon_fruit",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.DRAGON_FRUIT)));
+    public static final DeferredItem<Item> SOUL_FRUIT_1 = ITEMS.register("soul_fruit_1",
+            () -> new SoulCapacityItem(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(3)
+                            .saturationModifier(0.25f)
+                            .fast()
+                            .alwaysEdible()
+                            .build()),
+                    150, 1750));
+    public static final DeferredItem<Item> SOUL_FRUIT_2 = ITEMS.register("soul_fruit_2",
+            () -> new SoulCapacityItem(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(5)
+                            .saturationModifier(1f)
+                            .fast()
+                            .alwaysEdible()
+                            .build()),
+                    250, 4250));
+    public static final DeferredItem<Item> SOUL_FRUIT_3 = ITEMS.register("soul_fruit_3",
+            () -> new SoulCapacityItem(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(3)
+                            .saturationModifier(2.25f)
+                            .fast()
+                            .alwaysEdible()
+                            .effect(()-> new MobEffectInstance(MobEffects.REGENERATION, 200), 1f)
+                            .build()),
+                    475, 7500));
 
     public static final DeferredItem<Item> SHADOW_BERRIES = ITEMS.register("shadow_berry",
             () -> new ItemNameBlockItem(ModBlocks.SHADOW_BERRY_BUSH.get(), new Item.Properties().food(ModFoodProperties.SHADOW_BERRY)));

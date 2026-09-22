@@ -37,6 +37,15 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SOUL_PEDESTAL.get())
                 .add(ModBlocks.SOUL_FURNACE_CONTROLLER.get());
 
+        tag(ModTags.Blocks.ADVANCED_BLOCK_TOOLTIP)
+                .add(ModBlocks.SOUL_FURNACE_CONTROLLER.get())
+                .add(ModBlocks.SOUL_PEDESTAL.get())
+                .add(ModBlocks.SOUL_CRAFTER.get())
+                .add(ModBlocks.SOUL_STRUCTURE_BLOCK.get())
+                .add(ModBlocks.SOUL_CONDENSER.get())
+                .add(ModBlocks.SOUL_CRUCIBLE.get())
+                .add(ModBlocks.SOUL_COLLECTOR.get())
+                .add(ModBlocks.SOUL_CORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.SHADOW_ORE.get())

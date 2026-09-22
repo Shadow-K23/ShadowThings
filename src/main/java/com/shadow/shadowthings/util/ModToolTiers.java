@@ -14,7 +14,7 @@ public class ModToolTiers {
             15f,
             12f,
             28,
-            () -> Ingredient.of(ModItems.SHADOWINGOT)
+            () -> Ingredient.of(ModItems.SHADOW_INGOT)
     );
 
 

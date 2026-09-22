@@ -101,23 +101,24 @@ public abstract class AbstractSoulEntity extends BlockEntity {
 
     // Paste all your soul math methods here!
     public void setSouls(int amount) {
-        this.souls = Math.clamp(amount, 0, this.maxSouls);
+        this.souls = Math.max( 0, amount);
         sync();
     }
 
     public void addSouls(int amount) {
-        this.souls = Math.clamp(this.souls + amount, 0, this.maxSouls);
+        if (this.souls < this.maxSouls) {
+            this.souls = Math.min(this.souls + amount, this.maxSouls);
+        }
         sync();
     }
 
     public void removeSouls(int amount) {
-        this.souls = Math.clamp(this.souls - amount, 0, this.maxSouls);
+        this.souls = Math.max(this.souls - amount, 0);
         sync();
     }
 
     public void setMaxSouls(int amount) {
         this.maxSouls = amount;
-        if (this.souls > amount) this.souls = amount;
         sync();
     }
 
@@ -155,11 +156,7 @@ public abstract class AbstractSoulEntity extends BlockEntity {
 
                 // Does it match the type we are looking for?
                 if (upgradeItem.getUpgradeType() == typeToFind) {
-
-                    // Option A: Only the highest tier counts
                     highestTier = Math.max(highestTier, upgradeItem.getTier());
-
-                    // Option B: Stack them! (totalTier += upgradeItem.getTier();)
                 }
             }
         }
