@@ -31,13 +31,13 @@ public class SoulFurnaceMenu extends AbstractSoulMenu {
         this.data = data;
 
         // 1. Add Upgrade Slots (Slots 0 to 3)[cite: 1]
-        this.addUpgradeSlots(this.blockEntity, 152, 10);
+        this.addUpgradeSlots(this.blockEntity, 155, 6);
 
         // 2. Add Main Inventory Slots (Slot 4 is Input, Slot 5 is Output)
-        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 0, 56, 34)); // Input
-        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 1, 116, 35)); // Output
+        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 0, 44, 30)); // Input
+        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 1, 116, 30)); // Output
 
-        // 3. Add Player Inventory (Slots 6 to 41)[cite: 2]
+        // 3. Add Player Inventory (Slots 6 to 41)
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
@@ -55,14 +55,14 @@ public class SoulFurnaceMenu extends AbstractSoulMenu {
     public int getScaledProgress() {
         int progress = this.data.get(2);
         int maxProgress = this.data.get(3);
-        int arrowPixelWidth = 24; // Change to your arrow texture width
+        int arrowPixelWidth = 96; // Change to your arrow texture width
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelWidth / maxProgress : 0;
     }
 
     public int getScaledMomentum() {
         int momentum = this.data.get(4);
         int maxMomentum = this.data.get(5);
-        int barPixelHeight = 50; // Change to your momentum bar texture height
+        int barPixelHeight = 71; // Change to your momentum bar texture height
         return maxMomentum != 0 && momentum != 0 ? momentum * barPixelHeight / maxMomentum : 0;
     }
 

@@ -433,7 +433,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
     }
     @Override
     public Component getDisplayName() {
-        return Component.literal("Soul Furnace");
+        return Component.translatable("block.shadowthings.soul_furnace");
     }
 
     @Override

@@ -51,7 +51,7 @@ public class CoreMeltdownManager {
         this.core.setChanged();
         level.sendBlockUpdated(pos, this.core.getBlockState(), this.core.getBlockState(), 3);
 
-        Component warningMessage = Component.literal("[CRITICAL ALARM] Soul Core containment has failed. Evacuate immediately.")
+        Component warningMessage = Component.translatable("message.shadowthings.core_meltdown_warning")
                 .withStyle(ChatFormatting.RED, ChatFormatting.BOLD);
         if(!warningSent) {
             warningSent = true;

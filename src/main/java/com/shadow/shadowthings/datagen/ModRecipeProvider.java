@@ -100,6 +100,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.ENDER_PEARL)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_matrix_craft");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SOUL_LINKER.get())
+                .pattern(" BC")
+                .pattern(" AB")
+                .pattern("A  ")
+                .define('B', ModItems.SHADOW_INGOT)
+                .define('A', Items.STICK)
+                .define('C', Items.ENDER_PEARL)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_linker_craft");
+
 
         //UPGRADES
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_UPGRADE_BASE_1.get(), 4)
@@ -303,22 +312,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ),
                         1750,
                         new ItemStack(ModItems.SHADOW_SCYTHE.get())
-                ),
-                null
-        );
-
-        recipeOutput.accept(
-                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_linker_infusion"),
-                new SoulInfusionRecipe(
-                        Ingredient.of(Items.DIAMOND),
-                        List.of(
-                                Ingredient.of(ModItems.SHADOW_INGOT),
-                                Ingredient.of(ModItems.SHADOW_INGOT),
-                                Ingredient.of(Items.STICK),
-                                Ingredient.of(Items.ENDER_PEARL)
-                        ),
-                        250,
-                        new ItemStack(ModItems.SOUL_LINKER.get())
                 ),
                 null
         );

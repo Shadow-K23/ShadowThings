@@ -13,6 +13,10 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     // Make sure you place your texture file here!
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "textures/gui/soul_furnace_gui.png");
+    private static final ResourceLocation MOMENTUM_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "textures/gui/soul_furnace_momentum_bar.png");
+    private static final ResourceLocation PROGRESS_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "textures/gui/soul_furnace_progress_bar.png");
 
     public SoulFurnaceScreen(SoulFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -44,39 +48,36 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
 
         renderProgressArrow(guiGraphics, x, y);
         renderMomentumBar(guiGraphics, x, y);
+
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if (menu.getProgress() > 0) {
-            int progress = this.menu.getScaledProgress();
 
-            // X and Y on the screen (e.g., exactly between the input and output slots)
-            int screenX = x + 79;
-            int screenY = y + 34;
+            int currentWidth = Math.clamp(this.menu.getScaledProgress(),0,90);
 
-            // X and Y of the filled arrow on your TEXTURE file (e.g., off to the right side at 176, 14)
-            int textureX = 176;
-            int textureY = 14;
+            int screenX = x + 43;
+            int screenY = y + 29;
 
-            // Width is dynamic (progress), Height is static (e.g., 17)
-            guiGraphics.blit(TEXTURE, screenX, screenY, textureX, textureY, progress, 17);
+            int textureX = 0;
+            int textureY = 0;
+
+            guiGraphics.blit(PROGRESS_BAR_TEXTURE, screenX, screenY, textureX, textureY, currentWidth, 18, 90, 18);
         }
     }
 
     private void renderMomentumBar(GuiGraphics guiGraphics, int x, int y) {
         if (menu.getMomentum() > 0) {
-            int scaledMomentum = this.menu.getScaledMomentum(); // Max height is 50 pixels
+            int scaledMomentum = this.menu.getScaledMomentum();
+            int maxHeight = 71;
 
-            // To make a bar fill from BOTTOM to TOP, we draw it upside down.
-            // Screen Y = starting Y + (maxHeight - currentHeight)
-            int screenX = x + 10;
-            int screenY = y + 20 + (50 - scaledMomentum);
+            int screenX = x + 4;
+            int screenY = y + 5 + (maxHeight - scaledMomentum);
 
-            // Texture Y also shifts down by (maxHeight - currentHeight)
-            int textureX = 176;
-            int textureY = 32 + (50 - scaledMomentum);
+            int textureX = 0;
+            int textureY = (maxHeight - scaledMomentum);
 
-            guiGraphics.blit(TEXTURE, screenX, screenY, textureX, textureY, 10, scaledMomentum);
+            guiGraphics.blit(MOMENTUM_BAR_TEXTURE, screenX, screenY, textureX, textureY, 17, scaledMomentum, 17, 71);
         }
     }
 
@@ -92,5 +93,11 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
         if (mouseX >= x + 10 && mouseX <= x + 20 && mouseY >= y + 20 && mouseY <= y + 70) {
             guiGraphics.renderTooltip(this.font, Component.literal("Momentum: " + menu.getMomentum() + " / " + menu.getMaxMomentum()), mouseX, mouseY);
         }
+    }
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0xF2D5FF, false);
     }
 }

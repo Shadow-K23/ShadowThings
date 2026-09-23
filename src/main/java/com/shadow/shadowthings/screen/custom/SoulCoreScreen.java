@@ -19,8 +19,10 @@ import net.minecraft.world.entity.player.Inventory;
 public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"textures/gui/soul_core_gui.png");
-    private static final ResourceLocation UPGRADE_PANEL =
-            ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID,"textures/gui/upgrade_gui.png");
+    private static final ResourceLocation SIPHON_ACTIVE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/soul_siphon_button_active.png");
+    private static final ResourceLocation HEALTH_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/core_health_bar.png");
 
     private SoulCoreModel model;
 
@@ -36,17 +38,27 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        // Add a standard button.
-        // You can adjust the X (x + 10), Y (y + 10), Width (60), and Height (20) to fit your GUI texture!
-        this.addRenderableWidget(Button.builder(Component.literal("Soul Siphon"), button -> {
-
-            // This is the magic line! It sends the click directly to our Menu's 'clickMenuButton' method
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
-
-        }).bounds(x + 10, y + 10, 60, 20).build());
+        this.titleLabelX = -30;
+        this.titleLabelY = -35;
+        this.inventoryLabelX = 8;
+        this.inventoryLabelY = this.imageHeight - 136;
 
         var modelPart = this.minecraft.getEntityModels().bakeLayer(SoulCoreModel.LAYER_LOCATION);
         this.model = new SoulCoreModel(modelPart);
+        // Add a standard button.
+        // You can adjust the X (x + 10), Y (y + 10), Width (60), and Height (20) to fit your GUI texture!
+        this.addRenderableWidget(new CustomTexturedButton(
+                x + 234, y + 80,
+                18, 18,
+                GUI_TEXTURE,
+                234, 80,
+                SIPHON_ACTIVE_TEXTURE,
+                button -> {
+                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
+                }
+        ));
+
+
     }
 
     @Override
@@ -61,6 +73,9 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
 
         // 2. Do we have souls to draw?
         int scaledProgress = menu.getScaledSoulProgress();
+        int transferRate = this.menu.blockEntity.getTransferRate();
+        int transferAmount = this.menu.blockEntity.getTransferAmount();
+
         if (scaledProgress > 0) {
 
             // 3. Draw the filled bar overlay!
@@ -68,49 +83,151 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
             // And your filled bar texture is placed at X=176, Y=0 on your .png file
             int barMaxHeight = 69; // Must match the number in your Menu class
 
-            guiGraphics.blit(GUI_TEXTURE,
-                    x + 150,
-                    y + 8 + (barMaxHeight - scaledProgress), // Screen Y (Pushed down so it grows upward)
-                    237, // Texture U (X coordinate of the filled bar on your .png file)
-                    barMaxHeight - scaledProgress, // Texture V (Y coordinate of the filled bar on your .png file)
-                    19, // Width of the bar
-                    scaledProgress // Height of the bar we are actively drawing
-            );
+        }
+        int centerX = x + (this.imageWidth / 2);
+        int labelX = centerX - (this.font.width(Component.translatable("gui.shadowthings.soul_amount")) / 2);
+        int valueX = centerX - (this.font.width((menu.getSouls()/1000f) + "k / " + menu.getMaxSouls()/1000f + "k") / 2);
+        //INFORMATION TEXT
+        //TRANSFER
+        guiGraphics.drawString(
+                minecraft.font,
+                Component.translatable("gui.shadowthings.transfer_rate"),
+                x + 15, y + 25,
+                0xa2a2a2
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                String.valueOf(transferRate),
+                x + 15, y + 37,
+                0xFFFFFF
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                Component.translatable("gui.shadowthings.transfer_amount"),
+                x + 15, y + 57,
+                0xa2a2a2
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                String.valueOf(transferAmount),
+                x + 15, y + 69,
+                0xFFFFFF
+        );
+        //SOULS NET TRANSFER
+        int netChange = menu.getSoulNetChange();
+        int perSecond = netChange / 5;
+
+        int color = perSecond > 0 ? 0x55FF55 : (perSecond < 0 ? 0xFF5555 : 0x5b5b5b);
+        String sign = perSecond > 0 ? "+" + perSecond : String.valueOf(perSecond);
+
+
+        guiGraphics.drawString(
+                minecraft.font,
+                Component.translatable("gui.shadowthings.soul_net_change"),
+                x + 15, y + 89,
+                0xa2a2a2
+        );
+        guiGraphics.drawString(
+                this.font,
+                sign + "/s",
+                x + 15, y + 101,
+                color,
+                false
+        );
+
+        //SOULS
+        guiGraphics.drawString(
+                minecraft.font,
+                Component.translatable("gui.shadowthings.soul_amount"),
+                labelX, y + 135,
+                0xa2a2a2
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                (menu.getSouls()/1000f) + "k / " + menu.getMaxSouls()/1000f + "k",
+                valueX, y + 150,
+                0x41beff
+        );
+
+        //SIPHON
+
+        boolean isSiphonEnabled = this.menu.getSiphonState();
+        Component siphonState;
+        int colorSip;
+        if(isSiphonEnabled){
+            siphonState = Component.translatable("gui.shadowthings.active");
+            colorSip = 0x55FF55;
+        }else{
+            siphonState = Component.translatable("gui.shadowthings.inactive");
+            colorSip = 0xFF5555;
         }
 
         guiGraphics.drawString(
                 minecraft.font,
-                (menu.getSouls()/1000f) + "k / " + menu.getMaxSouls()/1000f + "k",
-                x + 150, y + 75,
-                0x41beff
+                Component.translatable("gui.shadowthings.core_siphon"),
+                centerX - 115, y + 135,
+                colorSip
         );
         guiGraphics.drawString(
                 minecraft.font,
-                ("CORE HEALTH: " + menu.getCoreHealth()) + " / 1000" ,
-                x + 125, y + 50,
-                0xff3333
+                siphonState,
+                centerX - 115, y + 150,
+                colorSip
         );
+        //CORE HP
+        int currentHealth = this.menu.getCoreHealth();
+        int maxHealth = 10000;
 
-        int panelX = leftPos + this.imageWidth;
-        int panelY = topPos + 5; // Push it down 5 pixels from the top
+        float hpRatio = (float) currentHealth / Math.max(1, maxHealth);
+        float hpPercent = (float) currentHealth * 100 / maxHealth;
+        int maxBarHeight = 71;
+        int barWidth = 15;
 
-        // 3. Draw the upgrade panel
-        // Parameters: texture, x, y, uOffset, vOffset, width, height
-        guiGraphics.blit(UPGRADE_PANEL, panelX, panelY, 0, 0, 27, 83);
+        int emptyPixels = maxBarHeight - (int) (maxBarHeight * hpRatio);
+        int currentBarHeight = maxBarHeight - emptyPixels;
+
+        int barX = x + 216;
+        int barY = y + 5;
+
+        int textureU = 0;
+        int textureV = 0;
+
+        guiGraphics.blit(HEALTH_BAR_TEXTURE,
+                barX,
+                barY + emptyPixels,
+                textureU,
+                textureV + emptyPixels,
+                barWidth,
+                currentBarHeight,
+                71,
+                15);
+
+        guiGraphics.drawString(
+                minecraft.font,
+                Component.translatable("gui.shadowthings.core_health") ,
+                centerX + 62, y + 135,
+                0xFF597A
+        );
+        guiGraphics.drawString(
+                minecraft.font,
+                hpPercent + "%" ,
+                centerX + 76, y + 150,
+                0xFF597A
+        );
 
         //GUI CRYSTAL
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
 
-        poseStack.translate(x + (imageWidth / 2.0f), y + (imageHeight / 2.0f), 150.0f);
-        poseStack.scale(50.0f, -50.0f, 50.0f);
+        poseStack.translate(x + (imageWidth / 2.0f), y - 5 + (imageHeight / 2.0f), 150.0f);
+        poseStack.scale(35.0f, -35.0f, 35.0f);
 
         float time = this.minecraft.level.getGameTime() + pPartialTick;
         poseStack.mulPose(Axis.XP.rotationDegrees(180.0f));
 
-        poseStack.translate(0, 1.5f , 0);
+        poseStack.translate(0, 2f , 0);
         poseStack.mulPose(Axis.YP.rotationDegrees(time * 1.75f));
-        poseStack.translate(-0, -1.5f , -0);
+        poseStack.translate(-0, -2f , -0);
 
         SoulCoreEntity core = this.menu.blockEntity;
         if (core != null) {
@@ -139,5 +256,15 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
         }
         guiGraphics.flush();
         poseStack.popPose();
+    }
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(guiGraphics, mouseX, mouseY); // Renders item names when hovering
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
     }
 }

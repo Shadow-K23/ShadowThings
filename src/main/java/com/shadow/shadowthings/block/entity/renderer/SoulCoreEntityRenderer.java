@@ -49,7 +49,7 @@ public class SoulCoreEntityRenderer implements BlockEntityRenderer<SoulCoreEntit
             return;
         }
 
-        float damageFactor = 1.0f - ((float) Math.max(1, blockEntity.coreHealth) / 1000f);
+        float damageFactor = 1.0f - ((float) Math.max(1, blockEntity.coreHealth) / 10000f);
 
         // 2. Set a maximum jitter distance (0.1 blocks is a very violent shake)
         float maxJitter = 0.1f * damageFactor;

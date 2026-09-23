@@ -162,7 +162,7 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Soul Crucible");
+        return Component.translatable("block.shadowthings.soul_crucible");
     }
 
     @Nullable

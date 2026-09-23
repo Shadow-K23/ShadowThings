@@ -94,6 +94,8 @@ public abstract class AbstractSoulEntity extends BlockEntity {
 
     }
 
+    //TODO: A LASER BETWEEN CORE  AND CONNECTED MACHINES WHEN HOLDING LINKER TOOL
+
     public int getSouls() { return souls; }
     public int getMaxSouls() { return maxSouls; }
     public int getTransferRate() {return transferRate;}

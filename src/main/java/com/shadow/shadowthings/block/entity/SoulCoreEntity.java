@@ -59,8 +59,14 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     private int coreRadius = 32;
 
     public int coreHealth = 10000;
-    public final int MAX_CORE_HEALTH = 1000;
+    public final int MAX_CORE_HEALTH = 10000;
     public int safeCapacity = 200000;
+
+    private final int[] soulHistory = new int[100];
+    private int historyIndex = 0;
+    public int rollingSoulChange = 0;
+    private int inputThisTick = 0;
+    private int outputThisTick = 0;
 
     public boolean isMeltingDown = false;
     public int meltdownTimer = 0; // Tracks the terrifying collapse animation
@@ -99,6 +105,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
                 case 0 -> SoulCoreEntity.this.souls;
                 case 1 -> SoulCoreEntity.this.maxSouls;
                 case 2 -> SoulCoreEntity.this.coreHealth;
+                case 3 -> SoulCoreEntity.this.rollingSoulChange;
                 default -> 0;
             };
         }
@@ -106,15 +113,16 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 0 -> SoulCoreEntity.this.souls = Math.clamp(value,0,maxSouls);
+                case 0 -> SoulCoreEntity.this.souls = Math.clamp(value, 0, maxSouls);
                 case 1 -> SoulCoreEntity.this.maxSouls = value;
                 case 2 -> SoulCoreEntity.this.coreHealth = value;
+                case 3 -> SoulCoreEntity.this.rollingSoulChange = value;
             }
         }
 
         @Override
         public int getCount() {
-            return 3; // We are syncing 3 variables (souls and maxSouls)
+            return 4;
         }
     };
 
@@ -126,6 +134,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void addSouls(int amount) {
+        this.inputThisTick += amount;
         this.souls = Math.clamp(this.souls + amount, 0, this.maxSouls);
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
@@ -133,6 +142,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void removeSouls(int amount) {
+        this.outputThisTick += amount;
         this.souls = Math.clamp(this.souls - amount, 0, this.maxSouls);
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
@@ -215,6 +225,17 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
                 performSiphon(level, pos);
             }
         }
+
+        int delta = this.inputThisTick - this.outputThisTick;
+
+        this.inputThisTick = 0;
+        this.outputThisTick = 0;
+
+        this.rollingSoulChange -= this.soulHistory[this.historyIndex];
+        this.soulHistory[this.historyIndex] = delta;
+        this.rollingSoulChange += delta;
+
+        this.historyIndex = (this.historyIndex + 1) % 100;
     }
     private void performSiphon(Level level, BlockPos pos) {
         if (this.ownerUUID == null) return;
@@ -252,33 +273,33 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
             int transferRateTier = this.getUpgradeLevel(UpgradeType.SOUL_TRANSFER_RATE);
             int transferAmountTier = this.getUpgradeLevel(UpgradeType.SOUL_TRANSFER_AMOUNT);
 
+            int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 2.5))) * BASE_MAX_CAPACITY;
+            int bonusTransferAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))) * BASE_TRANSFER_AMOUNT;
+            int bonusSiphonAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))/4) * BASE_SIPHON_AMOUNT;
+
+            int newMaxCapacity = BASE_MAX_CAPACITY + bonusCapacity;
+            int newTransferAmount = BASE_TRANSFER_AMOUNT + bonusTransferAmount;
+            int newTransferRate = BASE_TRANSFER_RATE;
+            int newSiphonRate = BASE_SIPHON_RATE;
+            int newSiphonAmount = BASE_SIPHON_AMOUNT + bonusSiphonAmount ;
+
+            if (transferRateTier > 0) {
+                newTransferRate = BASE_TRANSFER_RATE / (transferRateTier * 2);
+                newSiphonRate = BASE_SIPHON_RATE / (transferRateTier * 2);
+            }
+
+            this.setMaxSouls(newMaxCapacity);
+            this.transferRate = newTransferRate;
+            this.transferAmount = newTransferAmount;
+            this.siphonRate = newSiphonRate;
+            this.siphonAmount = newSiphonAmount;
             if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
                 // OVERLOADED TIER!
                 this.setMaxSouls(205000);
                 this.safeCapacity = 200000;
-            } else {
-                int bonusCapacity = (int) (Math.floor(Math.pow(capacityTier, 2.5))) * BASE_MAX_CAPACITY;
-                int bonusTransferAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))) * BASE_TRANSFER_AMOUNT;
-                int bonusSiphonAmount = (int) (Math.floor(Math.pow(transferAmountTier, 1.75))/4) * BASE_SIPHON_AMOUNT;
-
-                int newMaxCapacity = BASE_MAX_CAPACITY + bonusCapacity;
-                int newTransferAmount = BASE_TRANSFER_AMOUNT + bonusTransferAmount;
-                int newTransferRate = BASE_TRANSFER_RATE;
-                int newSiphonRate = BASE_SIPHON_RATE;
-                int newSiphonAmount = BASE_SIPHON_AMOUNT + bonusSiphonAmount ;
-
-                if (transferRateTier > 0) {
-                    newTransferRate = BASE_TRANSFER_RATE / (transferRateTier * 2);
-                    newSiphonRate = BASE_SIPHON_RATE / (transferRateTier * 2);
-                }
-
-                this.setMaxSouls(newMaxCapacity);
-                this.transferRate = newTransferRate;
-                this.transferAmount = newTransferAmount;
-                this.siphonRate = newSiphonRate;
-                this.siphonAmount = newSiphonAmount;
             }
-        }
+            }
+        sync();
     }
 
     @Override
@@ -331,14 +352,12 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         if (tag.contains("CoreRadius")) {
             this.coreRadius = tag.getInt("CoreRadius");
         }
-
-
     }
 
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Soul Core");
+        return Component.translatable("block.shadowthings.soul_core");
     }
 
     @Override

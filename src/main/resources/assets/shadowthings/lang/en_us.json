@@ -115,6 +115,7 @@
 
   "block.shadowthings.soul_core": "Soul Core",
   "block.shadowthings.soul_furnace_controller": "Soul Furnace Controller",
+  "block.shadowthings.soul_furnace": "Soul Furnace",
   "block.shadowthings.soul_crafter": "Soul Crafter",
   "block.shadowthings.soul_pedestal": "Soul Pedestal",
   "block.shadowthings.soul_structure_block": "Soul Structure Block",
@@ -142,6 +143,17 @@
   "creativetab.shadowthings.shadow_items": "Shadow Items",
 
 
+  "gui.shadowthings.core_siphon": "Soul Siphon",
+  "gui.shadowthings.soul_amount": "Souls stored:",
+  "gui.shadowthings.transfer_rate": "Transfer Rate:",
+  "gui.shadowthings.transfer_amount": "Transfer Amount:",
+  "gui.shadowthings.soul_net_change": "Soul Net Change:",
+  "gui.shadowthings.core_health": "Core Health:",
+  "gui.shadowthings.active": "On",
+  "gui.shadowthings.inactive": "Off",
+
+  "message.shadowthings.core_meltdown_warning": "§c§l[WARNING] SOUL CORE MELTDOWN IMMINENT§r",
+
   "tooltip.shadowthings.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",
 
   "tooltip.shadowthings.soul_core": "The heart of the Soul Core multiblock.",
@@ -154,6 +166,7 @@
   "tooltip.shadowthings.soul_collector": "Collects souls from dying mobs in its vicinity.",
 
   "tooltip.shadowthings.shadow_scythe": "Powerful weapon that reaps souls from its opponents.",
+  "tooltip.shadowthings.shadow_hammer": "Breaks blocks in a 3x3 radius.",
   "tooltip.shadowthings.soul_linker": "Tool for connecting the Soul Core to other machines.",
   "tooltip.shadowthings.soul_upgrade_overload": "The most §dpowerful§r upgrade in the mod. §c§lUse with caution§r",
   "tooltip.shadowthings.soul_matrix": "Complicated machinery used in crafting powerful items and blocks.",

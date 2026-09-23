@@ -21,7 +21,7 @@ public class SoulCoreMenu extends AbstractSoulMenu {
 
     // Update your client-side constructor (extraData one)
     public SoulCoreMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     // Update your main constructor
@@ -30,7 +30,7 @@ public class SoulCoreMenu extends AbstractSoulMenu {
         this.blockEntity = ((SoulCoreEntity) blockEntity);
         this.level = inv.player.level();
         this.data = data;
-        this.addUpgradeSlots(this.blockEntity, 180, 10);
+        this.addUpgradeSlots(this.blockEntity, 195, -39);
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
@@ -54,6 +54,12 @@ public class SoulCoreMenu extends AbstractSoulMenu {
         int barPixelHeight = 69; // Change this to the exact pixel height of your bar in your texture!
 
         return maxSouls != 0 && currentSouls != 0 ? (currentSouls * barPixelHeight) / maxSouls : 0;
+    }
+    public int getSoulNetChange() {
+        return this.data.get(3);
+    }
+    public boolean getSiphonState(){
+        return this.blockEntity.soulSiphonEnabled;
     }
 
     @Override
@@ -139,14 +145,17 @@ public class SoulCoreMenu extends AbstractSoulMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 130 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 188));
         }
+    }
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new SoulCoreMenu(i, inventory, this.blockEntity, this.data);
     }
 }

@@ -13,8 +13,6 @@ public class SoulCrafterScreen extends AbstractContainerScreen<SoulCrafterMenu> 
     // Change "textures/gui/crafter.png" to match your actual file path!
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/soul_crafter_gui.png");
-    private static final ResourceLocation UPGRADE_PANEL =
-            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/upgrade_gui.png");
 
     public SoulCrafterScreen(SoulCrafterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -38,12 +36,6 @@ public class SoulCrafterScreen extends AbstractContainerScreen<SoulCrafterMenu> 
         guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        int panelX = leftPos + this.imageWidth;
-        int panelY = topPos + 5; // Push it down 5 pixels from the top
-
-        // 3. Draw the upgrade panel
-        // Parameters: texture, x, y, uOffset, vOffset, width, height
-        guiGraphics.blit(UPGRADE_PANEL, panelX, panelY, 0, 0, 27, 83);
     }
 
     @Override
