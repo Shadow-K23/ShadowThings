@@ -13,8 +13,10 @@ public class SoulCrucibleScreen extends AbstractContainerScreen<SoulCrucibleMenu
     // Change "textures/gui/crafter.png" to match your actual file path!
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/soul_crucible_gui.png");
-    private static final ResourceLocation UPGRADE_PANEL =
-            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/upgrade_gui.png");
+    private static final ResourceLocation FIRE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/soul_crucible_fire.png");
+    private static final ResourceLocation SOUL_BAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/gui/soul_crucible_souls_bar.png");
 
     public SoulCrucibleScreen(SoulCrucibleMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -23,32 +25,75 @@ public class SoulCrucibleScreen extends AbstractContainerScreen<SoulCrucibleMenu
     @Override
     protected void init() {
         super.init();
-
-        // Add the Craft Button
-        this.addRenderableWidget(Button.builder(Component.literal("Craft"), button -> {
-            // Send the network packet to the server!
-            var pos = this.menu.getBlockEntity().getBlockPos();
-            PacketDistributor.sendToServer(new ModStartCraftingPayload(pos));
-        }).bounds(this.leftPos + 50, this.topPos + 60, 76, 20).build());
+        this.titleLabelY = 5;
+        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        // Draw the background texture
         guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
+        //SOUL BAR
+        int souls = this.menu.getData().get(0);
+        int maxSouls = this.menu.getData().get(1);
 
-        int panelX = leftPos + this.imageWidth;
-        int panelY = topPos + 5; // Push it down 5 pixels from the top
+        int maxSoulBarHeight = 71;
+        int soulBarWidth = 16;
 
-        // 3. Draw the upgrade panel
-        // Parameters: texture, x, y, uOffset, vOffset, width, height
-        guiGraphics.blit(UPGRADE_PANEL, panelX, panelY, 0, 0, 27, 83);
+        if (maxSouls > 0 && souls > 0) {
+            float soulRatio = (float) souls / maxSouls;
+            int currentSoulHeight = (int) (maxSoulBarHeight * soulRatio);
+            int emptySoulPixels = maxSoulBarHeight - currentSoulHeight;
+
+            int soulBarX = this.leftPos + 5;
+            int soulBarY = this.topPos + 5;
+
+            guiGraphics.blit(SOUL_BAR_TEXTURE,
+                    soulBarX,
+                    soulBarY + emptySoulPixels,
+                    0,
+                    emptySoulPixels,
+                    soulBarWidth,
+                    currentSoulHeight,
+                    soulBarWidth,
+                    maxSoulBarHeight);
+        }
+
+        int burnTime = this.menu.getData().get(4);
+        int totalBurnTime = this.menu.getData().get(5);
+
+        //CENTER FIRE
+        int maxFireHeight = 51;
+        int fireWidth = 39;
+
+        if (burnTime > 0 && totalBurnTime > 0) {
+
+            int currentFireHeight = (int) (((float) burnTime / totalBurnTime) * maxFireHeight);
+            int emptyFirePixels = maxFireHeight - currentFireHeight;
+
+            int fireX = this.leftPos + 69;
+            int fireY = this.topPos + 12;
+
+            guiGraphics.blit(FIRE_TEXTURE,
+                    fireX,
+                    fireY + emptyFirePixels,
+                    0,
+                    emptyFirePixels,
+                    fireWidth,
+                    currentFireHeight,
+                    fireWidth,
+                    maxFireHeight);
+        }
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY); // Renders item names when hovering
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title,  this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
     }
 }

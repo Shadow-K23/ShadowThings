@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.logging.log4j.core.jmx.Server;
 import org.slf4j.Logger;
@@ -38,6 +39,8 @@ public abstract class AbstractSoulEntity extends BlockEntity {
     protected BlockPos linkedCorePos = null;
 
     protected int visualTransferTimer = 0; // Tracks how long to spawn particles
+
+
 
     public abstract TagKey<Item> getAllowedUpgradeTag();
 
@@ -94,7 +97,9 @@ public abstract class AbstractSoulEntity extends BlockEntity {
 
     }
 
-    //TODO: A LASER BETWEEN CORE  AND CONNECTED MACHINES WHEN HOLDING LINKER TOOL
+    public AABB getRenderBoundingBox() {
+        return AABB.INFINITE;
+    }
 
     public int getSouls() { return souls; }
     public int getMaxSouls() { return maxSouls; }

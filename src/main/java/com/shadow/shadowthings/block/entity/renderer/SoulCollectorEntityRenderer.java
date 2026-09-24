@@ -3,23 +3,28 @@ package com.shadow.shadowthings.block.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.shadow.shadowthings.block.entity.SoulCollectorEntity;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulOrbModel;
+import com.shadow.shadowthings.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.phys.Vec3;
 
-public class SoulCollectorEntityRenderer implements BlockEntityRenderer<SoulCollectorEntity> {
+public class SoulCollectorEntityRenderer extends AbstractSoulEntityRenderer<SoulCollectorEntity> {
 
     private final SoulOrbModel orbModel;
 
     public SoulCollectorEntityRenderer(BlockEntityRendererProvider.Context context) {
+        super(context);
         this.orbModel = new SoulOrbModel(context.bakeLayer(SoulOrbModel.LAYER_LOCATION));
     }
 
     @Override
-    public void render(SoulCollectorEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void renderMachine(SoulCollectorEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         long time = entity.getLevel().getGameTime();
 
@@ -62,5 +67,7 @@ public class SoulCollectorEntityRenderer implements BlockEntityRenderer<SoulColl
         this.orbModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
 
         poseStack.popPose();
+
+
     }
 }

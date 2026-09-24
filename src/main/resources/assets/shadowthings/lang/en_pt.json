@@ -1,0 +1,186 @@
+{
+  "item.shadowthings.shadow_ingot": "Shadow Doubloon",
+  "item.shadowthings.raw_shadow_steel": "Unforged Shadow Booty",
+
+  "item.shadowthings.shadow_sword": "Shadow Cutlass",
+  "item.shadowthings.shadow_hoe": "Shadow Scrapper",
+  "item.shadowthings.shadow_shovel": "Shadow Spade",
+  "item.shadowthings.shadow_pickaxe": "Shadow Pick",
+  "item.shadowthings.shadow_axe": "Shadow Hatchet",
+
+  "item.shadowthings.shadow_scythe": "Reaper's Hook",
+  "item.shadowthings.shadow_bow": "Shadow Shooter",
+
+  "item.shadowthings.soul_linker": "Soul Compass",
+  "item.shadowthings.shadow_hammer": "Shadow Smasher",
+
+  "item.shadowthings.soul_matrix": "Soul Mechanism",
+  "item.shadowthings.soul_fruit_1": "Davy Jones' Apple",
+  "item.shadowthings.soul_fruit_2": "Lapis Davy Jones' Apple",
+  "item.shadowthings.soul_fruit_3": "Amethyst Davy Jones' Apple",
+
+  "item.shadowthings.soul_upgrade_base_1": "Rigging Base T1",
+  "item.shadowthings.soul_upgrade_base_2": "Rigging Base T2",
+  "item.shadowthings.soul_upgrade_base_3": "Rigging Base T3",
+  "item.shadowthings.soul_upgrade_base_4": "Rigging Base T4",
+  "item.shadowthings.soul_upgrade_base_5": "Rigging Base T5",
+
+  "item.shadowthings.soul_upgrade_capacity_1": "Soul Hold Upgrade T1",
+  "item.shadowthings.soul_upgrade_capacity_2": "Soul Hold Upgrade T2",
+  "item.shadowthings.soul_upgrade_capacity_3": "Soul Hold Upgrade T3",
+  "item.shadowthings.soul_upgrade_capacity_4": "Soul Hold Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_transfer_amount_1": "Plunder Size Upgrade T1",
+  "item.shadowthings.soul_upgrade_transfer_amount_2": "Plunder Size Upgrade T2",
+  "item.shadowthings.soul_upgrade_transfer_amount_3": "Plunder Size Upgrade T3",
+  "item.shadowthings.soul_upgrade_transfer_amount_4": "Plunder Size Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_transfer_rate_1": "Winds Speed Upgrade T1",
+  "item.shadowthings.soul_upgrade_transfer_rate_2": "Winds Speed Upgrade T2",
+  "item.shadowthings.soul_upgrade_transfer_rate_3": "Winds Speed Upgrade T3",
+  "item.shadowthings.soul_upgrade_transfer_rate_4": "Winds Speed Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Rationing Upgrade T1",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Rationing Upgrade T2",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Rationing Upgrade T3",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Rationing Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_smelt_amount_1": "Furnace Load Upgrade T1",
+  "item.shadowthings.soul_upgrade_smelt_amount_2": "Furnace Load Upgrade T2",
+  "item.shadowthings.soul_upgrade_smelt_amount_3": "Furnace Load Upgrade T3",
+  "item.shadowthings.soul_upgrade_smelt_amount_4": "Furnace Load Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_smelt_speed_1": "Furnace Draft Upgrade T1",
+  "item.shadowthings.soul_upgrade_smelt_speed_2": "Furnace Draft Upgrade T2",
+  "item.shadowthings.soul_upgrade_smelt_speed_3": "Furnace Draft Upgrade T3",
+  "item.shadowthings.soul_upgrade_smelt_speed_4": "Furnace Draft Upgrade T4",
+
+  "item.shadowthings.soul_upgrade_redstone_control": "Red Dust Rigging",
+  "item.shadowthings.soul_upgrade_overload": "Powder Keg Upgrade",
+
+  "item.shadowthings.bar_brawl_music_disc": "Shanty Disc (Bar Brawl)",
+  "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "effect.shadowthings.slimey": "Sticky Bilge",
+  "effect.shadowthings.shadow_curse": "Davy Jones' Hex",
+
+  "item.minecraft.potion.effect.slimey_potion": "Brew of Sticky Bilge",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Splashin' Brew of Sticky Bilge",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Lingering Brew of Sticky Bilge",
+
+  "item.minecraft.potion.effect.shadow_curse_potion": "Brew of Davy Jones' Hex",
+  "item.minecraft.splash_potion.effect.shadow_curse_potion": "Splashin' Brew of Davy Jones' Hex",
+  "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Lingering Brew of Davy Jones' Hex",
+
+  "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Dart of Davy Jones' Hex",
+
+  "enchantment.shadowthings.lightning_strike": "Storm's Wrath",
+  "enchantment.shadowthings.poison_strike": "Viper's Kiss",
+  "enchantment.shadowthings.shadow_strike": "Shadow's Bite",
+  "enchantment.shadowthings.soul_stealer": "Soul Plunderer",
+
+
+  "item.shadowthings.shadow_helmet": "Shadow Tricorn",
+  "item.shadowthings.shadow_chestplate": "Shadow Coat",
+  "item.shadowthings.shadow_leggings": "Shadow Pegs",
+  "item.shadowthings.shadow_boots": "Shadow Boots",
+
+  "item.shadowthings.shadow_horse_armor": "Shadow Steed Armor",
+
+  "item.shadowthings.radish_seeds": "Turnip Seeds",
+  "item.shadowthings.shadow_berry": "Shadow Scurvy Berries",
+
+
+  "item.shadowthings.super_fuel": "Blazing Grog",
+
+
+  "block.shadowthings.shadow_block": "Crate of Shadow Doubloons",
+  "block.shadowthings.shadow_ore": "Buried Shadow",
+  "block.shadowthings.shadow_deepslate_ore": "Deep Buried Shadow",
+  "block.shadowthings.shadow_nether_ore": "Nether Buried Shadow",
+  "block.shadowthings.shadow_end_ore": "Void Buried Shadow",
+
+  "block.shadowthings.shadow_stairs": "Shadow Steps",
+  "block.shadowthings.shadow_slab": "Shadow Half-Timber",
+
+  "block.shadowthings.shadow_pressure_plate": "Shadow Step-Plate",
+  "block.shadowthings.shadow_button": "Shadow Peg",
+
+  "block.shadowthings.shadow_fence": "Shadow Railing",
+  "block.shadowthings.shadow_fence_gate": "Shadow Hatch",
+  "block.shadowthings.shadow_wall": "Shadow Bulwark",
+
+  "block.shadowthings.shadow_door": "Shadow Cabin Door",
+  "block.shadowthings.shadow_trapdoor": "Shadow Deck Hatch",
+
+  "block.shadowthings.soul_core": "Heart of the Sea Core",
+  "block.shadowthings.soul_furnace_controller": "Galley Stove Wheel",
+  "block.shadowthings.soul_furnace": "Soul Galley Stove",
+  "block.shadowthings.soul_crafter": "Shipwright's Bench",
+  "block.shadowthings.soul_pedestal": "Soul Shrine",
+  "block.shadowthings.soul_structure_block": "Ship-Builder's Block",
+
+  "block.shadowthings.shadow_machine_block": "Shadow Contraption Block",
+  "block.shadowthings.soul_condenser": "Soul Net",
+  "block.shadowthings.soul_crucible": "Soul Bilge",
+  "block.shadowthings.soul_collector": "Davy Jones' Locker",
+
+
+  "block.shadowthings.radish_crop": "Turnip Patch",
+  "block.shadowthings.shadow_berries_bush": "Shadow Scurvy Bush",
+
+  "block.shadowthings.shadowwood_log": "Shadow Timber",
+  "block.shadowthings.shadowwood_wood": "Shadow Wood",
+
+  "block.shadowthings.stripped_shadowwood_log": "Peeled Shadow Timber",
+  "block.shadowthings.stripped_shadowwood_wood": "Peeled Shadow Wood",
+
+  "block.shadowthings.shadowwood_planks": "Shadow Planks",
+  "block.shadowthings.shadowwood_sapling": "Shadow Shoot",
+  "block.shadowthings.shadowwood_leaves": "Shadow Fronds",
+
+  "creativetab.shadowthings.shadow_blocks": "Shadow Timbers & Blocks",
+  "creativetab.shadowthings.shadow_items": "Shadow Plunder",
+
+  "gui.shadowthings.player_souls": "Cap'n's Souls:",
+  "gui.shadowthings.core_siphon": "Soul Pump",
+  "gui.shadowthings.soul_amount": "Souls in the hold:",
+  "gui.shadowthings.transfer_rate": "Wind speed:",
+  "gui.shadowthings.transfer_amount": "Cargo size:",
+  "gui.shadowthings.soul_net_change": "Ebb and flow:",
+  "gui.shadowthings.core_health": "Hull integrity:",
+  "gui.shadowthings.active": "Sailin'",
+  "gui.shadowthings.inactive": "Anchored",
+
+  "message.shadowthings.linking_tool_reset": "§eYer compass be wiped clean, matey.",
+  "message.shadowthings.furnace_distance_warning": "§cAvast! The barrel be too far from the stove!",
+  "message.shadowthings.furnace_inventory_warning": "§cThat ain't a booty chest!",
+  "message.shadowthings.furnace_input.info": "§aInflow tied. Now find the outflow.",
+  "message.shadowthings.furnace_output.info": "§bOutflow tied. Riggin' be done.",
+  "message.shadowthings.furnace_destroyed": "§cThe galley stove be shattered! Riggin' aborted!",
+  "message.shadowthings.core_saved": "§dX marks the Core.",
+  "message.shadowthings.furnace_config_start": "§dStartin' stove riggin'. Tap the inflow.",
+  "message.shadowthings.core_range_warning": "§cThe contraption be too far from the Core!",
+  "message.shadowthings.core_linking_finished": "§aThe contraption be tied to the Core, aye!",
+  "message.shadowthings.core_meltdown_warning": "§c§l[WARNING] ABANDON SHIP! CORE MELTDOWN IMMINENT YARRR§r",
+
+  "tooltip.shadowthings.shift": "§7Hold§r §6§lShift§r§r §7to read the map.§r",
+
+  "tooltip.shadowthings.soul_core": "The beatin' heart of yer soul contraption.",
+  "tooltip.shadowthings.soul_furnace_controller": "The wheel o' the soul stove.",
+  "tooltip.shadowthings.soul_crafter": "Used for shapin' fine pirate gear.",
+  "tooltip.shadowthings.soul_pedestal": "Used for dark soul craftin'.",
+  "tooltip.shadowthings.soul_structure_block": "Used for layin' down the ship's bones.",
+  "tooltip.shadowthings.soul_condenser": "Gathers souls right out of the salty breeze.",
+  "tooltip.shadowthings.soul_crucible": "Brews souls from the remains of the cursed.",
+  "tooltip.shadowthings.soul_collector": "Steals the souls of scallywags who walk the plank near it.",
+
+  "tooltip.shadowthings.shadow_scythe": "A wicked hook that rips souls from yer foes.",
+  "tooltip.shadowthings.shadow_hammer": "Smashes timbers in a 3x3 square.",
+  "tooltip.shadowthings.soul_linker": "A compass for tying yer Core to other contraptions.",
+  "tooltip.shadowthings.soul_upgrade_overload": "The most §dpowerful§r rigging. §c§lHandle with care, or boom!§r",
+  "tooltip.shadowthings.soul_matrix": "A tangled web for craftin' the finest plunder.",
+  "tooltip.shadowthings.soul_fruit_1": "Stretches yer soul hold up to 1750!",
+  "tooltip.shadowthings.soul_fruit_2": "Stretches yer soul hold up to 4250!",
+  "tooltip.shadowthings.soul_fruit_3": "Stretches yer soul hold up to 7500!"
+}

@@ -21,13 +21,13 @@ public class SoulCrafterScreen extends AbstractContainerScreen<SoulCrafterMenu> 
     @Override
     protected void init() {
         super.init();
-
+        this.inventoryLabelY = this.imageHeight - 94;
         // Add the Craft Button
         this.addRenderableWidget(Button.builder(Component.literal("Craft"), button -> {
             // Send the network packet to the server!
             var pos = this.menu.getBlockEntity().getBlockPos();
             PacketDistributor.sendToServer(new ModStartCraftingPayload(pos));
-        }).bounds(this.leftPos + 50, this.topPos + 60, 76, 20).build());
+        }).bounds(this.leftPos + 60, this.topPos + 60, 56, 20).build());
     }
 
     @Override
@@ -42,5 +42,11 @@ public class SoulCrafterScreen extends AbstractContainerScreen<SoulCrafterMenu> 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY); // Renders item names when hovering
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0xF2D5FF, false);
     }
 }

@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import com.shadow.shadowthings.ShadowThings;
 import com.shadow.shadowthings.block.custom.SoulFurnaceBlock;
 import com.shadow.shadowthings.block.entity.SoulFurnaceEntity;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulFurnaceModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
-public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnaceEntity> {
+public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFurnaceEntity> {
 
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ShadowThings.MODID, "textures/entity/soul_furnace.png");
 
@@ -29,12 +30,13 @@ public class SoulFurnaceEntityRenderer implements BlockEntityRenderer<SoulFurnac
     private float clientSmoothedMomentum = 0.0f;
 
     public SoulFurnaceEntityRenderer(BlockEntityRendererProvider.Context context) {
+        super(context);
         this.itemRenderer = context.getItemRenderer();
         this.furnaceModel = new SoulFurnaceModel(context.bakeLayer(SoulFurnaceModel.LAYER_LOCATION));
     }
 
     @Override
-    public void render(SoulFurnaceEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void renderMachine(SoulFurnaceEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (!entity.isFormed) return;
 
         float centerX = 0.5f;

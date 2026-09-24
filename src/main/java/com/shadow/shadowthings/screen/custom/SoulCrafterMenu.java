@@ -30,9 +30,9 @@ public class SoulCrafterMenu extends AbstractSoulMenu {
 
         this.blockEntity = (SoulCrafterEntity) entity;
         this.levelAccess = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
-        this.addUpgradeSlots(blockEntity, 180, 10);
+        this.addUpgradeSlots(blockEntity, 155, 6);
         // Add the 1 slot for the Crafter's Catalyst (x: 80, y: 35)
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 33));
 
         // Add the Player's Inventory (Standard math for alignment)
         addPlayerInventory(inv);

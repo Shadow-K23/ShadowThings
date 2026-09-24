@@ -23,7 +23,7 @@ public class SoulCrucibleMenu extends AbstractSoulMenu {
 
     // Client-side constructor (Adds dummy data for the client to read)
     public SoulCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new net.minecraft.world.inventory.SimpleContainerData(4));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new net.minecraft.world.inventory.SimpleContainerData(6));
     }
 
     // Server-side constructor (Accepts the real data from the entity)
@@ -35,8 +35,8 @@ public class SoulCrucibleMenu extends AbstractSoulMenu {
         this.levelAccess = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
         this.data = data; // Assign the data
 
-        this.addUpgradeSlots(blockEntity, 180, 10);
-        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 0, 80, 35));
+        this.addUpgradeSlots(blockEntity, 155, 6);
+        this.addSlot(new SlotItemHandler(this.blockEntity.mainInventory, 0, 80, 33));
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -49,25 +49,53 @@ public class SoulCrucibleMenu extends AbstractSoulMenu {
         return this.blockEntity;
     }
 
+    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 0;
+    private static final int TE_INVENTORY_SLOT_COUNT = 5; // 4 upgrades + 2 main slots
+
+    private static final int VANILLA_FIRST_SLOT_INDEX = TE_INVENTORY_SLOT_COUNT;
+    private static final int HOTBAR_SLOT_COUNT = 9;
+    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
+    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
+    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
+    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
+
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
-        // Required method for shift-clicking items between inventories
-        Slot slot = this.slots.get(index);
-        if (!slot.hasItem()) return ItemStack.EMPTY;
+    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
+        Slot sourceSlot = slots.get(pIndex);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
+        ItemStack sourceStack = sourceSlot.getItem();
+        ItemStack copyOfSourceStack = sourceStack.copy();
 
-        ItemStack stackInSlot = slot.getItem();
-        ItemStack originalStack = stackInSlot.copy();
-
-        if (index == 0) {
-            if (!this.moveItemStackTo(stackInSlot, 1, 37, true)) return ItemStack.EMPTY;
-        } else if (!this.moveItemStackTo(stackInSlot, 0, 1, false)) { // If clicking Player inventory
+        // If clicked in TE -> Move to Player Inventory
+        if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+                return ItemStack.EMPTY;
+            }
+        }
+        // If clicked in Player Inventory -> Move to TE (Prefers Input Slot 4, then Upgrades)
+        else if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+            // Try input slot first (Slot 4)
+            if (!moveItemStackTo(sourceStack, 4, 5, false)) {
+                // Then try upgrade slots (Slots 0 to 3)
+                if (!moveItemStackTo(sourceStack, 0, 4, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+        } else {
             return ItemStack.EMPTY;
         }
 
-        if (stackInSlot.isEmpty()) slot.setByPlayer(ItemStack.EMPTY);
-        else slot.setChanged();
+        if (sourceStack.getCount() == 0) {
+            sourceSlot.set(ItemStack.EMPTY);
+        } else {
+            sourceSlot.setChanged();
+        }
+        sourceSlot.onTake(playerIn, sourceStack);
+        return copyOfSourceStack;
+    }
 
-        return originalStack;
+    public ContainerData getData() {
+        return this.data;
     }
 
     @Override

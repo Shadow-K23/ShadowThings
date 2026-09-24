@@ -102,6 +102,8 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
 
     public int smeltAmountTier = 0;
     public int soulEfficiencyTier = 0;
+    public BlockPos inputPos = null;
+    public BlockPos outputPos = null;
 
     public boolean isSmelting = false;
 
@@ -285,34 +287,23 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
     }
 
     private void tickAutoIO(Level level, BlockPos pos) {
-
         int stackTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_SPEED);
         int checkInterval = 10;
-        if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())){stackTier = 4;checkInterval = 5;}
-
+        if (this.hasUpgrade(ModItems.SOUL_UPGRADE_OVERLOAD.get())) {
+            stackTier = 4;
+            checkInterval = 5;
+        }
 
         if (level.getGameTime() % checkInterval != 0) return;
 
-        // Check all 6 directions around the controller block
-        int radius = 2;
-
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
-                // Skip the center block (the machine itself)
-                if (x == 0 && z == 0) continue;
-
-                BlockPos targetPos = pos.offset(x, 0, z);
-
-                IItemHandler adjacentHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, targetPos, null);
-
-                if (adjacentHandler == null) continue;
-
-
-                // --- 2. PUSH OUTPUT (Slot 1 -> Adjacent Inventory) ---
+        // --- 2. PUSH OUTPUT ---
+        if (this.outputPos != null) {
+            IItemHandler outHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, this.outputPos, null);
+            if (outHandler != null) {
                 ItemStack outputStack = mainInventory.getStackInSlot(1);
                 if (!outputStack.isEmpty()) {
-                    for (int i = 0; i < adjacentHandler.getSlots(); i++) {
-                        ItemStack remainder = adjacentHandler.insertItem(i, outputStack, false);
+                    for (int i = 0; i < outHandler.getSlots(); i++) {
+                        ItemStack remainder = outHandler.insertItem(i, outputStack, false);
                         if (remainder.getCount() < outputStack.getCount()) {
                             mainInventory.setStackInSlot(1, remainder);
                             setChanged();
@@ -321,46 +312,44 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
                         }
                     }
                 }
+            }
+        }
 
+        // --- 3. PULL INPUT ---
+        if (this.inputPos != null) {
+            IItemHandler inHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, this.inputPos, null);
+            if (inHandler != null) {
+                ItemStack inputSlot = mainInventory.getStackInSlot(0);
+                int maxStackSize = 64;
 
+                if (inputSlot.isEmpty() || inputSlot.getCount() < maxStackSize) {
+                    for (int i = 0; i < inHandler.getSlots(); i++) {
+                        ItemStack candidate = inHandler.extractItem(i, maxStackSize, true);
+                        if (!candidate.isEmpty()) {
+                            SingleRecipeInput inventoryWrapper = new SingleRecipeInput(candidate);
+                            boolean canSmelt = level.getRecipeManager()
+                                    .getRecipeFor(RecipeType.SMELTING, inventoryWrapper, level).isPresent();
 
-            // --- 3. PULL INPUT (Adjacent Inventory -> Slot 0) ---
-            ItemStack inputSlot = mainInventory.getStackInSlot(0);
-            int maxStackSize = 64; // Default max stack size fallback
-
-            // Check if input slot has room for more items
-            if (inputSlot.isEmpty() || inputSlot.getCount() < maxStackSize) {
-                for (int i = 0; i < adjacentHandler.getSlots(); i++) {
-                    // Simulate extraction to check what the item is
-                    ItemStack candidate = adjacentHandler.extractItem(i, maxStackSize, true);
-
-                    if (!candidate.isEmpty()) {
-                        // Verify if it can be smelted by the furnace
-                        SingleRecipeInput inventoryWrapper = new SingleRecipeInput(candidate);
-                        boolean canSmelt = level.getRecipeManager()
-                                .getRecipeFor(RecipeType.SMELTING, inventoryWrapper, level).isPresent();
-
-                        if (canSmelt) {
-                            // If slot already has items, make sure the candidate matches the exact same item type
-                            if (!inputSlot.isEmpty() && !ItemStack.isSameItemSameComponents(inputSlot, candidate)) {
-                                continue;
-                            }
-
-                            // Calculate exact space available in the slot
-                            int upgradeBatchLimit = Math.max(1, stackTier * 16);
-                            int spaceLeft = inputSlot.isEmpty() ? candidate.getMaxStackSize() : inputSlot.getMaxStackSize() - inputSlot.getCount();
-                            int extractAmount = Math.min(candidate.getCount(), Math.min(spaceLeft, upgradeBatchLimit));
-                            // Perform the actual extraction for the full batch size
-                            ItemStack realExtracted = adjacentHandler.extractItem(i, extractAmount, false);
-                            if (!realExtracted.isEmpty()) {
-                                if (inputSlot.isEmpty()) {
-                                    mainInventory.setStackInSlot(0, realExtracted);
-                                } else {
-                                    inputSlot.grow(realExtracted.getCount());
+                            if (canSmelt) {
+                                if (!inputSlot.isEmpty() && !ItemStack.isSameItemSameComponents(inputSlot, candidate)) {
+                                    continue;
                                 }
-                                setChanged();
-                                level.sendBlockUpdated(pos, getBlockState(), getBlockState(), 3);
-                                break;
+
+                                int upgradeBatchLimit = Math.max(1, stackTier * 16);
+                                int spaceLeft = inputSlot.isEmpty() ? candidate.getMaxStackSize() : inputSlot.getMaxStackSize() - inputSlot.getCount();
+                                int extractAmount = Math.min(candidate.getCount(), Math.min(spaceLeft, upgradeBatchLimit));
+
+                                ItemStack realExtracted = inHandler.extractItem(i, extractAmount, false);
+                                if (!realExtracted.isEmpty()) {
+                                    if (inputSlot.isEmpty()) {
+                                        mainInventory.setStackInSlot(0, realExtracted);
+                                    } else {
+                                        inputSlot.grow(realExtracted.getCount());
+                                    }
+                                    setChanged();
+                                    level.sendBlockUpdated(pos, getBlockState(), getBlockState(), 3);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -368,7 +357,7 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
             }
         }
     }
-    }
+
 
     @Override
     protected void onUpgradesChanged() {
@@ -413,9 +402,12 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         tag.putFloat("MomentumGain", this.momentumGainRate);
         tag.putFloat("MomentumDecay", this.momentumDecayRate);
         tag.putInt("SmeltAmount", this.smeltAmountTier);
+        tag.putInt("SoulEfficiency", this.soulEfficiencyTier);
         tag.putInt("Progress", this.progress);
         tag.putBoolean("IsSmelting", this.isSmelting);
         tag.put("MainInventory", mainInventory.serializeNBT(registries));
+        if (this.inputPos != null) tag.putLong("InputPos", this.inputPos.asLong());
+        if (this.outputPos != null) tag.putLong("OutputPos", this.outputPos.asLong());
     }
 
     @Override
@@ -427,10 +419,14 @@ public class SoulFurnaceEntity extends AbstractSoulEntity implements MenuProvide
         this.momentumGainRate = tag.getFloat("MomentumGain");
         this.momentumDecayRate = tag.getFloat("MomentumDecay");
         this.smeltAmountTier = tag.getInt("SmeltAmount");
+        this.soulEfficiencyTier = tag.getInt("SoulEfficiency");
         this.progress = tag.getInt("Progress");
         this.isSmelting = tag.getBoolean("IsSmelting");
         mainInventory.deserializeNBT(registries, tag.getCompound("MainInventory"));
+        if (tag.contains("InputPos")) this.inputPos = BlockPos.of(tag.getLong("InputPos"));
+        if (tag.contains("OutputPos")) this.outputPos = BlockPos.of(tag.getLong("OutputPos"));
     }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.shadowthings.soul_furnace");

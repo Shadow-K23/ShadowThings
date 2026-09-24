@@ -1,0 +1,186 @@
+{
+  "item.shadowthings.shadow_ingot": "Cieniowo Sztaba",
+  "item.shadowthings.raw_shadow_steel": "Surowo Cieniowo Sztaba",
+
+  "item.shadowthings.shadow_sword": "Cieniowy Mieczok",
+  "item.shadowthings.shadow_hoe": "Cieniowo Haczka",
+  "item.shadowthings.shadow_shovel": "Cieniowa Ryla",
+  "item.shadowthings.shadow_pickaxe": "Cieniowy Kilof",
+  "item.shadowthings.shadow_axe": "Cieniowo Zekera",
+
+  "item.shadowthings.shadow_scythe": "Cieniowo Kosa",
+  "item.shadowthings.shadow_bow": "Cieniowy Bogen",
+
+  "item.shadowthings.soul_linker": "Duszny Binder",
+  "item.shadowthings.shadow_hammer": "Cieniowy Młot",
+
+  "item.shadowthings.soul_matrix": "Duszna Matryca",
+  "item.shadowthings.soul_fruit_1": "Duszna Bania",
+  "item.shadowthings.soul_fruit_2": "Lapisowo Duszna Bania",
+  "item.shadowthings.soul_fruit_3": "Ametystowo Duszna Bania",
+
+  "item.shadowthings.soul_upgrade_base_1": "Podstawa Apgrejdu T1",
+  "item.shadowthings.soul_upgrade_base_2": "Podstawa Apgrejdu T2",
+  "item.shadowthings.soul_upgrade_base_3": "Podstawa Apgrejdu T3",
+  "item.shadowthings.soul_upgrade_base_4": "Podstawa Apgrejdu T4",
+  "item.shadowthings.soul_upgrade_base_5": "Podstawa Apgrejdu T5",
+
+  "item.shadowthings.soul_upgrade_capacity_1": "Apgrejd Dusznego Kabzla T1",
+  "item.shadowthings.soul_upgrade_capacity_2": "Apgrejd Dusznego Kabzla T2",
+  "item.shadowthings.soul_upgrade_capacity_3": "Apgrejd Dusznego Kabzla T3",
+  "item.shadowthings.soul_upgrade_capacity_4": "Apgrejd Dusznego Kabzla T4",
+
+  "item.shadowthings.soul_upgrade_transfer_amount_1": "Apgrejd Srogigo Przesyłu T1",
+  "item.shadowthings.soul_upgrade_transfer_amount_2": "Apgrejd Srogigo Przesyłu T2",
+  "item.shadowthings.soul_upgrade_transfer_amount_3": "Apgrejd Srogigo Przesyłu T3",
+  "item.shadowthings.soul_upgrade_transfer_amount_4": "Apgrejd Srogigo Przesyłu T4",
+
+  "item.shadowthings.soul_upgrade_transfer_rate_1": "Apgrejd Gibkigo Przesyłu T1",
+  "item.shadowthings.soul_upgrade_transfer_rate_2": "Apgrejd Gibkigo Przesyłu T2",
+  "item.shadowthings.soul_upgrade_transfer_rate_3": "Apgrejd Gibkigo Przesyłu T3",
+  "item.shadowthings.soul_upgrade_transfer_rate_4": "Apgrejd Gibkigo Przesyłu T4",
+
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Apgrejd Oszczyndzania T1",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Apgrejd Oszczyndzania T2",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Apgrejd Oszczyndzania T3",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Apgrejd Oszczyndzania T4",
+
+  "item.shadowthings.soul_upgrade_smelt_amount_1": "Apgrejd Srogigo Waryniŏ T1",
+  "item.shadowthings.soul_upgrade_smelt_amount_2": "Apgrejd Srogigo Waryniŏ T2",
+  "item.shadowthings.soul_upgrade_smelt_amount_3": "Apgrejd Srogigo Waryniŏ T3",
+  "item.shadowthings.soul_upgrade_smelt_amount_4": "Apgrejd Srogigo Waryniŏ T4",
+
+  "item.shadowthings.soul_upgrade_smelt_speed_1": "Apgrejd Gibkigo Waryniŏ T1",
+  "item.shadowthings.soul_upgrade_smelt_speed_2": "Apgrejd Gibkigo Waryniŏ T2",
+  "item.shadowthings.soul_upgrade_smelt_speed_3": "Apgrejd Gibkigo Waryniŏ T3",
+  "item.shadowthings.soul_upgrade_smelt_speed_4": "Apgrejd Gibkigo Waryniŏ T4",
+
+  "item.shadowthings.soul_upgrade_redstone_control": "Apgrejd na Czerwony Sztaub",
+  "item.shadowthings.soul_upgrade_overload": "Apgrejd Przeładowanio",
+
+  "item.shadowthings.bar_brawl_music_disc": "Plata ze Muzykōm (Bar Brawl)",
+  "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "effect.shadowthings.slimey": "Glajzowaty",
+  "effect.shadowthings.shadow_curse": "Cieniowe Heksen",
+
+  "item.minecraft.potion.effect.slimey_potion": "Eliksiyr Glajzy",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Ciepany Eliksiyr Glajzy",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Dugi Eliksiyr Glajzy",
+
+  "item.minecraft.potion.effect.shadow_curse_potion": "Eliksiyr Cieniowego Heksen",
+  "item.minecraft.splash_potion.effect.shadow_curse_potion": "Ciepany Eliksiyr Cieniowego Heksen",
+  "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Dugi Eliksiyr Cieniowego Heksen",
+
+  "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Strzała Cieniowego Heksen",
+
+  "enchantment.shadowthings.lightning_strike": "Pieruńskie Bicie",
+  "enchantment.shadowthings.poison_strike": "Trujōnce Bicie",
+  "enchantment.shadowthings.shadow_strike": "Cieniowe Bicie",
+  "enchantment.shadowthings.soul_stealer": "Kradziok Dusz",
+
+
+  "item.shadowthings.shadow_helmet": "Cieniowo Muca",
+  "item.shadowthings.shadow_chestplate": "Cieniowy Klajd",
+  "item.shadowthings.shadow_leggings": "Cieniowe Galoty",
+  "item.shadowthings.shadow_boots": "Cieniowe Szczewiki",
+
+  "item.shadowthings.shadow_horse_armor": "Cieniowo Zbroja lo Kōnia",
+
+  "item.shadowthings.radish_seeds": "Ziołna ze Rzodkwi",
+  "item.shadowthings.shadow_berry": "Cieniowe Jagody",
+
+
+  "item.shadowthings.super_fuel": "Pieroński Hajc",
+
+
+  "block.shadowthings.shadow_block": "Blok ze Cieniowyj Sztaby",
+  "block.shadowthings.shadow_ore": "Cieniowy Kamol",
+  "block.shadowthings.shadow_deepslate_ore": "Głymboki Cieniowy Kamol",
+  "block.shadowthings.shadow_nether_ore": "Piekielny Cieniowy Kamol",
+  "block.shadowthings.shadow_end_ore": "Endowy Cieniowy Kamol",
+
+  "block.shadowthings.shadow_stairs": "Cieniowe Sztigi",
+  "block.shadowthings.shadow_slab": "Cieniowo Płyta",
+
+  "block.shadowthings.shadow_pressure_plate": "Cieniowy Zic do Deptanio",
+  "block.shadowthings.shadow_button": "Cieniowy Knefel",
+
+  "block.shadowthings.shadow_fence": "Cieniowo Zogroda",
+  "block.shadowthings.shadow_fence_gate": "Cieniowy Ajnfart",
+  "block.shadowthings.shadow_wall": "Cieniowy Mur",
+
+  "block.shadowthings.shadow_door": "Cieniowe Dźwiyrze",
+  "block.shadowthings.shadow_trapdoor": "Cieniowa Klapa",
+
+  "block.shadowthings.soul_core": "Duszny Zdrzodek",
+  "block.shadowthings.soul_furnace_controller": "Majster Dusznego Piecoka",
+  "block.shadowthings.soul_furnace": "Duszny Piecok",
+  "block.shadowthings.soul_crafter": "Duszny Werksztel",
+  "block.shadowthings.soul_pedestal": "Duszny Zocel",
+  "block.shadowthings.soul_structure_block": "Duszny Blok do Budowanio",
+
+  "block.shadowthings.shadow_machine_block": "Blok Cieniowyj Maszyny",
+  "block.shadowthings.soul_condenser": "Duszny Kondynsator",
+  "block.shadowthings.soul_crucible": "Duszny Hasiok",
+  "block.shadowthings.soul_collector": "Zbiyrok Dusz",
+
+
+  "block.shadowthings.radish_crop": "Pole ze Rzodkwiōm",
+  "block.shadowthings.shadow_berries_bush": "Krzok Cieniowych Jagod",
+
+  "block.shadowthings.shadowwood_log": "Cieniowy Pniok",
+  "block.shadowthings.shadowwood_wood": "Cieniowe Drzewo",
+
+  "block.shadowthings.stripped_shadowwood_log": "Uobobrany Cieniowy Pniok",
+  "block.shadowthings.stripped_shadowwood_wood": "Uobobrane Cieniowe Drzewo",
+
+  "block.shadowthings.shadowwood_planks": "Cieniowe Deski",
+  "block.shadowthings.shadowwood_sapling": "Cieniowo Flanca",
+  "block.shadowthings.shadowwood_leaves": "Cieniowe Liście",
+
+  "creativetab.shadowthings.shadow_blocks": "Cieniowe Bloki",
+  "creativetab.shadowthings.shadow_items": "Cieniowe Klamoty",
+
+  "gui.shadowthings.player_souls": "Dusze chopa:",
+  "gui.shadowthings.core_siphon": "Duszny Cuk",
+  "gui.shadowthings.soul_amount": "Wciepane dusze:",
+  "gui.shadowthings.transfer_rate": "Gibkość przesyłu:",
+  "gui.shadowthings.transfer_amount": "Wielość przesyłu:",
+  "gui.shadowthings.soul_net_change": "Roznica dusz:",
+  "gui.shadowthings.core_health": "Życie Zdrzodka:",
+  "gui.shadowthings.active": "Załonczone",
+  "gui.shadowthings.inactive": "Wyłonczone",
+
+  "message.shadowthings.linking_tool_reset": "§eBinder zresetowany, synek.",
+  "message.shadowthings.furnace_distance_warning": "§cKastla je za daleko łod piecoka!",
+  "message.shadowthings.furnace_inventory_warning": "§cToż to ni ma żodna kastla!",
+  "message.shadowthings.furnace_input.info": "§aWejście podpięte. Teroz klikej wyjście.",
+  "message.shadowthings.furnace_output.info": "§bWyjście podpięte. Skludzone.",
+  "message.shadowthings.furnace_destroyed": "§cDuszny Piecok rozdupcony, binder przerywo roboty!",
+  "message.shadowthings.core_saved": "§dZdrzodek zaszrajbowany.",
+  "message.shadowthings.furnace_config_start": "§dRyktowanie piecoka zaczynte. Klikej wejście.",
+  "message.shadowthings.core_range_warning": "§cMaszyna je za daleko łod Zdrzodka!",
+  "message.shadowthings.core_linking_finished": "§aMaszyna pospinano ze Zdrzodkiem, gryfnie!",
+  "message.shadowthings.core_meltdown_warning": "§c§l[POZÓR] DUSZNY ZDRZODEK ZARZKI PIERDYKNIE§r",
+
+  "tooltip.shadowthings.shift": "§7Ciś§r §6§lShift§r§r §7coby poczytać wiyncyj.§r",
+
+  "tooltip.shadowthings.soul_core": "Samo serce dusznego bajzlu.",
+  "tooltip.shadowthings.soul_furnace_controller": "Majster łod dusznego piecoka.",
+  "tooltip.shadowthings.soul_crafter": "Używane do rzeźbienia lepszych klamotów.",
+  "tooltip.shadowthings.soul_pedestal": "Używane do dusznego rzeźbienia.",
+  "tooltip.shadowthings.soul_structure_block": "Klocek do stawianio wielkich maszyn.",
+  "tooltip.shadowthings.soul_condenser": "Pasiywnie ciongnie dusze ze luftu.",
+  "tooltip.shadowthings.soul_crucible": "Robi dusze ze śmieci po umrzykach i dusznego piosku.",
+  "tooltip.shadowthings.soul_collector": "Zgarniŏ dusze z potworkōw co padajōm kole niego.",
+
+  "tooltip.shadowthings.shadow_scythe": "Pierońsko kosa co rwie dusze łod wrogōw.",
+  "tooltip.shadowthings.shadow_hammer": "Rozdupco bloki we kwadracie 3x3.",
+  "tooltip.shadowthings.soul_linker": "Narzędzie do spinania Zdrzodka z inszymi maszynami.",
+  "tooltip.shadowthings.soul_upgrade_overload": "Najbarzij §dpieroński§r apgrejd. §c§lDej pozōr jak to biereś§r",
+  "tooltip.shadowthings.soul_matrix": "Poplątano maszyna do rzeźbienia gryfnych klamotów.",
+  "tooltip.shadowthings.soul_fruit_1": "Robi wiyncyj miejsca na dusze we kałdunie chopa, aż do 1750!",
+  "tooltip.shadowthings.soul_fruit_2": "Robi wiyncyj miejsca na dusze we kałdunie chopa, aż do 4250!",
+  "tooltip.shadowthings.soul_fruit_3": "Robi wiyncyj miejsca na dusze we kałdunie chopa, aż do 7500!"
+}

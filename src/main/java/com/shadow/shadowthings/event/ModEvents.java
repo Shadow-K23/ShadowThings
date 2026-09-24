@@ -29,7 +29,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import java.util.HashSet;
 import java.util.Set;
 
-@EventBusSubscriber(modid = ShadowThings.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = ShadowThings.MODID)
 public class ModEvents {
     private  static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
 

@@ -3,6 +3,7 @@ package com.shadow.shadowthings.block.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntityRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -11,16 +12,17 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class SoulCrafterEntityRenderer implements BlockEntityRenderer<SoulCrafterEntity> {
+public class SoulCrafterEntityRenderer extends AbstractSoulEntityRenderer<SoulCrafterEntity> {
 
     private final ItemRenderer itemRenderer;
 
     public SoulCrafterEntityRenderer(BlockEntityRendererProvider.Context context) {
+        super(context);
         this.itemRenderer = context.getItemRenderer();
     }
 
     @Override
-    public void render(SoulCrafterEntity crafter, float partialTick, PoseStack poseStack,
+    public void renderMachine(SoulCrafterEntity crafter, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 
         ItemStack stack = crafter.inventory.getStackInSlot(0);

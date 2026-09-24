@@ -4,7 +4,9 @@ import com.shadow.shadowthings.server.ModDataAttachments;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+
 
 public class ModManaHudOverlay {
 
@@ -37,7 +39,7 @@ public class ModManaHudOverlay {
         int boxWidth = 102;
         int boxHeight = 22;
 
-        int maxBarWidth = 100;
+        int maxBarWidth = 101;
         int frameHeight = 20;  // Height of just ONE frame of your animation
         int totalFrames = 4;   // How many frames are in your tall image
         int totalImageHeight = frameHeight * totalFrames;
@@ -68,8 +70,8 @@ public class ModManaHudOverlay {
 
         // 5. DRAW ANIMATED BAR (With Scissoring)
         // We add +2 to x and y so the bar sits inside the box's borders
-        int barX = x + 2;
-        int barY = y + 2;
+        int barX = x + 1;
+        int barY = y + 1;
 
         double scale = minecraft.getWindow().getGuiScale();
 
@@ -87,10 +89,12 @@ public class ModManaHudOverlay {
         // Turn off clipping box
         guiGraphics.disableScissor();
 
+        Component text = Component.translatable("gui.shadowthings.player_souls")
+                .append(Component.literal(" " + targetMana + "/" + maxMana));
         // 6. DRAW TEXT
         guiGraphics.drawString(
                 minecraft.font,
-                "Souls: " + targetMana + "/" + maxMana,
+                text,
                 x + 5, y + 7,
                 0x41beff
         );

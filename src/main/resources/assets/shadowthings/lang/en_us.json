@@ -1,5 +1,5 @@
 {
-  "item.shadowthings.shadow_ingot": "Shadow Steel",
+  "item.shadowthings.shadow_ingot": "Shadow Steel Ingot",
   "item.shadowthings.raw_shadow_steel": "Raw Shadow Steel",
 
   "item.shadowthings.shadow_sword": "Shadow Sword",
@@ -142,7 +142,7 @@
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",
 
-
+  "gui.shadowthings.player_souls": "Souls:",
   "gui.shadowthings.core_siphon": "Soul Siphon",
   "gui.shadowthings.soul_amount": "Souls stored:",
   "gui.shadowthings.transfer_rate": "Transfer Rate:",
@@ -152,6 +152,16 @@
   "gui.shadowthings.active": "On",
   "gui.shadowthings.inactive": "Off",
 
+  "message.shadowthings.linking_tool_reset": "§eLinking tool reset.",
+  "message.shadowthings.furnace_distance_warning": "§cInventory out of soul furnace range!",
+  "message.shadowthings.furnace_inventory_warning": "§cNot a storage block!",
+  "message.shadowthings.furnace_input.info": "§aInput connected. Now select the output.",
+  "message.shadowthings.furnace_output.info": "§bOutput connected. I/O config done.",
+  "message.shadowthings.furnace_destroyed": "§cSoul Furnace destroyed, I/O config aborted!",
+  "message.shadowthings.core_saved": "§dCore position saved.",
+  "message.shadowthings.furnace_config_start": "§dStarted soul furnace I/O config. Select the input.",
+  "message.shadowthings.core_range_warning": "§cMachine out of core range!",
+  "message.shadowthings.core_linking_finished": "§aMachine successfully connected to core!",
   "message.shadowthings.core_meltdown_warning": "§c§l[WARNING] SOUL CORE MELTDOWN IMMINENT§r",
 
   "tooltip.shadowthings.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",

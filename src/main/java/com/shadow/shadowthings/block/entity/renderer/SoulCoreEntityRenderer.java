@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.shadow.shadowthings.block.custom.SoulStructureBlock;
+import com.shadow.shadowthings.block.entity.base.AbstractSoulEntityRenderer;
 import com.shadow.shadowthings.client.model.SoulCoreModel; // Import your model!
 import com.shadow.shadowthings.block.entity.SoulCoreEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,7 +17,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class SoulCoreEntityRenderer implements BlockEntityRenderer<SoulCoreEntity> {
+public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreEntity> {
 
     // 1. Point this to your white texture file!
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/entity/soul_core.png");
@@ -24,7 +25,7 @@ public class SoulCoreEntityRenderer implements BlockEntityRenderer<SoulCoreEntit
     private final SoulCoreModel model;
 
     public SoulCoreEntityRenderer(BlockEntityRendererProvider.Context context) {
-        // 2. Load the 3D model into memory
+        super(context);
         this.model = new SoulCoreModel(context.bakeLayer(SoulCoreModel.LAYER_LOCATION));
     }
 
@@ -41,7 +42,7 @@ public class SoulCoreEntityRenderer implements BlockEntityRenderer<SoulCoreEntit
 
 
     @Override
-    public void render(SoulCoreEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void renderMachine(SoulCoreEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (blockEntity.getLevel() == null) return;
 
         // Check if the block is actually formed. If not, stop rendering the 3D model!

@@ -115,6 +115,22 @@ public class ModItemTagProvider extends ItemTagsProvider{
                 .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
                 .add(ModItems.SOUL_UPGRADE_OVERLOAD.get());
 
+        tag(ModTags.Items.CRUCIBLE_UPGRADES)
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get())
+                .add(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_1.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_4.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_1.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_2.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_3.get())
+                .add(ModItems.SOUL_UPGRADE_SMELT_SPEED_4.get())
+
+                .add(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get());
+
 
         tag(ItemTags.HEAD_ARMOR)
             .add(ModItems.SHADOW_HELMET.get());

@@ -28,8 +28,6 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     @Override
     protected void init() {
         super.init();
-        // Disables the default "Inventory" text rendering if it overlaps your slots
-        this.inventoryLabelY = 10000;
         this.titleLabelY = 5;
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
     }
@@ -98,6 +96,5 @@ public class SoulFurnaceScreen extends AbstractContainerScreen<SoulFurnaceMenu> 
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
 
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0xF2D5FF, false);
     }
 }

@@ -1,0 +1,182 @@
+{
+  "item.shadowthings.shadow_ingot": "Shaduw Shiny",
+  "item.shadowthings.raw_shadow_steel": "Raw Shaduw Shiny",
+
+  "item.shadowthings.shadow_sword": "Shaduw Stabber",
+  "item.shadowthings.shadow_hoe": "Shaduw Farmin Stik",
+  "item.shadowthings.shadow_shovel": "Shaduw Digger",
+  "item.shadowthings.shadow_pickaxe": "Shaduw Rok Buster",
+  "item.shadowthings.shadow_axe": "Shaduw Tree Chopper",
+
+  "item.shadowthings.shadow_scythe": "Shaduw Grim Reeper Ting",
+  "item.shadowthings.shadow_bow": "Shaduw Pew Pew",
+
+  "item.shadowthings.soul_linker": "Soul String Ting",
+  "item.shadowthings.shadow_hammer": "Shaduw Smasher",
+
+  "item.shadowthings.soul_matrix": "Soul Maze Boks",
+  "item.shadowthings.soul_fruit_1": "Nom Nom Soul Yums",
+  "item.shadowthings.soul_fruit_2": "Blu Soul Yums",
+  "item.shadowthings.soul_fruit_3": "Purpul Soul Yums",
+
+  "item.shadowthings.soul_upgrade_base_1": "Upgrud Botum T1",
+  "item.shadowthings.soul_upgrade_base_2": "Upgrud Botum T2",
+  "item.shadowthings.soul_upgrade_base_3": "Upgrud Botum T3",
+  "item.shadowthings.soul_upgrade_base_4": "Upgrud Botum T4",
+  "item.shadowthings.soul_upgrade_base_5": "Upgrud Botum T5",
+
+  "item.shadowthings.soul_upgrade_capacity_1": "Bigger Tummy Upgrud T1",
+  "item.shadowthings.soul_upgrade_capacity_2": "Bigger Tummy Upgrud T2",
+  "item.shadowthings.soul_upgrade_capacity_3": "Bigger Tummy Upgrud T3",
+  "item.shadowthings.soul_upgrade_capacity_4": "Bigger Tummy Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_transfer_amount_1": "Moar Gimme Upgrud T1",
+  "item.shadowthings.soul_upgrade_transfer_amount_2": "Moar Gimme Upgrud T2",
+  "item.shadowthings.soul_upgrade_transfer_amount_3": "Moar Gimme Upgrud T3",
+  "item.shadowthings.soul_upgrade_transfer_amount_4": "Moar Gimme Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_transfer_rate_1": "Go Fastur Upgrud T1",
+  "item.shadowthings.soul_upgrade_transfer_rate_2": "Go Fastur Upgrud T2",
+  "item.shadowthings.soul_upgrade_transfer_rate_3": "Go Fastur Upgrud T3",
+  "item.shadowthings.soul_upgrade_transfer_rate_4": "Go Fastur Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Save Da Soulz Upgrud T1",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Save Da Soulz Upgrud T2",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Save Da Soulz Upgrud T3",
+  "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Save Da Soulz Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_smelt_amount_1": "Moar Hot Stuf Upgrud T1",
+  "item.shadowthings.soul_upgrade_smelt_amount_2": "Moar Hot Stuf Upgrud T2",
+  "item.shadowthings.soul_upgrade_smelt_amount_3": "Moar Hot Stuf Upgrud T3",
+  "item.shadowthings.soul_upgrade_smelt_amount_4": "Moar Hot Stuf Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_smelt_speed_1": "Fastur Hot Stuf Upgrud T1",
+  "item.shadowthings.soul_upgrade_smelt_speed_2": "Fastur Hot Stuf Upgrud T2",
+  "item.shadowthings.soul_upgrade_smelt_speed_3": "Fastur Hot Stuf Upgrud T3",
+  "item.shadowthings.soul_upgrade_smelt_speed_4": "Fastur Hot Stuf Upgrud T4",
+
+  "item.shadowthings.soul_upgrade_redstone_control": "Red Rok Swich Upgrud",
+  "item.shadowthings.soul_upgrade_overload": "Boom Boom Upgrud",
+
+  "item.shadowthings.bar_brawl_music_disc": "Meow Meow Disc (Bar Brawl)",
+  "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0) meow",
+
+  "effect.shadowthings.slimey": "Sticky Goop",
+  "effect.shadowthings.shadow_curse": "Shaduw Hecks",
+
+  "item.minecraft.potion.effect.slimey_potion": "Sticky Goop Juuce",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Splashy Sticky Goop Juuce",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Stayin Sticky Goop Juuce",
+
+  "item.minecraft.potion.effect.shadow_curse_potion": "Shaduw Hecks Juuce",
+  "item.minecraft.splash_potion.effect.shadow_curse_potion": "Splashy Shaduw Hecks Juuce",
+  "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Stayin Shaduw Hecks Juuce",
+
+  "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Ouchie Stik Uv Shaduw Hecks",
+
+  "enchantment.shadowthings.lightning_strike": "Zap Zap Magic",
+  "enchantment.shadowthings.poison_strike": "Yucky Bite Magic",
+  "enchantment.shadowthings.shadow_strike": "Shaduw Punch Magic",
+  "enchantment.shadowthings.soul_stealer": "Soul Yoinker Magic",
+
+  "item.shadowthings.shadow_helmet": "Shaduw Hat",
+  "item.shadowthings.shadow_chestplate": "Shaduw Shirt",
+  "item.shadowthings.shadow_leggings": "Shaduw Pants",
+  "item.shadowthings.shadow_boots": "Shaduw Shoos",
+
+  "item.shadowthings.shadow_horse_armor": "Shaduw Horsey Cloths",
+
+  "item.shadowthings.radish_seeds": "Radish Bebbehs",
+  "item.shadowthings.shadow_berry": "Shaduw Nom Noms",
+
+  "item.shadowthings.super_fuel": "Super Fire Food",
+
+  "block.shadowthings.shadow_block": "Boks Ov Shaduw Shiny",
+  "block.shadowthings.shadow_ore": "Shaduw Rok",
+  "block.shadowthings.shadow_deepslate_ore": "Deep Shaduw Rok",
+  "block.shadowthings.shadow_nether_ore": "Hot Shaduw Rok",
+  "block.shadowthings.shadow_end_ore": "Spacey Shaduw Rok",
+
+  "block.shadowthings.shadow_stairs": "Shaduw Stairz",
+  "block.shadowthings.shadow_slab": "Half Shaduw Boks",
+
+  "block.shadowthings.shadow_pressure_plate": "Shaduw Step Ting",
+  "block.shadowthings.shadow_button": "Shaduw Boop Ting",
+
+  "block.shadowthings.shadow_fence": "Shaduw Keep Out Ting",
+  "block.shadowthings.shadow_fence_gate": "Shaduw Open Ting",
+  "block.shadowthings.shadow_wall": "Shaduw Big Keep Out Ting",
+
+  "block.shadowthings.shadow_door": "Shaduw Doar",
+  "block.shadowthings.shadow_trapdoor": "Shaduw Flippy Doar",
+
+  "block.shadowthings.soul_core": "Teh Soul Kore",
+  "block.shadowthings.soul_furnace_controller": "Boss Of Hot Maker",
+  "block.shadowthings.soul_furnace": "Hot Soul Maker",
+  "block.shadowthings.soul_crafter": "Magic Makin Boks",
+  "block.shadowthings.soul_pedestal": "Soul Showoff Boks",
+  "block.shadowthings.soul_structure_block": "Soul Bildin Boks",
+
+  "block.shadowthings.shadow_machine_block": "Shaduw Macheen Boks",
+  "block.shadowthings.soul_condenser": "Soul Sukker Boks",
+  "block.shadowthings.soul_crucible": "Soul Soup Pot",
+  "block.shadowthings.soul_collector": "Soul Yoinker Boks",
+
+  "block.shadowthings.radish_crop": "Radish Farmin",
+  "block.shadowthings.shadow_berries_bush": "Shaduw Nom Nom Bush",
+
+  "block.shadowthings.shadowwood_log": "Shaduw Tree Lug",
+  "block.shadowthings.shadowwood_wood": "Shaduw Tree Wud",
+
+  "block.shadowthings.stripped_shadowwood_log": "Nekkid Shaduw Tree Lug",
+  "block.shadowthings.stripped_shadowwood_wood": "Nekkid Shaduw Tree Wud",
+
+  "block.shadowthings.shadowwood_planks": "Shaduw Wud Flats",
+  "block.shadowthings.shadowwood_sapling": "Baby Shaduw Tree",
+  "block.shadowthings.shadowwood_leaves": "Shaduw Tree Floofs",
+
+  "creativetab.shadowthings.shadow_blocks": "Shaduw Bokses",
+  "creativetab.shadowthings.shadow_items": "Shaduw Tings",
+
+  "gui.shadowthings.player_souls": "Soulz u has:",
+  "gui.shadowthings.core_siphon": "Soul Sukkin Ting",
+  "gui.shadowthings.soul_amount": "Soulz in boks:",
+  "gui.shadowthings.transfer_rate": "How fast it goez:",
+  "gui.shadowthings.transfer_amount": "How much it goez:",
+  "gui.shadowthings.soul_net_change": "Soulz come in n out:",
+  "gui.shadowthings.core_health": "Kore lief:",
+  "gui.shadowthings.active": "Iz on",
+  "gui.shadowthings.inactive": "Iz off",
+
+  "message.shadowthings.linking_tool_reset": "§eLinky ting forgets.",
+  "message.shadowthings.furnace_distance_warning": "§cBox too far frum hot maker!",
+  "message.shadowthings.furnace_inventory_warning": "§cDis not a bukkit!",
+  "message.shadowthings.furnace_input.info": "§aIn hole okay. Now do out hole.",
+  "message.shadowthings.furnace_output.info": "§bOut hole okay. All dun.",
+  "message.shadowthings.furnace_destroyed": "§cHot maker go boom, no linky now!",
+  "message.shadowthings.core_saved": "§dKore memorized.",
+  "message.shadowthings.furnace_config_start": "§dStartin hot maker linky. Click da in hole.",
+  "message.shadowthings.core_range_warning": "§cMacheen too far frum kore!",
+  "message.shadowthings.core_linking_finished": "§aMacheen holding paws wif kore!",
+  "message.shadowthings.core_meltdown_warning": "§c§l[Oh noes] kore goin splat soon§r",
+
+  "tooltip.shadowthings.shift": "§7Smash§r §6§lShift§r§r §7for mor wordz.§r",
+
+  "tooltip.shadowthings.soul_core": "Da big heart of da soul boks.",
+  "tooltip.shadowthings.soul_furnace_controller": "Da big heart of da hot soul boks.",
+  "tooltip.shadowthings.soul_crafter": "Iz for makin fancy shaduw tings.",
+  "tooltip.shadowthings.soul_pedestal": "Iz for magic soul makin.",
+  "tooltip.shadowthings.soul_structure_block": "Iz for bildin big boks tings.",
+  "tooltip.shadowthings.soul_condenser": "Sukz up soulz frum da air invisibly.",
+  "tooltip.shadowthings.soul_crucible": "Maks soulz outta ded monster drops or sand of soulz.",
+  "tooltip.shadowthings.soul_collector": "Yoinks soulz frum ded frens dat go oof near it.",
+
+  "tooltip.shadowthings.shadow_scythe": "Big ouchie stik dat yoinks soulz frum bad guyz.",
+  "tooltip.shadowthings.shadow_hammer": "Smashies bokses in big 3x3 squarez.",
+  "tooltip.shadowthings.soul_linker": "Linky ting for holding paws beetween kore an udder macheenz.",
+  "tooltip.shadowthings.soul_upgrade_overload": "Da most §dstronkest§r upgrud evers. §c§lPlz do not bork it§r",
+  "tooltip.shadowthings.soul_matrix": "Vewy hard makin boks for stronk shinies an bokses.",
+  "tooltip.shadowthings.soul_fruit_1": "Gibs u moar tummy space for soulz up to 1750 nom nom!",
+  "tooltip.shadowthings.soul_fruit_2": "Gibs u moar tummy space for soulz up to 4250 nom nom!",
+  "tooltip.shadowthings.soul_fruit_3": "Gibs u moar tummy space for soulz up to 7500 nom nom!"
+}

@@ -72,23 +72,43 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_CONDENSER.get())
                 .pattern("ABA")
-                .pattern("BCB")
+                .pattern("DCD")
                 .pattern("ABA")
                 .define('B', ModItems.SHADOW_INGOT)
+                .define('C', ModBlocks.SHADOW_MACHINE_BLOCK)
                 .define('A', Items.IRON_INGOT)
-                .define('C', Items.ENDER_PEARL)
+                .define('D', Items.GOLD_INGOT)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_condenser_craft");
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_CRUCIBLE.get())
                 .pattern("ABA")
-                .pattern("BCB")
+                .pattern("DCD")
                 .pattern("ABA")
                 .define('B', ModItems.SHADOW_INGOT)
+                .define('C', ModBlocks.SHADOW_MACHINE_BLOCK)
                 .define('A', Items.GOLD_INGOT)
-                .define('C', Items.MAGMA_BLOCK)
+                .define('D', Items.MAGMA_BLOCK)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_crucible_craft");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_PEDESTAL.get())
+                .pattern("CDC")
+                .pattern(" C ")
+                .pattern("BBB")
+                .define('B', Items.DEEPSLATE_BRICKS)
+                .define('D', Items.BLUE_WOOL)
+                .define('C', ModItems.SHADOW_INGOT)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_pedestal_craft");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_CRAFTER.get())
+                .pattern("BAB")
+                .pattern("DCD")
+                .pattern("BAB")
+                .define('B', ModItems.SHADOW_INGOT)
+                .define('C', ModItems.SOUL_MATRIX)
+                .define('A', Items.GOLD_INGOT)
+                .define('D', Items.DIAMOND)
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_crafter_craft");
 
         //COMPONENTS
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SOUL_MATRIX.get())
@@ -108,6 +128,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', Items.STICK)
                 .define('C', Items.ENDER_PEARL)
                 .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_linker_craft");
+
 
 
         //UPGRADES
@@ -300,6 +321,40 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         );
 
         recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_shovel_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_SHOVEL),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1500,
+                        new ItemStack(ModItems.SHADOW_SHOVEL.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_hoe_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.NETHERITE_HOE),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1500,
+                        new ItemStack(ModItems.SHADOW_HOE.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
                 ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_scythe_infusion"),
                 new SoulInfusionRecipe(
                         Ingredient.of(Items.NETHERITE_SWORD),
@@ -312,6 +367,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ),
                         1750,
                         new ItemStack(ModItems.SHADOW_SCYTHE.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","shadow_bow_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(Items.BOW),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(Items.OBSIDIAN),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        1500,
+                        new ItemStack(ModItems.SHADOW_BOW.get())
                 ),
                 null
         );
@@ -415,9 +487,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         recipeOutput.accept(
                 ResourceLocation.fromNamespaceAndPath("shadowthings","soul_collector_infusion"),
                 new SoulInfusionRecipe(
-                        Ingredient.of(ModItems.SOUL_MATRIX),
+                        Ingredient.of(ModBlocks.SHADOW_MACHINE_BLOCK),
                         List.of(
-                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SOUL_MATRIX),
                                 Ingredient.of(ModItems.SHADOW_INGOT),
                                 Ingredient.of(Items.ENDER_PEARL),
                                 Ingredient.of(Items.ENDER_PEARL),
@@ -425,35 +497,361 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                 Ingredient.of(Items.DIAMOND)
                         ),
                         1500,
-                        new ItemStack(ModBlocks.SOUL_FURNACE_CONTROLLER.get())
+                        new ItemStack(ModBlocks.SOUL_COLLECTOR.get())
+                ),
+                null
+        );
+        //UPGRADES TIER 2-4
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_capacity_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_CAPACITY_1),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_CAPACITY_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_capacity_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_CAPACITY_2),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_CAPACITY_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_capacity_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_CAPACITY_3),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.AMETHYST_SHARD),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_CAPACITY_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_rate_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_RATE_1),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_rate_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_RATE_2),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_rate_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_RATE_3),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.SUGAR),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_RATE_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_amount_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_1),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_amount_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_2),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_transfer_amount_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_3),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_TRANSFER_AMOUNT_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_soul_efficiency_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_1),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_soul_efficiency_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_2),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_soul_efficiency_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_3),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.QUARTZ),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SOUL_USAGE_EFFICIENCY_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_speed_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_SPEED_1),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_SPEED_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_speed_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_SPEED_2),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_SPEED_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_speed_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_SPEED_3),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_SPEED_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_amount_2_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_2),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_1),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND)
+                        ),
+                        650,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_amount_3_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_3),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_2),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL)
+                        ),
+                        1250,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_smelt_amount_4_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_4),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_3),
+                                Ingredient.of(Items.LAPIS_LAZULI),
+                                Ingredient.of(Items.REDSTONE),
+                                Ingredient.of(Items.DIAMOND),
+                                Ingredient.of(Items.ENDER_PEARL),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        2000,
+                        new ItemStack(ModItems.SOUL_UPGRADE_SMELT_AMOUNT_4.get())
+                ),
+                null
+        );
+
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_redstone_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_5),
+                        List.of(
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(ModItems.SHADOW_INGOT),
+                                Ingredient.of(Items.REDSTONE_BLOCK),
+                                Ingredient.of(Items.LEVER)
+                        ),
+                        1750,
+                        new ItemStack(ModItems.SOUL_UPGRADE_REDSTONE_CONTROL.get())
+                ),
+                null
+        );
+        recipeOutput.accept(
+                ResourceLocation.fromNamespaceAndPath("shadowthings","soul_upgrade_overload_infusion"),
+                new SoulInfusionRecipe(
+                        Ingredient.of(ModItems.SOUL_UPGRADE_BASE_5),
+                        List.of(
+                                Ingredient.of(ModItems.SOUL_MATRIX),
+                                Ingredient.of(ModItems.SOUL_MATRIX),
+                                Ingredient.of(ModBlocks.SHADOW_BLOCK),
+                                Ingredient.of(Items.NETHER_STAR),
+                                Ingredient.of(Items.NETHERITE_INGOT),
+                                Ingredient.of(Items.NETHERITE_INGOT)
+                        ),
+                        7500,
+                        new ItemStack(ModItems.SOUL_UPGRADE_OVERLOAD.get())
                 ),
                 null
         );
 
 
-
         //NON-BLOCK BLOCKS
 
-        stairBuilder(ModBlocks.SHADOW_STAIRS.get(), Ingredient.of(ModItems.SHADOW_INGOT)).group("shadow_steel")
-                .unlockedBy("has_shadow_steel",has(ModItems.SHADOW_INGOT)).save(recipeOutput);
-        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHADOW_SLAB.get(), ModItems.SHADOW_INGOT.get());
+        stairBuilder(ModBlocks.SHADOW_STAIRS.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS)).group("shadow")
+                .unlockedBy("has_shadow_planks",has(ModBlocks.SHADOWWOOD_PLANKS)).save(recipeOutput);
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHADOW_SLAB.get(), ModBlocks.SHADOWWOOD_PLANKS.get());
 
-        buttonBuilder(ModBlocks.SHADOW_BUTTON.get(), Ingredient.of(ModItems.SHADOW_INGOT.get())).group("bismuth")
-                .unlockedBy("has_bismuth", has(ModItems.SHADOW_INGOT.get())).save(recipeOutput);
+        buttonBuilder(ModBlocks.SHADOW_BUTTON.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS.get())).group("shadow")
+                .unlockedBy("has_shadow_planks", has(ModBlocks.SHADOWWOOD_PLANKS.get())).save(recipeOutput);
 
-        pressurePlate(recipeOutput, ModBlocks.SHADOW_PRESSURE_PLATE.get(), ModItems.SHADOW_INGOT.get());
+        pressurePlate(recipeOutput, ModBlocks.SHADOW_PRESSURE_PLATE.get(), ModBlocks.SHADOWWOOD_PLANKS.get());
 
-        fenceBuilder(ModBlocks.SHADOW_FENCE.get(), Ingredient.of(ModItems.SHADOW_INGOT.get())).group("bismuth")
-                .unlockedBy("has_bismuth", has(ModItems.SHADOW_INGOT.get())).save(recipeOutput);
+        fenceBuilder(ModBlocks.SHADOW_FENCE.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS.get())).group("shadow")
+                .unlockedBy("has_shadow_planks", has(ModBlocks.SHADOWWOOD_PLANKS.get())).save(recipeOutput);
 
-        fenceGateBuilder(ModBlocks.SHADOW_FENCE_GATE.get(), Ingredient.of(ModItems.SHADOW_INGOT.get())).group("bismuth")
-                .unlockedBy("has_bismuth", has(ModItems.SHADOW_INGOT.get())).save(recipeOutput);
+        fenceGateBuilder(ModBlocks.SHADOW_FENCE_GATE.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS.get())).group("shadow")
+                .unlockedBy("has_shadow_planks", has(ModBlocks.SHADOWWOOD_PLANKS.get())).save(recipeOutput);
 
-        doorBuilder(ModBlocks.SHADOW_DOOR.get(), Ingredient.of(ModItems.SHADOW_INGOT.get())).group("bismuth")
-                .unlockedBy("has_bismuth", has(ModItems.SHADOW_INGOT.get())).save(recipeOutput);
+        doorBuilder(ModBlocks.SHADOW_DOOR.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS.get())).group("shadow")
+                .unlockedBy("has_shadow_planks", has(ModBlocks.SHADOWWOOD_PLANKS.get())).save(recipeOutput);
 
-        trapdoorBuilder(ModBlocks.SHADOW_TRAPDOOR.get(), Ingredient.of(ModItems.SHADOW_INGOT.get())).group("bismuth")
-                .unlockedBy("has_bismuth", has(ModItems.SHADOW_INGOT.get())).save(recipeOutput);
+        trapdoorBuilder(ModBlocks.SHADOW_TRAPDOOR.get(), Ingredient.of(ModBlocks.SHADOWWOOD_PLANKS.get())).group("shadow")
+                .unlockedBy("has_shadow_planks", has(ModBlocks.SHADOWWOOD_PLANKS.get())).save(recipeOutput);
 
         //SHAPELESS
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHADOW_INGOT,9)

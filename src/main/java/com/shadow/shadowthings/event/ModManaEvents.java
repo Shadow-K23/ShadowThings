@@ -24,7 +24,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.*;
 
-@EventBusSubscriber(modid = ShadowThings.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = ShadowThings.MODID)
 public class ModManaEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
 
@@ -94,9 +94,9 @@ public class ModManaEvents {
         BlockPos deathPos = dyingEntity.blockPosition();
 
         // --- 1. SOUL COLLECTOR LOGIC (Automated Mob Farms) ---
-        int collectorSouls = 2;
-        if (dyingEntity instanceof Monster) collectorSouls = 15;
-        if (dyingEntity.getMaxHealth() >= 100) collectorSouls = 500;
+        int collectorSouls = 25;
+        if (dyingEntity instanceof Monster) collectorSouls = 75;
+        if (dyingEntity.getMaxHealth() >= 100) collectorSouls = 1500;
 
         // Define the 15-block radius corners
         BlockPos minPos = BlockPos.containing(deathPos.getX() - 15, deathPos.getY() - 15, deathPos.getZ() - 15);

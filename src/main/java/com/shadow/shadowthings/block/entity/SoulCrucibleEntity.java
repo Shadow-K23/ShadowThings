@@ -3,6 +3,7 @@ package com.shadow.shadowthings.block.entity;
 import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import com.shadow.shadowthings.screen.custom.SoulCrucibleMenu;
 import com.shadow.shadowthings.util.ModTags;
+import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -22,18 +23,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvider {
 
-    // --- BURNING MECHANICS ---
+    // --- BURNING & GENERATION MECHANICS ---
     public int progress = 0;
-    public int maxProgress = 60; // Takes 3 seconds (60 ticks) to burn 1 item
-    public int currentYield = 0; // How many souls the currently burning item will give
+    public int maxProgress = 60;
+
+    public int burnTime = 0;
+    public int totalBurnTime = 0;
+
+    private final int baseSoulsPerCycle = 10;
     private int networkTickCounter = 0;
 
+    int efficiencyUpgradeTier = 0;
+    int speedUpgradeTier = 0;
+    int amountUpgradeTier = 0;
+
     // --- INVENTORY ---
-    // Slot 0: Input Item
     public final ItemStackHandler mainInventory = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -44,6 +51,7 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
         }
     };
 
+    // Zwiększono do 6, aby zsynchronizować burnTime z GUI (płomykiem)
     public final ContainerData data = new ContainerData() {
         @Override
         public int get(int index) {
@@ -52,6 +60,8 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
                 case 1 -> SoulCrucibleEntity.this.getMaxSouls();
                 case 2 -> SoulCrucibleEntity.this.progress;
                 case 3 -> SoulCrucibleEntity.this.maxProgress;
+                case 4 -> SoulCrucibleEntity.this.burnTime;
+                case 5 -> SoulCrucibleEntity.this.totalBurnTime;
                 default -> 0;
             };
         }
@@ -63,10 +73,12 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
                 case 1 -> SoulCrucibleEntity.this.setMaxSouls(value);
                 case 2 -> SoulCrucibleEntity.this.progress = value;
                 case 3 -> SoulCrucibleEntity.this.maxProgress = value;
+                case 4 -> SoulCrucibleEntity.this.burnTime = value;
+                case 5 -> SoulCrucibleEntity.this.totalBurnTime = value;
             }
         }
         @Override
-        public int getCount() { return 4; }
+        public int getCount() { return 6; }
     };
 
     public SoulCrucibleEntity(BlockPos pos, BlockState state) {
@@ -75,36 +87,58 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
 
     public void tick(Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide()) return;
+        boolean isDirty = false;
 
-        // --- 1. BURN ITEMS ---
-        if (this.currentYield > 0) {
-            // An item is currently being burned
-            this.progress++;
-            if (this.progress >= this.maxProgress) {
-                this.souls = Math.min(this.souls + this.currentYield, this.maxSouls);
-                this.progress = 0;
-                this.currentYield = 0;
-                this.setChanged();
+
+        if (this.burnTime > 0) {
+            this.burnTime--;
+            isDirty = true;
+        }
+
+
+        if (this.burnTime <= 0 && this.souls < this.maxSouls) {
+            ItemStack inputStack = mainInventory.getStackInSlot(0);
+            int rawBurnTime = getFuelBurnTime(inputStack);
+
+            if (rawBurnTime > 0) {
+
+                this.burnTime = (int) (rawBurnTime * getEfficiencyModifier());
+                this.totalBurnTime = this.burnTime;
+
+                mainInventory.extractItem(0, 1, false);
+                isDirty = true;
+            }
+        }
+
+        if (this.burnTime > 0) {
+            if (this.souls < this.maxSouls) {
+
+                this.progress += getSpeedModifier();
+
+                if (this.progress >= this.maxProgress) {
+
+                    int soulsToGenerate = (int) (this.baseSoulsPerCycle * getStackModifier());
+                    this.souls = Math.min(this.souls + soulsToGenerate, this.maxSouls);
+
+                    this.progress = 0;
+                }
+                isDirty = true;
             }
         } else {
-            // Not burning anything. Check if we have valid items and room in the tank!
-            ItemStack inputStack = mainInventory.getStackInSlot(0);
-            if (!inputStack.isEmpty() && this.souls < this.maxSouls) {
-                int yieldAmount = getSoulYield(inputStack);
-
-                if (yieldAmount > 0) {
-                    this.currentYield = yieldAmount;
-                    mainInventory.extractItem(0, 1, false); // Consume 1 item
-                    this.setChanged();
-                }
+            if (this.progress > 0) {
+                this.progress = Math.max(0, this.progress - 2);
+                isDirty = true;
             }
+        }
+
+        if (isDirty) {
+            this.setChanged();
         }
 
         // --- TRANSMISSION TO CORE ---
         this.networkTickCounter++;
         if (this.networkTickCounter >= 20) {
             this.networkTickCounter = 0;
-
             BlockPos targetCore = this.getLinkedCorePos();
 
             if (targetCore != null && this.souls > 0 && level instanceof ServerLevel) {
@@ -118,7 +152,6 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
                             this.setChanged();
                         }
                     } else {
-                        // Core is missing/broken, clear it
                         this.setLinkedCorePos(null);
                         this.setChanged();
                     }
@@ -127,14 +160,27 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
         }
     }
 
-    // --- ITEM VALUES ---
-    private int getSoulYield(ItemStack stack) {
-        if (stack.is(Items.ROTTEN_FLESH)) return 25;
-        if (stack.is(Items.BONE)) return 35;
-        if (stack.is(Items.SPIDER_EYE)) return 50;
-        if (stack.is(Items.SOUL_SAND) || stack.is(Items.SOUL_SOIL)) return 75;
+    // --- UPGRADES) ---
 
-        return 0; // Not a valid soul fuel
+    private int getSpeedModifier() {
+        return 1 + speedUpgradeTier;
+    }
+
+    private float getStackModifier() {
+        return 1.0f + (amountUpgradeTier * 1.0f);
+    }
+
+    private float getEfficiencyModifier() {
+        return 1.0f + (efficiencyUpgradeTier * 0.25f);
+    }
+
+    // --- FUEL VALUES ---
+    private int getFuelBurnTime(ItemStack stack) {
+        if (stack.is(Items.ROTTEN_FLESH)) return 200;
+        if (stack.is(Items.BONE)) return 300;
+        if (stack.is(Items.SPIDER_EYE)) return 400;
+        if (stack.is(Items.SOUL_SAND) || stack.is(Items.SOUL_SOIL)) return 800;
+        return 0;
     }
 
     @Override
@@ -143,21 +189,35 @@ public class SoulCrucibleEntity extends AbstractSoulEntity implements MenuProvid
     }
 
     @Override
+    protected void onUpgradesChanged() {
+        super.onUpgradesChanged();
+        this.efficiencyUpgradeTier = this.getUpgradeLevel(UpgradeType.SOUL_USAGE_EFFICIENCY);
+        this.amountUpgradeTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_AMOUNT);
+        this.speedUpgradeTier = this.getUpgradeLevel(UpgradeType.SOUL_SMELT_SPEED);
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("Progress", this.progress);
-        tag.putInt("CurrentYield", this.currentYield);
+        tag.putInt("BurnTime", this.burnTime);
+        tag.putInt("TotalBurnTime", this.totalBurnTime);
+        tag.putInt("SpeedTier", this.speedUpgradeTier);
+        tag.putInt("EfficiencyTier", this.efficiencyUpgradeTier);
+        tag.putInt("AmountTier", this.amountUpgradeTier);
         tag.put("MainInventory", mainInventory.serializeNBT(registries));
-
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         this.progress = tag.getInt("Progress");
-        this.currentYield = tag.getInt("CurrentYield");
+        this.burnTime = tag.getInt("BurnTime");
+        this.totalBurnTime = tag.getInt("TotalBurnTime");
+        this.speedUpgradeTier = tag.getInt("SpeedTier");
+        this.efficiencyUpgradeTier = tag.getInt("EfficiencyTier");
+        this.amountUpgradeTier = tag.getInt("AmountTier");
         mainInventory.deserializeNBT(registries, tag.getCompound("MainInventory"));
-
     }
 
     @Override
