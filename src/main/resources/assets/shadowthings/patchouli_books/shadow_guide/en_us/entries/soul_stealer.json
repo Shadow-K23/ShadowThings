@@ -1,0 +1,11 @@
+{
+  "name": "Soul Core",
+  "icon": "shadowthings:soul_core",
+  "category": "shadowthings:machines",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+    }
+  ]
+}

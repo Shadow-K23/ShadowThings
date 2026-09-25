@@ -1,147 +1,108 @@
 {
   "item.shadowthings.shadow_ingot": "Shadow Steel Ingot",
   "item.shadowthings.raw_shadow_steel": "Raw Shadow Steel",
-
   "item.shadowthings.shadow_sword": "Shadow Sword",
   "item.shadowthings.shadow_hoe": "Shadow Hoe",
   "item.shadowthings.shadow_shovel": "Shadow Shovel",
   "item.shadowthings.shadow_pickaxe": "Shadow Pickaxe",
   "item.shadowthings.shadow_axe": "Shadow Axe",
-
   "item.shadowthings.shadow_scythe": "Shadow Scythe",
   "item.shadowthings.shadow_bow": "Shadow Bow",
-
   "item.shadowthings.soul_linker": "Soul Linker",
   "item.shadowthings.shadow_hammer": "Shadow Hammer",
-
   "item.shadowthings.soul_matrix": "Soul Matrix",
   "item.shadowthings.soul_fruit_1": "Soul Fruit",
   "item.shadowthings.soul_fruit_2": "Lapis Soul Fruit",
   "item.shadowthings.soul_fruit_3": "Amethyst Soul Fruit",
-
   "item.shadowthings.soul_upgrade_base_1": "Upgrade Base T1",
   "item.shadowthings.soul_upgrade_base_2": "Upgrade Base T2",
   "item.shadowthings.soul_upgrade_base_3": "Upgrade Base T3",
   "item.shadowthings.soul_upgrade_base_4": "Upgrade Base T4",
   "item.shadowthings.soul_upgrade_base_5": "Upgrade Base T5",
-
   "item.shadowthings.soul_upgrade_capacity_1": "Soul Capacity Upgrade T1",
   "item.shadowthings.soul_upgrade_capacity_2": "Soul Capacity Upgrade T2",
   "item.shadowthings.soul_upgrade_capacity_3": "Soul Capacity Upgrade T3",
   "item.shadowthings.soul_upgrade_capacity_4": "Soul Capacity Upgrade T4",
-
   "item.shadowthings.soul_upgrade_transfer_amount_1": "Transfer Amount Upgrade T1",
   "item.shadowthings.soul_upgrade_transfer_amount_2": "Transfer Amount Upgrade T2",
   "item.shadowthings.soul_upgrade_transfer_amount_3": "Transfer Amount Upgrade T3",
   "item.shadowthings.soul_upgrade_transfer_amount_4": "Transfer Amount Upgrade T4",
-
   "item.shadowthings.soul_upgrade_transfer_rate_1": "Transfer Rate Upgrade T1",
   "item.shadowthings.soul_upgrade_transfer_rate_2": "Transfer Rate Upgrade T2",
   "item.shadowthings.soul_upgrade_transfer_rate_3": "Transfer Rate Upgrade T3",
   "item.shadowthings.soul_upgrade_transfer_rate_4": "Transfer Rate Upgrade T4",
-
   "item.shadowthings.soul_upgrade_soul_usage_efficiency_1": "Soul Efficiency Upgrade T1",
   "item.shadowthings.soul_upgrade_soul_usage_efficiency_2": "Soul Efficiency Upgrade T2",
   "item.shadowthings.soul_upgrade_soul_usage_efficiency_3": "Soul Efficiency Upgrade T3",
   "item.shadowthings.soul_upgrade_soul_usage_efficiency_4": "Soul Efficiency Upgrade T4",
-
   "item.shadowthings.soul_upgrade_smelt_amount_1": "Smelt Amount Upgrade T1",
   "item.shadowthings.soul_upgrade_smelt_amount_2": "Smelt Amount Upgrade T2",
   "item.shadowthings.soul_upgrade_smelt_amount_3": "Smelt Amount Upgrade T3",
   "item.shadowthings.soul_upgrade_smelt_amount_4": "Smelt Amount Upgrade T4",
-
   "item.shadowthings.soul_upgrade_smelt_speed_1": "Smelt Speed Upgrade T1",
   "item.shadowthings.soul_upgrade_smelt_speed_2": "Smelt Speed Upgrade T2",
   "item.shadowthings.soul_upgrade_smelt_speed_3": "Smelt Speed Upgrade T3",
   "item.shadowthings.soul_upgrade_smelt_speed_4": "Smelt Speed Upgrade T4",
-
   "item.shadowthings.soul_upgrade_redstone_control": "Redstone Control Upgrade",
   "item.shadowthings.soul_upgrade_overload": "Overload Upgrade",
-
   "item.shadowthings.bar_brawl_music_disc": "Bar Brawl Music Disc",
   "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
-
   "effect.shadowthings.slimey": "Slimey",
   "effect.shadowthings.shadow_curse": "Shadow Curse",
-
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
-
   "item.minecraft.potion.effect.shadow_curse_potion": "Shadow Curse Potion",
   "item.minecraft.splash_potion.effect.shadow_curse_potion": "Shadow Curse Splash Potion",
   "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Shadow Curse Lingering Potion",
-
   "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Arrow of Shadow Curse",
-
   "enchantment.shadowthings.lightning_strike": "Lightning Strike",
   "enchantment.shadowthings.poison_strike": "Poison Strike",
   "enchantment.shadowthings.shadow_strike": "Shadow Strike",
   "enchantment.shadowthings.soul_stealer": "Soul Stealer",
-
-
   "item.shadowthings.shadow_helmet": "Shadow Helmet",
   "item.shadowthings.shadow_chestplate": "Shadow Chestplate",
   "item.shadowthings.shadow_leggings": "Shadow Leggings",
   "item.shadowthings.shadow_boots": "Shadow Boots",
-
   "item.shadowthings.shadow_horse_armor": "Shadow Horse Armor",
-
   "item.shadowthings.radish_seeds": "Radish Seeds",
   "item.shadowthings.shadow_berry": "Shadow Berries",
-
-
   "item.shadowthings.super_fuel": "Super Fuel",
-
-
   "block.shadowthings.shadow_block": "Block of Shadow Steel",
   "block.shadowthings.shadow_ore": "Shadow Ore",
   "block.shadowthings.shadow_deepslate_ore": "Shadow Deepslate Ore",
   "block.shadowthings.shadow_nether_ore": "Shadow Nether Ore",
   "block.shadowthings.shadow_end_ore": "Shadow End Ore",
-
   "block.shadowthings.shadow_stairs": "Shadow Stairs",
   "block.shadowthings.shadow_slab": "Shadow Slab",
-
   "block.shadowthings.shadow_pressure_plate": "Shadow Pressure Plate",
   "block.shadowthings.shadow_button": "Shadow Button",
-
   "block.shadowthings.shadow_fence": "Shadow Fence",
   "block.shadowthings.shadow_fence_gate": "Shadow Fence Gate",
   "block.shadowthings.shadow_wall": "Shadow Wall",
-
   "block.shadowthings.shadow_door": "Shadow Door",
   "block.shadowthings.shadow_trapdoor": "Shadow Trapdoor",
-
   "block.shadowthings.soul_core": "Soul Core",
   "block.shadowthings.soul_furnace_controller": "Soul Furnace Controller",
   "block.shadowthings.soul_furnace": "Soul Furnace",
   "block.shadowthings.soul_crafter": "Soul Crafter",
   "block.shadowthings.soul_pedestal": "Soul Pedestal",
   "block.shadowthings.soul_structure_block": "Soul Structure Block",
-
   "block.shadowthings.shadow_machine_block": "Shadow Machine Block",
   "block.shadowthings.soul_condenser": "Soul Condenser",
   "block.shadowthings.soul_crucible": "Soul Crucible",
   "block.shadowthings.soul_collector": "Soul Collector",
-
-
   "block.shadowthings.radish_crop": "Radish Crop",
   "block.shadowthings.shadow_berries_bush": "Shadow Berries Bush",
-
-  "block.shadowthings.shadowwood_log": "Shadowwood Log" ,
+  "block.shadowthings.shadowwood_log": "Shadowwood Log",
   "block.shadowthings.shadowwood_wood": "Shadowwood Wood",
-
   "block.shadowthings.stripped_shadowwood_log": "Stripped Shadowwood Log",
   "block.shadowthings.stripped_shadowwood_wood": "Stripped Shadowwood Wood",
-
   "block.shadowthings.shadowwood_planks": "Shadowwood Planks",
   "block.shadowthings.shadowwood_sapling": "Shadowwood Sapling",
   "block.shadowthings.shadowwood_leaves": "Shadowwood Leaves",
-
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",
-
   "gui.shadowthings.player_souls": "Souls:",
   "gui.shadowthings.core_siphon": "Soul Siphon",
   "gui.shadowthings.soul_amount": "Souls stored:",
@@ -151,7 +112,6 @@
   "gui.shadowthings.core_health": "Core Health:",
   "gui.shadowthings.active": "On",
   "gui.shadowthings.inactive": "Off",
-
   "message.shadowthings.linking_tool_reset": "§eLinking tool reset.",
   "message.shadowthings.furnace_distance_warning": "§cInventory out of soul furnace range!",
   "message.shadowthings.furnace_inventory_warning": "§cNot a storage block!",
@@ -163,9 +123,7 @@
   "message.shadowthings.core_range_warning": "§cMachine out of core range!",
   "message.shadowthings.core_linking_finished": "§aMachine successfully connected to core!",
   "message.shadowthings.core_meltdown_warning": "§c§l[WARNING] SOUL CORE MELTDOWN IMMINENT§r",
-
   "tooltip.shadowthings.shift": "§7Press§r §6§lShift§r§r §7for more information.§r",
-
   "tooltip.shadowthings.soul_core": "The heart of the Soul Core multiblock.",
   "tooltip.shadowthings.soul_furnace_controller": "The heart of the Soul Furnace multiblock.",
   "tooltip.shadowthings.soul_crafter": "Used for crafting advanced items from the mod.",
@@ -174,7 +132,6 @@
   "tooltip.shadowthings.soul_condenser": "Passively collects souls from the atmosphere.",
   "tooltip.shadowthings.soul_crucible": "Generates souls from undead mob drops or soul sand.",
   "tooltip.shadowthings.soul_collector": "Collects souls from dying mobs in its vicinity.",
-
   "tooltip.shadowthings.shadow_scythe": "Powerful weapon that reaps souls from its opponents.",
   "tooltip.shadowthings.shadow_hammer": "Breaks blocks in a 3x3 radius.",
   "tooltip.shadowthings.soul_linker": "Tool for connecting the Soul Core to other machines.",
@@ -182,15 +139,6 @@
   "tooltip.shadowthings.soul_matrix": "Complicated machinery used in crafting powerful items and blocks.",
   "tooltip.shadowthings.soul_fruit_1": "Increases players max souls when eaten up to 1750!",
   "tooltip.shadowthings.soul_fruit_2": "Increases players max souls when eaten up to 4250!",
-  "tooltip.shadowthings.soul_fruit_3": "Increases players max souls when eaten up to 7500!",
+  "tooltip.shadowthings.soul_fruit_3": "Increases players max souls when eaten up to 7500!"
 
-  "shadowthings.book.name": "The ShadowThings Guide",
-  "shadowthings.book.landing_text": "Welcome to the world of shadows and souls. This book contains all the knowledge required to harness the $(6)Soul Core$().",
-
-  "shadowthings.book.category.machines": "Soul Machines",
-  "shadowthings.book.category.machines.desc": "Discover the machines required to process, store, and utilize souls.",
-
-  "shadowthings.book.entry.soul_core": "Soul Core",
-  "shadowthings.book.entry.soul_core.page1": "The $(l)Soul Core$() is the beating heart of your entire setup. It stores collected souls and distributes them to connected machines. You must link it to other devices using the $(l)Soul Linker$().",
-  "shadowthings.book.entry.soul_core.page2": "Crafting the core requires a Soul Matrix and precious materials. Keep it safe!"
 }

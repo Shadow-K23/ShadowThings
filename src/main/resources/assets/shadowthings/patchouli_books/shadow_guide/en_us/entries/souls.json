@@ -1,0 +1,20 @@
+{
+  "name": "Souls",
+  "icon": "shadowthings:shadow_sword",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This is the core mechanic of the mod. $(br2) Whenever you kill a hostile mob, you earn a random amount of souls. You can see the current amount in the bottom right corner. The amount gained is increased by [ADD ENCHANT LINK HERE] enchant on your weapon. You can also increase the player max soul capacity by eating $(l:shadowthings:soul_fruits)Soul Fruits$()."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_bar_pic.png"
+      ],
+      "title": "Souls bar",
+      "border": true,
+      "text": "This is your souls bar."
+    }
+  ]
+}

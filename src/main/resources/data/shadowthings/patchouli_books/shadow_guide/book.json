@@ -1,7 +1,7 @@
 {
-  "name": "shadowthings.book.name",
-  "landing_text": "shadowthings.book.landing_text",
+  "name": "ShadowThings",
+  "landing_text": "Welcome to ShadowThings",
   "version": 1,
-  "model": "patchouli:book_brown",
-  "creative_tab": "shadowthings:shadow_items_tab"
+  "creative_tab": "shadowthings:shadow_items_tab",
+  "use_resource_pack": true
 }

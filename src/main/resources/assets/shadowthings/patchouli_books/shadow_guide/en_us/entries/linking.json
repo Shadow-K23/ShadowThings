@@ -1,0 +1,33 @@
+{
+  "name": "Soul Linker",
+  "icon": "shadowthings:soul_linker",
+  "category": "shadowthings:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Soul Linker tool can be used to link the $(l:shadowthings:soul_core)Soul Core$() to different machines. $(br2)To link a machine to the core first right click the core $(o)(middle block of the structure)$() then right click any machine you want to connect. To reset the tool shift right click into the air. $(br)In case of linking to the Soul Furnace you need to click the controller block in the middle."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_linker_pic.png"
+      ],
+      "title": "Soul Furnace linking",
+      "border": true,
+      "text": "Machines linked to the core."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Soul Linker tool can also be used to configure the $(l:shadowthings:soul_furnace)Soul Furnace$() $(l:shadowthings:soul_furnace_aio)Auto I/O.$() To configure auto I/O.$(br)First you need to right click the furnace controller block $(o)(middle)$(), then you can right click the $(l)input$() inventory, after that you right click the $(l)output$() inventory."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_linker_furnace_pic.png"
+      ],
+      "title": "Soul Core linking",
+      "border": true,
+      "text": "Machines linked to the core."
+    }
+  ]
+}
