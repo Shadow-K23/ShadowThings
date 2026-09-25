@@ -1,10 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
-  "group": "bismuth",
+  "group": "shadow",
   "ingredients": [
     {
-      "item": "shadowthings:shadow_ingot"
+      "item": "shadowthings:shadowwood_planks"
     }
   ],
   "result": {

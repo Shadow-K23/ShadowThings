@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "bismuth",
+  "group": "shadow",
   "key": {
     "#": {
       "item": "minecraft:stick"
     },
     "W": {
-      "item": "shadowthings:shadow_ingot"
+      "item": "shadowthings:shadowwood_planks"
     }
   },
   "pattern": [

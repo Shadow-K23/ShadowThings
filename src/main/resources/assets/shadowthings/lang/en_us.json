@@ -182,5 +182,15 @@
   "tooltip.shadowthings.soul_matrix": "Complicated machinery used in crafting powerful items and blocks.",
   "tooltip.shadowthings.soul_fruit_1": "Increases players max souls when eaten up to 1750!",
   "tooltip.shadowthings.soul_fruit_2": "Increases players max souls when eaten up to 4250!",
-  "tooltip.shadowthings.soul_fruit_3": "Increases players max souls when eaten up to 7500!"
+  "tooltip.shadowthings.soul_fruit_3": "Increases players max souls when eaten up to 7500!",
+
+  "shadowthings.book.name": "The ShadowThings Guide",
+  "shadowthings.book.landing_text": "Welcome to the world of shadows and souls. This book contains all the knowledge required to harness the $(6)Soul Core$().",
+
+  "shadowthings.book.category.machines": "Soul Machines",
+  "shadowthings.book.category.machines.desc": "Discover the machines required to process, store, and utilize souls.",
+
+  "shadowthings.book.entry.soul_core": "Soul Core",
+  "shadowthings.book.entry.soul_core.page1": "The $(l)Soul Core$() is the beating heart of your entire setup. It stores collected souls and distributes them to connected machines. You must link it to other devices using the $(l)Soul Linker$().",
+  "shadowthings.book.entry.soul_core.page2": "Crafting the core requires a Soul Matrix and precious materials. Keep it safe!"
 }
