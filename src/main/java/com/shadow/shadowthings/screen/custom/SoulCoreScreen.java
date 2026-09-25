@@ -236,7 +236,7 @@ public class SoulCoreScreen extends AbstractContainerScreen<SoulCoreMenu> {
             float dynamicScale = 0.20f + (1.5f * fillRatio);
             poseStack.scale(dynamicScale, dynamicScale, dynamicScale);
 
-            ResourceLocation CRYSTAL_TEX = ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/entity/soul_core.png");
+            ResourceLocation CRYSTAL_TEX = ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/entity/soul_core_pic.png");
 
             var buffer = guiGraphics.bufferSource().getBuffer(RenderType.entityTranslucent(CRYSTAL_TEX));
 

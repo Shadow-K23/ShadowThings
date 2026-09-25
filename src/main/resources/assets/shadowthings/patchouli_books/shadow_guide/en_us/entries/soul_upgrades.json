@@ -1,0 +1,59 @@
+{
+  "name": "Soul Upgrades",
+  "icon": "shadowthings:soul_upgrade_overload",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Most of the machines in this mod can be upgraded in various ways. On the next pages you will see what machine accepts what upgrade and what it does."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Capacity",
+      "item": "shadowthings:soul_upgrade_capacity_1,shadowthings:soul_upgrade_capacity_2,shadowthings:soul_upgrade_capacity_3,shadowthings:soul_upgrade_capacity_4",
+      "text": "Capacity upgrades increase the max soul capacity of machines. They work in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Transfer Amount",
+      "item": "shadowthings:soul_upgrade_transfer_amount_1,shadowthings:soul_upgrade_transfer_amount_2,shadowthings:soul_upgrade_transfer_amount_3,shadowthings:soul_upgrade_transfer_amount_4",
+      "text": "Transfer amount upgrades increase the amount of souls sent per packet. They work in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Transfer Rate",
+      "item": "shadowthings:soul_upgrade_transfer_rate_1,shadowthings:soul_upgrade_transfer_rate_2,shadowthings:soul_upgrade_transfer_rate_3,shadowthings:soul_upgrade_transfer_rate_4",
+      "text": "Transfer amount upgrades increase the rate of sending packets. They work in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l)$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - increase the speed of crafting."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Soul Efficiency",
+      "item": "shadowthings:soul_upgrade_soul_usage_efficiency_1,shadowthings:soul_upgrade_soul_usage_efficiency_2,shadowthings:soul_upgrade_soul_usage_efficiency_3,shadowthings:soul_upgrade_soul_usage_efficiency_4",
+      "text": "Smelt amount upgrades increase the amount of smelted items. They work in:$(br)$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - decrease soul used per item and momentum decay rate.$(li)$(l:shadowthings:soul_crucible)Soul Crucible - increase souls gained per item.$(/l)$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - decrease souls used for crafting."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Smelt Speed",
+      "item": "shadowthings:soul_upgrade_smelt_speed_1,shadowthings:soul_upgrade_smelt_speed_2,shadowthings:soul_upgrade_smelt_speed_3,shadowthings:soul_upgrade_smelt_speed_4",
+      "text": "Smelt speed upgrades increase the smelting speed. They work in:$(br)$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - increase max momentum and momentum gain.$(li)$(l:shadowthings:soul_crucible)Soul Crucible$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Smelt Amount",
+      "item": "shadowthings:soul_upgrade_smelt_speed_1,shadowthings:soul_upgrade_smelt_speed_2,shadowthings:soul_upgrade_smelt_speed_3,shadowthings:soul_upgrade_smelt_speed_4",
+      "text": "Smelt amount upgrades increase the amount of smelted items. They work in:$(br)$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - also increase soul cost per item.$(li)$(l:shadowthings:soul_crucible)Soul Crucible$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Redstone",
+      "item": "shadowthings:soul_upgrade_redstone_control",
+      "text": "This upgrade makes machines interact with redstone. $(#F00)[NOT IMPLEMENTED YET]$() It works in:$(br)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Overload",
+      "item": "shadowthings:soul_upgrade_overload",
+      "text": "This upgrade is the most $(#F0F)powerful$() of all in the mod. It is really overpowered, but has some negative effects. It works in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l) - overloads the cores max capacity. Can make the core $(l:shadowthings:core_meltdown)$(#F00)EXPLODE$()$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - increases max momentum to insane amounts. [NO NEGATIVE EFFECTS FOR NOW]$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - unlocks overpowered recipes. $(#F00)[NOT IMPLEMENTED YET]$()"
+    }
+  ]
+}
