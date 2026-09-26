@@ -1,11 +1,15 @@
 {
-  "name": "Soul Core",
-  "icon": "shadowthings:soul_fruit_1",
-  "category": "shadowthings:items",
+  "name": "Soul Crafter",
+  "icon": "shadowthings:soul_crafter",
+  "category": "shadowthings:machines",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+      "text": "The Soul Crafter is the mods ow crafting system. It works just like any other pedestal crafting system. You put in the catalyst into the crafter itself and the ingredients on the pedestals around the crafter. Then hit 'craft' inside the crafter itself."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The ingredients don't need to be in a specific order, neither the pedestals in specific locations, as long as the pedestals are no further than 2 blocks away from the crafter.$(br)You don't need a certain amount of pedestals for it to work. As long as you have the amount a recipe needs you're set."
     }
   ]
 }

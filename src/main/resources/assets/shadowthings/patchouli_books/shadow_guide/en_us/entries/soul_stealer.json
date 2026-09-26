@@ -1,11 +1,11 @@
 {
-  "name": "Soul Core",
-  "icon": "shadowthings:soul_core",
-  "category": "shadowthings:machines",
+  "name": "Soul Stealer",
+  "icon": "minecraft:enchanted_book",
+  "category": "shadowthings:enchants_effects",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+      "text": "The Soul Stealer enchant increases $(l:shadowthings:souls)Souls$() collected from killing mobs. It's suitable for weapons."
     }
   ]
 }

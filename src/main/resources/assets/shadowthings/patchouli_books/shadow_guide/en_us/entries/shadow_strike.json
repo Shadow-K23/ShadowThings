@@ -1,0 +1,11 @@
+{
+  "name": "Shadow Strike",
+  "icon": "minecraft:enchanted_book",
+  "category": "shadowthings:enchants_effects",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Shadow Strike is the rarest enchant of the mod. $(br)This enchant has a chance to apply the $(l:shadowthings:shadow_curse)Shadow Curse$() effect. At level 3 it has 100% to trigger. It's suitable for weapons."
+    }
+  ]
+}

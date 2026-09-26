@@ -1,0 +1,11 @@
+{
+  "name": "Shadow Curse",
+  "icon": "shadowthings:textures/mob_effect/shadow_curse.png",
+  "category": "shadowthings:enchants_effects",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Shadow Curse is a effect that repeats the amount dealt to the affected entity as magic damage. At amplification 2 it repeats 50% of the damage done. It's potions can be crafted by adding Shadow Berries to an Awkward Potion."
+    }
+  ]
+}

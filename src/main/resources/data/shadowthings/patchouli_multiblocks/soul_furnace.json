@@ -1,0 +1,24 @@
+{
+  "pattern": [
+    [
+      "S S",
+      "   ",
+      "S S"
+    ],
+    [
+      "S S",
+      " 0 ",
+      "S S"
+    ],
+    [
+      "SSS",
+      "SCS",
+      "SSS"
+    ]
+  ],
+  "mapping": {
+    "S": "shadowthings:soul_structure_block",
+    "C": "shadowthings:soul_furnace_controller"
+  },
+  "symmetrical": true
+}

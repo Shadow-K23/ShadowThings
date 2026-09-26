@@ -1,0 +1,87 @@
+{
+  "name": "Soul Multiblocks",
+  "icon": "shadowthings:soul_crafter",
+  "category": "shadowthings:multiblocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Here you can get the visualizations of the multiblock structures. $(l)Remember to right click the controller block when you finish the structure in order to form the multiblock$()"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Soul Core",
+      "enable_visualize": true,
+      "multiblock": {
+        "pattern": [
+          ["S S","   ","S S"],
+          ["S S"," 0 ","S S"],
+          ["SSS","SCS","SSS"]
+        ],
+        "mapping": {
+          "S": "shadowthings:soul_structure_block",
+          "C": "shadowthings:soul_core"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Soul Furnace",
+      "enable_visualize": true,
+      "multiblock": {
+        "pattern": [
+          [
+            "S S",
+            "   ",
+            "S S"
+          ],
+          [
+            "S S",
+            " 0 ",
+            "S S"
+          ],
+          [
+            "SSS",
+            "SCS",
+            "SSS"
+          ]
+        ],
+        "mapping": {
+          "S": "shadowthings:soul_structure_block",
+          "C": "shadowthings:soul_furnace_controller"
+        },
+        "symmetrical": true
+      },
+      "symmetrical": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Soul Crafter",
+      "text": "An example of crafter setup. You don't need that many pedestals at start.",
+      "enable_visualize": true,
+      "multiblock": {
+        "pattern": [
+          [
+            "     ",
+            "     ",
+            "  0  ",
+            "     ",
+            "     "
+          ],
+          [
+            "  P  ",
+            "P   P",
+            "  C  ",
+            "P   P",
+            "  P  "
+          ]
+        ],
+        "mapping": {
+          "P": "shadowthings:soul_pedestal",
+          "C": "shadowthings:soul_crafter"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

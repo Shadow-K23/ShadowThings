@@ -1,0 +1,21 @@
+{
+  "name": "Shadow Steel",
+  "icon": "shadowthings:raw_shadow_steel",
+  "category": "shadowthings:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This is the main ore of the mod. It spawns in the Overworld, Nether and End."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_pic.png",
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_nether_pic.png",
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_end_pic.png"
+      ],
+      "title": "Shadow Steel Ore",
+      "border": true
+    }
+  ]
+}

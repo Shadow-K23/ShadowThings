@@ -58,7 +58,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', Items.IRON_INGOT)
                 .define('A', Items.REDSTONE)
                 .define('C', ModBlocks.SHADOW_BLOCK)
-                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:soul_machine_block_craft");
+                .unlockedBy("has_shadow_ingot",has(ModItems.SHADOW_INGOT)).save(recipeOutput, "shadowthings:shadow_machine_block_craft");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SOUL_CORE.get())
                 .pattern("ABA")
@@ -857,6 +857,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHADOW_INGOT,9)
                 .requires(ModBlocks.SHADOW_BLOCK)
                 .unlockedBy("has_shadow_block",has(ModBlocks.SHADOW_BLOCK)).save(recipeOutput,"shadowthings:shadow_ingot_craft");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModBlocks.SHADOWWOOD_LOG)
+                .requires(ModBlocks.SHADOWWOOD_PLANKS, 4)
+                .unlockedBy("has_shadowwood_log",has(ModBlocks.SHADOWWOOD_LOG)).save(recipeOutput,"shadowthings:shadow_plank_craft");
 
         oreSmelting(recipeOutput, SHADOW_SMELTABLES,RecipeCategory.MISC,ModItems.SHADOW_INGOT.get(), 0.25f,200, "shadow_steel");
         oreBlasting(recipeOutput, SHADOW_SMELTABLES,RecipeCategory.MISC,ModItems.SHADOW_INGOT.get(), 0.25f,100, "shadow_steel");

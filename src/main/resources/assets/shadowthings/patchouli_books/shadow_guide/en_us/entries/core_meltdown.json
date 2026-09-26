@@ -1,11 +1,19 @@
 {
-  "name": "Soul Core",
-  "icon": "shadowthings:soul_fruit_1",
-  "category": "shadowthings:items",
+  "name": "Soul Core Explosion",
+  "icon": "minecraft:tnt",
+  "category": "shadowthings:mechanics",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+      "text": "The Soul Core has a special mechanic when overloaded. The upgrade itself pushes the core to it's max, expanding the capacity, to crazy amounts. Except it has a safe threshold for souls. Right now it's 200k, after the soul count surpasses 200k, the core starts taking damage. The more souls stored over the safe threshold the faster the core health goes down."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If the core health reaches 0 you're in a $(l)$(o)REALLY$() bad situation. This isn't the point of no return though. After the warning you have 30 seconds to destroy the multiblock (losing all stored souls in the process) and after that you can't even get close to core because it starts pushing you away. Then you better just $(l)$(o)RUN.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "I'll save the rest of the sequence for your own experience. Just so you know, your base will at least take a big hit after the explosion :) $(br)Putting the upgrade in the core is really not necessary for progression (for now). $(#F00) Use at your own risk!"
     }
   ]
 }

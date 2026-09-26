@@ -1,0 +1,17 @@
+{
+  "pattern": [
+    [
+      "  P  ",
+      "P   P",
+      "  C  ",
+      "P   P",
+      "  P  "
+    ]
+  ],
+  "mapping": {
+    "P": "shadowthings:soul_pedestal",
+    "C": "shadowthings:soul_crafter"
+  },
+  "symmetrical": true
+}
+

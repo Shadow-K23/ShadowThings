@@ -1,11 +1,11 @@
 {
-  "name": "Soul Core",
+  "name": "Soul Fruits",
   "icon": "shadowthings:soul_fruit_1",
   "category": "shadowthings:items",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+      "text": "The Soul Fruits expand the players default soul capacity when eaten. They have 3 different tiers and tier one is obtained from breaking Shadowwood Tree Leaves $(li)Tier 1 increases max capacity by 150 up to 1750!$(li)Tier 2 increases max capacity by 250 up to 4250!$(li)Tier 3 increases max capacity by 475 up to 7500!"
     }
   ]
 }

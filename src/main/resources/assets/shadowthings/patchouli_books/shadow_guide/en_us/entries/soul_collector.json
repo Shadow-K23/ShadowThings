@@ -1,11 +1,11 @@
 {
-  "name": "Soul Core",
-  "icon": "shadowthings:soul_fruit_1",
-  "category": "shadowthings:items",
+  "name": "Soul Collector",
+  "icon": "shadowthings:soul_collector",
+  "category": "shadowthings:machines",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core is the main multiblock of the mod. It stores $(l:shadowthings:souls)Souls.$()"
+      "text": "Soul Collector is a machine that collects souls from dying mobs in it's vicinity. You can configure the radius by right clicking. The presets are 5x5,9x9 and 13x13.$(br) It has an internal storage buffer of 2,5k souls."
     }
   ]
 }

@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Most of the machines in this mod can be upgraded in various ways. On the next pages you will see what machine accepts what upgrade and what it does."
+      "text": "Most of the machines in this mod can be upgraded in various ways. On the next pages you will see what machine accepts what upgrade and what it does. The upgrade slots of the machines is the column of 4 pink-ish slots in the corner of the gui."
     },
     {
       "type": "patchouli:spotlight",
@@ -29,7 +29,7 @@
       "type": "patchouli:spotlight",
       "title": "Soul Efficiency",
       "item": "shadowthings:soul_upgrade_soul_usage_efficiency_1,shadowthings:soul_upgrade_soul_usage_efficiency_2,shadowthings:soul_upgrade_soul_usage_efficiency_3,shadowthings:soul_upgrade_soul_usage_efficiency_4",
-      "text": "Smelt amount upgrades increase the amount of smelted items. They work in:$(br)$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - decrease soul used per item and momentum decay rate.$(li)$(l:shadowthings:soul_crucible)Soul Crucible - increase souls gained per item.$(/l)$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - decrease souls used for crafting."
+      "text": "Efficiency upgrades affect the number of souls used/gained. They work in:$(br)$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - decrease soul used per item and momentum decay rate.$(li)$(l:shadowthings:soul_crucible)Soul Crucible$(/l) - increase souls gained per item. $(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - decrease souls used for crafting."
     },
     {
       "type": "patchouli:spotlight",
@@ -53,7 +53,11 @@
       "type": "patchouli:spotlight",
       "title": "Overload",
       "item": "shadowthings:soul_upgrade_overload",
-      "text": "This upgrade is the most $(#F0F)powerful$() of all in the mod. It is really overpowered, but has some negative effects. It works in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l) - overloads the cores max capacity. Can make the core $(l:shadowthings:core_meltdown)$(#F00)EXPLODE$()$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - increases max momentum to insane amounts. [NO NEGATIVE EFFECTS FOR NOW]$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - unlocks overpowered recipes. $(#F00)[NOT IMPLEMENTED YET]$()"
+      "text": "This upgrade is the most $(#F0F)powerful$() of all in the mod. It is really overpowered, but has some negative effects. It works in:$(br)$(li)$(l:shadowthings:soul_core)Soul Core$(/l) - overloads the cores max capacity. Can make the core $(l:shadowthings:core_meltdown)$(#F00)EXPLODE$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l:shadowthings:soul_furnace)Soul Furnace$(/l) - increases max momentum to insane amounts. [NO NEGATIVE EFFECTS FOR NOW]$(li)$(l:shadowthings:soul_crafter)Soul Crafter$(/l) - unlocks overpowered recipes. $(#F00)[NOT IMPLEMENTED YET]$()"
     }
   ]
 }

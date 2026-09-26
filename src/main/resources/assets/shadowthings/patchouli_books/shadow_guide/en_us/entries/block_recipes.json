@@ -1,0 +1,41 @@
+{
+  "name": "Block Recipes",
+  "icon": "shadowthings:shadowwood_log",
+  "category": "shadowthings:crafting_recipes",
+  "pages":[
+    {
+      "type": "patchouli:crafting",
+      "recipe": "shadowthings:shadow_machine_block_craft",
+      "recipe2": "shadowthings:soul_structure_block_craft"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "shadowthings:soul_condenser_craft",
+      "recipe2": "shadowthings:soul_crucible_craft"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "shadowthings:soul_core_craft",
+      "recipe2": "shadowthings:soul_crafter_craft"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe2": "shadowthings:soul_pedestal_craft"
+    },
+    {
+      "type": "shadowthings:soul_crafter_recipe",
+      "souls_text": "3500",
+      "catalyst": "shadowthings:soul_matrix",
+      "output": "shadowthings:soul_furnace_controller",
+      "in1": "shadowthings:shadow_ingot",
+      "in2": "shadowthings:shadow_ingot",
+      "in3": "shadowthings:shadow_ingot",
+      "in4": "shadowthings:shadow_ingot",
+      "in5": "minecraft:coal_block",
+      "in6": "minecraft:coal_block",
+      "in7": "minecraft:magma_block",
+      "in8": "minecraft:magma_block",
+      "in9": "minecraft:air"
+    }
+  ]
+}
