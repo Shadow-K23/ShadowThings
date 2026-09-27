@@ -26,6 +26,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -51,7 +53,6 @@ import terrablender.api.Regions;
 public class ShadowThings {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "shadowthings";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ShadowThings(IEventBus modEventBus, ModContainer modContainer) {
@@ -158,6 +159,30 @@ public class ShadowThings {
             event.register(ModMenuTypes.SOUL_CRAFTER_MENU.get(), SoulCrafterScreen::new);
             event.register(ModMenuTypes.SOUL_FURNACE_MENU.get(), SoulFurnaceScreen::new);
             event.register(ModMenuTypes.SOUL_CRUCIBLE_MENU.get(), SoulCrucibleScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+            event.registerBlockEntity(
+                    Capabilities.ItemHandler.BLOCK,
+                    ModBlockEntities.SOUL_CRUCIBLE_BE.get(),
+                    (blockEntity, direction) -> blockEntity.mainInventory
+            );
+            event.registerBlockEntity(
+                    Capabilities.ItemHandler.BLOCK,
+                    ModBlockEntities.SOUL_PEDESTAL_BE.get(),
+                    (blockEntity, direction) -> blockEntity.inventory
+            );
+            event.registerBlockEntity(
+                    Capabilities.ItemHandler.BLOCK,
+                    ModBlockEntities.SOUL_CRAFTER_BE.get(),
+                    (blockEntity,direction) -> blockEntity.inventory
+            );
+            event.registerBlockEntity(
+                    Capabilities.ItemHandler.BLOCK,
+                    ModBlockEntities.SOUL_CRUCIBLE_BE.get(),
+                    (blockEntity,direction) -> blockEntity.mainInventory
+            );
         }
     }
 }

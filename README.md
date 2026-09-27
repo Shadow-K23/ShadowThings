@@ -1,25 +1,54 @@
+# ShadowThings
 
-Installation information
-=======
+[![NeoForge 1.21.1](https://img.shields.io/badge/NeoForge-1.21.1-orange.svg)](https://neoforged.net/)
+[![License: Hybrid](https://img.shields.io/badge/License-Hybrid-blue.svg)](#license)
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+> *Welcome to ShadowThings. The mod that is all about collecting souls and using them for your own advantage. Take control of dark energy, build powerful structures, and harness their power. I hope you're ready for a wild ride and enjoy the mod!*
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+## 🔮 Key Features
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+* **Soul Management:** Harvest souls using the *Soul Crucible* and store them in powerful *Soul Cores*.
+* **Advanced Crafting:** Use the *Soul Crafter* and surrounding pedestals to perform complex, animated rituals on multiblock structures.
+* **Upgrade System:** Modify and upgrade your machines to increase their soul transfer rates and efficiency.
+* **Shadow Guide:** Fully documented in-game mechanics via an interactive guidebook (*Shadow Guide*), featuring a 3D multiblock visualization system to help you build.
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+---
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+## ⚙️ Requirements & Dependencies
+
+To ensure the mod works correctly, please make sure you have the following installed:
+
+* **Mod Loader:** [NeoForge](https://neoforged.net/) (version `21.1` or newer)
+
+**Required Mods (Mandatory):**
+* [GeckoLib](https://modrinth.com/mod/geckolib) - Required for advanced machine and entity animations.
+* [TerraBlender (NeoForge)](https://modrinth.com/mod/terrablender) - Required for proper biome and structure generation in the world.
+
+**Recommended Mods (Optional):**
+* [Patchouli (NeoForge)](https://modrinth.com/mod/patchouli) - Highly recommended! Without it, the interactive "Shadow Guide" (mod book) and the 3D structure visualization system will not be available in-game.
+
+---
+
+## 🛠️ Installation
+
+1. Download and install [NeoForge](https://neoforged.net/) for Minecraft 1.21.1.
+2. Download the latest version of **ShadowThings** from the *Releases* tab (or compile your own from the source).
+3. Place the downloaded `.jar` file into the `mods/` folder in your Minecraft directory (`.minecraft`).
+4. Ensure the `.jar` files for the required dependencies (GeckoLib and TerraBlender) are also in the `mods/` folder.
+5. Launch the game and enjoy the mod!
+
+---
+
+## 📝 License
+
+This project uses a **Hybrid License model**:
+* **Source Code:** Released under the **MIT License**, allowing other developers to learn from and modify the code.
+* **Assets:** All assets are protected by copyright (**All Rights Reserved**).
+
+For detailed information, please refer to the [LICENSE](LICENSE) file.
+
+---
+
+## 🐛 Bug Reporting & Feedback
+
+Found a bug or have an idea for a new feature? Feel free to open a new issue in the [Issues](../../issues) tab.

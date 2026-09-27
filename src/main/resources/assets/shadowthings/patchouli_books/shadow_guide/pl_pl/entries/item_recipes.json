@@ -1,0 +1,17 @@
+{
+  "name": "Receptury Przedmiotów",
+  "icon": "shadowthings:shadow_ingot",
+  "category": "shadowthings:crafting_recipes",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "shadowthings:shadow_ingot_craft",
+      "recipe2": "shadowthings:soul_matrix_craft"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "shadowthings:soul_fruit_2_craft",
+      "recipe2": "shadowthings:soul_fruit_3_craft"
+    }
+  ]
+}

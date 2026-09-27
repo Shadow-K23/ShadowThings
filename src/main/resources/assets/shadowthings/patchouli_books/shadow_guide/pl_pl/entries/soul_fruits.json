@@ -1,0 +1,15 @@
+{
+  "name": "Owoce Dusz",
+  "icon": "shadowthings:soul_fruit_1",
+  "category": "shadowthings:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Owoce Dusz po zjedzeniu zwiększają domyślną pojemność dusz gracza. Występują w 3 różnych poziomach, a poziom pierwszy zdobywa się, niszcząc Cieniste Liście."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)Poziom 1 zwiększa maksymalną pojemność o 150, aż do 1750!$(li)Poziom 2 zwiększa maksymalną pojemność o 250, aż do 4250!$(li)Poziom 3 zwiększa maksymalną pojemność o 475, aż do 7500!"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Kondensator Dusz",
+  "icon": "shadowthings:soul_condenser",
+  "category": "shadowthings:machines",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Kondensator Dusz to pasywny sposób na generowanie dusz we wczesnej fazie gry. Wystarczy go postawić, a zacznie zbierać dusze z atmosfery. Domyślnie generuje 3 dusze/s. Chyba że postawisz go w niestandardowym biomie modyfikacji „Cienisty Las”, wtedy generacja jest dziesięciokrotnie zwiększona.$(br)Ta maszyna $(l) NIE ładuje chunków$() i $(l)NIE musi być połączona z rdzeniem.$()"
+    }
+  ]
+}

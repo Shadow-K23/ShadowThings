@@ -1,0 +1,11 @@
+{
+  "name": "Piec Dusz - Auto I/O",
+  "icon": "minecraft:chest",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l:shadowthings:soul_furnace)Piec Dusz$(/l) posiada mechanikę automatycznego wejścia/wyjścia. Możesz go skonfigurować za pomocą Łącznika Dusz. Proces ten jest opisany we wpisie $(l:shadowthings:linking)Łącznik Dusz.$()"
+    }
+  ]
+}

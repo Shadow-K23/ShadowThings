@@ -1,0 +1,11 @@
+{
+  "name": "Klątwa Cienia",
+  "icon": "shadowthings:textures/mob_effect/shadow_curse.png",
+  "category": "shadowthings:enchants_effects",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Klątwa Cienia to efekt, który powtarza zadane dotkniętej istocie obrażenia jako obrażenia magiczne. Przy poziomie wzmocnienia 2 powtarza 50% zadanych obrażeń. Jej mikstury można wytworzyć, dodając Cieniste Jagody do Dziwnej Mikstury."
+    }
+  ]
+}

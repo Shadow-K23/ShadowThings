@@ -1,0 +1,21 @@
+{
+  "name": "Stal Cienia",
+  "icon": "shadowthings:raw_shadow_steel",
+  "category": "shadowthings:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To główna ruda tej modyfikacji. Występuje w Overworldzie, Netherze i Endzie."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_pic.png",
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_nether_pic.png",
+        "shadowthings:textures/gui/patchouli/shadow_steel_ore_end_pic.png"
+      ],
+      "title": "Ruda Cienia",
+      "border": true
+    }
+  ]
+}

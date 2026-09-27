@@ -1,0 +1,68 @@
+{
+  "name": "Ulepszenia Dusz",
+  "icon": "shadowthings:soul_upgrade_overload",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Większość maszyn w tej modyfikacji można ulepszyć na różne sposoby. Na kolejnych stronach zobaczysz, jaka maszyna akceptuje jakie ulepszenie i co ono robi. Sloty na ulepszenia maszyn to kolumna 4 różowawych slotów w rogu interfejsu."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pojemność",
+      "item": "shadowthings:soul_upgrade_capacity_1,shadowthings:soul_upgrade_capacity_2,shadowthings:soul_upgrade_capacity_3,shadowthings:soul_upgrade_capacity_4",
+      "text": "Ulepszenia pojemności zwiększają maksymalną pojemność dusz maszyn. Działają w:$(li)$(l:shadowthings:soul_core)Rdzeniu Dusz$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ilość Przesyłu",
+      "item": "shadowthings:soul_upgrade_transfer_amount_1,shadowthings:soul_upgrade_transfer_amount_2,shadowthings:soul_upgrade_transfer_amount_3,shadowthings:soul_upgrade_transfer_amount_4",
+      "text": "Ulepszenia ilości przesyłu zwiększają liczbę dusz wysyłanych w jednym pakiecie. Działają w:$(li)$(l:shadowthings:soul_core)Rdzeniu Dusz$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Szybkość Przesyłu",
+      "item": "shadowthings:soul_upgrade_transfer_rate_1,shadowthings:soul_upgrade_transfer_rate_2,shadowthings:soul_upgrade_transfer_rate_3,shadowthings:soul_upgrade_transfer_rate_4",
+      "text": "Ulepszenia ilości przesyłu zwiększają szybkość wysyłania pakietów. Działają w:$(li)$(l:shadowthings:soul_core)Rdzeniu Dusz$(/l)$(li)$(l:shadowthings:soul_crafter)Kreatorze Dusz$(/l) - zwiększają szybkość craftingu."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wydajność Dusz",
+      "item": "shadowthings:soul_upgrade_soul_usage_efficiency_1,shadowthings:soul_upgrade_soul_usage_efficiency_2,shadowthings:soul_upgrade_soul_usage_efficiency_3,shadowthings:soul_upgrade_soul_usage_efficiency_4",
+      "text": "Ulepszenia wydajności wpływają na liczbę zużywanych/zdobywanych dusz. Działają w:$(li)$(l:shadowthings:soul_furnace)Piecu Dusz$(/l) - zmniejszają liczbę dusz zużywanych na przedmiot oraz tempo zanikania rozpędu.$(li)$(l:shadowthings:soul_crucible)Tyglu Dusz$(/l) - zwiększają liczbę dusz zdobywanych za przedmiot."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l:shadowthings:soul_crafter)Kreatorze Dusz$(/l) - zmniejszają liczbę dusz zużywanych do craftingu."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Szybkość Przepalania",
+      "item": "shadowthings:soul_upgrade_smelt_speed_1,shadowthings:soul_upgrade_smelt_speed_2,shadowthings:soul_upgrade_smelt_speed_3,shadowthings:soul_upgrade_smelt_speed_4",
+      "text": "Ulepszenia szybkości przepalania zwiększają szybkość przepalania. Działają w:$(li)$(l:shadowthings:soul_furnace)Piecu Dusz$(/l) - zwiększają maksymalny rozpęd oraz jego przyrost.$(li)$(l:shadowthings:soul_crucible)Tyglu Dusz$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ilość Przepalania",
+      "item": "shadowthings:soul_upgrade_smelt_speed_1,shadowthings:soul_upgrade_smelt_speed_2,shadowthings:soul_upgrade_smelt_speed_3,shadowthings:soul_upgrade_smelt_speed_4",
+      "text": "Ulepszenia ilości przepalania zwiększają liczbę przepalanych przedmiotów. Działają w:$(li)$(l:shadowthings:soul_furnace)Piecu Dusz$(/l) - zwiększają również koszt dusz na przedmiot.$(li)$(l:shadowthings:soul_crucible)Tyglu Dusz$(/l)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Redstone",
+      "item": "shadowthings:soul_upgrade_redstone_control",
+      "text": "To ulepszenie sprawia, że maszyny reagują na redstone. $(#F00)[JESZCZE NIEZAIMPLEMENTOWANE]$() Działa w:"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Przeciążenie",
+      "item": "shadowthings:soul_upgrade_overload",
+      "text": "To ulepszenie jest $(#F0F)najpotężniejsze$() ze wszystkich w tej modyfikacji. Jest naprawdę przesadnie silne, ale ma pewne negatywne skutki. Działa w:$(li)$(l:shadowthings:soul_core)Rdzeniu Dusz$(/l) - przeciąża maksymalną pojemność rdzenia. Może sprawić, że rdzeń $(l:shadowthings:core_meltdown)$(#F00)WYBUCHNIE$()",
+      "anchor": "overload_anchor"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l:shadowthings:soul_furnace)Piecu Dusz$(/l) - zwiększa maksymalny rozpęd do szalonych wartości. [BRAK NEGATYWNYCH SKUTKÓW NA RAZIE]$(li)$(l:shadowthings:soul_crafter)Kreatorze Dusz$(/l) - odblokowuje przesadnie silne receptury. $(#F00)[JESZCZE NIEZAIMPLEMENTOWANE]$()"
+    }
+  ]
+}

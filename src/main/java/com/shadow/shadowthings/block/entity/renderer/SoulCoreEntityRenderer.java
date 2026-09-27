@@ -18,8 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreEntity> {
-
-    // 1. Point this to your white texture file!
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("shadowthings", "textures/entity/soul_core.png");
 
     private final SoulCoreModel model;
@@ -33,7 +31,6 @@ public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreE
     public AABB getRenderBoundingBox(SoulCoreEntity blockEntity) {
         BlockPos pos = blockEntity.getBlockPos();
 
-        // AABB using 6 doubles: (minX, minY, minZ, maxX, maxY, maxZ)
         return new AABB(
                 pos.getX() - 1.0, pos.getY(),       pos.getZ() - 1.0,
                 pos.getX() + 2.0, pos.getY() + 4.0, pos.getZ() + 2.0
@@ -45,14 +42,12 @@ public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreE
     public void renderMachine(SoulCoreEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (blockEntity.getLevel() == null) return;
 
-        // Check if the block is actually formed. If not, stop rendering the 3D model!
         if (!blockEntity.isFormed) {
             return;
         }
 
         float damageFactor = 1.0f - ((float) Math.max(1, blockEntity.coreHealth) / 10000f);
 
-        // 2. Set a maximum jitter distance (0.1 blocks is a very violent shake)
         float maxJitter = 0.1f * damageFactor;
         float fullness = Math.min(1.0f,(float)blockEntity.getSouls() / blockEntity.getMaxSouls()); // Testing value
 
@@ -68,25 +63,20 @@ public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreE
         int b = (int) (35 + 220 * fullness);
         float scale = 0.20f + (1.5f * fullness);
 
-        // --- 2. MELTDOWN OVERRIDES ---
+        // --- MELTDOWN OVERRIDES ---
         if (blockEntity.isMeltingDown) {
             int timer = blockEntity.meltdownTimer;
             float exactTimer = timer + partialTick;
 
-            // A. Stop the gentle floating bob instantly
             bobbingOffset = 0.0f;
-
-            // B. Accelerate Rotation (Exponentially faster as timer increases)
             rotationAngle += exactTimer * (exactTimer / 30.0f);
 
-            // C. Flashing Colors (Strobes faster as detonation approaches)
             float flashSpeed = 0.2f + (exactTimer / 800.0f);
             float flash = (float) Math.abs(Math.sin(exactTimer * flashSpeed));
-            r = 255; // Lock red to max for extreme danger
-            g = (int) (255 * flash); // Flash white/yellow
+            r = 255;
+            g = (int) (255 * flash);
             b = (int) (255 * flash);
 
-            // D. Scaling Overrides (Replacing the old slow pulse)
             if (timer < 1680) {
                 // The crystal slowly swells and bulges outward constantly until collapse
                 scale += (exactTimer / 1700.0f) * 1.5f;
@@ -95,11 +85,10 @@ public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreE
                 // Phase 3B: Dead Silence - Snap to pitch black!
                 r = 0; g = 0; b = 0;
 
-                // Freeze rotation exactly where it was at tick 1699!
+                // Freeze rotation
                 float frozenTimer = 1679.0f;
                 rotationAngle = (time - (timer - 1680) + partialTick) * 1.5f + (frozenTimer * (frozenTimer / 30.0f));
 
-                // The violent cubic collapse shrink
                 float maxScaleBeforeCollapse = (0.20f + (1.5f * fullness)) + 1.5f;
                 float collapseProgress = (exactTimer - 1680) / 100.0f;
                 scale = maxScaleBeforeCollapse * (float) Math.pow(1.0 - collapseProgress, 3);
@@ -111,31 +100,31 @@ public class SoulCoreEntityRenderer extends AbstractSoulEntityRenderer<SoulCoreE
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(TEXTURE));
         poseStack.pushPose();
 
-        // ==========================================
-        // 1. GLOBAL SETUP (Applies to everything)
-        // ==========================================
+
+        //GLOBAL SETUP
+
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.mulPose(Axis.XP.rotationDegrees(180f));
 
         this.model.base.render(poseStack, vertexConsumer, packedLight, packedOverlay, 0xFFFFFFFF);
         poseStack.pushPose();
 
-        // ==========================================
-        // 2. CRYSTAL SETUP (Applies ONLY to the crystal)
-        // ==========================================
+
+        // CRYSTAL SETUP (
+
         float randomX = (float) ((Math.random() - 0.5) * 2.0 * maxJitter);
         float randomY = (float) ((Math.random() - 0.5) * 2.0 * maxJitter);
         float randomZ = (float) ((Math.random() - 0.5) * 2.0 * maxJitter);
 
-        // Apply the modified translations and angles!
+
         poseStack.translate(0.0 + randomX, -bobbingOffset + randomY, 0.0 + randomZ);
         poseStack.mulPose(Axis.YP.rotationDegrees(rotationAngle));
         poseStack.scale(scale, scale, scale);
 
-        // Draw the Crystal (Glowing Light, Scaled, Spinning, Custom Color)
+
         this.model.crystal.render(poseStack, vertexConsumer, 15728880, packedOverlay, color);
 
-        poseStack.popPose(); // Erase the crystal math
-        poseStack.popPose(); // Erase the global math
+        poseStack.popPose();
+        poseStack.popPose();
     }
 }

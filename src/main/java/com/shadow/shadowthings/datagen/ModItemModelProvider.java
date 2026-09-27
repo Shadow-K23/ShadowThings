@@ -131,7 +131,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         //SEEDS
         basicItem(ModItems.RADISH_SEEDS.get());
         //FUEL
-        basicItem(ModItems.SUPER_FUEL.get());
+        
         //MISC
         basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
 

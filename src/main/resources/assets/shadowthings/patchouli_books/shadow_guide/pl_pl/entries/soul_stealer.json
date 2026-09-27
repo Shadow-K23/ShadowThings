@@ -1,0 +1,11 @@
+{
+  "name": "Kradzież Dusz",
+  "icon": "minecraft:enchanted_book",
+  "category": "shadowthings:enchants_effects",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Zaklęcie Kradzież Dusz zwiększa liczbę $(l:shadowthings:souls)Dusz$() zdobywanych za zabijanie mobów. Nadaje się na bronie."
+    }
+  ]
+}

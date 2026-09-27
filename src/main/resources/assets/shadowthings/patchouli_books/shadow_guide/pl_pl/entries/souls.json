@@ -1,0 +1,20 @@
+{
+  "name": "Dusze",
+  "icon": "shadowthings:shadow_sword",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To główna mechanika tej modyfikacji. $(br) Za każdym razem, gdy zabijesz wrogiego moba, zdobywasz losową liczbę dusz. Aktualną ich ilość możesz zobaczyć w prawym dolnym rogu. Zdobywana ilość jest zwiększana przez zaklęcie $(l:shadowthings:soul_stealer)Kradzież Dusz$(/l) na twojej broni. Możesz również zwiększyć maksymalną pojemność dusz gracza, jedząc $(l:shadowthings:soul_fruits)Owoce Dusz$()."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_bar_pic.png"
+      ],
+      "title": "Pasek Dusz",
+      "border": true,
+      "text": "To jest twój pasek dusz."
+    }
+  ]
+}

@@ -6,14 +6,17 @@
   "item.shadowthings.shadow_shovel": "Shadow Shovel",
   "item.shadowthings.shadow_pickaxe": "Shadow Pickaxe",
   "item.shadowthings.shadow_axe": "Shadow Axe",
+
   "item.shadowthings.shadow_scythe": "Shadow Scythe",
   "item.shadowthings.shadow_bow": "Shadow Bow",
   "item.shadowthings.soul_linker": "Soul Linker",
   "item.shadowthings.shadow_hammer": "Shadow Hammer",
+
   "item.shadowthings.soul_matrix": "Soul Matrix",
   "item.shadowthings.soul_fruit_1": "Soul Fruit",
   "item.shadowthings.soul_fruit_2": "Lapis Soul Fruit",
   "item.shadowthings.soul_fruit_3": "Amethyst Soul Fruit",
+
   "item.shadowthings.soul_upgrade_base_1": "Upgrade Base T1",
   "item.shadowthings.soul_upgrade_base_2": "Upgrade Base T2",
   "item.shadowthings.soul_upgrade_base_3": "Upgrade Base T3",
@@ -43,12 +46,16 @@
   "item.shadowthings.soul_upgrade_smelt_speed_2": "Smelt Speed Upgrade T2",
   "item.shadowthings.soul_upgrade_smelt_speed_3": "Smelt Speed Upgrade T3",
   "item.shadowthings.soul_upgrade_smelt_speed_4": "Smelt Speed Upgrade T4",
+
   "item.shadowthings.soul_upgrade_redstone_control": "Redstone Control Upgrade",
   "item.shadowthings.soul_upgrade_overload": "Overload Upgrade",
+
   "item.shadowthings.bar_brawl_music_disc": "Bar Brawl Music Disc",
   "item.shadowthings.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
   "effect.shadowthings.slimey": "Slimey",
   "effect.shadowthings.shadow_curse": "Shadow Curse",
+
   "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
   "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
   "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
@@ -56,10 +63,12 @@
   "item.minecraft.splash_potion.effect.shadow_curse_potion": "Shadow Curse Splash Potion",
   "item.minecraft.lingering_potion.effect.shadow_curse_potion": "Shadow Curse Lingering Potion",
   "item.minecraft.tipped_arrow.effect.shadow_curse_potion": "Arrow of Shadow Curse",
+
   "enchantment.shadowthings.lightning_strike": "Lightning Strike",
   "enchantment.shadowthings.poison_strike": "Poison Strike",
   "enchantment.shadowthings.shadow_strike": "Shadow Strike",
   "enchantment.shadowthings.soul_stealer": "Soul Stealer",
+
   "item.shadowthings.shadow_helmet": "Shadow Helmet",
   "item.shadowthings.shadow_chestplate": "Shadow Chestplate",
   "item.shadowthings.shadow_leggings": "Shadow Leggings",
@@ -68,6 +77,7 @@
   "item.shadowthings.radish_seeds": "Radish Seeds",
   "item.shadowthings.shadow_berry": "Shadow Berries",
   "item.shadowthings.super_fuel": "Super Fuel",
+
   "block.shadowthings.shadow_block": "Block of Shadow Steel",
   "block.shadowthings.shadow_ore": "Shadow Ore",
   "block.shadowthings.shadow_deepslate_ore": "Shadow Deepslate Ore",
@@ -101,8 +111,10 @@
   "block.shadowthings.shadowwood_planks": "Shadowwood Planks",
   "block.shadowthings.shadowwood_sapling": "Shadowwood Sapling",
   "block.shadowthings.shadowwood_leaves": "Shadowwood Leaves",
+
   "creativetab.shadowthings.shadow_blocks": "Shadow Blocks",
   "creativetab.shadowthings.shadow_items": "Shadow Items",
+
   "gui.shadowthings.player_souls": "Souls:",
   "gui.shadowthings.core_siphon": "Soul Siphon",
   "gui.shadowthings.soul_amount": "Souls stored:",
@@ -112,6 +124,9 @@
   "gui.shadowthings.core_health": "Core Health:",
   "gui.shadowthings.active": "On",
   "gui.shadowthings.inactive": "Off",
+
+  "book.shadowthings.landing_text": "Welcome to ShadowThings. The mod that is all about collecting souls and using them for your own advantage. I hope you're ready for a wild ride and enjoy the mod.",
+
   "message.shadowthings.linking_tool_reset": "§eLinking tool reset.",
   "message.shadowthings.furnace_distance_warning": "§cInventory out of soul furnace range!",
   "message.shadowthings.furnace_inventory_warning": "§cNot a storage block!",

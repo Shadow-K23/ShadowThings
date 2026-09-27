@@ -1,0 +1,33 @@
+{
+  "name": "Łącznik Dusz",
+  "icon": "shadowthings:soul_linker",
+  "category": "shadowthings:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Narzędzie Łącznik Dusz może być użyte do połączenia $(l:shadowthings:soul_core)Rdzenia Dusz$() z różnymi maszynami. $(br)Aby połączyć maszynę z rdzeniem, kliknij prawym przyciskiem myszy na rdzeń $(o)(środkowy blok struktury)$(), a następnie kliknij prawym przyciskiem myszy na dowolną maszynę, którą chcesz podłączyć. Aby zresetować narzędzie, kliknij prawym przyciskiem myszy w powietrze, trzymając Shift."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_linker_pic.png"
+      ],
+      "title": "Łączenie Pieca Dusz",
+      "border": true,
+      "text": "Maszyny połączone z rdzeniem."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Narzędzie Łącznik Dusz może być również użyte do konfiguracji $(l:shadowthings:soul_furnace)Pieca Dusz$() $(l:shadowthings:soul_furnace_aio)Automatycznego I/O.$() Aby skonfigurować automatyczne I/O, najpierw musisz kliknąć prawym przyciskiem myszy na blok kontrolera pieca $(o)(środkowy)$(), następnie możesz kliknąć prawym przyciskiem myszy na ekwipunek $(l)wejściowy$(), a potem na ekwipunek $(l)wyjściowy$()."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "shadowthings:textures/gui/patchouli/soul_linker_furnace_pic.png"
+      ],
+      "title": "Łączenie Rdzenia Dusz",
+      "border": true,
+      "text": "Maszyny połączone z rdzeniem."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Tygiel Dusz",
+  "icon": "shadowthings:soul_crucible",
+  "category": "shadowthings:machines",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tygiel Dusz to twój sposób na zdobywanie sporej ilości $(l:shadowthings:souls)dusz$() w środkowej fazie gry, potrzebnych do craftingu i częściowo do przepalania. $(br)Ten blok przepala przedmioty na dusze. Podobnie jak zwykły generator węglowy, który znajdziesz w wielu modyfikacjach."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Może przepalać:$(li)Zgniłe Mięso$(li)Kość$(li)Oko Pająka$(li)Piasek Dusz$(br)Im niżej na liście, tym więcej dusz produkuje. Może być również $(l:shadowthings:soul_upgrades)ulepszony.$()"
+    }
+  ]
+}

@@ -40,11 +40,11 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
         if (!entity.isFormed) return;
 
         float centerX = 0.5f;
-        float centerY = 1.175f; // Adjust this if your base/item is too high or low
+        float centerY = 1.175f;
         float centerZ = 0.5f;
 
 
-        // --- 2. RENDER THE STATIC BASE BONE ---
+        //RENDER THE STATIC BASE BONE
         poseStack.pushPose();
         poseStack.translate(0.5f, 1.5f, 0.5f);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -54,13 +54,12 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
         this.furnaceModel.base.render(poseStack, baseConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
 
-        float momentumLerpRate = 0.1f; // Adjust between 0.1f (slower/smoother) and 0.3f (snappier)
+        float momentumLerpRate = 0.1f;
         this.clientSmoothedMomentum += (entity.momentum - this.clientSmoothedMomentum) * momentumLerpRate;
 
-        // Use the smoothed client momentum for all visual effects instead of the raw entity.momentum!
         float speedPercent = this.clientSmoothedMomentum / Math.max(1.0f, entity.maxMomentum);
 
-        // --- 3. RENDER THE HOVERING ITEM ---
+        // RENDER THE HOVERING ITEM
         ItemStack inputStack = entity.mainInventory.getStackInSlot(0);
         if (!inputStack.isEmpty()) {
             poseStack.pushPose();
@@ -74,7 +73,7 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
             poseStack.popPose();
         }
 
-        // --- 4. PARAMETRIC MATH: THE ORBITING BALL BONE ---
+        // PARAMETRIC MATH: THE ORBITING BALL BONE
         float orbitTime = entity.prevOrbitAngle + (entity.orbitAngle - entity.prevOrbitAngle) * partialTick;
 
         poseStack.pushPose();
@@ -83,11 +82,10 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
         poseStack.translate(0.5f, 1.825f, 0.5f);
 
 
-        // --- SPEED MIRAGES (The Perfect Ring) ---
-        // A full circle is 2*PI radians. We slice the circle into 16 perfect increments.
+        // SPEED MIRAGES
         float trailGap = (float) (Math.PI * 2) / 20.0f;
 
-        int ballCount = 1; // Default to just the main crystal
+        int ballCount = 1;
 
         // Only start spawning trailing mirages once momentum hits 150
         if (entity.momentum >= 125.0f) {
@@ -95,14 +93,12 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
             float progress = (entity.momentum - 125.0f) / (650.0f - 125.0f);
             // Safety clamp
             progress = Math.clamp(progress, 0.0f, 1.0f);
-            // 2. The "Soft Exponential" Curve
-            // We blend 40% Linear (starts immediately) with 60% Exponential (swoops at the end).
+
             float linearPart = progress * 0.35f;
             float exponentialPart = (progress * progress) * 0.65f;
 
             float curveFactor = linearPart + exponentialPart;
 
-            // 3. Map the curve to your 20 extra trail slots
             int extraBalls = (int) (curveFactor * 20.0f);
 
             ballCount = 1 + extraBalls;
@@ -132,7 +128,7 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
             float smoothSpeed = speedPercent * speedPercent * (3.0f - 2.0f * speedPercent);
 
             if (ring == 0) {
-                // Inner Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed so it glides to a stop
+                // Inner Ring: Primary Spin (Y-Axis) - Scaled by smoothSpeed
                 float spinY = (float) (Math.sin(orbitTime * 0.015f) * 300.0f + Math.sin(orbitTime * 0.005f) * 600.0f);
                 poseStack.mulPose(Axis.YP.rotationDegrees(spinY * smoothSpeed));
 
@@ -169,7 +165,6 @@ public class SoulFurnaceEntityRenderer extends AbstractSoulEntityRenderer<SoulFu
         // --- 6. RENDER ENERGY BEAMS (Pass 2) ---
         // Only run the entire second pass if we are actively smelting!
         if (entity.isSmelting) {
-            // Request the lightning buffer ONCE, outside the loop!
             VertexConsumer beamConsumer = buffer.getBuffer(RenderType.lightning());
 
             for (int ring = 0; ring < 2; ring++) {

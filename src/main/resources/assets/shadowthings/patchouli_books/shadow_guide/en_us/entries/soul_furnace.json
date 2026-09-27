@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Furnace is a multiblock that works like a furnace, except it uses $(l:shadowthings:souls)Souls.$() $(br)It can be $(l:shadowthings:soul_upgrades) upgraded$() just like the $(l:shadowthings:soul_core)Soul Core$().$(br2)This furnace doesn't work exactly like the normal furnace though. It has a momentum mechanic. Whenever smelting, overtime it accumulates momentum. Momentum makes it smelt faster and reduces souls used for smelting."
+      "text": "The Soul Furnace is a multiblock that works like a furnace, except it uses $(l:shadowthings:souls)Souls.$() It can be$(l:shadowthings:soul_upgrades) upgraded$() just like the $(l:shadowthings:soul_core)Soul Core$().$(br)This furnace doesn't work exactly like the normal furnace though. It has a momentum mechanic. Whenever smelting, overtime it accumulates momentum. Momentum makes it smelt faster and reduces souls used for smelting."
     },
     {
       "type": "patchouli:image",
