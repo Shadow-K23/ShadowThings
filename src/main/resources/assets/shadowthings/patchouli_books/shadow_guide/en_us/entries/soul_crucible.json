@@ -5,7 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Crucible is you mid-game method of obtaining good amount of $(l:shadowthings:souls)souls$() for crafting and some smelting. $(br)The block smelts items for souls. Just like a normal coal generator you find in many mods. $(br)It can smelt:$(li)Rotten Flesh$(li)Bone$(li)Spider Eye$(li)Soul Sand$(br)The lower in the list the more souls it produces. It can also be $(l:shadowthings:soul_upgrades)upgraded.$()"
+      "text": "The Soul Crucible is you mid-game method of obtaining good amount of $(l:shadowthings:souls)souls$() for crafting and some smelting. $(br)The block smelts items for souls. Just like a normal coal generator you find in many mods."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It can smelt:$(li)Rotten Flesh$(li)Bone$(li)Spider Eye$(li)Soul Sand$(br)The lower in the list the more souls it produces. It can also be $(l:shadowthings:soul_upgrades)upgraded.$()"
     }
   ]
 }

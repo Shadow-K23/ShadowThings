@@ -90,8 +90,7 @@ public class SoulCollectorEntity extends AbstractSoulEntity {
                     int spaceInCore = core.getMaxSouls() - core.getSouls();
 
                     if (spaceInCore > 0) {
-                        // Push souls to the core! (Amount scales with capacity/upgrades)
-                        int amountToPush = Math.min(this.souls, Math.min(spaceInCore, 200));
+                        int amountToPush = Math.min(this.souls, Math.min(spaceInCore, 1000));
                         core.addSouls(amountToPush);
                         this.removeSouls(amountToPush);
                         this.setChanged();

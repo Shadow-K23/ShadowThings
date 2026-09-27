@@ -1,0 +1,15 @@
+{
+  "name": "Kreator Dusz",
+  "icon": "shadowthings:soul_crafter",
+  "category": "shadowthings:machines",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Kreator Dusz to własny system craftingu tej modyfikacji. Działa podobnie jak każdy inny system craftingu oparty na piedestałach. Katalizator umieszczasz w samym kreatorze, a składniki na piedestałach dookoła niego. Następnie naciśnij „craft” wewnątrz samego kreatora."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Składniki nie muszą znajdować się w konkretnej kolejności, podobnie piedestały nie muszą stać w określonych miejscach, o ile znajdują się nie dalej niż 2 bloki od kreatora.$(br)Nie potrzebujesz określonej liczby piedestałów, aby to działało. Wystarczy, że masz taką ich ilość, jakiej wymaga receptura."
+    }
+  ]
+}

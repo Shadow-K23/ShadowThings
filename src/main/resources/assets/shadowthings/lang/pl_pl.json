@@ -103,7 +103,6 @@
   "block.shadowthings.shadowwood_leaves": "Cieniste Liście",
   "creativetab.shadowthings.shadow_blocks": "Cieniste Bloki",
   "creativetab.shadowthings.shadow_items": "Cieniste Przedmioty",
-
   "gui.shadowthings.player_souls": "Dusze:",
   "gui.shadowthings.core_siphon": "Syfon Dusz",
   "gui.shadowthings.soul_amount": "Przechowywane dusze:",
@@ -113,6 +112,8 @@
   "gui.shadowthings.core_health": "Zdrowie Rdzenia:",
   "gui.shadowthings.active": "Wyłączone",
   "gui.shadowthings.inactive": "Włączone",
+
+  "book.shadowthings.landing_text": "Witaj w ShadowThings – modyfikacji, w której głównym celem jest gromadzenie dusz i naginanie ich do własnej woli. Przygotuj się na mocne wrażenia i miłej zabawy!",
 
   "message.shadowthings.linking_tool_reset": "§eŁącznik zresetowany.",
   "message.shadowthings.furnace_distance_warning": "§cPojemnik poza zasięgiem pieca!",
@@ -125,7 +126,6 @@
   "message.shadowthings.core_range_warning": "§cMaszyna poza zasięgiem Rdzenia!",
   "message.shadowthings.core_linking_finished": "§aMaszyna pomyślnie połączona z Rdzeniem!",
   "message.shadowthings.core_meltdown_warning": "§c§l[OSTRZEŻENIE] KRYTYCZNE PRZECIĄŻENIE RDZENIA DUSZ§r",
-
   "tooltip.shadowthings.shift": "§7Naciśnij§r §6§lShift§r§r §7aby uzyskać więcej informacji.§r",
   "tooltip.shadowthings.soul_core": "Serce multibloku Rdzenia Dusz.",
   "tooltip.shadowthings.soul_furnace_controller": "Serce multibloku Pieca Dusz.",

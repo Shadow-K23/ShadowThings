@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(l:shadowthings:soul_furnace)Soul Furnace$(/l) has a auto input/output mechanic. You can configure it using the Soul Linker. The process is described under the $(l:shadowthings:soul_linker)Soul Linker entry.$()"
+      "text": "The $(l:shadowthings:soul_furnace)Soul Furnace$(/l) has a auto input/output mechanic. You can configure it using the Soul Linker. The process is described under the $(l:shadowthings:linking)Soul Linker entry.$()"
     }
   ]
 }

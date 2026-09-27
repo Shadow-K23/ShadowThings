@@ -26,19 +26,15 @@ public class SoulPedestalEntityRenderer implements BlockEntityRenderer<SoulPedes
         ItemStack stack = pedestal.inventory.getStackInSlot(0);
         if (stack.isEmpty() || pedestal.getLevel() == null) return;
 
-        // Smooth, non-jittery time value for animation (survives tick boundaries)
         float time = pedestal.getLevel().getGameTime() + partialTick;
 
         poseStack.pushPose();
 
-        // Pedestal collision box top is at y = 14/16 = 0.875, float just above it
         poseStack.translate(0.5, 1.1, 0.5);
 
-        // Gentle up/down bob
         float bob = Mth.sin(time / 10f) * 0.05f;
         poseStack.translate(0, bob, 0);
 
-        // Slow, constant spin
         poseStack.mulPose(Axis.YP.rotationDegrees((time * 2f) % 360f));
 
         poseStack.scale(0.5f, 0.5f, 0.5f);

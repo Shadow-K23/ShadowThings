@@ -1,0 +1,19 @@
+{
+  "name": "Eksplozja Rdzenia Dusz",
+  "icon": "minecraft:tnt",
+  "category": "shadowthings:mechanics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Rdzeń Dusz posiada specjalną mechanikę, gdy zostanie $(l:shadowthings:soul_upgrades#overload_anchor)przeciążony$(). Samo ulepszenie popycha rdzeń do granic możliwości, zwiększając jego pojemność do szalonych wartości. Ma on jednak bezpieczny próg dusz. Obecnie wynosi on 200 tys. Gdy liczba dusz przekroczy 200 tys., rdzeń zaczyna otrzymywać obrażenia. Im więcej dusz przechowywanych powyżej bezpiecznego progu,"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "tym szybciej spada zdrowie rdzenia. Jeśli zdrowie rdzenia spadnie do 0, znajdujesz się w $(l)$(o)NAPRAWDĘ$() złej sytuacji. To jednak nie jest jeszcze punkt bez odwrotu. Po ostrzeżeniu masz 30 sekund na zniszczenie multibloku (tracąc przy tym wszystkie przechowywane dusze), a po tym czasie nie możesz nawet zbliżyć się do rdzenia, ponieważ zaczyna on cię odpychać. Wtedy lepiej po prostu $(l)$(o)UCIEKAJ.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Resztę tej sekwencji zostawiam do własnego odkrycia. Wiedz tylko, że twoja baza z pewnością mocno ucierpi po eksplozji :) $(br)Umieszczenie tego ulepszenia w rdzeniu tak naprawdę nie jest konieczne do progresji (na razie). $(#F00) Używaj na własne ryzyko!"
+    }
+  ]
+}

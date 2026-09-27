@@ -1,0 +1,11 @@
+{
+  "name": "Uderzenie Cienia",
+  "icon": "minecraft:enchanted_book",
+  "category": "shadowthings:enchants_effects",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Uderzenie Cienia to najrzadsze zaklęcie w tej modyfikacji. $(br)To zaklęcie ma szansę na nałożenie efektu $(l:shadowthings:shadow_curse)Klątwy Cienia$(). Na poziomie 3 ma 100% szans na aktywację. Nadaje się na bronie."
+    }
+  ]
+}

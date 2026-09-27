@@ -43,6 +43,10 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
     // 1-slot inventory for the center Catalyst/Result item
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
+        public int getSlotLimit(int slot) {
+            return 1;
+        }
+        @Override
         protected void onContentsChanged(int slot) {
             sync();
             if (level != null && !level.isClientSide()) {
@@ -70,6 +74,7 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
     public int craftingProgress = 0;
     public int requiredSouls = 0;
     public int maxCraftingTime = 100; // 5 seconds (20 ticks * 5)
+    int craftSpeed = 1;
 
     public SoulInfusionRecipe cachedRecipe = null;
     public ItemStack cachedResult = ItemStack.EMPTY;
@@ -89,7 +94,7 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
     public SoulCrafterEntity(BlockPos pos, BlockState state) {
         // Passes the BlockEntity type, position, state, and a Max Soul capacity of 10,000!
-        super(ModBlockEntities.SOUL_CRAFTER_BE.get(), pos, state,0, 10000, 0 ,0);
+        super(ModBlockEntities.SOUL_CRAFTER_BE.get(), pos, state,0, 10000, 1 ,0);
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
@@ -219,7 +224,7 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
             // 2. Calculate Speed based on Upgrades
             // (Ensure you have an UpgradeType.CRAFTER_SPEED or similar defined in your enum!)
-            int craftSpeed = 1 + transferRateTier; // Base speed of 1, plus 1 per upgrade tier
+            craftSpeed = 1 + transferRateTier; // Base speed of 1, plus 1 per upgrade tier
 
             // 3. Advance Progress
             int baseCostPerTick = (int) Math.ceil((double) this.requiredSouls / (double) this.maxCraftingTime);
@@ -508,6 +513,7 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
         tag.putInt("MaxCraftingTime", this.maxCraftingTime);
         tag.putInt("RequiredSouls", this.requiredSouls);
         tag.putInt("TransferTickCounter", this.transferTickCounter);
+        tag.putInt("CraftSpeed", this.craftSpeed);
 
         tag.putFloat("SoulEfficiencyTier", this.soulEfficiencyTier);
         tag.putInt("TransferRateTier", this.transferRateTier);
@@ -522,7 +528,9 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
         this.craftingProgress = tag.getInt("CraftingProgress");
         this.maxCraftingTime = tag.contains("MaxCraftingTime") ? tag.getInt("MaxCraftingTime") : 100;
         this.requiredSouls = tag.getInt("RequiredSouls");
+        this.requiredSouls = tag.getInt("RequiredSouls");
         this.transferTickCounter = tag.getInt("TransferTickCounter");
+        this.craftSpeed = tag.getInt("CraftSpeed");
 
         this.soulEfficiencyTier = tag.getFloat("SoulEfficiencyTier");
         this.transferRateTier = tag.getInt("TransferRateTier");

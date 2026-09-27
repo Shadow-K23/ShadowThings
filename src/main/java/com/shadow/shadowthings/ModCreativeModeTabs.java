@@ -99,7 +99,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RADISH_SEEDS);
 
                         //FUELS
-                        output.accept(ModItems.SUPER_FUEL);
 
                         //MISC
                         output.accept(ModItems.BAR_BRAWL_MUSIC_DISC);

@@ -5,7 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Condenser is a passive way to generate souls early-game. You just need to place it and it starts collecting souls from the atmosphere. By default it generates 3/s souls. Unless you place it in the mods custom 'Shadowwood Forest', then the generation is multiplied tenfold.$(br)This machine $(l) does NOT load chunks$() and $(l)does NOT need to be connected to the core.$()"
+      "text": "The Soul Condenser is a passive way to generate souls early-game. You just need to place it and it starts collecting souls from the atmosphere. By default it generates 3/s souls. Unless you place it in the mods custom 'Shadowwood Forest', then the generation is multiplied tenfold."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This machine $(l)does NOT load chunks$() and $(l)does NOT need to be connected to the core.$()"
     }
   ]
 }

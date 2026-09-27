@@ -1,0 +1,52 @@
+modLoader="javafml"
+loaderVersion="[4,)" # Loader wymagany dla NeoForge 1.21+
+license="All rights reserved" # Lub np. "MIT", zależnie od Twoich preferencji
+#issueTrackerURL="https://github.com/TwojaNazwa/ShadowThings/issues" # Opcjonalnie
+
+[[mods]]
+modId="shadowthings"
+version="${file.jarVersion}"
+displayName="Shadow Things"
+logoFile="logo.png"
+authors="Twój Nick"
+description='''
+Welcome to ShadowThings. The mod that is all about collecting souls and using them for your own advantage.
+I hope you're ready for a wild ride and enjoy the mod.
+'''
+
+# Wymaganie: Minecraft 1.21.1
+[[dependencies.shadowthings]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.1,1.22)"
+ordering="NONE"
+side="BOTH"
+
+# Wymaganie: NeoForge dla 1.21.1
+[[dependencies.shadowthings]]
+modId="neoforge"
+mandatory=true
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.shadowthings]]
+modId="patchouli"
+mandatory=false
+versionRange="[1.21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.shadowthings]]
+modId="geckolib"
+mandatory=true
+versionRange="[1.21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.shadowthings]]
+modId="terrablender"
+mandatory=true
+versionRange="[1.21.1,)"
+ordering="NONE"
+side="BOTH"

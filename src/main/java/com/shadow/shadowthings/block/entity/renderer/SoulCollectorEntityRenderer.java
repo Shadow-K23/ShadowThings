@@ -33,7 +33,6 @@ public class SoulCollectorEntityRenderer extends AbstractSoulEntityRenderer<Soul
             fillRatio = (float) entity.getSouls() / (float) entity.getMaxSouls();
         }
 
-        // Smooth rotation using the entity's tracked angle
         float currentSpeed = 2.0F + (fillRatio * 6.0F);
         float spinAngle = entity.clientSpinAngle + (currentSpeed * partialTick);
 
@@ -41,18 +40,13 @@ public class SoulCollectorEntityRenderer extends AbstractSoulEntityRenderer<Soul
 
         poseStack.pushPose();
 
-        // 1. Center the renderer exactly where we want the ball to hover
         poseStack.translate(0.5D, 1.75D + bob, 0.5D);
 
-        // 2. Apply the spin rotation
         poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(spinAngle));
 
-        // 3. Apply the dynamic scaling
         float scale = 0.6F + (fillRatio * 0.6F);
         poseStack.scale(scale, scale, scale);
 
-        // 4. FIX THE PIVOT: Shift the model geometry up by exactly 1 block in scaled space.
-        // This perfectly aligns the Blockbench geometry center with the hovering rotation center!
         poseStack.translate(0.0D, -1.0D, 0.0D);
 
         // --- DYNAMIC COLOR ---

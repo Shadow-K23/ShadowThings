@@ -165,8 +165,7 @@ public class ModItems {
             ()-> new ItemNameBlockItem(ModBlocks.RADISH_CROP.get(), new Item.Properties()));
 
     //FUELS
-    public static final DeferredItem<Item> SUPER_FUEL = ITEMS.register("super_fuel",
-            () -> new FuelItem(new Item.Properties(), 800));
+
     //ADVANCED TOOLS
     public static final DeferredItem<Item> SOUL_LINKER = ITEMS.register("soul_linker",
             ()-> new SoulLinkerItem(new Item.Properties().durability(100)));

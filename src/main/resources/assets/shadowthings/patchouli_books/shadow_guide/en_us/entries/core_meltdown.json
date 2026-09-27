@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Soul Core has a special mechanic when overloaded. The upgrade itself pushes the core to it's max, expanding the capacity, to crazy amounts. Except it has a safe threshold for souls. Right now it's 200k, after the soul count surpasses 200k, the core starts taking damage. The more souls stored over the safe threshold the faster the core health goes down."
+      "text": "The Soul Core has a special mechanic when $(l:shadowthings:soul_upgrades#overload_anchor)overloaded$(). The upgrade itself pushes the core to it's max, expanding the capacity, to crazy amounts. Except it has a safe threshold for souls. Right now it's 200k, after the soul count surpasses 200k, the core starts taking damage. The more souls stored over the safe threshold the faster the core health goes down."
     },
     {
       "type": "patchouli:text",

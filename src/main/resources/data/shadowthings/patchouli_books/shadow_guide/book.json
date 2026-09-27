@@ -1,6 +1,6 @@
 {
   "name": "ShadowThings",
-  "landing_text": "Welcome to ShadowThings. The mod that is all about collecting souls and using them for your own advantage. I hope you're ready for a wild ride and enjoy the mod.",
+  "landing_text": "book.shadowthings.landing_text",
   "version": 1,
   "creative_tab": "shadowthings:shadow_items_tab",
   "use_resource_pack": true,
@@ -8,8 +8,8 @@
   "model": "patchouli:book_purple",
   "text_color": "460c63",
   "nameplate_color": "fa00ff",
-  "link_color": "310085",
-  "link_hover_color": "0018d9",
+  "link_color": "aa22ee",
+  "link_hover_color": "661155",
   "progress_bar_color": "7839ba",
   "progress_bar_background": "1e0e2f",
   "text_overflow_mode": "overflow"

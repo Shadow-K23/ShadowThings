@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "type": "patchouli:text",
+      "text": "#souls_text",
+      "x": 60,
+      "y": 10,
+      "alignment": "center"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Koszt dusz:",
+      "x": 15,
+      "y": 10,
+      "alignment": "center"
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#catalyst",
+      "x": 5,
+      "y": 55
+    },
+    { "type": "patchouli:item", "item": "#in1", "x": 31, "y": 35 },
+    { "type": "patchouli:item", "item": "#in2", "x": 51, "y": 35 },
+    { "type": "patchouli:item", "item": "#in3", "x": 71, "y": 35 },
+    { "type": "patchouli:item", "item": "#in4", "x": 31, "y": 55 },
+    { "type": "patchouli:item", "item": "#in5", "x": 51, "y": 55 },
+    { "type": "patchouli:item", "item": "#in6", "x": 71, "y": 55 },
+    { "type": "patchouli:item", "item": "#in7", "x": 31, "y": 75 },
+    { "type": "patchouli:item", "item": "#in8", "x": 51, "y": 75 },
+    { "type": "patchouli:item", "item": "#in9", "x": 71, "y": 75 },
+    {
+      "type": "patchouli:item",
+      "item": "#output",
+      "x": 97,
+      "y": 55
+    }
+  ]
+}
