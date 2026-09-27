@@ -20,7 +20,7 @@ public class SoulCoreData extends SavedData {
 
     public void setCore(UUID playerUUID, BlockPos pos) {
         playerCores.put(playerUUID, pos);
-        this.setDirty(); // Crucial: Tells Minecraft to save this file to disk!
+        this.setDirty();
     }
 
     public void removeCore(UUID playerUUID) {
