@@ -219,43 +219,6 @@ public abstract class AbstractSoulEntity extends BlockEntity {
 
     public void tickClientVisuals() {
         if (this.level == null || !this.level.isClientSide()) return;
-
-        // If the server told us we are transferring, count down and spawn particles!
-        if (this.visualTransferTimer > 0) {
-            this.visualTransferTimer--;
-
-            // We can spawn multiple particles per tick if we want a thicker stream!
-            if (this.linkedCorePos != null && this.level.getGameTime() % 2 == 0) {
-
-                // --- START POSITION (The Crystal) ---
-                // Adjust the '1.5' up or down until it perfectly matches your crystal's height!
-                // We add a tiny random offset so they spawn scattered around the crystal.
-                double startX = this.linkedCorePos.getX() + 0.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
-                double startY = this.linkedCorePos.getY() + 1.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
-                double startZ = this.linkedCorePos.getZ() + 0.5 + (this.level.random.nextDouble() - 0.5) * 0.5;
-
-                // --- END POSITION (The Crafter) ---
-                double targetX = this.getBlockPos().getX() + 0.5;
-                double targetY = this.getBlockPos().getY() + 0.8;
-                double targetZ = this.getBlockPos().getZ() + 0.5;
-
-                // --- VECTOR MATH ---
-                double dX = targetX - startX;
-                double dY = targetY - startY;
-                double dZ = targetZ - startZ;
-
-                double distance = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
-                double speed = 0.50;
-
-                double vX = (dX / distance) * speed;
-                double vY = (dY / distance) * speed;
-                double vZ = (dZ / distance) * speed;
-
-                this.level.addParticle(net.minecraft.core.particles.ParticleTypes.SOUL,
-                        startX, startY, startZ,
-                        vX, vY, vZ);
-            }
-        }
     }
 
     // A handy helper method so you don't repeat the sync logic 6 times!
