@@ -29,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.joml.Vector3f;
 import org.slf4j.Logger;
@@ -54,19 +55,55 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
             }
         }
         @Override
+        public void setStackInSlot(int slot, ItemStack stack) {
+            isFinishedProduct = false;
+            super.setStackInSlot(slot, stack);
+        }
+        @Override
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            if (!simulate) isFinishedProduct = false;
+            return super.insertItem(slot, stack, simulate);
+        }
+        @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             // Prevent putting items in while crafting
             return !isCrafting && super.isItemValid(slot, stack);
         }
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if (isCrafting) return ItemStack.EMPTY;
+            ItemStack extracted = super.extractItem(slot, amount, simulate);
+            if (!simulate && this.getStackInSlot(slot).isEmpty()) {
+                isFinishedProduct = false;
+            }
+            return extracted;
+        }
+    };
+    public final IItemHandler automationInventory = new IItemHandler() {
+        @Override
+        public int getSlots() { return inventory.getSlots(); }
+
+        @Override
+        public ItemStack getStackInSlot(int slot) { return inventory.getStackInSlot(slot); }
+
+        @Override
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            return inventory.insertItem(slot, stack, simulate);
+        }
 
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            // Prevent players from pulling the item out while crafting!
-            if (isCrafting) {
+            if (!isFinishedProduct || isCrafting) {
                 return ItemStack.EMPTY;
             }
-            return super.extractItem(slot, amount, simulate);
+            return inventory.extractItem(slot, amount, simulate);
         }
+
+        @Override
+        public int getSlotLimit(int slot) { return inventory.getSlotLimit(slot); }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) { return inventory.isItemValid(slot, stack); }
     };
 
     // --- CRAFTING ANIMATION VARIABLES ---
@@ -78,8 +115,9 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
     public SoulInfusionRecipe cachedRecipe = null;
     public ItemStack cachedResult = ItemStack.EMPTY;
+    public boolean isFinishedProduct = false;
 
-    public float soulEfficiencyTier = 0;
+    public float soulEfficiencyTier = 1f;
     public int transferRateTier = 0;
     public boolean isOverloaded = false;
 
@@ -314,11 +352,12 @@ public class SoulCrafterEntity extends AbstractSoulEntity implements MenuProvide
 
         // 3. Output the Result
         this.inventory.setStackInSlot(0, this.cachedResult.copy());
+        this.isFinishedProduct = true;
 
         // --- NEW: FINISH PARTICLES ---
         if (this.level instanceof ServerLevel serverLevel) {
             double pX = this.worldPosition.getX() + 0.5;
-            double pY = this.worldPosition.getY() + 1.75; // Right where the levitating item is
+            double pY = this.worldPosition.getY() + 1.75;
             double pZ = this.worldPosition.getZ() + 0.5;
 
             // A huge burst of souls and flash particles!

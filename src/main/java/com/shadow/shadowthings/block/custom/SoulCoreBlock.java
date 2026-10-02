@@ -4,8 +4,10 @@ import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.SoulCoreEntity;
+import com.shadow.shadowthings.util.UpgradeType;
 import com.shadow.shadowthings.world.SoulCoreData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
@@ -237,6 +239,33 @@ public class SoulCoreBlock extends BaseEntityBlock {
             }
         }
         super.setPlacedBy(level, pos, state, placer, stack);
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        if (!state.getValue(SoulStructureBlock.FORMED)) {
+            return 0;
+        }
+
+        if (level.getBlockEntity(pos) instanceof SoulCoreEntity core) {
+            if(core.getUpgradeLevel(UpgradeType.REDSTONE) < 1){return 0;}
+            float currentSouls = core.getSouls();
+            float maxSafe = core.safeCapacity;
+
+            if (currentSouls <= 0 || maxSafe <= 0) {
+                return 0;
+            }
+            if (currentSouls >= maxSafe) {
+                return 15;
+            }
+            return 1 + (int) ((currentSouls / maxSafe) * 14.0f);
+        }
+        return 0;
     }
 
     @Nullable

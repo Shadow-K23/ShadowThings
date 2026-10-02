@@ -3,6 +3,7 @@ package com.shadow.shadowthings.block.custom;
 import com.mojang.serialization.MapCodec;
 import com.shadow.shadowthings.block.entity.ModBlockEntities;
 import com.shadow.shadowthings.block.entity.SoulCrafterEntity;
+import com.shadow.shadowthings.util.UpgradeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
@@ -16,6 +17,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -24,8 +28,12 @@ import org.jetbrains.annotations.Nullable;
 public class SoulCrafterBlock extends BaseEntityBlock {
     public static final MapCodec<SoulCrafterBlock> CODEC = simpleCodec(SoulCrafterBlock::new);
     public static final VoxelShape SHAPE = Block.box(0,0,0,16,12,16);
+
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+
     public SoulCrafterBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, Boolean.valueOf(false)));
     }
 
     @Override
@@ -78,5 +86,28 @@ public class SoulCrafterBlock extends BaseEntityBlock {
                 (lvl, p, st, blockEntity) -> {
                      blockEntity.tick(lvl, p, st);
                 });
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(POWERED);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
+        if (!level.isClientSide) {
+            boolean isPowered = level.hasNeighborSignal(pos);
+            if (isPowered != state.getValue(POWERED)) {
+                if (isPowered) {
+                    if (level.getBlockEntity(pos) instanceof SoulCrafterEntity crafter) {
+                        int redstoneUpgrade = crafter.getUpgradeLevel(UpgradeType.REDSTONE);
+                        if (!crafter.isCrafting && redstoneUpgrade > 0) {
+                            crafter.startCrafting();
+                        }
+                    }
+                }
+                level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(isPowered)), 3);
+            }
+        }
     }
 }

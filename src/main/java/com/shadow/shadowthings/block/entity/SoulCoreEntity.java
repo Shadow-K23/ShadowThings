@@ -68,6 +68,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     private int inputThisTick = 0;
     private int outputThisTick = 0;
 
+    private int lastRedstoneSignal = 0;
     public boolean isMeltingDown = false;
     public int meltdownTimer = 0; // Tracks the terrifying collapse animation
 
@@ -127,6 +128,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     };
 
     public void setSouls(int amount) {
+        this.syncAndCheckRedstone();
         this.souls = Math.clamp(amount, 0, this.maxSouls);
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
@@ -134,6 +136,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void addSouls(int amount) {
+        this.syncAndCheckRedstone();
         this.inputThisTick += amount;
         this.souls = Math.clamp(this.souls + amount, 0, this.maxSouls);
         this.setChanged();
@@ -142,6 +145,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void removeSouls(int amount) {
+        this.syncAndCheckRedstone();
         this.outputThisTick += amount;
         this.souls = Math.clamp(this.souls - amount, 0, this.maxSouls);
         this.setChanged();
@@ -150,6 +154,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
         }
     }
     public void setMaxSouls(int amount) {
+        this.syncAndCheckRedstone();
         this.maxSouls = amount;
         this.setChanged();
         if (this.level != null && !this.level.isClientSide()) {
@@ -216,6 +221,7 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
             }
         }
 
+
         // --- 3. SIPHONING LOGIC ---
         // Only siphon if it is enabled AND there is still room in the tank!
         if (this.soulSiphonEnabled && this.souls < this.maxSouls) {
@@ -240,15 +246,12 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
     private void performSiphon(Level level, BlockPos pos) {
         if (this.ownerUUID == null) return;
 
-        // 1. Create a 5-block radius around the Core
         AABB searchArea = new AABB(pos).inflate(5.0);
 
-        // 2. Find players in that area whose UUID matches the owner
         List<Player> nearbyOwners = level.getEntitiesOfClass(Player.class, searchArea,
                 player -> player.getUUID().equals(this.ownerUUID)
         );
 
-        // 3. If the owner is nearby, drain them!
         if (!nearbyOwners.isEmpty()) {
             Player owner = nearbyOwners.get(0);
             ServerPlayer player = owner.getServer().getPlayerList().getPlayer(ownerUUID);
@@ -259,6 +262,35 @@ public class SoulCoreEntity extends AbstractSoulEntity implements MenuProvider {
                 manaData.removeMana(siphonAmount);
                 PacketDistributor.sendToPlayer(player, new ModManaSyncPayload(manaData.getMana(), manaData.getMaxMana()));
                 this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+            }
+        }
+    }
+
+    public void syncAndCheckRedstone() {
+        if (this.level == null || this.level.isClientSide()) return;
+        this.setChanged();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+
+        int currentSignal = 0;
+        if(this.getUpgradeLevel(UpgradeType.REDSTONE) < 1){return;}
+        if (this.safeCapacity > 0) {
+            float ratio = this.getSouls() / (float) this.safeCapacity;
+            if (ratio >= 1.0f) currentSignal = 15;
+            else if (ratio > 0) currentSignal = 1 + (int) (ratio * 14.0f);
+        }
+
+        if (currentSignal != this.lastRedstoneSignal) {
+            this.lastRedstoneSignal = currentSignal;
+
+            if (this.isFormed) {
+                for (int x = -1; x <= 1; x++) {
+                    for (int y = 0; y <= 2; y++) {
+                        for (int z = -1; z <= 1; z++) {
+                            BlockPos partPos = this.getBlockPos().offset(x, y, z);
+                            this.level.updateNeighborsAt(partPos, this.level.getBlockState(partPos).getBlock());
+                        }
+                    }
+                }
             }
         }
     }

@@ -3,8 +3,10 @@ package com.shadow.shadowthings.block.custom;
 import com.shadow.shadowthings.block.ModBlocks;
 import com.shadow.shadowthings.block.entity.base.AbstractSoulEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -48,7 +50,7 @@ public class SoulStructureBlock extends Block {
         super.onRemove(state, level, pos, newState, isMoving);
     }
     @Override
-    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 
         // Only forward the click if the structure is actually fully formed
         if (state.getValue(FORMED)) {
@@ -76,6 +78,30 @@ public class SoulStructureBlock extends Block {
 
         // If it isn't formed, just do nothing (act like a normal block)
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState state) {
+        return state.getValue(FORMED);
+    }
+
+    @Override
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        if (!state.getValue(FORMED)) {
+            return 0;
+        }
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -2; y <= 2; y++) {
+                for (int z = -1; z <= 1; z++) {
+                    BlockPos checkPos = pos.offset(x, y, z);
+                    BlockState checkState = level.getBlockState(checkPos);
+                    if (checkState.is(ModBlocks.SOUL_CORE.get())) {
+                        return checkState.getSignal(level, checkPos, direction);
+                    }
+                }
+            }
+        }
+        return 0;
     }
 }
 

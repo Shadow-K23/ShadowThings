@@ -176,7 +176,7 @@ public class ShadowThings {
             event.registerBlockEntity(
                     Capabilities.ItemHandler.BLOCK,
                     ModBlockEntities.SOUL_CRAFTER_BE.get(),
-                    (blockEntity,direction) -> blockEntity.inventory
+                    (blockEntity,direction) -> blockEntity.automationInventory
             );
             event.registerBlockEntity(
                     Capabilities.ItemHandler.BLOCK,
